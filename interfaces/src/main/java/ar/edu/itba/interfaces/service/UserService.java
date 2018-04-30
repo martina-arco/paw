@@ -8,13 +8,5 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    /**
-     * Create a new user.
-     *
-     * @param username The name of the user.
-     * @return The created user.
-     */
-    User create(String username);
-
     User create(String username, String password);
 }

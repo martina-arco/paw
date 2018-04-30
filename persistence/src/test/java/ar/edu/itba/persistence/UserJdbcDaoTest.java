@@ -32,12 +32,33 @@ public class UserJdbcDaoTest {
         jdbcTemplate = new JdbcTemplate(ds);
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "users");
     }
+
     @Test
     public void testCreate() {
         final User user = userDao.create(USERNAME, PASSWORD);
         assertNotNull(user);
+        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
         assertEquals(USERNAME, user.getUsername());
         assertEquals(PASSWORD, user.getPassword());
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
+    }
+
+    @Test
+    public void testFindByUsername() {
+        final long id = userDao.create(USERNAME, PASSWORD).getId();
+        final User user = userDao.findByUsername(USERNAME);
+        assertNotNull(user);
+        assertEquals(USERNAME, user.getUsername());
+        assertEquals(PASSWORD, user.getPassword());
+        assertEquals(id, user.getId());
+    }
+
+    @Test
+    public void testFindById() {
+        final long id = userDao.create(USERNAME, PASSWORD).getId();
+        final User user = userDao.findById(id);
+        assertNotNull(user);
+        assertEquals(USERNAME, user.getUsername());
+        assertEquals(PASSWORD, user.getPassword());
+        assertEquals(id, user.getId());
     }
 }

@@ -1,5 +1,6 @@
 package ar.edu.itba.webapp.config;
 
+import ar.edu.itba.webapp.auth.PawUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,28 +23,29 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.userDetailsService(userDetailsService)
-                .sessionManagement()
+            .sessionManagement()
                 .invalidSessionUrl("/login")
-                .and().authorizeRequests()
+            .and().authorizeRequests()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").authenticated()
-                .and().formLogin()
+                .anyRequest().authenticated()
+            .and().formLogin()
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .defaultSuccessUrl("/", false)
                 .loginPage("/login")
-                .and().rememberMe()
+            .and().rememberMe()
                 .rememberMeParameter("j_rememberme")
                 .userDetailsService(userDetailsService)
                 .key("mysupersecretketthatnobodyknowsabout")
-                                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30))
-                                .and().logout()
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/login")
-                                .and().exceptionHandling()
-                                .accessDeniedPage("/403")
-                                .and().csrf().disable();
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30))
+            .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+            .and().exceptionHandling()
+                .accessDeniedPage("/403")
+            .and().csrf()
+                .disable();
     }
 
     @Override

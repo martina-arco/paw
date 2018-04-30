@@ -4,7 +4,10 @@ import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.User;
 import ar.edu.itba.webapp.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +53,16 @@ public class HelloWorldController {
     public ModelAndView index(@RequestParam(value = "userId", required = true) final int id) {
         final ModelAndView mav = new ModelAndView("user");
         mav.addObject("user", us.findById(id));
+        return mav;
+    }
+
+    @RequestMapping(value="/hello")
+    public ModelAndView printUser() {
+        final ModelAndView mav = new ModelAndView("hello");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+
+        mav.addObject("username", name);
         return mav;
     }
 
