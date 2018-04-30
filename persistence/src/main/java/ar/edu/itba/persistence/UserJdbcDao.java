@@ -45,6 +45,15 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
+    public User findByUsername(String username) {
+        final List<User> list = jdbcTemplate.query("SELECT * FROM users WHERE username = ?", ROW_MAPPER, username);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    @Override
     public User create(final String username) {
         final Map<String, Object> args = new HashMap<>();
         args.put("username", username); // la key es el nombre de la columna

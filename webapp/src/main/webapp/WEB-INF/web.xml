@@ -16,6 +16,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
       ar.edu.itba.webapp.config.WebConfig,
+      ar.edu.itba.webapp.config.WebAuthConfig,
     </param-value>
   </context-param>
   <listener>

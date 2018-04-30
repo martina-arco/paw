@@ -41,12 +41,18 @@ public class HelloWorldController {
         return new ModelAndView("create");
     }*/
 
+    @RequestMapping("/login")
+    public ModelAndView login() {
+        return new ModelAndView("login");
+    }
+
     @RequestMapping("/user")
     public ModelAndView index(@RequestParam(value = "userId", required = true) final int id) {
         final ModelAndView mav = new ModelAndView("user");
         mav.addObject("user", us.findById(id));
         return mav;
     }
+
 
     @ModelAttribute("userId")
     public Integer loggedUser(final HttpSession session)
