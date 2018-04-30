@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
     public User create(String username) {
         return userDao.create(username);
     }
+
+    @Override
+    public User create(String username, String password) {
+        return userDao.create(username, password);
+    }
 }

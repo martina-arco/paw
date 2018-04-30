@@ -13,4 +13,6 @@ public interface UserService {
      * @return The created user.
      */
     User create(String username);
+
+    User create(String username, String password);
 }
