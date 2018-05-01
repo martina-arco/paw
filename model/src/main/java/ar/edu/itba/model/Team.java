@@ -9,10 +9,10 @@ public class Team {
     private Formation formation;
     private YouthAcademy youthAcademy;
     private Integer fanTrust, boardTrust;
-    private List<Reciept> finance;
+    private List<Receipt> finance;
     private Integer money;
 
-    public Team(String name, League league, Stadium stadium, Formation formation, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Reciept> finance, Integer money) {
+    public Team(String name, League league, Stadium stadium, Formation formation, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance, Integer money) {
         this.name = name;
         this.league = league;
         this.stadium = stadium;
@@ -80,11 +80,11 @@ public class Team {
         this.boardTrust = boardTrust;
     }
 
-    public List<Reciept> getFinance() {
+    public List<Receipt> getFinance() {
         return finance;
     }
 
-    public void setFinance(List<Reciept> finance) {
+    public void setFinance(List<Receipt> finance) {
         this.finance = finance;
     }
 
