@@ -29,6 +29,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
             <groupId>ar.edu.itba</groupId>
             <artifactId>interfaces</artifactId>
             <version>${parent.version}</version>
@@ -38,10 +46,6 @@
             <artifactId>persistence</artifactId>
             <version>${parent.version}</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
         </dependency>
     </dependencies>
 

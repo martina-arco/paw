@@ -3,6 +3,8 @@ package ar.edu.itba.webapp.controllers;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.User;
 import ar.edu.itba.webapp.form.UserForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,8 @@ import javax.validation.Valid;
 
 @Controller
 public class HelloWorldController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldController.class);
 
     @Autowired
     private UserService us;
@@ -53,17 +57,16 @@ public class HelloWorldController {
     @RequestMapping(value="/hello")
     public ModelAndView printUser() {
         final ModelAndView mav = new ModelAndView("hello");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-
-        mav.addObject("username", name);
         return mav;
     }
 
 
-    @ModelAttribute("userId")
-    public Integer loggedUser(final HttpSession session)
-    {
-        return 1;//(Integer) session.getAttribute("LOGGED_USER_ID");
+    @ModelAttribute
+    public User loggedUser() {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        final User user = us.findByUsername(auth.getName());
+        LOGGER.debug("Logged user is {}", user);
+        return user;
     }
+
 }
