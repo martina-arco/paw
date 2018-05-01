@@ -3,20 +3,24 @@ package ar.edu.itba.model;
 import java.util.List;
 
 public class Team {
+    private long id;
     private String name;
     private League league;
     private Stadium stadium;
     private Formation formation;
+    private List<Player> players;
     private YouthAcademy youthAcademy;
     private Integer fanTrust, boardTrust;
     private List<Receipt> finance;
     private Integer money;
 
-    public Team(String name, League league, Stadium stadium, Formation formation, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance, Integer money) {
+    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance, Integer money) {
+        this.id = id;
         this.name = name;
         this.league = league;
         this.stadium = stadium;
         this.formation = formation;
+        this.players = players;
         this.youthAcademy = youthAcademy;
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
@@ -94,5 +98,21 @@ public class Team {
 
     public void setMoney(Integer money) {
         this.money = money;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

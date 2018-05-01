@@ -17,8 +17,10 @@ public class Formation {
     private List<Player> substitutes;
     private int pressure, attitude;
     private Player captain, freeKickTaker, penaltyTaker;
+    private long id;
 
-    public Formation(final Map<Player, Point> formation, final int pressure, final int attitude, final Player captain, final Player freeKickTaker, final Player penaltyTaker) {
+    public Formation(final long id, final Map<Player, Point> formation, final int pressure, final int attitude, final Player captain, final Player freeKickTaker, final Player penaltyTaker) {
+        this.id = id;
         this.formation = formation;
         this.pressure = pressure;
         this.attitude = attitude;
@@ -88,5 +90,13 @@ public class Formation {
 
     public void setPenaltyTaker(Player penaltyTaker) {
         this.penaltyTaker = penaltyTaker;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

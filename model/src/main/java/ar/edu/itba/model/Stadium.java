@@ -26,7 +26,17 @@ public class Stadium {
     private int highClass, highClassPrice;
     private String name;
 
-    public Stadium(final String name){
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    private long id;
+
+    public Stadium(String name){
         this.name = name;
         lowClass = 0;
         mediumClass = 0;
