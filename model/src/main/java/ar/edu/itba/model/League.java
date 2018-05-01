@@ -3,11 +3,14 @@ package ar.edu.itba.model;
 import java.util.List;
 
 public class League {
+    private long id;
+    private String name;
     private List<MatchDay> fixture;
     private MatchDay currentMatchDate;
-    private long id;
 
-    public League(List<MatchDay> fixture, MatchDay currentMatchDate, long id) {
+
+    public League(long id, String name, List<MatchDay> fixture, MatchDay currentMatchDate) {
+        this.name = name;
         this.fixture = fixture;
         this.currentMatchDate = currentMatchDate;
         this.id = id;
@@ -35,5 +38,13 @@ public class League {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
