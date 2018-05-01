@@ -7,9 +7,11 @@ public class Player {
     private String name;
     private Integer age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness;
     private Team team;
+    private long id;
 
-    public Player(String name, Integer age, Integer value, Integer potential, Integer skillLevel, Team team,
+    public Player(long id, String name, Integer age, Integer value, Integer potential, Integer skillLevel, Team team,
                   Integer goalkeeping, Integer finish, Integer defending, Integer passing, Integer fitness) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.value = value;
@@ -61,6 +63,10 @@ public class Player {
 
     public Integer getFitness() {
         return fitness;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public Team getTeam() {

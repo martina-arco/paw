@@ -6,10 +6,11 @@ package ar.edu.itba.model;
 public class PlayerStats {
 
     private Player player;
-    private Integer saves, performance, passes, assists, scores, yellowCards, redCards;
+    private int saves, performance, passes, assists, scores, yellowCards, redCards, tackles;
+    private long id;
 
-    public PlayerStats(Player player, Integer saves, Integer performance, Integer passes,
-                       Integer assists, Integer scores, Integer yellowCards, Integer redCards) {
+    public PlayerStats(long id, Player player, int saves, int performance, int passes,  int tackles,
+                       int assists, int scores, int yellowCards, int redCards) {
         this.player = player;
         this.saves = saves;
         this.performance = performance;
@@ -18,18 +19,24 @@ public class PlayerStats {
         this.scores = scores;
         this.yellowCards = yellowCards;
         this.redCards = redCards;
+        this.tackles = tackles;
+        this.id = id;
     }
 
-    public void addSave(){
-        saves++;
+    public void addSave(int amount){
+        saves += amount;
     }
 
-    public void addAssist(){
-        assists++;
+    public void addTackle(int amount){
+        tackles += amount;
     }
 
-    public void addPass(){
-        passes++;
+    public void addAssist(int amount){
+        assists += amount;
+    }
+
+    public void addPass(int amount){
+        passes += amount;
     }
 
     public void addScore(){
@@ -46,6 +53,10 @@ public class PlayerStats {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public Integer getSaves() {
@@ -74,6 +85,14 @@ public class PlayerStats {
 
     public Integer getRedCards() {
         return redCards;
+    }
+
+    public Integer getTackles() {
+        return tackles;
+    }
+
+    public Integer getScores() {
+        return scores;
     }
 
     public void setPerformance(Integer performance) {

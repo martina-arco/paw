@@ -8,14 +8,18 @@ public class Event {
     private Player p1, p2;
     private EventType type;
     private Integer minute;
+    private long id;
 
-    public Event(Player p1, EventType type, Integer minute) {
+    public Event(long id, Player p1, EventType type, Integer minute) {
+        this.id = id;
         this.p1 = p1;
+        this.p2 = null;
         this.type = type;
         this.minute = minute;
     }
 
-    public Event(Player p1, Player p2, EventType type, Integer minute) {
+    public Event(long id, Player p1, Player p2, EventType type, Integer minute) {
+        this.id = id;
         this.p1 = p1;
         this.p2 = p2;
         this.type = type;
