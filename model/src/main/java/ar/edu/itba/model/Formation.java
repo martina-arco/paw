@@ -1,15 +1,24 @@
 package ar.edu.itba.model;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 public class Formation {
-    private Map<Player, Point> formation;
+
+    public static final Collection<Point> availablePositions = new HashSet<>();
+
+    public static void init(){
+        //availablePositions.add(new Point());
+    }
+
+    private final Map<Player, Point> formation;
     private List<Player> substitutes;
-    private Integer pressure, attitude;
+    private int pressure, attitude;
     private Player captain, freeKickTaker, penaltyTaker;
 
-    public Formation(Map<Player, Point> formation, Integer pressure, Integer attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
+    public Formation(final Map<Player, Point> formation, final int pressure, final int attitude, final Player captain, final Player freeKickTaker, final Player penaltyTaker) {
         this.formation = formation;
         this.pressure = pressure;
         this.attitude = attitude;
@@ -18,12 +27,19 @@ public class Formation {
         this.penaltyTaker = penaltyTaker;
     }
 
-    public Map<Player, Point> getFormation() {
-        return formation;
+    public void movePlayer(final Player p1, final Point position){
+        if(availablePositions.contains(position))
+            formation.put(p1,position);
     }
 
-    public void setFormation(Map<Player, Point> formation) {
-        this.formation = formation;
+    public void replacePlayer(final Player p1, final Player p2){
+        Point position = formation.get(p1);
+        formation.remove(p1);
+        formation.put(p2,position);
+    }
+
+    public Map<Player, Point> getFormation() {
+        return formation;
     }
 
     public List<Player> getSubstitutes() {
@@ -34,19 +50,19 @@ public class Formation {
         this.substitutes = substitutes;
     }
 
-    public Integer getPressure() {
+    public int getPressure() {
         return pressure;
     }
 
-    public void setPressure(Integer pressure) {
+    public void setPressure(int pressure) {
         this.pressure = pressure;
     }
 
-    public Integer getAttitude() {
+    public int getAttitude() {
         return attitude;
     }
 
-    public void setAttitude(Integer attitude) {
+    public void setAttitude(int attitude) {
         this.attitude = attitude;
     }
 

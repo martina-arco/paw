@@ -1,29 +1,32 @@
 package ar.edu.itba.model;
 
-import static ar.edu.itba.model.SeatType.*;
 
 public class Stadium {
 
-    private static final Integer lowCost = 50, mediumCost = 100, highCost = 200;
+    public enum SeatType {
+        LOW,MEDIUM,HIGH
+    }
 
-    public static Integer getHighCost() {
+    private static final int lowCost = 50, mediumCost = 100, highCost = 200;
+
+    public static int getHighCost() {
         return highCost;
     }
 
-    public static Integer getMediumCost() {
+    public static int getMediumCost() {
         return mediumCost;
     }
 
-    public static Integer getLowCost() {
+    public static int getLowCost() {
         return lowCost;
     }
 
-    private Integer lowClass, lowClassPrice;
-    private Integer mediumClass, mediumClassPrice;
-    private Integer highClass, highClassPrice;
+    private int lowClass, lowClassPrice;
+    private int mediumClass, mediumClassPrice;
+    private int highClass, highClassPrice;
     private String name;
 
-    public Stadium(String name){
+    public Stadium(final String name){
         this.name = name;
         lowClass = 0;
         mediumClass = 0;
@@ -34,31 +37,31 @@ public class Stadium {
         return name;
     }
 
-    public Integer getHighClass() {
+    public int getHighClass() {
         return highClass;
     }
 
-    public Integer getHighClassPrice() {
+    public int getHighClassPrice() {
         return highClassPrice;
     }
 
-    public Integer getMediumClass() {
+    public int getMediumClass() {
         return mediumClass;
     }
 
-    public Integer getMediumClassPrice() {
+    public int getMediumClassPrice() {
         return mediumClassPrice;
     }
 
-    public Integer getLowClass() {
+    public int getLowClass() {
         return lowClass;
     }
 
-    public Integer getLowClassPrice() {
+    public int getLowClassPrice() {
         return lowClassPrice;
     }
 
-    public void addSeats(SeatType type, Integer amount){
+    public void addSeats(final SeatType type, final int amount){
         switch(type){
             case HIGH:
                 highClass += amount;

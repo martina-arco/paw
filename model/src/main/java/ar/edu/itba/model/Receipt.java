@@ -6,15 +6,15 @@ public class Receipt {
         SOLDPLAYER, BOUGHTPLAYER, EXPANDEDSTADIUM, MATCHINCOME, TOURNAMENTPRICE
     }
 
-    private Integer amount;
-    private ReceiptType type;
+    private int amount;
+    private final ReceiptType type;
 
-    public Receipt(Integer amount, ReceiptType type){
+    public Receipt(final int amount, final ReceiptType type){
         this.amount = amount;
         this.type = type;
     }
 
-    public Integer getAmount(){
+    public int getAmount(){
         return amount;
     }
 

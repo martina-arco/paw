@@ -18,19 +18,19 @@ public class StadiumTest {
 
     @Test
     public void addLowSeats() {
-        stadium.addSeats(SeatType.LOW,testConst);
-        assertTrue(stadium.getLowClass().equals(testConst));
+        stadium.addSeats(Stadium.SeatType.LOW,testConst);
+        assertTrue(stadium.getLowClass() == testConst);
     }
 
     @Test
     public void addMediumSeats() {
-        stadium.addSeats(SeatType.MEDIUM,testConst);
-        assertTrue(stadium.getMediumClass().equals(testConst));
+        stadium.addSeats(Stadium.SeatType.MEDIUM,testConst);
+        assertTrue(stadium.getMediumClass() == testConst);
     }
 
     @Test
     public void addHighSeats() {
-        stadium.addSeats(SeatType.HIGH,testConst);
-        assertTrue(stadium.getHighClass().equals(testConst));
+        stadium.addSeats(Stadium.SeatType.HIGH,testConst);
+        assertTrue(stadium.getHighClass() == testConst);
     }
 }
