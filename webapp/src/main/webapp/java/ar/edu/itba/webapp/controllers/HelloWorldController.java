@@ -35,14 +35,8 @@ public class HelloWorldController {
             return index(form);
         }
         final User u = us.create(form.getUsername(), form.getPassword());
-        return new ModelAndView("redirect:/user?userId=" + u.getId());
+        return new ModelAndView("redirect:/login");
     }
-
-    /*@RequestMapping("/create")
-    public ModelAndView create(@RequestParam(value = "name", required = true) final String username) {
-        final User u = us.create(username);
-        return new ModelAndView("create");
-    }*/
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -60,7 +54,7 @@ public class HelloWorldController {
     public ModelAndView printUser() {
         final ModelAndView mav = new ModelAndView("hello");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
+        String name = auth.getName();
 
         mav.addObject("username", name);
         return mav;

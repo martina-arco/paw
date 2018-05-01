@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
 <c:url value="/login" var="loginUrl" />
@@ -19,5 +19,7 @@
         <input type="submit" value="Login!"/>
     </div>
 </form>
+Don't have an account?
+<a href="<c:url value="/"/>"><input type="button" value="Create one!"/></a>
 </body>
 </html>
