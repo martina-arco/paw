@@ -1,0 +1,117 @@
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: whitesmoke;
+}
+
+.nav li {
+    float: left;
+}
+
+.nav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav li a:hover {
+    background-color: darkseagreen;
+}
+
+.leftHalf {
+    float: left;
+    width: 50%;
+    margin: 10px;
+}
+
+.rightHalf {
+    overflow : hidden;
+    margin: 10px;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+    width: 50%;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    overflow: hidden;
+}
+
+.leftBtn {
+    float: left;
+}
+
+.rightBtn {
+    float: right;
+    margin-right: inherit;
+}
+
+input[type = button] {
+    background-color: ghostwhite;
+    border: 1px solid grey;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    padding: 7px;
+    width: 100px;
+    border-radius: 2px;
+}
+
+input[type=button]:hover {
+    background-color : #e2e2e2;
+}
+
+.player {
+    background-color: darkseagreen;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-right: 50px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background-color: darkseagreen;
+}
+
+
+
+tr:hover {
+    background: darkseagreen;
+}
+
+td a {
+    display: block;
+    color: black;
+}
+
