@@ -39,7 +39,7 @@ public class MatchJdbcDao implements MatchDao{
 
             boolean played = homePoints == 0 && awayPoints == 0 ? false : true;
 
-//            List<Event> events = dao.findByMatchId(id);
+//           List<Event> events = dao.findByMatchId(id);
 //
 //            List<PlayerStats> stats = dao.findByMatchId(id);
 //

@@ -25,4 +25,24 @@ public class Event {
         this.type = type;
         this.minute = minute;
     }
+
+    public Player getP1() {
+        return p1;
+    }
+
+    public Player getP2() {
+        return p2;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public Integer getMinute() {
+        return minute;
+    }
+
+    public long getId() {
+        return id;
+    }
 }

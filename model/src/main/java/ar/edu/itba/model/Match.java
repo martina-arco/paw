@@ -109,6 +109,7 @@ public class Match {
     }
 
     public Event changeStats(Player p, EventType type, int amount) {
+
         switch (type) {
             case ASSIST:
                 stats.get(p).addAssist(amount);
@@ -125,6 +126,7 @@ public class Match {
             default:
                 break;
         }
+
         return null;
     }
 

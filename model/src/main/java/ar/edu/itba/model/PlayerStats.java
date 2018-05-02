@@ -98,4 +98,8 @@ public class PlayerStats {
     public void setPerformance(Integer performance) {
         this.performance = performance;
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }
