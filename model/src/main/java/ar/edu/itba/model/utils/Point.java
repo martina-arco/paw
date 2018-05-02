@@ -1,4 +1,4 @@
-package ar.edu.itba.model;
+package ar.edu.itba.model.utils;
 
 public class Point {
     private Integer x, y;

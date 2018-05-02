@@ -6,10 +6,10 @@ package ar.edu.itba.model;
 public class Player {
     private String name;
     private Integer age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness;
-    private Team team;
     private long id;
+    private Contract contract;
 
-    public Player(long id, String name, Integer age, Integer value, Integer potential, Integer skillLevel, Team team,
+    public Player(long id, String name, Integer age, Integer value, Integer potential, Integer skillLevel, Contract contract,
                   Integer goalkeeping, Integer finish, Integer defending, Integer passing, Integer fitness) {
         this.id = id;
         this.name = name;
@@ -22,7 +22,7 @@ public class Player {
         this.defending = defending;
         this.passing = passing;
         this.fitness = fitness;
-        this.team = team;
+        this.contract = contract;
     }
 
     public String getName() {
@@ -65,12 +65,8 @@ public class Player {
         return fitness;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public Team getTeam() {
-        return team;
+    public Contract getContract() {
+        return contract;
     }
 
     public void setValue(Integer value) {
@@ -93,7 +89,7 @@ public class Player {
         age++;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

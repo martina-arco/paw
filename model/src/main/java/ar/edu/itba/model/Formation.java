@@ -1,5 +1,7 @@
 package ar.edu.itba.model;
 
+import ar.edu.itba.model.utils.Point;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;

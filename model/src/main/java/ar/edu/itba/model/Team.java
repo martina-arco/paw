@@ -12,10 +12,12 @@ public class Team {
     private YouthAcademy youthAcademy;
     private Integer fanTrust, boardTrust;
     private List<Receipt> finance;
+    private List<BankLoan> loans;
     private Integer money;
 
-    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance, Integer money) {
+    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance, List<BankLoan> bankLoans, Integer money) {
         this.id = id;
+        this.loans = bankLoans;
         this.name = name;
         this.league = league;
         this.stadium = stadium;
@@ -25,6 +27,7 @@ public class Team {
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
         this.finance = finance;
+        this.loans = loans;
         this.money = money;
     }
 
