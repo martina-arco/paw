@@ -26,14 +26,14 @@ public class EventJdbcDao implements EventDao {
         @Override
         public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {
 
-            long id = rs.getInt("eventid");
+            long id = rs.getInt("id");
             String type =  rs.getString("eventType");
             int minute = rs.getInt("minute");
 
 //            Player p1 = dao.getPlayerById(rs.getInt("player1"));
 //            Player p2 = dao.getPlayerById(rs.getInt("player2"));
 //
-//            return new Event(id, p1, p2, type, minute);
+//            return new Event(id, p1, p2, EventType.valueOf(type), minute);
             return null;
         }
     };
@@ -43,7 +43,7 @@ public class EventJdbcDao implements EventDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("event")
-                .usingGeneratedKeyColumns("eventid");
+                .usingGeneratedKeyColumns("id");
     }
 
     @Override

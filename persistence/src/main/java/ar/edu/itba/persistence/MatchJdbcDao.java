@@ -27,7 +27,7 @@ public class MatchJdbcDao implements MatchDao{
         @Override
         public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-            long id = rs.getInt("matchid");
+            long id = rs.getInt("id");
 
 //            Team home = findTeamById(rs.getInt(home));
 //            Team away = findTeamById(rs.getInt(away));
@@ -39,7 +39,7 @@ public class MatchJdbcDao implements MatchDao{
 
             boolean played = homePoints == 0 && awayPoints == 0 ? false : true;
 
-//           List<Event> events = dao.findByMatchId(id);
+//            List<Event> events = dao.findByMatchId(id);
 //
 //            List<PlayerStats> stats = dao.findByMatchId(id);
 //
@@ -60,18 +60,16 @@ public class MatchJdbcDao implements MatchDao{
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("match")
-                .usingGeneratedKeyColumns("matchid");
+                .usingGeneratedKeyColumns("id");
     }
 
     @Override
     public List<Match> findByTeam(Team team) {
-//        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE home = ? OR away = ?", ROW_MAPPER, team.getId(), team.getId());
-//        if (list.isEmpty()) {
-//            return null;
-//        }
-//        return list;
-
-        return null;
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE home = ? OR away = ?", ROW_MAPPER, team.getId(), team.getId());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
     }
 
     @Override
@@ -94,12 +92,12 @@ public class MatchJdbcDao implements MatchDao{
 //
 //        for (Player p : home.getFormation().getPlayers()) {
 //            PlayerStatsJdbcDao dao = new PlayerStatsJdbcDao(ds);
-//            match.createStats(dao.create(p, match));
+//            match.addStats(dao.create(p, match));
 //        }
 //
 //        for (Player p : away.getFormation().getPlayers()) {
 //            PlayerStatsJdbcDao dao = new PlayerStatsJdbcDao(ds);
-//            match.createStats(dao.create(p, match));
+//            match.addStats(dao.create(p, match));
 //        }
 
         return match;

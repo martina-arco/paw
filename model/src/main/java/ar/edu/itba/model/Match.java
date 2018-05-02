@@ -17,7 +17,7 @@ public class Match {
     private Map<Player, PlayerStats> stats;
     private boolean played;
     private List<Event> events;
-    private long id;
+    private final long id;
 
     public Match(long id, Team home, Team away, int homeScore, int awayScore, int homePoints,
                  int awayPoints, Map<Player, PlayerStats> stats, boolean played, List<Event> events) {
@@ -46,92 +46,20 @@ public class Match {
         played = true;
     }
 
-    private Event addScore(long id, Player p, int minute) {
-        Event event = new Event(id, p, SCORE, minute);
-
-        if(p.getTeam().equals(home))
-            homeScore++;
-        else
-            awayScore++;
-
-        stats.get(p).addScore();
-        events.add(event);
-
-        return event;
+    public void addHomeScore (int amount) {
+        homeScore += amount;
     }
 
-    private Event addYellowCard(long id, Player p, int minute){
-        Event event = new Event(id, p, YELLOW_CARD, minute);
-
-        stats.get(p).addYellowCard();
-        events.add(event);
-
-        return event;
+    public void addAwayScore(int amount) {
+        awayScore += amount;
     }
 
-    private Event addRedCard(long id, Player p, int minute){
-        Event event = new Event(id, p, RED_CARD, minute);
-
-        stats.get(p).addRedCard();
-        events.add(event);
-
-        return event;
+    public void addStats(PlayerStats stat) {
+        stats.put(stat.getPlayer(), stat);
     }
 
-    private Event addEvent(long id, Player p, EventType type, int minute){
-
-        switch (type) {
-            case RED_CARD:
-                return addRedCard(id, p, minute);
-            case SCORE:
-                return addScore(id, p, minute);
-            case YELLOW_CARD:
-                return addYellowCard(id, p, minute);
-            default:
-                break;
-        }
-
-        return null;
-    }
-
-    public Event addEvent(long id, Player p1, Player p2, EventType type, int minute) {
-
-        if(p2 == null)
-            addEvent(id, p1, type, minute);
-
-        if(type != SUBSTITUTE)
-            return null;
-
-        Event event = new Event(id, p1, p2, SUBSTITUTE, minute);
-        events.add(event);
-
-        return event;
-    }
-
-    public Event changeStats(Player p, EventType type, int amount) {
-
-        switch (type) {
-            case ASSIST:
-                stats.get(p).addAssist(amount);
-                break;
-            case PASS:
-                stats.get(p).addPass(amount);
-                break;
-            case SAVE:
-                stats.get(p).addSave(amount);
-                break;
-            case TACKLE:
-                stats.get(p).addTackle(amount);
-                break;
-            default:
-                break;
-        }
-
-        return null;
-    }
-
-    public void createStats(PlayerStats playerStats) {
-        stats.put(playerStats.getPlayer(), playerStats);
+    public void addEvent(Event e) {
+        events.add(e);
     }
 
     public Team getHome() {
@@ -162,7 +90,7 @@ public class Match {
         return new ArrayList<>(stats.values());
     }
 
-    public Boolean getPlayed() {
+    public Boolean isPlayed() {
         return played;
     }
 
@@ -174,7 +102,96 @@ public class Match {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPlayed(boolean played) {
+        this.played = played;
     }
+
+    //
+//    private Event addScore(long id, Player p, int minute) {
+//        Event event = new Event(id, p, SCORE, minute);
+//
+//        if(p.getTeam().equals(home))
+//            homeScore++;
+//        else
+//            awayScore++;
+//
+//        stats.get(p).addScore();
+//        events.add(event);
+//
+//        return event;
+//    }
+//
+//    private Event addYellowCard(long id, Player p, int minute){
+//        Event event = new Event(id, p, YELLOW_CARD, minute);
+//
+//        stats.get(p).addYellowCard();
+//        events.add(event);
+//
+//        return event;
+//    }
+//
+//    private Event addRedCard(long id, Player p, int minute){
+//        Event event = new Event(id, p, RED_CARD, minute);
+//
+//        stats.get(p).addRedCard();
+//        events.add(event);
+//
+//        return event;
+//    }
+//
+//    private Event addEvent(long id, Player p, EventType type, int minute){
+//
+//        switch (type) {
+//            case RED_CARD:
+//                return addRedCard(id, p, minute);
+//            case SCORE:
+//                return addScore(id, p, minute);
+//            case YELLOW_CARD:
+//                return addYellowCard(id, p, minute);
+//            default:
+//                break;
+//        }
+//
+//        return null;
+//    }
+//
+//    public Event addEvent(long id, Player p1, Player p2, EventType type, int minute) {
+//
+//        if(p2 == null)
+//            addEvent(id, p1, type, minute);
+//
+//        if(type != SUBSTITUTE)
+//            return null;
+//
+//        Event event = new Event(id, p1, p2, SUBSTITUTE, minute);
+//        events.add(event);
+//
+//        return event;
+//    }
+//
+//    public Event changeStats(Player p, EventType type, int amount) {
+//
+//        switch (type) {
+//            case ASSIST:
+//                stats.get(p).addAssist(amount);
+//                break;
+//            case PASS:
+//                stats.get(p).addPass(amount);
+//                break;
+//            case SAVE:
+//                stats.get(p).addSave(amount);
+//                break;
+//            case TACKLE:
+//                stats.get(p).addTackle(amount);
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        return null;
+//    }
+//
+//    public void createStats(PlayerStats playerStats) {
+//        stats.put(playerStats.getPlayer(), playerStats);
+//    }
 }

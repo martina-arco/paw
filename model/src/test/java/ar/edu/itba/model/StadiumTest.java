@@ -13,7 +13,7 @@ public class StadiumTest {
 
     @Before
     public void setUp(){
-        stadium = new Stadium(testName);
+        stadium = new Stadium(0, testName,0, 0, 0, 0, 0, 0 );
     }
 
     @Test

@@ -51,7 +51,7 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("player_stats")
-                .usingGeneratedKeyColumns("playerstatsid");
+                .usingGeneratedKeyColumns("id");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     @Override
     public List<PlayerStats> findByMatchId(long id) {
-        final List<PlayerStats> list = jdbcTemplate.query("SELECT * FROM player_stats WHERE match = ?", ROW_MAPPER, id);
+        final List<PlayerStats> list = jdbcTemplate.query("SELECT * FROM playerStats WHERE match = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;
         }
