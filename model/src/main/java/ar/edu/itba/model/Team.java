@@ -1,5 +1,6 @@
 package ar.edu.itba.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
@@ -15,9 +16,8 @@ public class Team {
     private List<BankLoan> loans;
     private Integer money;
 
-    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance, List<BankLoan> bankLoans, Integer money) {
+    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, Integer money) {
         this.id = id;
-        this.loans = bankLoans;
         this.name = name;
         this.league = league;
         this.stadium = stadium;
@@ -26,8 +26,8 @@ public class Team {
         this.youthAcademy = youthAcademy;
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
-        this.finance = finance;
-        this.loans = loans;
+        this.finance = new ArrayList<Receipt>();
+        this.loans = new ArrayList<BankLoan>();
         this.money = money;
     }
 

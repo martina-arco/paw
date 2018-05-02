@@ -8,13 +8,9 @@ public class YouthAcademy {
     private Team team;
     private long id;
 
-    public YouthAcademy(Team team){
-        this.team = team;
-    }
-
     public YouthAcademy(long id, Team team, List<Player> players){
-        this(team);
         this.id = id;
+        this.team = team;
         this.players = new ArrayList<>();
         this.players.addAll(players);
     }
