@@ -68,6 +68,10 @@ public class EventJdbcDao implements EventDao {
 
         final Number eventId = jdbcInsert.executeAndReturnKey(args);
 
-        return match.addEvent(eventId.longValue(), p1, p2, eventType, minute);
+        Event e = new Event(eventId.longValue(), p1, p2, eventType, minute);
+
+        match.addEvent(e);
+
+        return e;
     }
 }

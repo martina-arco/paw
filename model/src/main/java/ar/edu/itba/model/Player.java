@@ -85,6 +85,10 @@ public class Player {
         this.fitness = fitness;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public void increaseAge() {
         age++;
     }

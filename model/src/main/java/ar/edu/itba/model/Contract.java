@@ -6,11 +6,13 @@ public class Contract {
     private final Team team;
     private final Integer salary;
     private final Date term;
+    private final long id;
 
-    public Contract(Team team, Integer salary, Date term) {
+    public Contract(long id, Team team, Integer salary, Date term) {
         this.team = team;
         this.salary = salary;
         this.term = term;
+        this.id = id;
     }
 
     //Esto va en Service? @lemery
@@ -28,5 +30,9 @@ public class Contract {
 
     public Team getTeam() {
         return team;
+    }
+
+    public long getId() {
+        return id;
     }
 }

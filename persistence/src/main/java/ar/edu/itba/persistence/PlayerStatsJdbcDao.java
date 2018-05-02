@@ -73,30 +73,37 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
         String typeS = null;
 
-        switch (type) {
-            case SAVE:
-                typeS = "saves";
-                break;
-            case ASSIST:
-                typeS = "assists";
-                break;
-            case PASS:
-                typeS = "passes";
-                break;
-            case TACKLE:
-                typeS = "tackles";
-                break;
-            default:
-                break;
+        for (PlayerStats stat : m.getStats()) {
+
+            if(stat.getPlayer().equals(p)) {
+                switch (type) {
+                    case SAVE:
+                        typeS = "saves";
+                        stat.addSave(amount);
+                        break;
+                    case ASSIST:
+                        typeS = "assists";
+                        stat.addAssist(amount);
+                        break;
+                    case PASS:
+                        typeS = "passes";
+                        stat.addPass(amount);
+                        break;
+                    case TACKLE:
+                        typeS = "tackles";
+                        stat.addTackle(amount);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
 
         if(typeS == null)
             return;
 
         jdbcTemplate.update("UPDATE player_stats SET ? = ? WHERE match = ? and player = ?", typeS, amount, m.getId(), p.getId());
-
-        m.changeStats(p, type, amount);
-
     }
 
     @Override
