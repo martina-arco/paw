@@ -33,7 +33,7 @@
 
 
 
-                <table class="table">
+                <table class="table bg-white">
 
                     <thead>
                     <tr>

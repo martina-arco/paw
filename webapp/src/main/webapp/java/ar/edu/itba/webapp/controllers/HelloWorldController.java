@@ -42,12 +42,6 @@ public class HelloWorldController {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping("/home")
-    public ModelAndView home() {
-        ModelAndView mav = new ModelAndView("home");
-        return mav;
-    }
-
     @RequestMapping("/match")
     public ModelAndView match() {
         ModelAndView mav = new ModelAndView("match");

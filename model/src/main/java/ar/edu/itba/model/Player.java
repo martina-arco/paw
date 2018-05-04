@@ -1,8 +1,5 @@
 package ar.edu.itba.model;
 
-/**
- * Created by martina on 30/04/2018.
- */
 public class Player {
     private String name;
     private Integer age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness;

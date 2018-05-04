@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class ContractServiceImpl implements ContractService {
+public class ContractServiceImpl {/*implements ContractService {
 
     @Autowired
-    ContractDao contractDao;
+    private ContractDao contractDao;
 
     @Override
     @Transactional
@@ -32,5 +32,5 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public List<Contract> findByTeam(Team team) {
         return contractDao.findByTeam(team);
-    }
+    }*/
 }

@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PlayerServiceImpl implements PlayerService {
+public class PlayerServiceImpl {/*implements PlayerService {
 
-    @Autowired
-    PlayerDao playerDao;
-
-    @Override
-    @Transactional
-    public Player create(String name, int age, int value, int potential, int skillLevel, Contract contract, int goalkeeping, int finish, int defending, int passing, int fitness) {
-        return playerDao.create(name, age, value, potential, skillLevel, contract, goalkeeping, finish, defending, passing, fitness);
-    }
-
-    @Override
-    public Player findById(long id) {
-        return playerDao.findById(id);
-    }
+//    @Autowired
+//    private PlayerDao playerDao;
+//
+//    @Override
+//    @Transactional
+//    public Player create(String name, int age, int value, int potential, int skillLevel, Contract contract, int goalkeeping, int finish, int defending, int passing, int fitness) {
+//        return playerDao.create(name, age, value, potential, skillLevel, contract, goalkeeping, finish, defending, passing, fitness);
+//    }
+//
+//    @Override
+//    public Player findById(long id) {
+//        return playerDao.findById(id);
+//    }*/
 }

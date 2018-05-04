@@ -26,7 +26,7 @@
                             <h5><spring:message code="boardTrust"/> </h5>
                         </div>
                         <div class="col">
-                            <p><spring:message code="team.boardTrust" arguments="${team.boardTrust}"/></p>
+                            <%--<p><spring:message code="argument" arguments="${team.boardTrust}"/></p>--%>
                         </div>
                     </div>
                     <div class="row">
@@ -34,7 +34,7 @@
                             <h5><spring:message code="fanTrust"/> </h5>
                         </div>
                         <div class="col">
-                            <p>15</p>
+                            <%--<p><spring:message code="argument" arguments="${team.fanTrust}"/></p>--%>
                         </div>
                     </div>
 
@@ -48,18 +48,18 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <p><spring:message code="finishing"/></p>
+                                    <%--<p><spring:message code="finishing"/><spring:message code="argument" arguments="${player.finish}"/></p>--%>
                                 </div>
                                 <div class="col-sm">
-                                    <p><spring:message code="defending"/></p>
+                                    <%--<p><spring:message code="defending"/><spring:message code="argument" arguments="${player.defending}"/></p>--%>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm">
-                                    <p><spring:message code="passing"/></p>
+                                    <%--<p><spring:message code="passing"/><spring:message code="argument" arguments="${player.passing}"/></p>--%>
                                 </div>
                                 <div class="col-sm">
-                                    <p><spring:message code = "goalKeeping"/></p>
+                                    <%--<p><spring:message code = "goalKeeping"/><spring:message code="argument" arguments="${player.goalKeeping}"/></p>--%>
                                 </div>
                             </div>
                         </div>
@@ -71,10 +71,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <h7><spring:message code="salary"/> </h7>
+                                    <%--<p><spring:message code="salary"/><spring:message code="argument" arguments="${contract.salary}"/></p>--%>
                                 </div>
                                 <div class="col-sm">
-                                    <h7><spring:message code="value"/> </h7>
+                                    <%--<p><spring:message code="value"/> <spring:message code="argument" arguments="${player.value}"/></p>--%>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                             <a href="<c:url value="/"/>"><button class="button"><spring:message code="formation"/> </button></a>
                         </div>
                         <div class="col">
-                            <a href="<c:url value="/"/>"><button class="button"><spring:message code="playMatch"/> </button></a>
+                            <a href="<c:url value="/match"/>"><button class="button"><spring:message code="playMatch"/> </button></a>
                         </div>
                     </div>
 
