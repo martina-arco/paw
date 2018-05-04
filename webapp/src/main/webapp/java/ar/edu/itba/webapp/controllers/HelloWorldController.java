@@ -44,7 +44,14 @@ public class HelloWorldController {
 
     @RequestMapping("/home")
     public ModelAndView home() {
-        return new ModelAndView("home");
+        ModelAndView mav = new ModelAndView("home");
+        return mav;
+    }
+
+    @RequestMapping("/match")
+    public ModelAndView match() {
+        ModelAndView mav = new ModelAndView("match");
+        return mav;
     }
 
     @RequestMapping("/login")

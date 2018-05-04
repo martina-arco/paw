@@ -16,133 +16,138 @@
     <jsp:include page="navBar.jsp" />
 
     <div class="contain">
-
         <div class = "translucent"></div>
+        <div class = "content">
+            <div class="row">
+                <div class="col-sm">
 
-            <div class = "content">
-
-                <div class="row">
-
-                    <div class="col-sm">
-
-                        <div class="trust">
+                    <div class="row">
+                        <div class="col-3">
                             <h5><spring:message code="boardTrust"/> </h5>
-                            <br>
+                        </div>
+                        <div class="col">
+                            <p><spring:message code="team.boardTrust" arguments="${team.boardTrust}"/></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
                             <h5><spring:message code="fanTrust"/> </h5>
                         </div>
+                        <div class="col">
+                            <p>15</p>
+                        </div>
+                    </div>
 
-                        <div class = "player">
-                            <h5>Perez (Age: 28)</h5>
+                    <div class = "player">
+                        <h5>Perez (Age: 28)</h5>
 
-                            <hr>
+                        <hr>
 
-                            <h6><spring:message code="attributes"/></h6>
+                        <h6><spring:message code="attributes"/></h6>
 
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h7><spring:message code="finishing"/></h7>
-                                    </div>
-                                    <div class="col-sm">
-                                        <h7><spring:message code="defending"/></h7>
-                                    </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p><spring:message code="finishing"/></p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h7><spring:message code="passing"/></h7>
-                                    </div>
-                                    <div class="col-sm">
-                                        <h7><spring:message code = "potential"/></h7>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h7><spring:message code = "goalKeeping"/></h7>
-                                    </div>
-                                    <div class="col-sm">
-                                        <h7><spring:message code="fitness"/> </h7>
-                                    </div>
+                                <div class="col-sm">
+                                    <p><spring:message code="defending"/></p>
                                 </div>
                             </div>
-
-                            <hr>
-
-                            <h6><spring:message code="finance"/> </h6>
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h7><spring:message code="salary"/> </h7>
-                                    </div>
-                                    <div class="col-sm">
-                                        <h7><spring:message code="value"/> </h7>
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p><spring:message code="passing"/></p>
+                                </div>
+                                <div class="col-sm">
+                                    <p><spring:message code = "goalKeeping"/></p>
                                 </div>
                             </div>
-
-                            <hr>
-
-                            <div class="btn-toolbar justify-content-between" role="toolbar">
-                                <div class="btn-group mr-2" role="group">
-                                    <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="sell"/> </button></a>
-                                </div>
-                                <div class="btn-group mr-2" role="group">
-                                        <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="contract"/> </button></a>
-                                </div>
-                                <div class="btn-group mr-2" role="group">
-                                        <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="retire"/> </button></a>
-                                </div>
-                            </div>
-
                         </div>
 
-                        <a href="<c:url value="/"/>"><button class="button formation"><spring:message code="formation"/> </button></a>
+                        <hr>
+
+                        <h6><spring:message code="finance"/> </h6>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h7><spring:message code="salary"/> </h7>
+                                </div>
+                                <div class="col-sm">
+                                    <h7><spring:message code="value"/> </h7>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="btn-toolbar justify-content-between" role="toolbar">
+                            <div class="btn-group mr-2" role="group">
+                                <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="sell"/> </button></a>
+                            </div>
+                            <div class="btn-group mr-2" role="group">
+                                    <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="contract"/> </button></a>
+                            </div>
+                            <div class="btn-group mr-2" role="group">
+                                    <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="retire"/> </button></a>
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="col">
-
-                        <table class="table table-hover bg-white small table-sm">
-
-                            <thead>
-                            <tr>
-                                <th scope="col"><spring:message code="name"/> </th>
-                                <th scope="col"><spring:message code="salary"/> </th>
-                                <th scope="col"><spring:message code="value"/> </th>
-                                <th scope="col"><spring:message code="fitness"/> </th>
-                                <th scope="col"><spring:message code="age"/></th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <c:forEach var = "i" begin = "1" end = "23">
-                                    <tr>
-                                        <th scope="row"><a href="<c:url value="/"/>">Perez</a></th>
-                                        <td>3,000</td> 
-                                        <td>400k</td> 
-                                        <td>93</td> 
-                                        <td>35</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                            <%--<c:forEach items="${playerName}" var="player">--%>
-                                <%--<tr>--%>
-                                    <%--<td>${player.name}</td>--%>
-                                    <%--<td>${player.salary}</td>--%>
-                                    <%--<td>${player.value}</td>--%>
-                                    <%--<td>${player.fitness}</td>--%>
-                                    <%--<td>${player.age}</td>--%>
-                                <%--</tr>--%>
-                            <%--</c:forEach>--%>
-
-                        </table>
-
+                    <div class="row">
+                        <div class="col">
+                            <a href="<c:url value="/"/>"><button class="button"><spring:message code="formation"/> </button></a>
+                        </div>
+                        <div class="col">
+                            <a href="<c:url value="/"/>"><button class="button"><spring:message code="playMatch"/> </button></a>
+                        </div>
                     </div>
 
                 </div>
 
+                <div class="col">
+
+                    <table class="table table-hover bg-white small table-sm">
+
+                        <thead>
+                        <tr>
+                            <th scope="col"><spring:message code="name"/> </th>
+                            <th scope="col"><spring:message code="salary"/> </th>
+                            <th scope="col"><spring:message code="value"/> </th>
+                            <th scope="col"><spring:message code="fitness"/> </th>
+                            <th scope="col"><spring:message code="age"/></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <c:forEach var = "i" begin = "1" end = "23">
+                                <tr>
+                                    <th scope="row"><a href="<c:url value="/"/>">Perez</a></th>
+                                    <td>3,000</td> 
+                                    <td>400k</td> 
+                                    <td>93</td> 
+                                    <td>35</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                        <%--<c:forEach items="${playerName}" var="player">--%>
+                            <%--<tr>--%>
+                                <%--<td>${player.name}</td>--%>
+                                <%--<td>${player.salary}</td>--%>
+                                <%--<td>${player.value}</td>--%>
+                                <%--<td>${player.fitness}</td>--%>
+                                <%--<td>${player.age}</td>--%>
+                            <%--</tr>--%>
+                        <%--</c:forEach>--%>
+
+                    </table>
+
+                </div>
+
             </div>
+
         </div>
     </div>
 
