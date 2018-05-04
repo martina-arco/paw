@@ -74,4 +74,12 @@ public class ContractJdbcDao implements ContractDao{
 //        return new Contract(id.longValue(), team, salary, (Date)length);
         return null;
     }
+
+    @Override
+    public Contract findById(long id) {
+
+        //ToDo
+
+        return null;
+    }
 }

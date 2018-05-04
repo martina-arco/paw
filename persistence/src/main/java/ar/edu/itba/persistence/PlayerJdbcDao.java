@@ -75,4 +75,12 @@ public class PlayerJdbcDao implements PlayerDao{
 
         return new Player(id.longValue(), name, age, value, potential, skillLevel, contract, goalkeeping, finish, defending, passing, fitness);
     }
+
+    @Override
+    public Player findById(long id) {
+
+        //ToDo
+
+        return null;
+    }
 }

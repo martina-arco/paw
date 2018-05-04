@@ -83,4 +83,12 @@ public class FormationJdbcDao implements FormationDao{
 
         return new Formation(formationId.longValue(), formation, pressure, attitude, captain, freeKickTaker, penaltyTaker);
     }
+
+    @Override
+    public Formation findById(long id) {
+
+        //ToDo
+
+        return null;
+    }
 }
