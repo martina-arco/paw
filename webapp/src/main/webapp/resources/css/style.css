@@ -1,4 +1,19 @@
+.contain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95%;
+  margin: 1%;
+}
+
+.content {
+  background-color: white;
+  padding: 1%;
+  width: 50%;
+  overflow: auto;
+}
+
 h2 {
-  color: red;
-  padding: 20px;
+  text-align: center;
+  line-height: 0.8;
 }

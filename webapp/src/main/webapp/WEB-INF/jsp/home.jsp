@@ -6,7 +6,9 @@
 <html>
 <head>
     <title>Main</title>
-    <link rel="stylesheet" href="<c:url value="/css/home.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
     <c:url value="/home" var="homeUrl" />
