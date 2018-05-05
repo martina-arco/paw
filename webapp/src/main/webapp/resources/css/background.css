@@ -8,17 +8,18 @@ body {
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 1.5%;
-    position:relative;
+    width: 99%;
     height: 87%;
+    position: fixed;
 }
 
 .translucent {
-    position:absolute;
+    position : absolute;
     top : 0;
     bottom:0;
     left:0;
     width:100%;
-    background-color:white;
+    background-color : white;
     opacity: 0.9;
     -moz-opacity: 0.3;
     filter:alpha(opacity=30);

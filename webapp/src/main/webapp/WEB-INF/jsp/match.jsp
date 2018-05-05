@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/css/match.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
 </head>
 <body>
     <c:url value="/match" var="matchUrl" />
@@ -26,22 +26,20 @@
                     </div>
                     <div class="col-3">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar green" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
 
-
-
                 <table class="table bg-white">
 
-                    <thead>
+                    <thead class = "green">
                     <tr>
-                        <th scope="col" class="width1"><spring:message code="stadium"/> </th>
-                        <th scope="col" class="width1"><spring:message code="home"/> </th>
-                        <th scope="col" colspan="2" class="width4"><spring:message code="score"/> </th>
-                        <th scope="col" class="width1"><spring:message code="away"/> </th>
-                        <th scope="col" class="width2"><spring:message code="events"/></th>
+                        <th scope="col" class="width15"><spring:message code="stadium"/> </th>
+                        <th scope="col" class="width15"><spring:message code="home"/> </th>
+                        <th scope="col" colspan="2" class="width20"><spring:message code="score"/> </th>
+                        <th scope="col" class="width15"><spring:message code="away"/> </th>
+                        <th scope="col" class="width35"><spring:message code="events"/></th>
                     </tr>
                     </thead>
 
@@ -49,12 +47,12 @@
 
                     <c:forEach var = "i" begin = "1" end = "6">
                         <tr>
-                            <td class="width1">Monumental</td>
-                            <td class="width1">River</td> 
-                            <td class="width3">1</td> 
-                            <td class="width3">0</td>
-                            <td class="width1">Boca</td> 
-                            <td class="width2">Gol</td>
+                            <td class="width15">Monumental</td>
+                            <td class="width15">River</td> 
+                            <td class="width10">1</td> 
+                            <td class="width10">0</td>
+                            <td class="width15">Boca</td> 
+                            <td class="width35">Gol</td>
                         </tr>
                     </c:forEach>
 

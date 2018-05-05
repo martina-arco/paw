@@ -1,5 +1,7 @@
 package ar.edu.itba.webapp.controllers;
 
+import ar.edu.itba.interfaces.service.PlayerService;
+import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.User;
 import ar.edu.itba.webapp.form.UserForm;
@@ -28,6 +30,12 @@ public class HelloWorldController {
     @Autowired
     private UserService us;
 
+//    @Autowired
+//    private PlayerService player;
+//
+//    @Autowired
+//    private TeamService team;
+
     @RequestMapping("/")
     public ModelAndView index(@ModelAttribute("registerForm") final UserForm form) {
         return new ModelAndView("index");
@@ -45,6 +53,26 @@ public class HelloWorldController {
     @RequestMapping("/match")
     public ModelAndView match() {
         ModelAndView mav = new ModelAndView("match");
+        return mav;
+    }
+
+    @RequestMapping("/youthAcademy")
+    public ModelAndView youthAcademy() {
+        ModelAndView mav = new ModelAndView("youthAcademy");
+        return mav;
+    }
+
+    @RequestMapping("/matchEnd")
+    public ModelAndView matchEnd() {
+        ModelAndView mav = new ModelAndView("matchEnd");
+        return mav;
+    }
+
+    @RequestMapping("/home")
+    public ModelAndView home() {
+        ModelAndView mav = new ModelAndView("home");
+        //mav.addObject("player", player.findById(id));
+        mav.addObject("team", loggedUser().getTeam());
         return mav;
     }
 

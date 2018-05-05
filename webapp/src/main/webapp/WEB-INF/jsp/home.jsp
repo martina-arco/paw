@@ -6,11 +6,14 @@
 <html>
 <head>
     <title>Main</title>
-    <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
+
 </head>
+<body>
     <c:url value="/home" var="homeUrl" />
 
     <jsp:include page="navBar.jsp" />
@@ -26,7 +29,7 @@
                             <h5><spring:message code="boardTrust"/> </h5>
                         </div>
                         <div class="col">
-                            <%--<p><spring:message code="argument" arguments="${team.boardTrust}"/></p>--%>
+                            <p><spring:message code="argument" arguments="${team.boardTrust}"/></p>
                         </div>
                     </div>
                     <div class="row">
@@ -34,11 +37,11 @@
                             <h5><spring:message code="fanTrust"/> </h5>
                         </div>
                         <div class="col">
-                            <%--<p><spring:message code="argument" arguments="${team.fanTrust}"/></p>--%>
+                            <p><spring:message code="argument" arguments="${team.fanTrust}"/></p>
                         </div>
                     </div>
 
-                    <div class = "player">
+                    <div class = "player green">
                         <h5>Perez (Age: 28)</h5>
 
                         <hr>
@@ -48,18 +51,18 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <%--<p><spring:message code="finishing"/><spring:message code="argument" arguments="${player.finish}"/></p>--%>
+                                    <p><spring:message code="finishing"/><spring:message code="argument" arguments="${player.finish}"/></p>
                                 </div>
                                 <div class="col-sm">
-                                    <%--<p><spring:message code="defending"/><spring:message code="argument" arguments="${player.defending}"/></p>--%>
+                                    <p><spring:message code="defending"/><spring:message code="argument" arguments="${player.defending}"/></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm">
-                                    <%--<p><spring:message code="passing"/><spring:message code="argument" arguments="${player.passing}"/></p>--%>
+                                    <p><spring:message code="passing"/><spring:message code="argument" arguments="${player.passing}"/></p>
                                 </div>
                                 <div class="col-sm">
-                                    <%--<p><spring:message code = "goalKeeping"/><spring:message code="argument" arguments="${player.goalKeeping}"/></p>--%>
+                                    <p><spring:message code = "goalKeeping"/><spring:message code="argument" arguments="${player.goalKeeping}"/></p>
                                 </div>
                             </div>
                         </div>
@@ -71,10 +74,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <%--<p><spring:message code="salary"/><spring:message code="argument" arguments="${contract.salary}"/></p>--%>
+                                    <p><spring:message code="salary"/><spring:message code="argument" arguments="${contract.salary}"/></p>
                                 </div>
                                 <div class="col-sm">
-                                    <%--<p><spring:message code="value"/> <spring:message code="argument" arguments="${player.value}"/></p>--%>
+                                    <p><spring:message code="value"/> <spring:message code="argument" arguments="${player.value}"/></p>
                                 </div>
                             </div>
                         </div>

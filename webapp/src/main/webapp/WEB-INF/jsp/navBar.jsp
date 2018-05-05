@@ -5,14 +5,14 @@
 <head></head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id = "nav">
-            <a class="navbar-brand" href="#">Team name</a>
+            <a class="navbar-brand" href = "<c:url value="/home"/>">Team name</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a href = "<c:url value="youthAcademy.jsp" var="youthAcademyUrl"/>" class="nav-link"><spring:message code="youthAcademy"/> </a>
+                        <a href = "<c:url value="/youthAcademy"/>" class="nav-link"><spring:message code="youthAcademy"/> </a>
                     </li>
                     <li class="nav-item active">
                         <a href = "<c:url value="stadium.jsp" var="stadiumUrl"/>" class="nav-link"><spring:message code="stadium"/></a>
