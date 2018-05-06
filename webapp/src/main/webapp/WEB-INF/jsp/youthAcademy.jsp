@@ -70,7 +70,7 @@
                                 <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="hire"/> </button></a>
                             </div>
                             <div class="btn-group mr-2" role="group">
-                                <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="remove"/> </button></a>
+                                <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="retire"/> </button></a>
                             </div>
                         </div>
 

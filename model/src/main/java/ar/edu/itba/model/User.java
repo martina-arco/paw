@@ -5,11 +5,13 @@ public class User {
     private String username;
     private String password;
     private long id;
+    private Team team;
 
     public User(String username, String password, long id) {
         this.username = username;
         this.id = id;
         this.password = password;
+        this.team = team;
     }
 
     public long getId() {
@@ -22,5 +24,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 }

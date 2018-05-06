@@ -1,0 +1,55 @@
+.green {
+    background-color: #7ebc83;
+}
+
+.width10 {
+    width: 10%;
+}
+
+.width15 {
+    width: 15%;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.width35 {
+    width: 35%;
+}
+
+.width60 {
+    width : 60%;
+}
+
+.width100 {
+    width : 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.big-height {
+    line-height: 0.8;
+}
+
+.indent {
+    margin-left: 250px;
+}
+
+table.table-center {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.big-height {
+    height: 40px;
+    margin-bottom: 1.5%;
+    line-height: 40px;
+    vertical-align: middle;
+}

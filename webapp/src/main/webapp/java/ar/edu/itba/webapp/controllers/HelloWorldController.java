@@ -68,6 +68,18 @@ public class HelloWorldController {
         return mav;
     }
 
+    @RequestMapping("/finance")
+    public ModelAndView finance() {
+        ModelAndView mav = new ModelAndView("finance");
+        return mav;
+    }
+
+    @RequestMapping("/stadium")
+    public ModelAndView stadium() {
+        ModelAndView mav = new ModelAndView("stadium");
+        return mav;
+    }
+
     @RequestMapping("/home")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView("home");

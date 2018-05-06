@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/matchEnd.css"/>"/>
 </head>
 <body>
     <c:url value="/matchEnd" var="matchEndUrl" />
@@ -76,7 +77,7 @@
 
                     <h6><spring:message code="goals"/> </h6>
 
-                    <table class="table width60 table-borderless center">
+                    <table class="table width60 table-borderless table-center">
                         <tbody>
 
                                 <tr>
@@ -93,7 +94,7 @@
 
                     <h6><spring:message code="matchStats"/> </h6>
 
-                    <table class="table width60 table-borderless center">
+                    <table class="table width60 table-borderless table-center">
                         <tbody>
 
                         <tr>

@@ -17,9 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by martina on 02/05/2018.
- */
 public class ContractJdbcDao implements ContractDao{
 
     private JdbcTemplate jdbcTemplate;
