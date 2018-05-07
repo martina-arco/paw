@@ -23,47 +23,8 @@
                 <div class="col-sm">
 
                     <div class = "player green">
-                        <h5>Perez (Age: 28)</h5>
 
-                        <hr>
-
-                        <h6><spring:message code="attributes"/></h6>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p><spring:message code="finishing"/><spring:message code="argument" arguments="${player.finish}"/></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p><spring:message code="defending"/><spring:message code="argument" arguments="${player.defending}"/></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p><spring:message code="passing"/><spring:message code="argument" arguments="${player.passing}"/></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p><spring:message code = "goalKeeping"/><spring:message code="argument" arguments="${player.goalKeeping}"/></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <h6><spring:message code="finance"/> </h6>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p><spring:message code="salary"/><spring:message code="argument" arguments="${contract.salary}"/></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p><spring:message code="value"/> <spring:message code="argument" arguments="${player.value}"/></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
+                        <jsp:include page="playerInfo.jsp"/>
 
                         <div class="btn-toolbar justify-content-between" role="toolbar">
                             <div class="btn-group mr-2" role="group">

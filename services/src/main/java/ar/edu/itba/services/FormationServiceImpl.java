@@ -12,19 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
 @Service
-public class FormationServiceImpl {/*implements FormationService {
+public class FormationServiceImpl implements FormationService {
 
-//    @Autowired
-//    private FormationDao formationDao;
-//
-//    @Override
-//    @Transactional
-//    public Formation create(Map<Player, Point> formation, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
-//        return formationDao.create(formation, pressure, attitude, captain, freeKickTaker, penaltyTaker);
-//    }
-//
-//    @Override
-//    public Formation findById(long id) {
-//        return formationDao.findById(id);
-//    }*/
+    @Autowired
+    private FormationDao formationDao;
+
+    @Override
+    @Transactional
+    public Formation create(Map<Player, Point> formation, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
+        return formationDao.create(formation, pressure, attitude, captain, freeKickTaker, penaltyTaker);
+    }
+
+    @Override
+    public Formation findById(long id) {
+        return formationDao.findById(id);
+    }
 }

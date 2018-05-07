@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -17,9 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Created by martina on 01/05/2018.
- */
+@Repository
 public class ReceiptJdbcDao implements ReceiptDao {
 
     private JdbcTemplate jdbcTemplate;

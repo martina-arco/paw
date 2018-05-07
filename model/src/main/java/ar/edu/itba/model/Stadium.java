@@ -1,6 +1,5 @@
 package ar.edu.itba.model;
 
-
 public class Stadium {
 
     public enum SeatType {

@@ -2,9 +2,11 @@ package ar.edu.itba.persistence;
 
 import ar.edu.itba.interfaces.dao.YouthAcademyDao;
 import ar.edu.itba.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -13,16 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class YouthAcademyJdbcDao implements YouthAcademyDao {
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;
-
-    public YouthAcademyJdbcDao(final DataSource ds) {
-        jdbcTemplate = new JdbcTemplate(ds);
-        jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("youthAcademy")
-                .usingGeneratedKeyColumns("id");
-    }
 
     private static final RowMapper<YouthAcademy> ROW_MAPPER = new RowMapper<YouthAcademy>() {
         @Override
@@ -37,6 +33,14 @@ public class YouthAcademyJdbcDao implements YouthAcademyDao {
             return null;
         }
     };
+
+    @Autowired
+    public YouthAcademyJdbcDao(final DataSource ds) {
+        jdbcTemplate = new JdbcTemplate(ds);
+        jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("youthAcademy")
+                .usingGeneratedKeyColumns("id");
+    }
 
     @Override
     public YouthAcademy create(Team team, List<Player> players) {

@@ -28,7 +28,7 @@
                             <h5><spring:message code="boardTrust"/> </h5>
                         </div>
                         <div class="col">
-                            <p><spring:message code="argument" arguments="${team.boardTrust}"/></p>
+                            <p><c:out value="${team.boardTrust}"/></p>
                         </div>
                     </div>
                     <div class="row">
@@ -36,52 +36,13 @@
                             <h5><spring:message code="fanTrust"/> </h5>
                         </div>
                         <div class="col">
-                            <p><spring:message code="argument" arguments="${team.fanTrust}"/></p>
+                            <p><c:out value="${team.fanTrust}"/></p>
                         </div>
                     </div>
 
                     <div class = "player green">
-                        <h5>Perez (Age: 28)</h5>
 
-                        <hr>
-
-                        <h6><spring:message code="attributes"/></h6>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p><spring:message code="finishing"/><spring:message code="argument" arguments="${player.finish}"/></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p><spring:message code="defending"/><spring:message code="argument" arguments="${player.defending}"/></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p><spring:message code="passing"/><spring:message code="argument" arguments="${player.passing}"/></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p><spring:message code = "goalKeeping"/><spring:message code="argument" arguments="${player.goalKeeping}"/></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <h6><spring:message code="finance"/> </h6>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <p><spring:message code="salary"/><spring:message code="argument" arguments="${contract.salary}"/></p>
-                                </div>
-                                <div class="col-sm">
-                                    <p><spring:message code="value"/> <spring:message code="argument" arguments="${player.value}"/></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
+                        <jsp:include page="playerInfo.jsp"/>
 
                         <div class="btn-toolbar justify-content-between" role="toolbar">
                             <div class="btn-group mr-2" role="group">
@@ -136,11 +97,11 @@
                         </tbody>
                         <%--<c:forEach items="${playerName}" var="player">--%>
                             <%--<tr>--%>
-                                <%--<td>${player.name}</td>--%>
-                                <%--<td>${player.salary}</td>--%>
-                                <%--<td>${player.value}</td>--%>
-                                <%--<td>${player.fitness}</td>--%>
-                                <%--<td>${player.age}</td>--%>
+                                <%--<td><c:out value="${player.name}"/></td>--%>
+                                <%--<td><c:out value="${player.salary}"/></td>--%>
+                                <%--<td><c:out value="${player.value}"/></td>--%>
+                                <%--<td><c:out value="${player.fitness}"/></td>--%>
+                                <%--<td><c:out value="${player.age}"/></td>--%>
                             <%--</tr>--%>
                         <%--</c:forEach>--%>
 

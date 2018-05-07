@@ -1,8 +1,5 @@
 package ar.edu.itba.model;
 
-/**
- * Created by martina on 30/04/2018.
- */
 public class Event {
 
     private Player p1, p2;

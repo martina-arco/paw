@@ -6,10 +6,6 @@ import java.util.Map;
 
 import static ar.edu.itba.model.EventType.*;
 
-/**
- * Created by martina on 30/04/2018.
- */
-
 public class Match {
 
     private Team home, away;

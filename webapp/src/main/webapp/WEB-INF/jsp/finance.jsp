@@ -23,7 +23,7 @@
                     <h3 class="indent"><spring:message code="money"/></h3>
                 </div>
                 <div class="col">
-                    <h5>3,000,000</h5>
+                    <h5><c:out value="${money}"/></h5>
                 </div>
             </div>
 
@@ -39,15 +39,15 @@
 
                     <tr>
                         <td class="width60"><spring:message code="playersSold"/></td> 
-                        <td>$25</td> 
+                        <td><spring:message code="currency" arguments="${playersSold}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="bankLoan"/></td>
-                        <td>$40</td> 
+                        <td><spring:message code="currency" arguments="${bankLoanIncome}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="ticketsSold"/></td>
-                        <td>$40</td> 
+                        <td><spring:message code="currency" arguments="${ticketsSold}"/></td> 
                     </tr>
 
                     </tbody>
@@ -66,19 +66,19 @@
 
                     <tr>
                         <td class="width60"><spring:message code="playersBought"/></td> 
-                        <td>$25</td> 
+                        <td><spring:message code="currency" arguments="${playersBought}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="bankLoan"/></td>
-                        <td>$40</td> 
+                        <td><spring:message code="currency" arguments="${bankLoanExpense}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="stadiumExpansion"/></td>
-                        <td>$40</td> 
+                        <td><spring:message code="currency" arguments="${stadiumExpansion}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="salaries"/></td>
-                        <td>$40</td> 
+                        <td><spring:message code="currency" arguments="${salaries}"/></td> 
                     </tr>
 
                     </tbody>

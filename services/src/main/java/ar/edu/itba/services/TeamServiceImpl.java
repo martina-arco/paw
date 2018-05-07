@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class TeamServiceImpl {/*implements TeamService {
+public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamDao teamDao;
@@ -24,5 +24,5 @@ public class TeamServiceImpl {/*implements TeamService {
     @Override
     public Team findById(long id) {
         return teamDao.findById(id);
-    }*/
+    }
 }
