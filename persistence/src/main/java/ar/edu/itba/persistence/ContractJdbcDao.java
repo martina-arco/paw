@@ -31,7 +31,7 @@ public class ContractJdbcDao implements ContractDao{
             int id = rs.getInt("id");
             int playerid = rs.getInt("player");
             int teamid = rs.getInt("team");
-            int salary = rs.getInt("salary");
+            int salary = rs.getInt("player.salary");
             int contractLength = rs.getInt("contractLength");
 
 //            Player p = findById(playerid);
@@ -66,7 +66,7 @@ public class ContractJdbcDao implements ContractDao{
 
         args.put("team", team.getId());
         args.put("player", p.getId());
-        args.put("salary", salary);
+        args.put("player.salary", salary);
 //        args.put("length", length);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);

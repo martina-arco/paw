@@ -3,14 +3,15 @@ package ar.edu.itba.webapp.controllers;
 import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
+import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
+import ar.edu.itba.webapp.form.ChooseTeamForm;
 import ar.edu.itba.webapp.form.UserForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
+import org.springframework.expression.ParseException;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,22 +20,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@Controller
-public class HelloWorldController {
+@org.springframework.stereotype.Controller
+public class HelloWorldController extends Controller{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldController.class);
 
     @Autowired
     private UserService us;
 
-//    @Autowired
-//    private PlayerService player;
-//
-//    @Autowired
-//    private TeamService team;
+    @Autowired
+    private PlayerService player;
+
+    @Autowired
+    private TeamService team;
 
     @RequestMapping("/")
     public ModelAndView index(@ModelAttribute("registerForm") final UserForm form) {
@@ -48,44 +54,6 @@ public class HelloWorldController {
         }
         final User u = us.create(form.getUsername(), form.getPassword());
         return new ModelAndView("redirect:/login");
-    }
-
-    @RequestMapping("/match")
-    public ModelAndView match() {
-        ModelAndView mav = new ModelAndView("match");
-        return mav;
-    }
-
-    @RequestMapping("/youthAcademy")
-    public ModelAndView youthAcademy() {
-        ModelAndView mav = new ModelAndView("youthAcademy");
-        return mav;
-    }
-
-    @RequestMapping("/matchEnd")
-    public ModelAndView matchEnd() {
-        ModelAndView mav = new ModelAndView("matchEnd");
-        return mav;
-    }
-
-    @RequestMapping("/finance")
-    public ModelAndView finance() {
-        ModelAndView mav = new ModelAndView("finance");
-        return mav;
-    }
-
-    @RequestMapping("/stadium")
-    public ModelAndView stadium() {
-        ModelAndView mav = new ModelAndView("stadium");
-        return mav;
-    }
-
-    @RequestMapping("/home")
-    public ModelAndView home() {
-        ModelAndView mav = new ModelAndView("home");
-        //mav.addObject("player", player.findById(id));
-        mav.addObject("team", loggedUser().getTeam());
-        return mav;
     }
 
     @RequestMapping("/login")
@@ -104,15 +72,6 @@ public class HelloWorldController {
     public ModelAndView printUser() {
         final ModelAndView mav = new ModelAndView("hello");
         return mav;
-    }
-
-
-    @ModelAttribute
-    public User loggedUser() {
-        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        final User user = us.findByUsername(auth.getName());
-        LOGGER.debug("Logged user is {}", user);
-        return user;
     }
 
 }

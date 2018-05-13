@@ -10,19 +10,19 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <p><spring:message code="finishing" arguments="${player.finish}"/></p>
+            <p><spring:message code="player.finishing" arguments="${player.finish}"/></p>
 
         </div>
         <div class="col-sm">
-            <p><spring:message code="defending" arguments="${player.defending}"/></p>
+            <p><spring:message code="player.defending" arguments="${player.defending}"/></p>
         </div>
     </div>
     <div class="row">
         <div class="col-sm">
-            <p><spring:message code="passing" arguments="${player.passing}"/></p>
+            <p><spring:message code="player.passing" arguments="${player.passing}"/></p>
         </div>
         <div class="col-sm">
-            <p><spring:message code = "goalKeeping" arguments="${player.goalKeeping}"/></p>
+            <p><spring:message code = "player.goalKeeping" arguments="${player.goalKeeping}"/></p>
         </div>
     </div>
 </div>
@@ -34,7 +34,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <p><spring:message code="salary" arguments="${contract.salary}"/></p>
+            <p><spring:message code="player.salary" arguments="${contract.salary}"/></p>
         </div>
         <div class="col-sm">
             <p><spring:message code="value"  arguments="${player.value}"/></p>

@@ -2,7 +2,7 @@ package ar.edu.itba.model;
 
 public class Player {
     private String name;
-    private Integer age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness;
+    private Integer age, value, potential, skillLevel, goalKeeping, finish, defending, passing, fitness;
     private long id;
     private Contract contract;
 
@@ -14,7 +14,7 @@ public class Player {
         this.value = value;
         this.potential = potential;
         this.skillLevel = skillLevel;
-        this.goalkeeping = goalkeeping;
+        this.goalKeeping = goalkeeping;
         this.finish = finish;
         this.defending = defending;
         this.passing = passing;
@@ -42,8 +42,8 @@ public class Player {
         return skillLevel;
     }
 
-    public Integer getGoalkeeping() {
-        return goalkeeping;
+    public Integer getGoalKeeping() {
+        return goalKeeping;
     }
 
     public Integer getFinish() {

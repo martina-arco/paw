@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/css/matchEnd.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/match.css"/>"/>
 </head>
 <body>
     <c:url value="/matchEnd" var="matchEndUrl" />
@@ -61,18 +61,18 @@
                     <div class="row green center big-height">
 
                         <div class="col">
-                            <h5>Home</h5>
+                            <h5><c:out value="${match.home}"/></h5>
                         </div>
                         <div class="col">
-                            <h5>1x1</h5>
+                            <h5><spring:message code="homeAndAwayScore" arguments="${match.homeScore}, ${match.awayScore}"/></h5>
                         </div>
                         <div class="col">
-                            <h5>Away</h5>
+                            <h5><c:out value="${match.home}"/></h5>
                         </div>
                     </div>
 
                     <div class="container center">
-                        <h5>Stadium</h5>
+                        <h5><c:out value="${stadium}"/></h5>
                     </div>
 
                     <h6><spring:message code="goals"/> </h6>
@@ -98,29 +98,29 @@
                         <tbody>
 
                         <tr>
-                            <td>5</td> 
+                            <td><c:out value="${homeSaves}"/></td> 
                             <td><spring:message code="saves"/> </td> 
-                            <td>6</td>
+                            <td><c:out value="${awaySaves}"/></td>
                         </tr>
                         <tr>
-                            <td>57</td>
+                            <td><c:out value="${homePasses}"/></td>
                             <td><spring:message code="passes"/> </td> 
-                            <td>45</td>
+                            <td><c:out value="${awayPasses}"/></td>
                         </tr>
                         <tr>
-                            <td>57</td>
+                            <td><c:out value="${homeTackles}"/></td>
                             <td><spring:message code="tackles"/> </td> 
-                            <td>45</td>
+                            <td><c:out value="${awayTackles}"/></td>
                         </tr>
                         <tr>
-                            <td>57</td>
+                            <td><c:out value="${homeAssists}"/></td>
                             <td><spring:message code="assists"/> </td> 
-                            <td>45</td>
+                            <td><c:out value="${awayAssists}"/></td>
                         </tr>
                         <tr>
-                            <td>57</td>
+                            <td><c:out value="${homeFouls}"/></td>
                             <td><spring:message code="fouls"/> </td> 
-                            <td>45</td>
+                            <td><c:out value="${awayFouls}"/></td>
                         </tr>
                         </tbody>
                     </table>

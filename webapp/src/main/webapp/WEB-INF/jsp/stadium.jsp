@@ -30,15 +30,15 @@
 
                     <tr>
                         <td class="width60"><spring:message code="lowSeats"/></td> 
-                        <td><c:out value="${lowSeats}"/></td> 
+                        <td><c:out value="${stadium.lowSeats}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="mediumSeats"/></td>
-                        <td><c:out value="${mediumSeats}"/></td> 
+                        <td><c:out value="${stadium.mediumSeats}"/></td> 
                     </tr>
                     <tr>
                         <td class="width60"><spring:message code="highSeats"/></td>
-                        <td><c:out value="${highSeats}"/></td> 
+                        <td><c:out value="${stadium.highSeats}"/></td> 
                     </tr>
 
                     </tbody>
@@ -47,7 +47,7 @@
 
             <div class="row big-height">
                 <div class="col">
-                    <h3 class="indent"><spring:message code="expandStadium"/> </h3>
+                    <h3 class="indent"><spring:message code="stadiumExpansion"/> </h3>
                 </div>
             </div>
 

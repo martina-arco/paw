@@ -22,6 +22,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player findById(long id) {
-        return playerDao.findById(id);
+        //return playerDao.findById(id);
+        return new Player(1, "asd", 0,0,0,0, null, 0,0,0,0,0);
     }
 }

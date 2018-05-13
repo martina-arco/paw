@@ -29,10 +29,10 @@ public class PlayerJdbcDao implements PlayerDao{
             int value = rs.getInt("value");
             int potential = rs.getInt("potential");
             int skillLevel = rs.getInt("skillLevel");
-            int goalkeeping = rs.getInt("goalKeeping");
-            int finishing = rs.getInt("finishing");
+            int goalkeeping = rs.getInt("player.goalKeeping");
+            int finishing = rs.getInt("player.finishing");
             int defending = rs.getInt("defending	");
-            int passing	= rs.getInt("passing");
+            int passing	= rs.getInt("player.passing");
             int fitness = rs.getInt("fitness");
             String name = rs.getString("name");
 //            Contract contract = dao.findByPlayerId(id);
@@ -64,10 +64,10 @@ public class PlayerJdbcDao implements PlayerDao{
         args.put("potential", potential);
         args.put("skillLevel", skillLevel);
         args.put("contract", contract.getId());
-        args.put("goalKeeping", goalkeeping);
-        args.put("finishing", finish);
-        args.put("defending", defending);
-        args.put("passing", passing);
+        args.put("player.goalKeeping", goalkeeping);
+        args.put("player.finishing", finish);
+        args.put("player.defending", defending);
+        args.put("player.passing", passing);
         args.put("fitness", fitness);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);

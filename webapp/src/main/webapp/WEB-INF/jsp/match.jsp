@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/match.css"/>"/>
 </head>
 <body>
     <c:url value="/match" var="matchUrl" />
@@ -57,14 +58,16 @@
                     </c:forEach>
 
                     </tbody>
-                    <%--<c:forEach items="${playerName}" var="player">--%>
-                    <%--<tr>--%>
-                    <%--<td>${player.name}</td>--%>
-                    <%--<td>${player.salary}</td>--%>
-                    <%--<td>${player.value}</td>--%>
-                    <%--<td>${player.fitness}</td>--%>
-                    <%--<td>${player.age}</td>--%>
-                    <%--</tr>--%>
+
+                    <%--<c:forEach items="${matches}" var="match">--%>
+                        <%--<tr>--%>
+                            <%--<td>${match.home.stadium}</td>--%>
+                            <%--<td>${match.home}</td>--%>
+                            <%--<td>${match.homeScore}</td>--%>
+                            <%--<td>${match.awayScore}</td>--%>
+                            <%--<td>${match.away}</td>--%>
+                            <%--<td>${match.event}</td>--%>
+                        <%--</tr>--%>
                     <%--</c:forEach>--%>
 
                 </table>

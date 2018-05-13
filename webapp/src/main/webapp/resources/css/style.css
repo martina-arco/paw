@@ -47,6 +47,10 @@ table.table-center {
     margin-right:auto;
 }
 
+input[type="radio"]{
+    margin: 0 10px 0 10px;
+}
+
 .big-height {
     height: 40px;
     margin-bottom: 1.5%;

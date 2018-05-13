@@ -76,7 +76,7 @@
                         <thead>
                         <tr>
                             <th scope="col"><spring:message code="name"/> </th>
-                            <th scope="col"><spring:message code="salary"/> </th>
+                            <th scope="col"><spring:message code="player.salary"/> </th>
                             <th scope="col"><spring:message code="value"/> </th>
                             <th scope="col"><spring:message code="fitness"/> </th>
                             <th scope="col"><spring:message code="age"/></th>
@@ -87,7 +87,7 @@
 
                             <c:forEach var = "i" begin = "1" end = "23">
                                 <tr>
-                                    <th scope="row"><a href="<c:url value="/"/>">Perez</a></th>
+                                    <th scope="row"><a href="<c:url value="/home/${i}" />">Perez</a></th>
                                     <td>3,000</td> 
                                     <td>400k</td> 
                                     <td>93</td> 
@@ -95,7 +95,8 @@
                                 </tr>
                             </c:forEach>
                         </tbody>
-                        <%--<c:forEach items="${playerName}" var="player">--%>
+
+                        <%--<c:forEach items="${players}" var="player">--%>
                             <%--<tr>--%>
                                 <%--<td><c:out value="${player.name}"/></td>--%>
                                 <%--<td><c:out value="${player.salary}"/></td>--%>
