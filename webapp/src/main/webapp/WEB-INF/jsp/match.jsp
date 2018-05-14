@@ -20,7 +20,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <a href="<c:url value="/"/>"><input type="button" value="Change conditions" class="btn btn-light"/></a>
+                        <a href="<c:url value="/"/>"><input type="button" value="Make Changes" class="btn btn-light"/></a>
                     </div>
                     <div class="col text-md-right">
                         <p>25'</p>

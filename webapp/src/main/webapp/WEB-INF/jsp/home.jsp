@@ -60,7 +60,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <a href="<c:url value="/"/>"><button class="button"><spring:message code="formation"/> </button></a>
+                            <a href="<c:url value="/formation"/>"><button class="button"><spring:message code="formation"/> </button></a>
                         </div>
                         <div class="col">
                             <a href="<c:url value="/match"/>"><button class="button"><spring:message code="playMatch"/> </button></a>

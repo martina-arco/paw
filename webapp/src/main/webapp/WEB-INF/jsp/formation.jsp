@@ -95,9 +95,8 @@
                     </div>
 
                     <div class="col">
-                        <a href="<c:url value="/"/>"><button class="button"><spring:message code="save"/> </button></a>
+                        <a href="<c:url value="/home"/>"><button class="button"><spring:message code="save"/> </button></a>
                     </div>
-
 
                 </div>
 
