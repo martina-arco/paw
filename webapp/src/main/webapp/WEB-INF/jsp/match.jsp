@@ -50,10 +50,10 @@
                         <tr>
                             <td class="width15">Monumental</td>
                             <td class="width15">River</td> 
-                            <td class="width10">1</td> 
-                            <td class="width10">0</td>
+                            <td class="width10" id="homeScore">1</td> 
+                            <td class="width10" id="awayScore">0</td>
                             <td class="width15">Boca</td> 
-                            <td class="width35">Gol</td>
+                            <td class="width35" id="event">Gol</td>
                         </tr>
                     </c:forEach>
 
@@ -74,6 +74,8 @@
             </div>
     </div>
 
+
+    <script src="/js/match.js"\></script>
 
 </body>
 </html>

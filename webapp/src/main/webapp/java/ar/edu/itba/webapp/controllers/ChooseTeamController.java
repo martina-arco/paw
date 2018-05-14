@@ -30,7 +30,7 @@ public class ChooseTeamController extends Controller{
 
     @RequestMapping(value = "/chooseTeam")
     public ModelAndView chooseTeam(@ModelAttribute("chooseTeamForm") final ChooseTeamForm form) {
-//        league = leagueService.findByUserId(loggedUser().getId());
+//        league = leagueService.findByUser(loggedUser());
         return new ModelAndView("chooseTeam");
     }
 
@@ -49,7 +49,7 @@ public class ChooseTeamController extends Controller{
     @ModelAttribute("teamList")
     public List<Team> getTeamList(){
 
-//        List<Team> teams = leagueService.findTeamsById(league.getId());
+//        List<Team> teams = teamService.findByLeague(league);
 
 
         List<Team> teams = new ArrayList<>();

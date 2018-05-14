@@ -64,6 +64,10 @@ public class Team {
         return formationId;
     }
 
+    public boolean removePlayer(Player player) {
+        return players.remove(player);
+    }
+
     @Deprecated
     public List<Long> getPlayersIds() {
         if(players != null) {

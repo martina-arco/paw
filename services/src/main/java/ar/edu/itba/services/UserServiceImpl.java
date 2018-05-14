@@ -2,6 +2,7 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.UserDao;
 import ar.edu.itba.interfaces.service.UserService;
+import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User create(String username, String password, String mail) {
         return userDao.create(username, password, mail);
+    }
+
+    @Override
+    public void setTeam(Team team) {
+//        user.setTeam(team);
+//        userDao.save(user);
     }
 }

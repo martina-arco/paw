@@ -10,4 +10,6 @@ public interface TeamService {
 
     Team findById(long id);
 
+    List<Team> findByLeague(League league);
+
 }

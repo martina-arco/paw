@@ -13,4 +13,6 @@ public interface PlayerService {
 
     Player findById(long id);
 
+    void retire(Player player);
+
 }
