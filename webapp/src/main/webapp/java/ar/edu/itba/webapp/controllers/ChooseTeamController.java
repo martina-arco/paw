@@ -1,6 +1,10 @@
 package ar.edu.itba.webapp.controllers;
 
+import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.service.TeamService;
+import ar.edu.itba.model.*;
 import ar.edu.itba.webapp.form.ChooseTeamForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +20,17 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 public class ChooseTeamController extends Controller{
 
+    private League league;
+
+    @Autowired
+    private LeagueService leagueService;
+
+    @Autowired
+    private TeamService teamService;
+
     @RequestMapping(value = "/chooseTeam")
     public ModelAndView chooseTeam(@ModelAttribute("chooseTeamForm") final ChooseTeamForm form) {
+//        league = leagueService.findByUserId(loggedUser().getId());
         return new ModelAndView("chooseTeam");
     }
 
@@ -28,20 +41,23 @@ public class ChooseTeamController extends Controller{
             return chooseTeam(form);
         }
 
-//        loggedUser().setTeam(form.getTeamChosen());
+//        loggedUser().setTeam(teamService.findById(form.getTeamChosen()));
 
-        return new ModelAndView("redirect:home/1");
+        return new ModelAndView("redirect:home");
     }
 
     @ModelAttribute("teamList")
-    public List<String> getTeamList(){
+    public List<Team> getTeamList(){
 
-        List<String> teamList = new ArrayList<>();
-        teamList.add("River");
-        teamList.add("Boca");
-        teamList.add("San lorenzo");
-        //TO DO agarrar todos los nombres de equipos
+//        List<Team> teams = leagueService.findTeamsById(league.getId());
 
-        return teamList;
+
+        List<Team> teams = new ArrayList<>();
+        teams.add(new Team(1,"River",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
+        teams.add(new Team(2,"Boca",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
+        teams.add(new Team(3,"Racing",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
+
+
+        return teams;
     }
 }

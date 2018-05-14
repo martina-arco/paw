@@ -21,9 +21,9 @@
             <form:form modelAttribute="chooseTeamForm" action="${postPath}" method="post">
 
                 <div class="form-group">
-
-                        <form:radiobuttons path="teamChosen" items="${teamList}" element="br"/>
-
+                    <c:forEach items="${teamList}" var="team">
+                        <form:radiobutton path="teamChosen" value="${team.id}"/>${team.name}
+                    </c:forEach>
                 </div>
 
                 <div class="right">

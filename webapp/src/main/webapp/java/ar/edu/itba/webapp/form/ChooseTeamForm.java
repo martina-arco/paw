@@ -2,13 +2,13 @@ package ar.edu.itba.webapp.form;
 
 public class ChooseTeamForm {
 
-    private String teamChosen = "River";
+    private int teamChosen ;
 
-    public String getTeamChosen() {
+    public int getTeamChosen() {
         return teamChosen;
     }
 
-    public void setTeamChosen(String teamChosen) {
+    public void setTeamChosen(int teamChosen) {
         this.teamChosen = teamChosen;
     }
 }
