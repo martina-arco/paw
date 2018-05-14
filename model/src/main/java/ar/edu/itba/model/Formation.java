@@ -96,6 +96,14 @@ public class Formation {
         starters.put(p2,position);
     }
 
+    public void setStartersIds(Map<Long, Point> startersIds) {
+        this.startersIds = startersIds;
+    }
+
+    public void setSubstitutesIds(List<Long> substitutesIds) {
+        this.substitutesIds = substitutesIds;
+    }
+
     public Map<Player, Point> getStarters() {
         return starters;
     }

@@ -20,9 +20,9 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     @Transactional
     public Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping,
-                         int finish, int defending, int passing, int fitness, int salary, Date contractExpiration) {
+                         int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
         return playerDao.create(name, team, age, value, potential, skillLevel, goalkeeping, finish, defending, passing,
-                fitness, salary, contractExpiration);
+                fitness, salary, contractExpiration, youth);
     }
 
     @Override

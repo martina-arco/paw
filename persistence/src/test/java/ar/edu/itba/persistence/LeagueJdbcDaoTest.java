@@ -1,6 +1,7 @@
 package ar.edu.itba.persistence;
 
-import ar.edu.itba.model.User;
+import ar.edu.itba.model.Formation;
+import ar.edu.itba.model.League;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +20,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 @Sql("classpath:schema.sql")
-public class UserJdbcDaoTest {
-    private static final String PASSWORD = "Password";
-    private static final String USERNAME = "Username";
-    private static final String MAIL = "Mail";
+public class LeagueJdbcDaoTest {
 
     @Autowired
     private DataSource ds;
@@ -37,30 +35,10 @@ public class UserJdbcDaoTest {
 
     @Test
     public void testCreate() {
-        final User user = userDao.create(USERNAME, PASSWORD, MAIL);
+        /*final League league = userDao.create(, PASSWORD, MAIL);
         assertNotNull(user);
         assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
         assertEquals(USERNAME, user.getUsername());
-        assertEquals(PASSWORD, user.getPassword());
-    }
-
-    @Test
-    public void testFindByUsername() {
-        final long id = userDao.create(USERNAME, PASSWORD, MAIL).getId();
-        final User user = userDao.findByUsername(USERNAME);
-        assertNotNull(user);
-        assertEquals(USERNAME, user.getUsername());
-        assertEquals(PASSWORD, user.getPassword());
-        assertEquals(id, user.getId());
-    }
-
-    @Test
-    public void testFindById() {
-        final long id = userDao.create(USERNAME, PASSWORD, MAIL).getId();
-        final User user = userDao.findById(id);
-        assertNotNull(user);
-        assertEquals(USERNAME, user.getUsername());
-        assertEquals(PASSWORD, user.getPassword());
-        assertEquals(id, user.getId());
+        assertEquals(PASSWORD, user.getPassword());*/
     }
 }

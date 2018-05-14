@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -20,10 +21,12 @@ public class MatchTest {
 
     @Before
     public void setUp(){
-        match1 = new Match(0, null, null, 0,0,0,0, null, false, new LinkedList<Event>());
+        match1 = new Match(0, null, null, null, new Date(), 0,0,0,0, null, false, new LinkedList<Event>());
 
         match1.addHomeScore(3);
         match1.addAwayScore(2);
+        match1.setStats(new LinkedList<PlayerStats>());
+        match1.setEvents(new LinkedList<Event>());
     }
 
     @Test

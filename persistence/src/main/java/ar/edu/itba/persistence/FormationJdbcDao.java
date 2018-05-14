@@ -5,7 +5,9 @@ import ar.edu.itba.model.Formation;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.utils.Point;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +40,51 @@ public class FormationJdbcDao implements FormationDao{
         return new Formation(id, captainId, freeKickTakerId, penaltyTakerId, null, null, pressure, attitude);
         }
     };
+
+    private static final ResultSetExtractor<List<Formation>> RESULT_SET_EXTRACTOR = new ResultSetExtractor<List<Formation>>() {
+        @Override
+        public List<Formation> extractData(ResultSet rs) throws SQLException, DataAccessException {
+            List<Formation> formations = new LinkedList<>();
+            Formation currFormation = null;
+            Map<Long, Point> currStarters = null;
+            List<Long> currSubstitutes = null;
+            while (rs.next()) {
+                long id = rs.getLong("formationid");
+                if(currFormation == null) {
+                    currFormation = ROW_MAPPER.mapRow(rs, 0);
+                    currStarters = new HashMap<>();
+                    currSubstitutes = new LinkedList<>();
+                } else if (currFormation.getId() != id) {
+                    currFormation.setStartersIds(currStarters);
+                    currFormation.setSubstitutesIds(currSubstitutes);
+                    formations.add(currFormation);
+
+                    currFormation = ROW_MAPPER.mapRow(rs, 0);
+                    currStarters = new HashMap<>();
+                    currSubstitutes = new LinkedList<>();
+                }
+
+                String type = rs.getString("type");
+                if(type != null) {
+                    Formation.PlaysAs playsAs = Formation.PlaysAs.valueOf(type);
+                    long playerId = rs.getLong("player");
+                    switch (playsAs) {
+                        case STARTER:
+                            int x = rs.getInt("x");
+                            int y = rs.getInt("y");
+                            currStarters.put(playerId, new Point(x, y));
+                            break;
+                        case SUBSTITUTE:
+                            currSubstitutes.add(playerId);
+                            break;
+                    }
+                }
+            }
+            return formations;
+        }
+    };
+
+
 
     @Autowired
     public FormationJdbcDao(final DataSource ds) {
@@ -88,13 +136,45 @@ public class FormationJdbcDao implements FormationDao{
 
     @Override
     public boolean save(Formation formation) {
-        //TODO
-        return false;
+        long formationId = formation.getId();
+
+        jdbcTemplate.update("UPDATE formation SET pressure = ?, attitude = ?, penaltytaker = ?, freekicktaker = ?, " +
+                "captain = ? WHERE formationid = ?", formation.getPressure(), formation.getAttitude(),
+                formation.getPenaltyTakerId(), formation.getFreeKickTakerId(), formation.getCaptainId(), formationId);
+
+
+        jdbcTemplate.update("DELETE FROM playsas WHERE formation = ?", formationId);
+
+        Map<String, Object> args;
+
+        for (Map.Entry<Long, Point> entry : formation.getStartersIds().entrySet()) {
+            args = new HashMap<>();
+
+            args.put("formation", formationId);
+            args.put("player", entry.getKey());
+            args.put("x", entry.getValue().getX());
+            args.put("y", entry.getValue().getY());
+            args.put("type", Formation.PlaysAs.STARTER.toString());
+
+            jdbcInsertPlaysAs.execute(args);
+        }
+
+        for (Long player : formation.getSubstitutesIds()) {
+            args = new HashMap<>();
+
+            args.put("formation", formationId);
+            args.put("player", player);
+            args.put("type", Formation.PlaysAs.SUBSTITUTE.toString());
+
+            jdbcInsertPlaysAs.execute(args);
+        }
+
+        return true;
     }
 
     @Override
     public Formation findById(long id) {
-        final List<Formation> list = jdbcTemplate.query("SELECT * FROM formation WHERE formationid = ?", ROW_MAPPER, id);
+        final List<Formation> list = jdbcTemplate.query("SELECT * FROM formation LEFT JOIN playsas ON formationid = playsas.formation WHERE formationid = ?", RESULT_SET_EXTRACTOR, id);
         if (list.isEmpty()) {
             return null;
         }

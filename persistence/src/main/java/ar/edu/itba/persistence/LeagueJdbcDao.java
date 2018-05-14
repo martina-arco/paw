@@ -4,6 +4,7 @@ import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.MatchDay;
+import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -43,17 +44,18 @@ public class LeagueJdbcDao implements LeagueDao {
     };
 
     @Override
-    public League create(String name, Map<Date, List<Match>> fixture, int prize) {
-        League league = create(name, prize);
+    public League create(String name, Map<Date, List<Match>> fixture, int prize, User user) {
+        League league = create(name, prize, user);
         league.setFixture(fixture);
         return league;
     }
 
     @Override
-    public League create(String name, int prize) {
+    public League create(String name, int prize, User user) {
         final Map<String, Object> args = new HashMap<>();
         args.put("name", name);
         args.put("prize", prize);
+        args.put("userid", user.getId());
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
         return new League(id.longValue(), name, prize);
@@ -61,7 +63,7 @@ public class LeagueJdbcDao implements LeagueDao {
 
     @Override
     public League findById(long id) {
-        final List<League> list = jdbcTemplate.query("SELECT * FROM league WHERE id = ?", ROW_MAPPER, id);
+        final List<League> list = jdbcTemplate.query("SELECT * FROM league WHERE leagueid = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -70,6 +72,10 @@ public class LeagueJdbcDao implements LeagueDao {
 
     @Override
     public List<League> findAllByUserId(long id) {
-        return null;
+        final List<League> list = jdbcTemplate.query("SELECT * FROM league WHERE userid = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
     }
 }

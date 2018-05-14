@@ -1,21 +1,27 @@
 package ar.edu.itba.model;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Match {
 
-    private long id, homeId, awayId;
+    private long id, homeId, awayId, leagueId;
     private Team home, away;
+    private League league;
+    private Date day;
     private int homeScore, awayScore, homePoints, awayPoints;
     private List<PlayerStats> stats;
     private boolean played;
     private List<Event> events;
 
-    public Match(long id, Team home, Team away, int homeScore, int awayScore, int homePoints,
+    public Match(long id, Team home, Team away, League league, Date day, int homeScore, int awayScore, int homePoints,
                  int awayPoints, List<PlayerStats> stats, boolean played, List<Event> events) {
+        this.id = id;
         this.home = home;
         this.away = away;
+        this.league = league;
+        this.day = day;
         this.homeScore = homeScore;
         this.awayScore = awayScore;
         this.homePoints = homePoints;
@@ -23,14 +29,15 @@ public class Match {
         this.stats = stats;
         this.played = played;
         this.events = events;
-        this.id = id;
     }
 
-    public Match(long id, long homeId, long awayId, int homeScore, int awayScore, int homePoints, int awayPoints,
-                 boolean played) {
+    public Match(long id, long homeId, long awayId, long leagueId, Date day, int homeScore, int awayScore,
+                 int homePoints, int awayPoints, boolean played) {
         this.id = id;
         this.homeId = homeId;
         this.awayId = awayId;
+        this.leagueId = leagueId;
+        this.day = day;
         this.homeScore = homeScore;
         this.awayScore = awayScore;
         this.homePoints = homePoints;
@@ -49,6 +56,28 @@ public class Match {
         }
 
         played = true;
+    }
+
+    public long getLeagueId() {
+        if(league != null)
+            return league.getId();
+        return leagueId;
+    }
+
+    public League getLeague() {
+        return league;
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
+    }
+
+    public Date getDay() {
+        return day;
+    }
+
+    public void setDay(Date day) {
+        this.day = day;
     }
 
     public long getHomeId() {
@@ -95,6 +124,22 @@ public class Match {
 
     public void addStats(PlayerStats stat) {
         stats.add(stat);
+    }
+
+    public void setHome(Team home) {
+        this.home = home;
+    }
+
+    public void setAway(Team away) {
+        this.away = away;
+    }
+
+    public void setStats(List<PlayerStats> stats) {
+        this.stats = stats;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public void addEvent(Event e) {

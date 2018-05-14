@@ -25,7 +25,8 @@ public class MatchJdbcDao implements MatchDao{
     private final static RowMapper<Match> ROW_MAPPER = new RowMapper<Match>() {
         @Override
         public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Match(rs.getLong("matchid"), rs.getLong("home"), rs.getLong("away"), rs.getInt("homeScore"),
+            return new Match(rs.getLong("matchid"), rs.getLong("home"), rs.getLong("away"),
+                    rs.getLong("league"), rs.getDate("day"), rs.getInt("homeScore"),
                     rs.getInt("awayScore"), rs.getInt("homePts"), rs.getInt("awayPts"),
                     rs.getBoolean("played"));
         }
@@ -40,6 +41,15 @@ public class MatchJdbcDao implements MatchDao{
     }
 
     @Override
+    public Match findById(long id) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE matchid = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    @Override
     public List<Match> findByTeamId(long id) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE home = ? OR away = ?", ROW_MAPPER, id, id);
         if (list.isEmpty()) {
@@ -49,19 +59,43 @@ public class MatchJdbcDao implements MatchDao{
     }
 
     @Override
-    public Match create(Team home, Team away) {
+    public List<Match> findByLeagueId(long id) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Match> findByLeagueIdAndDate(long id, Date date) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day = ?", ROW_MAPPER, id, date);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public Match create(League league, Team home, Team away, Date day) {
         final Map<String, Object> args = new HashMap<>();
 
-        args.put("home", home.getName());
-        args.put("away", away.getName());
-        args.put("league", home.getLeague());
+        args.put("home", home.getId());
+        args.put("away", away.getId());
+        args.put("league", league.getId());
+        args.put("day", day);
 
         final Number matchId = jdbcInsert.executeAndReturnKey(args);
-        return new Match(matchId.longValue(), home, away, 0,0,0,0, null, false, null);
+        return new Match(matchId.longValue(), home, away, league, day, 0,0,0,0, null, false, null);
     }
 
     @Override
     public boolean save(Match match) {
-        return false;
+        jdbcTemplate.update("UPDATE match SET day = ?, home = ?, away = ?, league = ?, played = ?, homescore = ?, " +
+                "awayscore = ?, homepts = ?, awaypts = ?", match.getDay(), match.getHomeId(), match.getAwayId(),
+                match.getLeagueId(), match.isPlayed(), match.getHomeScore(), match.getAwayScore(), match.getHomePoints(),
+                match.getAwayPoints());
+
+        return true;
     }
 }

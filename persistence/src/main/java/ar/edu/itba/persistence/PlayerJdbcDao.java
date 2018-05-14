@@ -1,7 +1,6 @@
 package ar.edu.itba.persistence;
 
 import ar.edu.itba.interfaces.dao.PlayerDao;
-import ar.edu.itba.model.Contract;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +40,9 @@ public class PlayerJdbcDao implements PlayerDao{
             int finishing = rs.getInt("finishing");
             int salary = rs.getInt("finishing");
             Date contractExpiration = rs.getDate("contractExpiration");
+            boolean youth = rs.getBoolean("youth");
 
-            return new Player(id, team, name, age, value, potential, skillLevel, goalkeeping, finishing, defending, passing, fitness, salary, contractExpiration);
+            return new Player(id, team, name, age, value, potential, skillLevel, goalkeeping, finishing, defending, passing, fitness, salary, contractExpiration, youth);
         }
     };
 
@@ -57,7 +57,7 @@ public class PlayerJdbcDao implements PlayerDao{
 
     @Override
     public Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish,
-                         int defending, int passing, int fitness, int salary, Date contractExpiration) {
+                         int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
 
         final HashMap<String, Object> args = new HashMap<>();
 
@@ -74,16 +74,22 @@ public class PlayerJdbcDao implements PlayerDao{
         args.put("fitness", fitness);
         args.put("salary", salary);
         args.put("contractExpiration", contractExpiration);
+        args.put("youth", youth);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
 
-        return new Player(id.longValue(), team, name, age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness, salary, contractExpiration);
+        return new Player(id.longValue(), team, name, age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness, salary, contractExpiration, youth);
     }
 
     @Override
     public boolean save(Player player) {
-        //TODO
-        return false;
+        jdbcTemplate.update("UPDATE player SET team = ?, name = ?, age = ?, fitness = ?, value = ?, potential = ?, " +
+                "skilllevel = ?, goalkeeping = ?, defending = ?, passing = ?, finishing = ?, salary = ?, " +
+                "contractexpiration = ?, youth = ?", player.getTeamId(), player.getName(), player.getAge(),
+                player.getFitness(), player.getValue(), player.getPotential(), player.getSkillLevel(), player.getGoalKeeping(),
+                player.getDefending(), player.getPassing(), player.getFinish(), player.getSalary(), player.getContractExpiration(),
+                player.isYouth());
+        return true;
     }
 
     @Override
@@ -124,6 +130,7 @@ public class PlayerJdbcDao implements PlayerDao{
 
     @Override
     public boolean delete(Player player) {
-        return false;
+        jdbcTemplate.update("DELETE FROM player WHERE playerid = ?", player.getId());
+        return true;
     }
 }
