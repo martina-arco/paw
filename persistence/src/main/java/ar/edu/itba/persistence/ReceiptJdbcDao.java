@@ -1,7 +1,6 @@
 package ar.edu.itba.persistence;
 
 import ar.edu.itba.interfaces.dao.ReceiptDao;
-import ar.edu.itba.model.Event;
 import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Repository
 public class ReceiptJdbcDao implements ReceiptDao {
@@ -32,7 +30,7 @@ public class ReceiptJdbcDao implements ReceiptDao {
             int amount = rs.getInt("amount");
             String type = rs.getString("type");
 
-            return new Receipt(id, amount, Receipt.ReceiptType.valueOf(type));
+            return new Receipt(id, amount, Receipt.Type.valueOf(type));
         }
     };
 
@@ -54,7 +52,7 @@ public class ReceiptJdbcDao implements ReceiptDao {
     }
 
     @Override
-    public Receipt create(Team team, int amount, Receipt.ReceiptType type) {
+    public Receipt create(Team team, int amount, Receipt.Type type) {
 
         final Map<String, Object> args = new HashMap<>();
 

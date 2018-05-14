@@ -1,9 +1,12 @@
 package ar.edu.itba.persistence;
 
+import ar.edu.itba.interfaces.dao.EventDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -11,18 +14,50 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class MatchJdbcDao implements MatchDao{
 
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;
+    @Autowired
+    private EventDao eventDao;
+
+    /*private static final ResultSetExtractor<List<Match>> RESULT_SET_EXTRACTOR = new ResultSetExtractor<List<Match>>() {
+        @Override
+        public List<Match> extractData(ResultSet rs) throws SQLException, DataAccessException {
+            List<Match> matches = new ArrayList<>();
+            Match currentMatch = null;
+            while (rs.next()) {
+                long id = rs.getLong("matchid");
+                if(currentMatch == null) {
+                    currentMatch = mapRow(rs, null);
+                } else if (currentMatch.getId() != id) {
+                    matches.add(currentMatch);
+                    currentMatch = mapRow(rs, null);
+                }
+            }
+            return matches;
+        }
+    };*/
 
     private final static RowMapper<Match> ROW_MAPPER = new RowMapper<Match>() {
+        @Override
+        public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new Match(rs.getLong("matchid"), null, null, rs.getInt("homeScore"),
+                    rs.getInt("awayScore"), rs.getInt("homePts"), rs.getInt("awayPts"),
+                    null, rs.getBoolean("played"), null);
+        }
+    };
+
+    /*public static Match mapRow(ResultSet rs, String alias) throws SQLException {
+        return new Match(rs.getLong("matchid"), null, null, rs.getInt("homeScore"),
+                rs.getInt("awayScore"), rs.getInt("homePts"), rs.getInt("awayPts"),
+                null, rs.getBoolean("played"), null);
+    }*/
+
+    /*private final static RowMapper<Match> ROW_MAPPER = new RowMapper<Match>() {
         @Override
         public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -38,6 +73,8 @@ public class MatchJdbcDao implements MatchDao{
 
             boolean played = homePoints == 0 && awayPoints == 0 ? false : true;
 
+            //eventDao.findByMatchId(1);
+
 //            List<Event> events = dao.findByMatchId(id);
 //
 //            List<PlayerStats> stats = dao.findByMatchId(id);
@@ -52,7 +89,7 @@ public class MatchJdbcDao implements MatchDao{
 
             return null;
         }
-    };
+    };*/
 
     @Autowired
     public MatchJdbcDao(final DataSource ds) {
@@ -79,22 +116,22 @@ public class MatchJdbcDao implements MatchDao{
         args.put("away", away.getName());
         args.put("homeScore", 0);
         args.put("awayScore", 0);
-        args.put("league", home.getLeague().toString());
+        args.put("league", home.getLeague());
         args.put("homePoints", 0);
         args.put("awayPoints", 0);
 
         final Number matchId = jdbcInsert.executeAndReturnKey(args);
 
-        Match match = new Match(matchId.longValue(), home, away, 0,0,0,0, new HashMap<Player, PlayerStats>(), false, new ArrayList<Event>());
+        Match match = new Match(matchId.longValue(), home, away, 0,0,0,0, null, false, new ArrayList<Event>());
 
 //        DataSource ds;
 //
-//        for (Player p : home.getFormation().getPlayers()) {
+//        for (Player p : home.getStarters().getPlayers()) {
 //            PlayerStatsJdbcDao dao = new PlayerStatsJdbcDao(ds);
 //            match.addStats(dao.create(p, match));
 //        }
 //
-//        for (Player p : away.getFormation().getPlayers()) {
+//        for (Player p : away.getStarters().getPlayers()) {
 //            PlayerStatsJdbcDao dao = new PlayerStatsJdbcDao(ds);
 //            match.addStats(dao.create(p, match));
 //        }

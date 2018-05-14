@@ -2,10 +2,7 @@ package ar.edu.itba.model;
 
 import ar.edu.itba.model.utils.Point;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Formation {
 
@@ -15,35 +12,88 @@ public class Formation {
         //availablePositions.add(new Point());
     }
 
-    private final Map<Player, Point> formation;
-    private List<Player> substitutes;
-    private int pressure, attitude;
+    private long id, captainId, freeKickTakerId, penaltyTakerId;
     private Player captain, freeKickTaker, penaltyTaker;
-    private long id;
+    private Map<Player, Point> starters;
+    private Map<Long, Point> startersIds;
+    private List<Player> substitutes;
+    private List<Long> substitutesIds;
+    private int pressure, attitude;
 
-    public Formation(final long id, final Map<Player, Point> formation, final int pressure, final int attitude, final Player captain, final Player freeKickTaker, final Player penaltyTaker) {
+    public Formation(long id, Player captain, Player freeKickTaker, Player penaltyTaker, Map<Player, Point> starters, List<Player> substitutes, int pressure, int attitude) {
         this.id = id;
-        this.formation = formation;
-        this.pressure = pressure;
-        this.attitude = attitude;
         this.captain = captain;
         this.freeKickTaker = freeKickTaker;
         this.penaltyTaker = penaltyTaker;
+        this.starters = starters;
+        this.substitutes = substitutes;
+        this.pressure = pressure;
+        this.attitude = attitude;
+    }
+
+    public Formation(long id, long captainId, long freeKickTakerId, long penaltyTakerId, Map<Long, Point> startersIds, List<Long> substitutesIds, int pressure, int attitude) {
+        this.id = id;
+        this.captainId = captainId;
+        this.freeKickTakerId = freeKickTakerId;
+        this.penaltyTakerId = penaltyTakerId;
+        this.startersIds = startersIds;
+        this.substitutesIds = substitutesIds;
+        this.pressure = pressure;
+        this.attitude = attitude;
+    }
+
+    public long getCaptainId() {
+        if(captain != null)
+            return captain.getId();
+        return captainId;
+    }
+
+    public long getFreeKickTakerId() {
+        if(freeKickTaker != null)
+            return freeKickTaker.getId();
+        return freeKickTakerId;
+    }
+
+    public long getPenaltyTakerId() {
+        if(penaltyTaker != null)
+            return penaltyTaker.getId();
+        return penaltyTakerId;
+    }
+
+    public Map<Long, Point> getStartersIds() {
+        if(starters != null) {
+            Map<Long, Point> ids = new HashMap<>();
+            for (Map.Entry<Player, Point> entry : starters.entrySet()) {
+                ids.put(entry.getKey().getId(), entry.getValue());
+            }
+            return ids;
+        }
+        return startersIds;
+    }
+
+    public List<Long> getSubstitutesIds() {
+        if(substitutes != null){
+            List<Long> ids = new LinkedList<>();
+            for (Player p : substitutes)
+                ids.add(p.getId());
+            return ids;
+        }
+        return substitutesIds;
     }
 
     public void movePlayer(final Player p1, final Point position){
         if(availablePositions.contains(position))
-            formation.put(p1,position);
+            starters.put(p1,position);
     }
 
     public void replacePlayer(final Player p1, final Player p2){
-        Point position = formation.get(p1);
-        formation.remove(p1);
-        formation.put(p2,position);
+        Point position = starters.get(p1);
+        starters.remove(p1);
+        starters.put(p2,position);
     }
 
-    public Map<Player, Point> getFormation() {
-        return formation;
+    public Map<Player, Point> getStarters() {
+        return starters;
     }
 
     public List<Player> getSubstitutes() {

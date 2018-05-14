@@ -8,5 +8,5 @@ public interface UserDao {
 
     User findByUsername(String username);
 
-    User create(String username, String password);
+    User create(String username, String password, String mail);
 }

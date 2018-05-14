@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -19,7 +20,7 @@ public class MatchTest {
 
     @Before
     public void setUp(){
-        match1 = new Match(0, t1, t2, 0,0,0,0, new HashMap<Player, PlayerStats>(), false, new ArrayList<Event>());
+        match1 = new Match(0, null, null, 0,0,0,0, null, false, new LinkedList<Event>());
 
         match1.addHomeScore(3);
         match1.addAwayScore(2);

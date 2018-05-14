@@ -80,7 +80,7 @@ public class FormationJdbcDao implements FormationDao{
             jdbcInsertPlaysAs.execute(args2);
         }
 
-        return new Formation(formationId.longValue(), formation, pressure, attitude, captain, freeKickTaker, penaltyTaker);
+        return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, null, null, pressure, attitude);
     }
 
     @Override

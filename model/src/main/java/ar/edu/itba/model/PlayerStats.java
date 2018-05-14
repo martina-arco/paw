@@ -2,9 +2,9 @@ package ar.edu.itba.model;
 
 public class PlayerStats {
 
+    private long id, playerId;
     private Player player;
     private int saves, performance, passes, assists, scores, yellowCards, redCards, tackles;
-    private long id;
 
     public PlayerStats(long id, Player player, int saves, int performance, int passes,  int tackles,
                        int assists, int scores, int yellowCards, int redCards) {
@@ -18,6 +18,26 @@ public class PlayerStats {
         this.redCards = redCards;
         this.tackles = tackles;
         this.id = id;
+    }
+
+    public PlayerStats(long id, long playerId, int saves, int performance, int passes, int assists, int scores,
+                       int yellowCards, int redCards, int tackles) {
+        this.id = id;
+        this.playerId = playerId;
+        this.saves = saves;
+        this.performance = performance;
+        this.passes = passes;
+        this.assists = assists;
+        this.scores = scores;
+        this.yellowCards = yellowCards;
+        this.redCards = redCards;
+        this.tackles = tackles;
+    }
+
+    public long getPlayerId() {
+        if(player != null)
+            return player.getId();
+        return playerId;
     }
 
     public void addSave(int amount){
@@ -56,43 +76,43 @@ public class PlayerStats {
         return id;
     }
 
-    public Integer getSaves() {
+    public int getSaves() {
         return saves;
     }
 
-    public Integer getPerformance() {
+    public int getPerformance() {
         return performance;
     }
 
-    public Integer getPasses() {
+    public int getPasses() {
         return passes;
     }
 
-    public Integer getAssists() {
+    public int getAssists() {
         return assists;
     }
 
-    public Integer getGoals() {
+    public int getGoals() {
         return scores;
     }
 
-    public Integer getYellowCards() {
+    public int getYellowCards() {
         return yellowCards;
     }
 
-    public Integer getRedCards() {
+    public int getRedCards() {
         return redCards;
     }
 
-    public Integer getTackles() {
+    public int getTackles() {
         return tackles;
     }
 
-    public Integer getScores() {
+    public int getScores() {
         return scores;
     }
 
-    public void setPerformance(Integer performance) {
+    public void setPerformance(int performance) {
         this.performance = performance;
     }
 

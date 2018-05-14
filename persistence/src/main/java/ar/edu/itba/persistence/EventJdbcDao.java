@@ -32,7 +32,7 @@ public class EventJdbcDao implements EventDao {
 //            Player p1 = dao.getPlayerById(rs.getInt("player1"));
 //            Player p2 = dao.getPlayerById(rs.getInt("player2"));
 //
-//            return new Event(id, p1, p2, EventType.valueOf(type), minute);
+//            return new Event(id, p1, p2, Type.valueOf(type), minute);
             return null;
         }
     };
@@ -56,7 +56,7 @@ public class EventJdbcDao implements EventDao {
 
 
     @Override
-    public Event create(Match match, Player p1, Player p2, EventType eventType, int minute) {
+    public Event create(Match match, Player p1, Player p2, Event.Type eventType, int minute) {
         final Map<String, Object> args = new HashMap<>();
 
         args.put("match", match.getId());

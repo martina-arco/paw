@@ -1,12 +1,14 @@
 package ar.edu.itba.persistence;
 
 import ar.edu.itba.interfaces.dao.PlayerStatsDao;
-import ar.edu.itba.model.EventType;
+import ar.edu.itba.model.Event;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.PlayerStats;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,8 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;
+
+
 
     private static final RowMapper<PlayerStats> ROW_MAPPER = new RowMapper<PlayerStats>() {
         @Override
@@ -34,13 +39,6 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
             int passes = rs.getInt("passes");
             int tackles = rs.getInt("tackles");
             int assists = rs.getInt("assists");
-
-//            Player p = PlayerJdbcDao.findById(playerId);
-//            int scores = EventJdbcDao.findScoreByPlayerId(playerId);
-//            int yellowCards = EventJdbcDao.findYellowCardsByPlayerId(playerId);
-//            int redCards = EventJdbcDao.findRedCardsByPlayerId(playerId);
-
-//           return new PlayerStats(p, saves, performance, passes, tackles, assists, scores, yellowCards, redCards);
             return null;
         }
     };
@@ -68,8 +66,8 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
     }
 
     @Override
-    public void save(Match m, Player p, EventType type, int amount) {
-
+    public void save(PlayerStats playerStats) {
+/*
         String typeS = null;
 
         for (PlayerStats stat : m.getStats()) {
@@ -102,7 +100,7 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
         if(typeS == null)
             return;
 
-        jdbcTemplate.update("UPDATE player_stats SET ? = ? WHERE match = ? and player = ?", typeS, amount, m.getId(), p.getId());
+        jdbcTemplate.update("UPDATE player_stats SET ? = ? WHERE match = ? and player = ?", typeS, amount, m.getId(), p.getId());*/
     }
 
     @Override

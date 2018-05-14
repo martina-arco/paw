@@ -52,7 +52,7 @@ public class HelloWorldController extends Controller{
         if (errors.hasErrors()) {
             return index(form);
         }
-        final User u = us.create(form.getUsername(), form.getPassword());
+        final User u = us.create(form.getUsername(), form.getPassword(), "");
         return new ModelAndView("redirect:/login");
     }
 

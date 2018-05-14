@@ -1,14 +1,37 @@
 package ar.edu.itba.model;
 
-public class Player {
-    private String name;
-    private Integer age, value, potential, skillLevel, goalKeeping, finish, defending, passing, fitness;
-    private long id;
-    private Contract contract;
+import java.util.Date;
 
-    public Player(long id, String name, Integer age, Integer value, Integer potential, Integer skillLevel, Contract contract,
-                  Integer goalkeeping, Integer finish, Integer defending, Integer passing, Integer fitness) {
+public class Player {
+
+    private long id, teamId;
+    private Team team;
+    private String name;
+    private int age, value, potential, skillLevel, goalKeeping, finish, defending, passing, fitness, salary;
+    private Date contractExpiration;
+
+    public Player(long id, Team team, String name, int age, int value, int potential, int skillLevel, int goalKeeping,
+                  int finish, int defending, int passing, int fitness, int salary, Date contractExpiration) {
         this.id = id;
+        this.team = team;
+        this.name = name;
+        this.age = age;
+        this.value = value;
+        this.potential = potential;
+        this.skillLevel = skillLevel;
+        this.goalKeeping = goalKeeping;
+        this.finish = finish;
+        this.defending = defending;
+        this.passing = passing;
+        this.fitness = fitness;
+        this.salary = salary;
+        this.contractExpiration = contractExpiration;
+    }
+
+    public Player(long id, long teamId, String name, int age, int value, int potential, int skillLevel, int goalkeeping,
+                  int finish, int defending, int passing, int fitness, int salary, Date contractExpiration) {
+        this.id = id;
+        this.teamId = teamId;
         this.name = name;
         this.age = age;
         this.value = value;
@@ -19,66 +42,81 @@ public class Player {
         this.defending = defending;
         this.passing = passing;
         this.fitness = fitness;
-        this.contract = contract;
+        this.salary = salary;
+        this.contractExpiration = contractExpiration;
+    }
+
+    public long getTeamId() {
+        if(team != null)
+            return team.getId();
+        return teamId;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public Date getContractExpiration() {
+        return contractExpiration;
     }
 
     public String getName() {
         return name;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public Integer getValue() {
+    public int getValue() {
         return value;
     }
 
-    public Integer getPotential() {
+    public int getPotential() {
         return potential;
     }
 
-    public Integer getSkillLevel() {
+    public int getSkillLevel() {
         return skillLevel;
     }
 
-    public Integer getGoalKeeping() {
+    public int getGoalKeeping() {
         return goalKeeping;
     }
 
-    public Integer getFinish() {
+    public int getFinish() {
         return finish;
     }
 
-    public Integer getDefending() {
+    public int getDefending() {
         return defending;
     }
 
-    public Integer getPassing() {
+    public int getPassing() {
         return passing;
     }
 
-    public Integer getFitness() {
+    public int getFitness() {
         return fitness;
     }
 
-    public Contract getContract() {
-        return contract;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
-    public void setPotential(Integer potential) {
+    public void setPotential(int potential) {
         this.potential = potential;
     }
 
-    public void setSkillLevel(Integer skillLevel) {
+    public void setSkillLevel(int skillLevel) {
         this.skillLevel = skillLevel;
     }
 
-    public void setFitness(Integer fitness) {
+    public void setFitness(int fitness) {
         this.fitness = fitness;
     }
 
@@ -88,9 +126,5 @@ public class Player {
 
     public void increaseAge() {
         age++;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
     }
 }

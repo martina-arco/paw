@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,9 @@ public class UserJdbcDao implements UserDao {
     private final static RowMapper<User> ROW_MAPPER = new RowMapper<User>() {
                 @Override
                 public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    return new User(rs.getString("username"), rs.getString("password"), rs.getInt("userid"));
+                    return new User(rs.getLong("userid"), rs.getString("username"),
+                            rs.getString("password"), rs.getString("mail"),
+                            rs.getLong("team"));
                 }
             };
 
@@ -54,12 +57,14 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public User create(String username, String password) {
+    public User create(String username, String password, String mail) {
         final Map<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
+        args.put("mail", mail);
+        args.put("currentDay", new Date());
         final Number userId = jdbcInsert.executeAndReturnKey(args);
-        return new User(username, password, userId.longValue());
+        return new User(userId.longValue(), username, password, mail, null);
     }
 
 

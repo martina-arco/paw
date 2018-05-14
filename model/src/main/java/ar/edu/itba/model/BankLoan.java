@@ -28,11 +28,11 @@ public class BankLoan {
         return interest;
     }
 
-    public Integer getMonthlyAmount() {
+    public int getMonthlyAmount() {
         return monthlyAmount;
     }
 
-    public Integer getRemainingMonths() {
+    public int getRemainingMonths() {
         return remainingMonths;
     }
 }

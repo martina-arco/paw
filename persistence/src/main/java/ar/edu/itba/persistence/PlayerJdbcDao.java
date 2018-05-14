@@ -3,6 +3,7 @@ package ar.edu.itba.persistence;
 import ar.edu.itba.interfaces.dao.PlayerDao;
 import ar.edu.itba.model.Contract;
 import ar.edu.itba.model.Player;
+import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 
 @Repository
@@ -48,13 +50,13 @@ public class PlayerJdbcDao implements PlayerDao{
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("player")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("playerId");
     }
 
 
     @Override
-    public Player create(String name, int age, int value, int potential, int skillLevel, Contract contract,
-                         int goalkeeping, int finish, int defending, int passing, int fitness) {
+    public Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish,
+                         int defending, int passing, int fitness, int salary, Date contractExpiration) {
 
         final HashMap<String, Object> args = new HashMap<>();
 
@@ -63,16 +65,17 @@ public class PlayerJdbcDao implements PlayerDao{
         args.put("value", value);
         args.put("potential", potential);
         args.put("skillLevel", skillLevel);
-        args.put("contract", contract.getId());
-        args.put("player.goalKeeping", goalkeeping);
-        args.put("player.finishing", finish);
-        args.put("player.defending", defending);
-        args.put("player.passing", passing);
+        args.put("goalKeeping", goalkeeping);
+        args.put("finishing", finish);
+        args.put("defending", defending);
+        args.put("passing", passing);
         args.put("fitness", fitness);
+        args.put("salary", salary);
+        args.put("contractExpiration", contractExpiration);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
 
-        return new Player(id.longValue(), name, age, value, potential, skillLevel, contract, goalkeeping, finish, defending, passing, fitness);
+        return new Player(id.longValue(), team, name, age, value, potential, skillLevel, goalkeeping, finish, defending, passing, fitness, salary, contractExpiration);
     }
 
     @Override

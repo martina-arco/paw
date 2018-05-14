@@ -2,15 +2,15 @@ package ar.edu.itba.model;
 
 public class Receipt {
 
-    public enum ReceiptType {
+    public enum Type {
         SOLDPLAYER, BOUGHTPLAYER, EXPANDEDSTADIUM, MATCHINCOME, TOURNAMENTPRICE
     }
 
     private int amount;
-    private final ReceiptType type;
+    private Type type;
     private long id;
 
-    public Receipt(long id, final int amount, final ReceiptType type){
+    public Receipt(long id, final int amount, final Type type){
         this.amount = amount;
         this.type = type;
         this.id = id;
@@ -24,7 +24,7 @@ public class Receipt {
         return id;
     }
 
-    public ReceiptType getType(){
+    public Type getType(){
         return type;
     }
 }

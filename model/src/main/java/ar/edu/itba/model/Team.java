@@ -1,22 +1,29 @@
 package ar.edu.itba.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Team {
-    private long id;
+    private long id, leagueId, stadiumId, formationId;
     private String name;
     private League league;
     private Stadium stadium;
     private Formation formation;
+    private List<Long> playersIds;
     private List<Player> players;
-    private YouthAcademy youthAcademy;
+    private List<Long> youthAcademyIds;
+    private List<Player> youthAcademy;
     private Integer fanTrust, boardTrust;
+    private List<Long> financeIds;
     private List<Receipt> finance;
+    private List<Long> loansIds;
     private List<BankLoan> loans;
     private Integer money;
 
-    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players, YouthAcademy youthAcademy, Integer fanTrust, Integer boardTrust, Integer money) {
+    public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players,
+                List<Player> youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance,
+                List<BankLoan> loans, Integer money) {
         this.id = id;
         this.name = name;
         this.league = league;
@@ -26,10 +33,89 @@ public class Team {
         this.youthAcademy = youthAcademy;
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
-        this.finance = new ArrayList<Receipt>();
-        this.loans = new ArrayList<BankLoan>();
+        this.finance = finance;
+        this.loans = loans;
         this.money = money;
     }
+
+    public Team(long id, long leagueId, long stadiumId, long formationId, String name, List<Long> playersIds,
+                List<Long> youthAcademyIds, Integer fanTrust, Integer boardTrust, List<Long> financeIds,
+                List<Long> loansIds, Integer money) {
+        this.id = id;
+        this.leagueId = leagueId;
+        this.stadiumId = stadiumId;
+        this.formationId = formationId;
+        this.name = name;
+        this.playersIds = playersIds;
+        this.youthAcademyIds = youthAcademyIds;
+        this.fanTrust = fanTrust;
+        this.boardTrust = boardTrust;
+        this.financeIds = financeIds;
+        this.loansIds = loansIds;
+        this.money = money;
+    }
+
+    public long getLeagueId() {
+        if(league != null)
+            return league.getId();
+        return leagueId;
+    }
+
+    public long getStadiumId() {
+        if(stadium != null)
+            return stadium.getId();
+        return stadiumId;
+    }
+
+    public long getFormationId() {
+        if(formation != null)
+            return formation.getId();
+        return formationId;
+    }
+
+    public List<Long> getPlayersIds() {
+        if(players != null) {
+            List<Long> ids = new LinkedList<>();
+            for (Player p : players)
+                ids.add(p.getId());
+            return ids;
+        }
+        return playersIds;
+    }
+
+    public List<Long> getYouthAcademyIds() {
+        if(youthAcademy != null) {
+            List<Long> ids = new LinkedList<>();
+            for (Player p : youthAcademy)
+                ids.add(p.getId());
+            return ids;
+        }
+        return youthAcademyIds;
+    }
+
+    public List<Long> getFinanceIds() {
+        if(finance != null) {
+            List<Long> ids = new LinkedList<>();
+            for (Receipt r : finance)
+                ids.add(r.getId());
+            return ids;
+        }
+        return financeIds;
+    }
+
+    /*public List<Long> getLoansIds() {
+        if(loans != null) {
+            List<Long> ids = new LinkedList<>();
+            for (BankLoan l : loans)
+                ids.add(l.getId());
+            return ids;
+        }
+        return loansIds;
+    }
+
+    public List<BankLoan> getLoans() {
+        return loans;
+    }*/
 
     public String getName() {
         return name;
@@ -63,11 +149,11 @@ public class Team {
         this.formation = formation;
     }
 
-    public YouthAcademy getYouthAcademy() {
+    public List<Player> getYouthAcademy() {
         return youthAcademy;
     }
 
-    public void setYouthAcademy(YouthAcademy youthAcademy) {
+    public void setYouthAcademy(List<Player> youthAcademy) {
         this.youthAcademy = youthAcademy;
     }
 

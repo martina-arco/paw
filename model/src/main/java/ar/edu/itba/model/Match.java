@@ -1,22 +1,21 @@
 package ar.edu.itba.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
-import static ar.edu.itba.model.EventType.*;
 
 public class Match {
 
+    private long id, homeId, awayId;
     private Team home, away;
     private int homeScore, awayScore, homePoints, awayPoints;
-    private Map<Player, PlayerStats> stats;
+    private List<Long> statsIds;
+    private List<PlayerStats> stats;
     private boolean played;
+    private List<Long> eventsIds;
     private List<Event> events;
-    private final long id;
 
     public Match(long id, Team home, Team away, int homeScore, int awayScore, int homePoints,
-                 int awayPoints, Map<Player, PlayerStats> stats, boolean played, List<Event> events) {
+                 int awayPoints, List<PlayerStats> stats, boolean played, List<Event> events) {
         this.home = home;
         this.away = away;
         this.homeScore = homeScore;
@@ -27,6 +26,20 @@ public class Match {
         this.played = played;
         this.events = events;
         this.id = id;
+    }
+
+    public Match(long id, long homeId, long awayId, int homeScore, int awayScore, int homePoints, int awayPoints,
+                 List<Long> statsIds, boolean played, List<Long> eventsIds) {
+        this.id = id;
+        this.homeId = homeId;
+        this.awayId = awayId;
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+        this.homePoints = homePoints;
+        this.awayPoints = awayPoints;
+        this.statsIds = statsIds;
+        this.played = played;
+        this.eventsIds = eventsIds;
     }
 
     public void finish() {
@@ -42,6 +55,38 @@ public class Match {
         played = true;
     }
 
+    public long getHomeId() {
+        if(home != null)
+            return home.getId();
+        return homeId;
+    }
+
+    public long getAwayId() {
+        if(away != null)
+            return away.getId();
+        return awayId;
+    }
+
+    public List<Long> getStatsIds() {
+        if(stats != null) {
+            List<Long> ids = new LinkedList<>();
+            for (PlayerStats ps : stats)
+                ids.add(ps.getId());
+            return ids;
+        }
+        return statsIds;
+    }
+
+    public List<Long> getEventsIds() {
+        if(events != null) {
+            List<Long> ids = new LinkedList<>();
+            for (Event e : events)
+                ids.add(e.getId());
+            return ids;
+        }
+        return eventsIds;
+    }
+
     public void addHomeScore (int amount) {
         homeScore += amount;
     }
@@ -51,7 +96,7 @@ public class Match {
     }
 
     public void addStats(PlayerStats stat) {
-        stats.put(stat.getPlayer(), stat);
+        stats.add(stat);
     }
 
     public void addEvent(Event e) {
@@ -66,24 +111,24 @@ public class Match {
         return away;
     }
 
-    public Integer getHomeScore() {
+    public int getHomeScore() {
         return homeScore;
     }
 
-    public Integer getAwayScore() {
+    public int getAwayScore() {
         return awayScore;
     }
 
-    public Integer getHomePoints() {
+    public int getHomePoints() {
         return homePoints;
     }
 
-    public Integer getAwayPoints() {
+    public int getAwayPoints() {
         return awayPoints;
     }
 
     public List<PlayerStats> getStats() {
-        return new ArrayList<>(stats.values());
+        return stats;
     }
 
     public Boolean isPlayed() {

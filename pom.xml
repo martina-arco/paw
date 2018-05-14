@@ -20,6 +20,7 @@
     <jstl.version>1.2</jstl.version>
     <org.postgresql.version>9.3-1102-jdbc41</org.postgresql.version>
     <org.hsqldb.version>2.3.1</org.hsqldb.version>
+    <com.h2database.version>1.4.196</com.h2database.version>
     <javax.validation-api.version>1.0.0.GA</javax.validation-api.version>
     <org.hibernate.validator>4.3.1.Final</org.hibernate.validator>
     <spring-security.version>4.0.4.RELEASE</spring-security.version>
@@ -73,6 +74,12 @@
         <groupId>org.hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
         <version>${org.hsqldb.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${com.h2database.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>

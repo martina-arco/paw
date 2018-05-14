@@ -22,6 +22,7 @@ import static org.junit.Assert.assertNotNull;
 public class UserJdbcDaoTest {
     private static final String PASSWORD = "Password";
     private static final String USERNAME = "Username";
+    private static final String MAIL = "Mail";
     @Autowired
     private DataSource ds;
     @Autowired
@@ -35,7 +36,7 @@ public class UserJdbcDaoTest {
 
     @Test
     public void testCreate() {
-        final User user = userDao.create(USERNAME, PASSWORD);
+        final User user = userDao.create(USERNAME, PASSWORD, MAIL);
         assertNotNull(user);
         assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
         assertEquals(USERNAME, user.getUsername());
@@ -44,7 +45,7 @@ public class UserJdbcDaoTest {
 
     @Test
     public void testFindByUsername() {
-        final long id = userDao.create(USERNAME, PASSWORD).getId();
+        final long id = userDao.create(USERNAME, PASSWORD, MAIL).getId();
         final User user = userDao.findByUsername(USERNAME);
         assertNotNull(user);
         assertEquals(USERNAME, user.getUsername());
@@ -54,7 +55,7 @@ public class UserJdbcDaoTest {
 
     @Test
     public void testFindById() {
-        final long id = userDao.create(USERNAME, PASSWORD).getId();
+        final long id = userDao.create(USERNAME, PASSWORD, MAIL).getId();
         final User user = userDao.findById(id);
         assertNotNull(user);
         assertEquals(USERNAME, user.getUsername());

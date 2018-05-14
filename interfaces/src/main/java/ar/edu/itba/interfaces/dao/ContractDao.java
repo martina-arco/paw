@@ -3,8 +3,8 @@ package ar.edu.itba.interfaces.dao;
 import ar.edu.itba.model.Contract;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
-import ar.edu.itba.model.utils.Date;
 
+import java.util.Date;
 import java.util.List;
 
 /**

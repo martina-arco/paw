@@ -3,6 +3,7 @@ package ar.edu.itba.model;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class YouthAcademy {
     private List<Player> players;
     private Team team;

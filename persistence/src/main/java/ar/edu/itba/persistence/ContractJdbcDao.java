@@ -4,7 +4,6 @@ import ar.edu.itba.interfaces.dao.ContractDao;
 import ar.edu.itba.model.Contract;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
-import ar.edu.itba.model.utils.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,15 +31,10 @@ public class ContractJdbcDao implements ContractDao{
             int id = rs.getInt("id");
             int playerid = rs.getInt("player");
             int teamid = rs.getInt("team");
-            int salary = rs.getInt("player.salary");
-            int contractLength = rs.getInt("contractLength");
+            int salary = rs.getInt("salary");
+            Date expiration = rs.getDate("expiration");
 
-//            Player p = findById(playerid);
-//            Team t = findById(teamid);
-//
-//            return new Contract(id, t, salary, contractLength);
-
-            return null;
+            return new Contract(salary, id, expiration, playerid, teamid);
         }
     };
 
@@ -48,12 +43,12 @@ public class ContractJdbcDao implements ContractDao{
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("contract")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("contractid");
     }
 
     @Override
     public List<Contract> findByTeam(Team team) {
-        final List<Contract> list = jdbcTemplate.query("SELECT * FROM contract WHERE id = ?", ROW_MAPPER, team.getId());
+        final List<Contract> list = jdbcTemplate.query("SELECT * FROM contract WHERE team = ?", ROW_MAPPER, team.getId());
         if (list.isEmpty()) {
             return null;
         }
@@ -61,24 +56,24 @@ public class ContractJdbcDao implements ContractDao{
     }
 
     @Override
-    public Contract create(Team team, Player p, int salary, Date length) {
+    public Contract create(Team team, Player player, int salary, Date expiration) {
         final Map<String, Object> args = new HashMap<>();
 
         args.put("team", team.getId());
-        args.put("player", p.getId());
-        args.put("player.salary", salary);
-//        args.put("length", length);
+        args.put("player", player.getId());
+        args.put("salary", salary);
+        args.put("expiration", expiration);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
-//        return new Contract(id.longValue(), team, salary, (Date)length);
-        return null;
+        return new Contract(id.longValue(), salary, expiration, player, team);
     }
 
     @Override
     public Contract findById(long id) {
-
-        //ToDo
-
-        return null;
+        final List<Contract> list = jdbcTemplate.query("SELECT * FROM contract WHERE contractid = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }
