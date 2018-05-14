@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS LEAGUE (
     userid          INTEGER REFERENCES USERS,
     leagueid        SERIAL PRIMARY KEY,
     name            VARCHAR(63) NOT NULL,
-    price           REAL NOT NULL
+    prize           REAL NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS TEAM (

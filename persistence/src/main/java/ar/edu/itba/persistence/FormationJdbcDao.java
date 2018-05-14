@@ -26,22 +26,14 @@ public class FormationJdbcDao implements FormationDao{
         @Override
         public Formation mapRow(ResultSet rs, int i) throws SQLException {
 
-            int id = rs.getInt("id");
-            int pressure = rs.getInt("pressure");
-            int attitude = rs.getInt("attitude");
-            int captainId = rs.getInt("captain");
-            int penaltyTakerId = rs.getInt("penaltyTracker");
-            int freekickTakerId = rs.getInt("freeKickTaker");
+        long id = rs.getLong("formationid");
+        int pressure = rs.getInt("pressure");
+        int attitude = rs.getInt("attitude");
+        int captainId = rs.getInt("captain");
+        int penaltyTakerId = rs.getInt("penaltyTaker");
+        int freeKickTakerId = rs.getInt("freekickTaker");
 
-//            Player captain = daoPlayer.findById(captainId);
-//            Player penaltyTaker = daoPlayer.findById(penaltyTakerId);
-//            Player freeKickTaker = daoPlayer.findById(freekickTakerId);
-//            Map<Player, Point> formation = getFormationById();
-//
-//            return new Formation(id, formation, pressure, attitude, captain, freeKickTaker, penaltyTaker)
-
-            return null;
-
+        return new Formation(id, captainId, freeKickTakerId, penaltyTakerId, null, null, pressure, attitude);
         }
     };
 
@@ -50,10 +42,10 @@ public class FormationJdbcDao implements FormationDao{
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsertFormation = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("formation")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("formationid");
         jdbcInsertPlaysAs = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("playsAs")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("playsasid");
     }
 
     @Override
@@ -81,6 +73,12 @@ public class FormationJdbcDao implements FormationDao{
         }
 
         return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, null, null, pressure, attitude);
+    }
+
+    @Override
+    public boolean save(Formation formation) {
+        //TODO
+        return false;
     }
 
     @Override

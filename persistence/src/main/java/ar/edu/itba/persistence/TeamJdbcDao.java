@@ -70,6 +70,11 @@ public class TeamJdbcDao implements TeamDao {
         return new Team(id.longValue(), name, league, stadium, formation, players, youthAcademy, fanTrust, boardTrust, null, null, money);
     }
 
+    @Override
+    public boolean save(Team team) {
+        return false;
+    }
+
     private void AddContracts(List<Player> players, long teamId) {
         final Map<String, Object> args = new HashMap<>();
         for(Player player: players) {
@@ -84,5 +89,10 @@ public class TeamJdbcDao implements TeamDao {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public List<Team> findAllByLeagueId(long id) {
+        return null;
     }
 }

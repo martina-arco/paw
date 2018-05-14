@@ -6,5 +6,7 @@ public interface StadiumDao {
     
     Stadium create(String name, int lowClass, int lowClassPrice, int mediumClass, int mediumClassPrice, int highClass, int highClassPrice);
 
+    boolean save(Stadium stadium);
+
     Stadium findById(long id);
 }

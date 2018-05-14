@@ -13,6 +13,8 @@ public interface FormationDao {
 
     Formation create(Map<Player, Point> formation, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker);
 
+    boolean save(Formation formation);
+
     Formation findById(long id);
 
 }

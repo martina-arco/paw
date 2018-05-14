@@ -6,6 +6,7 @@ import ar.edu.itba.model.YouthAcademy;
 
 import java.util.List;
 
+@Deprecated
 public interface YouthAcademyDao {
 
     YouthAcademy create(Team team, List<Player> players);

@@ -9,4 +9,6 @@ public interface UserDao {
     User findByUsername(String username);
 
     User create(String username, String password, String mail);
+
+    boolean save(User user);
 }

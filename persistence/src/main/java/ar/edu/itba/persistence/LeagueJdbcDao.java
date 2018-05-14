@@ -54,11 +54,21 @@ public class LeagueJdbcDao implements LeagueDao {
     }
 
     @Override
+    public boolean saveCurrentMatchDay(League league) {
+        return false;
+    }
+
+    @Override
     public League findById(long id) {
         final List<League> list = jdbcTemplate.query("SELECT * FROM league WHERE id = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public List<League> findAllByUserId(long id) {
+        return null;
     }
 }

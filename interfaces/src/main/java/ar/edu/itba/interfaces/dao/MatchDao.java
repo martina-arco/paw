@@ -11,5 +11,8 @@ import java.util.List;
 public interface MatchDao {
 
     Match create(Team home, Team away);
+
+    boolean save(Match match);
+
     List<Match> findByTeam(Team team);
 }

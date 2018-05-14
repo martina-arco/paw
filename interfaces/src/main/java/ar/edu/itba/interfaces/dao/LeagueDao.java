@@ -9,5 +9,9 @@ public interface LeagueDao {
 
     League create(String name, List<MatchDay> fixture, MatchDay currentMatchDate);
 
+    boolean saveCurrentMatchDay(League league);
+
     League findById(long id);
+
+    List<League> findAllByUserId(long id);
 }

@@ -138,4 +138,9 @@ public class MatchJdbcDao implements MatchDao{
 
         return match;
     }
+
+    @Override
+    public boolean save(Match match) {
+        return false;
+    }
 }

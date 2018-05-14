@@ -7,9 +7,7 @@ import ar.edu.itba.model.Team;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by martina on 02/05/2018.
- */
+@Deprecated
 public interface ContractDao {
 
     Contract create(Team team, Player p, int salary, Date length);

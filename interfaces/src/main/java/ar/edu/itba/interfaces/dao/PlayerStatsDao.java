@@ -12,9 +12,8 @@ import java.util.List;
  */
 public interface PlayerStatsDao {
 
-    void save(PlayerStats playerStats);
+    boolean save(PlayerStats playerStats);
     PlayerStats create(Player p, Match m);
-    List<PlayerStats> findByMatch(Match m);
     List<PlayerStats> findByMatchId(long id);
 
 }

@@ -52,11 +52,6 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
     }
 
     @Override
-    public List<PlayerStats> findByMatch(Match m) {
-        return findByMatchId(m.getId());
-    }
-
-    @Override
     public List<PlayerStats> findByMatchId(long id) {
         final List<PlayerStats> list = jdbcTemplate.query("SELECT * FROM playerStats WHERE match = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {
@@ -66,7 +61,7 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
     }
 
     @Override
-    public void save(PlayerStats playerStats) {
+    public boolean save(PlayerStats playerStats) {
 /*
         String typeS = null;
 
@@ -101,6 +96,7 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
             return;
 
         jdbcTemplate.update("UPDATE player_stats SET ? = ? WHERE match = ? and player = ?", typeS, amount, m.getId(), p.getId());*/
+        return false;
     }
 
     @Override

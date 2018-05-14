@@ -67,5 +67,10 @@ public class UserJdbcDao implements UserDao {
         return new User(userId.longValue(), username, password, mail, null);
     }
 
+    @Override
+    public boolean save(User user) {
+        return false;
+    }
+
 
 }

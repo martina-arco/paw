@@ -25,15 +25,13 @@ public class EventJdbcDao implements EventDao {
         @Override
         public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {
 
-            long id = rs.getInt("id");
-            String type =  rs.getString("eventType");
+            long id = rs.getInt("eventid");
+            Event.Type type = Enum.valueOf(Event.Type.class, rs.getString("type"));
             int minute = rs.getInt("minute");
+            long p1 = rs.getLong("player1");
+            long p2 = rs.getLong("player2");
 
-//            Player p1 = dao.getPlayerById(rs.getInt("player1"));
-//            Player p2 = dao.getPlayerById(rs.getInt("player2"));
-//
-//            return new Event(id, p1, p2, Type.valueOf(type), minute);
-            return null;
+            return new Event(id, p1, p2, type, minute);
         }
     };
 
@@ -42,7 +40,7 @@ public class EventJdbcDao implements EventDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("event")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("eventid");
     }
 
     @Override
@@ -56,21 +54,17 @@ public class EventJdbcDao implements EventDao {
 
 
     @Override
-    public Event create(Match match, Player p1, Player p2, Event.Type eventType, int minute) {
+    public Event create(Match match, Player p1, Player p2, Event.Type type, int minute) {
         final Map<String, Object> args = new HashMap<>();
 
         args.put("match", match.getId());
         args.put("player1", p1.getId());
         args.put("player2", p2 == null ? null : p2.getId());
-        args.put("eventType", eventType.toString());
+        args.put("type", type.toString());
         args.put("minute", minute);
 
         final Number eventId = jdbcInsert.executeAndReturnKey(args);
 
-        Event e = new Event(eventId.longValue(), p1, p2, eventType, minute);
-
-        match.addEvent(e);
-
-        return e;
+        return new Event(eventId.longValue(), p1, p2, type, minute);
     }
 }

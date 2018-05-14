@@ -59,6 +59,11 @@ public class StadiumJdbcDao implements StadiumDao {
     }
 
     @Override
+    public boolean save(Stadium stadium) {
+        return false;
+    }
+
+    @Override
     public Stadium findById(long id) {
         final List<Stadium> list = jdbcTemplate.query("SELECT * FROM stadium WHERE id = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {

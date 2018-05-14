@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class PlayerJdbcDao implements PlayerDao{
@@ -26,22 +27,22 @@ public class PlayerJdbcDao implements PlayerDao{
         @Override
         public Player mapRow(ResultSet rs, int i) throws SQLException {
 
-            int id = rs.getInt("id");
+            long id = rs.getLong("playerid");
+            long team = rs.getLong("team");
+            String name = rs.getString("name");
             int age	= rs.getInt("age");
+            int fitness = rs.getInt("fitness");
             int value = rs.getInt("value");
             int potential = rs.getInt("potential");
             int skillLevel = rs.getInt("skillLevel");
-            int goalkeeping = rs.getInt("player.goalKeeping");
-            int finishing = rs.getInt("player.finishing");
+            int goalkeeping = rs.getInt("goalKeeping");
             int defending = rs.getInt("defending	");
-            int passing	= rs.getInt("player.passing");
-            int fitness = rs.getInt("fitness");
-            String name = rs.getString("name");
-//            Contract contract = dao.findByPlayerId(id);
-//
-//            return new Player(id, name, age, value, potential, skillLevel, contract, goalkeeping, finishing, defending, passing, fitness);
+            int passing	= rs.getInt("passing");
+            int finishing = rs.getInt("finishing");
+            int salary = rs.getInt("finishing");
+            Date contractExpiration = rs.getDate("contractExpiration");
 
-            return null;
+            return new Player(id, team, name, age, value, potential, skillLevel, goalkeeping, finishing, defending, passing, fitness, salary, contractExpiration);
         }
     };
 
@@ -50,7 +51,7 @@ public class PlayerJdbcDao implements PlayerDao{
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("player")
-                .usingGeneratedKeyColumns("playerId");
+                .usingGeneratedKeyColumns("playerid");
     }
 
 
@@ -60,6 +61,7 @@ public class PlayerJdbcDao implements PlayerDao{
 
         final HashMap<String, Object> args = new HashMap<>();
 
+        args.put("team", team.getId());
         args.put("name", name);
         args.put("age", age);
         args.put("value", value);
@@ -79,10 +81,40 @@ public class PlayerJdbcDao implements PlayerDao{
     }
 
     @Override
+    public boolean save(Player player) {
+        //TODO
+        return false;
+    }
+
+    @Override
     public Player findById(long id) {
+        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE playerid = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 
-        //ToDo
+    @Override
+    public List<Player> findAllByIdIn(List<Long> ids) {
+        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE playerid IN ?", ROW_MAPPER, ids);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
 
-        return null;
+    @Override
+    public List<Player> findAllByTeamId(long id) {
+        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public boolean delete(Player player) {
+        return false;
     }
 }
