@@ -15,6 +15,9 @@ public interface PlayerDao {
     Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish,
                          int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth);
 
+    Player create(String name, long team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish,
+                  int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth);
+
     boolean save(Player player);
 
     Player findById(long id);

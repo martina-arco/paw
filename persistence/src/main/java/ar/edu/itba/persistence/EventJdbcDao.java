@@ -55,11 +55,19 @@ public class EventJdbcDao implements EventDao {
 
     @Override
     public Event create(Match match, Player p1, Player p2, Event.Type type, int minute) {
+        Event event = create(match.getId(), p1.getId(), p2 == null ? -1 : p2.getId(), type, minute);
+        event.setP1(p1);
+        event.setP2(p2);
+        return event;
+    }
+
+    @Override
+    public Event create(long match, long p1, long p2, Event.Type type, int minute) {
         final Map<String, Object> args = new HashMap<>();
 
-        args.put("match", match.getId());
-        args.put("player1", p1.getId());
-        args.put("player2", p2 == null ? null : p2.getId());
+        args.put("match", match);
+        args.put("player1", p1);
+        args.put("player2", p2 == -1 ? null : p2);
         args.put("type", type.toString());
         args.put("minute", minute);
 

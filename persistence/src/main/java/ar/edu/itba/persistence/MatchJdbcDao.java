@@ -87,15 +87,24 @@ public class MatchJdbcDao implements MatchDao{
 
     @Override
     public Match create(League league, Team home, Team away, Date day) {
+        Match match = create(league.getId(), home.getId(), away.getId(), day);
+        match.setLeague(league);
+        match.setHome(home);
+        match.setAway(away);
+        return match;
+    }
+
+    @Override
+    public Match create(long league, long home, long away, Date day) {
         final Map<String, Object> args = new HashMap<>();
 
-        args.put("home", home.getId());
-        args.put("away", away.getId());
-        args.put("league", league.getId());
+        args.put("home", home);
+        args.put("away", away);
+        args.put("league", league);
         args.put("day", day);
 
         final Number matchId = jdbcInsert.executeAndReturnKey(args);
-        return new Match(matchId.longValue(), home, away, league, day, 0,0,0,0, null, false, null);
+        return new Match(matchId.longValue(), home, away, league, day, 0,0,0,0, false);
     }
 
     @Override

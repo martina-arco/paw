@@ -13,6 +13,7 @@ import java.util.List;
 public interface MatchDao {
 
     Match create(League league,Team home, Team away, Date day);
+    Match create(long league,long home, long away, Date day);
 
     boolean save(Match match);
 

@@ -14,6 +14,7 @@ public interface PlayerStatsDao {
 
     boolean save(PlayerStats playerStats);
     PlayerStats create(Player p, Match m);
+    PlayerStats create(long p, long m);
     List<PlayerStats> findByMatchId(long id);
 
 }

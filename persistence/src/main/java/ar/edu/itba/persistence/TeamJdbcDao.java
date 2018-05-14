@@ -48,18 +48,29 @@ public class TeamJdbcDao implements TeamDao {
 
     @Override
     public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money) {
+        Team team = create(name, league.getId(), stadium.getId(), formation.getId(), fanCount, fanTrust, boardTrust, money);
+        team.setLeague(league);
+        team.setStadium(stadium);
+        team.setFormation(formation);
+        team.setPlayers(players);
+        team.setYouthAcademy(youthAcademy);
+        return team;
+    }
+
+    @Override
+    public Team create(String name, long league, long stadium, long formation, int fanCount, int fanTrust, int boardTrust, int money) {
         final Map<String, Object> args = new HashMap<>();
         args.put("name", name);
-        args.put("league", league.getId());
-        args.put("stadium", stadium.getId());
-        args.put("formation", formation.getId());
+        args.put("league", league);
+        args.put("stadium", stadium);
+        args.put("formation", formation);
         args.put("fanCount", fanCount);
         args.put("fanTrust", fanTrust);
         args.put("boardTrust", boardTrust);
         args.put("money", money);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
-        return new Team(id.longValue(), name, league, stadium, formation, players, youthAcademy, fanCount, fanTrust, boardTrust, null, null, money);
+        return new Team(id.longValue(), league, stadium, formation, name, fanCount, fanTrust, boardTrust, money);
     }
 
     @Override

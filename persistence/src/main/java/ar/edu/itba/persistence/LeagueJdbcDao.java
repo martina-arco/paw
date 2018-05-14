@@ -52,10 +52,15 @@ public class LeagueJdbcDao implements LeagueDao {
 
     @Override
     public League create(String name, int prize, User user) {
+        return create(name, prize, user.getId());
+    }
+
+    @Override
+    public League create(String name, int prize, long user) {
         final Map<String, Object> args = new HashMap<>();
         args.put("name", name);
         args.put("prize", prize);
-        args.put("userid", user.getId());
+        args.put("userid", user);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
         return new League(id.longValue(), name, prize);

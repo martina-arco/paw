@@ -14,6 +14,8 @@ public interface LeagueDao {
     League create(String name, Map<Date, List<Match>> fixture, int prize, User user);
 
     League create(String name, int prize, User user);
+    
+    League create(String name, int prize, long user);
 
     League findById(long id);
 

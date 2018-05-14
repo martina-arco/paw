@@ -53,11 +53,16 @@ public class ReceiptJdbcDao implements ReceiptDao {
 
     @Override
     public Receipt create(Team team, int amount, Receipt.Type type) {
+        return create(team.getId(), amount, type);
+    }
+
+    @Override
+    public Receipt create(long team, int amount, Receipt.Type type) {
         final Map<String, Object> args = new HashMap<>();
 
         args.put("amount", amount);
         args.put("type", type.toString());
-        args.put("team", team.getId());
+        args.put("team", team);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
         return new Receipt(id.longValue(), amount, type);

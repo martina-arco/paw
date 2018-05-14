@@ -58,10 +58,17 @@ public class PlayerJdbcDao implements PlayerDao{
     @Override
     public Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish,
                          int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
+            Player player = create(name, team.getId(), age, value, potential, skillLevel, goalkeeping, finish, defending, passing,
+                    fitness, salary, contractExpiration, youth);
+            player.setTeam(team);
+            return player;
+        }
 
+    @Override
+    public Player create(String name, long team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
         final HashMap<String, Object> args = new HashMap<>();
 
-        args.put("team", team.getId());
+        args.put("team", team);
         args.put("name", name);
         args.put("age", age);
         args.put("player.value", value);

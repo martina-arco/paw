@@ -104,8 +104,8 @@ public class FormationJdbcDao implements FormationDao{
         args.put("pressure", pressure);
         args.put("attitude", attitude);
         args.put("captain", captain.getId());
-        args.put("penaltyTaker", penaltyTaker);
-        args.put("freeKickTaker", freeKickTaker);
+        args.put("penaltyTaker", penaltyTaker.getId());
+        args.put("freeKickTaker", freeKickTaker.getId());
 
         final Number formationId = jdbcInsertFormation.executeAndReturnKey(args);
 
@@ -126,6 +126,43 @@ public class FormationJdbcDao implements FormationDao{
 
             args.put("formation", formationId);
             args.put("player", player.getId());
+            args.put("type", Formation.PlaysAs.SUBSTITUTE.toString());
+
+            jdbcInsertPlaysAs.execute(args);
+        }
+
+        return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, starters, substitutes, pressure, attitude);
+    }
+
+    @Override
+    public Formation create(Map<Long, Point> starters, List<Long> substitutes, int pressure, int attitude, long captain, long freeKickTaker, long penaltyTaker) {
+        Map<String, Object> args = new HashMap<>();
+
+        args.put("pressure", pressure);
+        args.put("attitude", attitude);
+        args.put("captain", captain);
+        args.put("penaltyTaker", penaltyTaker);
+        args.put("freeKickTaker", freeKickTaker);
+
+        final Number formationId = jdbcInsertFormation.executeAndReturnKey(args);
+
+        for (Map.Entry<Long, Point> entry : starters.entrySet()) {
+            args = new HashMap<>();
+
+            args.put("formation", formationId);
+            args.put("player", entry.getKey());
+            args.put("x", entry.getValue().getX());
+            args.put("y", entry.getValue().getY());
+            args.put("type", Formation.PlaysAs.STARTER.toString());
+
+            jdbcInsertPlaysAs.execute(args);
+        }
+
+        for (Long player : substitutes) {
+            args = new HashMap<>();
+
+            args.put("formation", formationId);
+            args.put("player", player);
             args.put("type", Formation.PlaysAs.SUBSTITUTE.toString());
 
             jdbcInsertPlaysAs.execute(args);

@@ -101,11 +101,18 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     @Override
     public PlayerStats create(Player p, Match m) {
+        PlayerStats playerStats = create(p.getId(),m.getId());
+        playerStats.setPlayer(p);
+        playerStats.setMatch(m);
+        return playerStats;
+    }
 
+    @Override
+    public PlayerStats create(long p, long m) {
         final Map<String, Object> args = new HashMap<>();
 
-        args.put("match", m.getId());
-        args.put("player", p.getId());
+        args.put("match", m);
+        args.put("player", p);
         args.put("performance", 0);
         args.put("saves", 0);
         args.put("passes", 0);
