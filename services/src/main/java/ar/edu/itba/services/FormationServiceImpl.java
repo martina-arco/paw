@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -19,8 +20,8 @@ public class FormationServiceImpl implements FormationService {
 
     @Override
     @Transactional
-    public Formation create(Map<Player, Point> formation, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
-        return formationDao.create(formation, pressure, attitude, captain, freeKickTaker, penaltyTaker);
+    public Formation create(Map<Player, Point> starters, List<Player> substitutes, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
+        return formationDao.create(starters, substitutes, pressure, attitude, captain, freeKickTaker, penaltyTaker);
     }
 
     @Override

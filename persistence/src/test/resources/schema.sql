@@ -10,20 +10,21 @@ CREATE TABLE IF NOT EXISTS STADIUM (
 );
 
 CREATE TABLE IF NOT EXISTS PLAYER (
-  playerid          IDENTITY PRIMARY KEY,
-  team              INTEGER NOT NULL,
-  name              VARCHAR(63) NOT NULL,
-  age               INTEGER NOT NULL,
-  fitness           INTEGER NOT NULL,
-  value             INTEGER NOT NULL,
-  potential         INTEGER NOT NULL,
-  skilllevel        INTEGER NOT NULL,
-  goalkeeping       INTEGER NOT NULL,
-  defending         INTEGER NOT NULL,
-  passing           INTEGER NOT NULL,
-  finishing         INTEGER NOT NULL,
+  playerid            IDENTITY PRIMARY KEY,
+  team                INTEGER NOT NULL,
+  name                VARCHAR(63) NOT NULL,
+  age                 INTEGER NOT NULL,
+  fitness             INTEGER NOT NULL,
+  value               INTEGER NOT NULL,
+  potential           INTEGER NOT NULL,
+  skilllevel          INTEGER NOT NULL,
+  goalkeeping         INTEGER NOT NULL,
+  defending           INTEGER NOT NULL,
+  passing             INTEGER NOT NULL,
+  finishing           INTEGER NOT NULL,
   salary              INTEGER NOT NULL,
-  contractExpiration  DATE NOT NULL
+  contractExpiration  DATE NOT NULL,
+  youth               BOOL NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS FORMATION (
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS USERS (
   userid          IDENTITY PRIMARY KEY,
   username        VARCHAR(63) NOT NULL,
   password        VARCHAR(255) NOT NULL,
-  mail            VARCHAR(63) NOT NULL,
+  mail            VARCHAR(255) NOT NULL,
   currentDay      DATE NOT NULL,
   team            INTEGER
 );
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS LEAGUE (
   userid          INTEGER REFERENCES USERS,
   leagueid        IDENTITY PRIMARY KEY,
   name            VARCHAR(63) NOT NULL,
-  price           REAL NOT NULL
+  prize           INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS TEAM (
@@ -67,24 +68,10 @@ ALTER TABLE PLAYER ADD CONSTRAINT IF NOT EXISTS player_team_fk FOREIGN KEY (team
 
 CREATE TABLE IF NOT EXISTS RECEIPT (
   receiptid       IDENTITY PRIMARY KEY,
-  amount          REAL NOT NULL,
+  amount          INTEGER NOT NULL,
   type            VARCHAR(63) NOT NULL,
   team            INTEGER NOT NULL REFERENCES TEAM ON DELETE CASCADE
 );
-/*
-CREATE TABLE IF NOT EXISTS YOUTH_ACADEMY (
-  youthacademyid  IDENTITY PRIMARY KEY,
-  player          INTEGER NOT NULL REFERENCES PLAYER ON DELETE CASCADE,
-  team            INTEGER NOT NULL REFERENCES TEAM ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS CONTRACT (
-  contractid      IDENTITY PRIMARY KEY,
-  salary          REAL NOT NULL,
-  expiration      DATE NOT NULL,
-  player          INTEGER REFERENCES PLAYER ON DELETE CASCADE,
-  team            INTEGER REFERENCES TEAM ON DELETE CASCADE
-);*/
 
 CREATE TABLE IF NOT EXISTS MATCH (
   matchid         IDENTITY PRIMARY KEY,
@@ -92,11 +79,11 @@ CREATE TABLE IF NOT EXISTS MATCH (
   home            INTEGER NOT NULL REFERENCES TEAM ON DELETE CASCADE,
   away            INTEGER NOT NULL REFERENCES TEAM ON DELETE CASCADE,
   league          INTEGER NOT NULL REFERENCES LEAGUE ON DELETE CASCADE,
-  played          BOOLEAN NOT NULL,
-  homeScore       INTEGER,
-  awayScore       INTEGER,
-  homePts         INTEGER,
-  awayPts         INTEGER
+  played          BOOLEAN NOT NULL DEFAULT FALSE,
+  homeScore       INTEGER NOT NULL DEFAULT 0,
+  awayScore       INTEGER NOT NULL DEFAULT 0,
+  homePts         INTEGER NOT NULL DEFAULT 0,
+  awayPts         INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS PLAYERSTATS (
@@ -125,6 +112,6 @@ CREATE TABLE IF NOT EXISTS PLAYSAS (
   player          INTEGER REFERENCES PLAYER ON DELETE CASCADE,
   formation       INTEGER REFERENCES FORMATION ON DELETE CASCADE,
   type            VARCHAR(63) NOT NULL,
-  x               INTEGER NOT NULL,
-  y               INTEGER NOT NULL
+  x               INTEGER,
+  y               INTEGER
 );
