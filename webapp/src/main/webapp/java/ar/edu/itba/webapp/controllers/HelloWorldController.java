@@ -14,10 +14,7 @@ import org.springframework.expression.ParseException;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +51,12 @@ public class HelloWorldController extends Controller{
         }
         final User u = us.create(form.getUsername(), form.getPassword(), "");
         return new ModelAndView("redirect:/login");
+    }
+
+    @RequestMapping(value = "/json", produces = "application/json")
+    @ResponseBody
+    public Object json() {
+        return loggedUser();
     }
 
     @RequestMapping("/login")
