@@ -25,12 +25,15 @@
                 <div class="row">
 
                     <div class="col">
-                        <h5><spring:message code="formation"/> </h5>
+                        <h5><spring:message code="pressure"/> </h5>
                     </div>
                     <div class="col">
                         <select class="form-control">
-                            <option>4-4-2</option>
+                            <option><spring:message code="low"/></option>
+                            <option><spring:message code="medium"/></option>
+                            <option><spring:message code="high"/></option>
                         </select>
+
                     </div>
 
                     <div class="col">
@@ -40,6 +43,9 @@
                         <select class="form-control">
                             <option>Perez</option>
                         </select>
+                        <%--<c:forEach items="${formation.starters.keySet()}" var="player">
+                            <option><c:out value="${player.name}"/></option>
+                        </c:forEach>--%>
                     </div>
 
                 </div>
@@ -53,6 +59,9 @@
                         <select class="form-control">
                             <option>Perez</option>
                         </select>
+                        <%--<c:forEach items="${formation.starters.keySet()}" var="player">
+                            <option><c:out value="${player.name}"/></option>
+                        </c:forEach>--%>
                     </div>
 
                     <div class="col">
@@ -62,12 +71,16 @@
                         <select class="form-control">
                             <option>Perez</option>
                         </select>
+                        <%--<c:forEach items="${formation.starters.keySet()}" var="player">
+                            <option><c:out value="${player.name}"/></option>
+                        </c:forEach>--%>
                     </div>
 
                 </div>
 
                 <div class="row">
-
+                    <div class="col">
+                    <div class="row">
                     <div class="col">
                         <h5><spring:message code="attitude"/> </h5>
                     </div>
@@ -78,18 +91,13 @@
                             <option><spring:message code="defensive"/></option>
                         </select>
                     </div>
+                    </div>
+                    </div>
 
                     <div class="col">
-                        <h5><spring:message code="pressure"/> </h5>
+                        <a href="<c:url value="/"/>"><button class="button"><spring:message code="save"/> </button></a>
                     </div>
-                    <div class="col">
-                        <select class="form-control">
-                            <option><spring:message code="low"/></option>
-                            <option><spring:message code="medium"/></option>
-                            <option><spring:message code="high"/></option>
-                        </select>
 
-                    </div>
 
                 </div>
 
@@ -127,6 +135,18 @@
                             <td>70</td>
                         </tr>
                     </c:forEach>
+                    <%--<c:forEach items="${players}" var="player">
+                        <tr>
+                            <td><c:out value="${formation.getPlayerPosition(player.id)}"/></td>
+                            <td><c:out value="${player.name}"/></td>
+                            <td><c:out value="${player.fitness}"/></td>
+                            <td><c:out value="${player.skillLevel}"/></td>
+                            <td><c:out value="${player.goalKeeping}"/></td>
+                            <td><c:out value="${player.finish}"/></td>
+                            <td><c:out value="${player.defending}"/></td>
+                            <td><c:out value="${player.passing}"/></td>
+                        </tr>
+                    </c:forEach>--%>
                     </tbody>
 
                 </table>
