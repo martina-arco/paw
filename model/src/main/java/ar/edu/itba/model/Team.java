@@ -1,6 +1,5 @@
 package ar.edu.itba.model;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,14 +11,16 @@ public class Team {
     private Formation formation;
     private List<Player> players;
     private List<Player> youthAcademy;
-    private Integer fanTrust, boardTrust;
+    private int fanCount;
+    private int fanTrust;
+    private int boardTrust;
     private List<Receipt> finance;
     private List<BankLoan> loans;
-    private Integer money;
+    private int money;
 
     public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players,
-                List<Player> youthAcademy, Integer fanTrust, Integer boardTrust, List<Receipt> finance,
-                List<BankLoan> loans, Integer money) {
+                List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, List<Receipt> finance,
+                List<BankLoan> loans, int money) {
         this.id = id;
         this.name = name;
         this.league = league;
@@ -27,6 +28,7 @@ public class Team {
         this.formation = formation;
         this.players = players;
         this.youthAcademy = youthAcademy;
+        this.fanCount = fanCount;
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
         this.finance = finance;
@@ -34,13 +36,14 @@ public class Team {
         this.money = money;
     }
 
-    public Team(long id, String name, long leagueId, long stadiumId, long formationId, Integer fanTrust,
-                Integer boardTrust, Integer money) {
+    public Team(long id, long leagueId, long stadiumId, long formationId, String name, int fanCount, int fanTrust,
+                int boardTrust, int money) {
         this.id = id;
         this.leagueId = leagueId;
         this.stadiumId = stadiumId;
         this.formationId = formationId;
         this.name = name;
+        this.fanCount = fanCount;
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
         this.money = money;
@@ -115,6 +118,14 @@ public class Team {
         return loans;
     }*/
 
+    public int getFanCount() {
+        return fanCount;
+    }
+
+    public void setFanCount(int fanCount) {
+        this.fanCount = fanCount;
+    }
+
     public String getName() {
         return name;
     }
@@ -155,19 +166,19 @@ public class Team {
         this.youthAcademy = youthAcademy;
     }
 
-    public Integer getFanTrust() {
+    public int getFanTrust() {
         return fanTrust;
     }
 
-    public void setFanTrust(Integer fanTrust) {
+    public void setFanTrust(int fanTrust) {
         this.fanTrust = fanTrust;
     }
 
-    public Integer getBoardTrust() {
+    public int getBoardTrust() {
         return boardTrust;
     }
 
-    public void setBoardTrust(Integer boardTrust) {
+    public void setBoardTrust(int boardTrust) {
         this.boardTrust = boardTrust;
     }
 
@@ -179,11 +190,11 @@ public class Team {
         this.finance = finance;
     }
 
-    public Integer getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 

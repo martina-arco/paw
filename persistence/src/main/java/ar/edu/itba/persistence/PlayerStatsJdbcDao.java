@@ -16,10 +16,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class PlayerStatsJdbcDao implements PlayerStatsDao {
@@ -31,18 +28,45 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
         @Override
         public PlayerStats mapRow(ResultSet rs, int rowNumber) throws SQLException {
             long id = rs.getLong("playerstatsid");
+            int matchId = rs.getInt("match");
             int playerId = rs.getInt("player");
             int performance = rs.getInt("performance");
             int saves = rs.getInt("saves");
             int passes = rs.getInt("passes");
             int tackles = rs.getInt("tackles");
             int assists = rs.getInt("assists");
+            int scores = rs.getInt("scores");
+            int yellowCards = rs.getInt("yellowCards");
+            int redCards = rs.getInt("redCards");
 
-            //TODO events
-
-            return new PlayerStats(id, playerId, saves, performance, passes, assists, 0,0,0, tackles);
+            return new PlayerStats(id, matchId, playerId, saves, performance, passes, assists, scores, yellowCards, redCards, tackles);
         }
     };
+
+    /*private static final ResultSetExtractor<List<PlayerStats>> RESULT_SET_EXTRACTOR = new ResultSetExtractor<List<PlayerStats>>() {
+        @Override
+        public List<PlayerStats> extractData(ResultSet rs) throws SQLException, DataAccessException {
+            List<PlayerStats> playerStatsList = new LinkedList<>();
+            PlayerStats currPlayerStats = null;
+            while (rs.next()) {
+                long id = rs.getLong("playerstatsid");
+                if(currPlayerStats == null) {
+                    currPlayerStats = ROW_MAPPER.mapRow(rs, 0);
+                } else if (currPlayerStats.getId() != id) {
+                    //set values
+                    playerStatsList.add(currPlayerStats);
+
+                    currPlayerStats = ROW_MAPPER.mapRow(rs, 0);
+                }
+
+                String type = rs.getString("type");
+                if(type != null) {
+
+                }
+            }
+            return playerStatsList;
+        }
+    };*/
 
     @Autowired
     public PlayerStatsJdbcDao(final DataSource ds) {
@@ -54,7 +78,13 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     @Override
     public List<PlayerStats> findByMatchId(long id) {
-        final List<PlayerStats> list = jdbcTemplate.query("SELECT * FROM playerStats WHERE match = ?", ROW_MAPPER, id);
+        final List<PlayerStats> list = jdbcTemplate.query("SELECT playerStats.*, " +
+                "sum(CASE WHEN type = ? THEN 1 ELSE 0 END) AS scores, sum(CASE WHEN type = ? THEN 1 ELSE 0 END) AS yellowCards, " +
+                "sum(CASE WHEN type = ? THEN 1 ELSE 0 END) AS redCards FROM playerStats " +
+                "LEFT JOIN event ON playerstats.match = event.match AND player = player1 WHERE playerstats.match = ? " +
+                "GROUP BY playerstats.match, player", ROW_MAPPER, Event.Type.SCORE.toString(), Event.Type.YELLOW_CARD.toString(),
+                Event.Type.RED_CARD.toString(), id);
+        //final List<PlayerStats> list = jdbcTemplate.query("SELECT * FROM playerStats LEFT JOIN event ON playerstats.match = event.match AND player = player1 WHERE playerstats.match = ? ORDER BY playerstats.match, player", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -63,7 +93,10 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     @Override
     public boolean save(PlayerStats playerStats) {
-        return false;
+        jdbcTemplate.update("UPDATE playerstats SET match = ?, player = ?, performance = ?, saves = ?, passes = ?, " +
+                "tackles = ?, assists = ? WHERE playerstatsid = ?", playerStats.getMatchId(), playerStats.getPlayerId(),
+                playerStats.getPerformance(), playerStats.getSaves(), playerStats.getPasses(), playerStats.getTackles(), playerStats.getAssists(), playerStats.getId());
+        return true;
     }
 
     @Override
@@ -81,6 +114,6 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
         final Number playerStatsId = jdbcInsert.executeAndReturnKey(args);
 
-        return new PlayerStats(playerStatsId.longValue(), p, 0, 0,0,0,0,0,0, 0);
+        return new PlayerStats(playerStatsId.longValue(), m, p, 0, 0,0,0,0,0,0, 0);
     }
 }

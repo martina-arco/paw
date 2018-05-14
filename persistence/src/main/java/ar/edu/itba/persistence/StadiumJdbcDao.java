@@ -60,7 +60,11 @@ public class StadiumJdbcDao implements StadiumDao {
 
     @Override
     public boolean save(Stadium stadium) {
-        return false;
+        jdbcTemplate.update("UPDATE stadium SET lowclass = ?, lowclassprice = ?, mediumclass = ?, mediumclassprice = ?," +
+                " highclass = ?, highclassprice = ?, name = ? WHERE stadiumid = ?", stadium.getLowClass(),
+                stadium.getLowClassPrice(), stadium.getMediumClass(), stadium.getMediumClassPrice(), stadium.getHighClass(),
+                stadium.getHighClassPrice(), stadium.getName(), stadium.getId());
+        return true;
     }
 
     @Override

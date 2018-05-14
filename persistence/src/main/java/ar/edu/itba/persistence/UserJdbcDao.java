@@ -26,7 +26,7 @@ public class UserJdbcDao implements UserDao {
                 public User mapRow(ResultSet rs, int rowNum) throws SQLException {
                     return new User(rs.getLong("userid"), rs.getString("username"),
                             rs.getString("password"), rs.getString("mail"),
-                            rs.getLong("team"));
+                            rs.getLong("team"), rs.getDate("currentDay"));
                 }
             };
 
@@ -57,19 +57,21 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public User create(String username, String password, String mail) {
+    public User create(String username, String password, String mail, Date currentDay) {
         final Map<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
         args.put("mail", mail);
-        args.put("currentDay", new Date());
+        args.put("currentDay", currentDay);
         final Number userId = jdbcInsert.executeAndReturnKey(args);
-        return new User(userId.longValue(), username, password, mail, null);
+        return new User(userId.longValue(), username, password, mail, null, currentDay);
     }
 
     @Override
     public boolean save(User user) {
-        return false;
+        jdbcTemplate.update("UPDATE users SET username = ?, password = ?, mail = ?, currentday = ?, team = ? " +
+                "WHERE userid = ?", user.getUsername(), user.getPassword(), user.getMail(), user.getCurrentDay(),user.getTeam(), user.getId());
+        return true;
     }
 
 

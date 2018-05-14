@@ -85,10 +85,10 @@ public class PlayerJdbcDao implements PlayerDao{
     public boolean save(Player player) {
         jdbcTemplate.update("UPDATE player SET team = ?, name = ?, age = ?, fitness = ?, value = ?, potential = ?, " +
                 "skilllevel = ?, goalkeeping = ?, defending = ?, passing = ?, finishing = ?, salary = ?, " +
-                "contractexpiration = ?, youth = ?", player.getTeamId(), player.getName(), player.getAge(),
+                "contractexpiration = ?, youth = ? WHERE playerid = ?", player.getTeamId(), player.getName(), player.getAge(),
                 player.getFitness(), player.getValue(), player.getPotential(), player.getSkillLevel(), player.getGoalKeeping(),
                 player.getDefending(), player.getPassing(), player.getFinish(), player.getSalary(), player.getContractExpiration(),
-                player.isYouth());
+                player.isYouth(), player.getId());
         return true;
     }
 

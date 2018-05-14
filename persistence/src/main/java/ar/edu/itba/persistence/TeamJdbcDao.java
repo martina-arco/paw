@@ -37,32 +37,37 @@ public class TeamJdbcDao implements TeamDao {
             long league = rs.getLong("league");
             long stadium = rs.getLong("stadium");
             long formation = rs.getLong("formation");
+            int fanCount = rs.getInt("fanCount");
             int fanTrust = rs.getInt("fanTrust");
             int boardTrust = rs.getInt("boardTrust");
             int money = rs.getInt("money");
 
-            return new Team(id, name, league, stadium, formation, fanTrust, boardTrust, money);
+            return new Team(id, league, stadium, formation, name, fanCount, fanTrust, boardTrust, money);
         }
     };
 
     @Override
-    public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, Integer fanTrust, Integer boardTrust, Integer money) {
+    public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money) {
         final Map<String, Object> args = new HashMap<>();
         args.put("name", name);
         args.put("league", league.getId());
         args.put("stadium", stadium.getId());
         args.put("formation", formation.getId());
+        args.put("fanCount", fanCount);
         args.put("fanTrust", fanTrust);
         args.put("boardTrust", boardTrust);
         args.put("money", money);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
-        return new Team(id.longValue(), name, league, stadium, formation, players, youthAcademy, fanTrust, boardTrust, null, null, money);
+        return new Team(id.longValue(), name, league, stadium, formation, players, youthAcademy, fanCount, fanTrust, boardTrust, null, null, money);
     }
 
     @Override
     public boolean save(Team team) {
-        return false;
+        jdbcTemplate.update("UPDATE team SET name = ?, fancount = ?, fantrust = ?, boardtrust = ?, league = ?, " +
+                "stadium = ?, formation = ? WHERE teamid = ?", team.getName(), team.getFanCount(), team.getFanTrust(),
+                team.getBoardTrust(), team.getLeagueId(), team.getStadiumId(), team.getFormationId(), team.getId());
+        return true;
     }
 
     @Override

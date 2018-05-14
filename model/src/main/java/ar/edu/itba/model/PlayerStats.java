@@ -2,12 +2,15 @@ package ar.edu.itba.model;
 
 public class PlayerStats {
 
-    private long id, playerId;
+    private long id, matchId, playerId;
+    private Match match;
     private Player player;
     private int saves, performance, passes, assists, scores, yellowCards, redCards, tackles;
 
-    public PlayerStats(long id, Player player, int saves, int performance, int passes,  int tackles,
-                       int assists, int scores, int yellowCards, int redCards) {
+    public PlayerStats(long id, Match match, Player player, int saves, int performance, int passes, int assists,
+                       int scores, int yellowCards, int redCards, int tackles) {
+        this.id = id;
+        this.match = match;
         this.player = player;
         this.saves = saves;
         this.performance = performance;
@@ -17,12 +20,12 @@ public class PlayerStats {
         this.yellowCards = yellowCards;
         this.redCards = redCards;
         this.tackles = tackles;
-        this.id = id;
     }
 
-    public PlayerStats(long id, long playerId, int saves, int performance, int passes, int assists, int scores,
-                       int yellowCards, int redCards, int tackles) {
+    public PlayerStats(long id, long matchId, long playerId, int saves, int performance, int passes, int assists,
+                       int scores, int yellowCards, int redCards, int tackles) {
         this.id = id;
+        this.matchId = matchId;
         this.playerId = playerId;
         this.saves = saves;
         this.performance = performance;
@@ -34,10 +37,40 @@ public class PlayerStats {
         this.tackles = tackles;
     }
 
+    public long getMatchId() {
+        if(match != null)
+            return match.getId();
+        return matchId;
+    }
+
     public long getPlayerId() {
         if(player != null)
             return player.getId();
         return playerId;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
+
+    public void setSaves(int saves) {
+        this.saves = saves;
+    }
+
+    public void setPasses(int passes) {
+        this.passes = passes;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+    public void setScores(int scores) {
+        this.scores = scores;
     }
 
     public void addSave(int amount){

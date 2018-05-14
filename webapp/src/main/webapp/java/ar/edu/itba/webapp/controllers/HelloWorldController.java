@@ -20,10 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @org.springframework.stereotype.Controller
 public class HelloWorldController extends Controller{
@@ -49,7 +46,7 @@ public class HelloWorldController extends Controller{
         if (errors.hasErrors()) {
             return index(form);
         }
-        final User u = us.create(form.getUsername(), form.getPassword(), "");
+        final User u = us.create(form.getUsername(), form.getPassword(), "", new Date());
         return new ModelAndView("redirect:/login");
     }
 

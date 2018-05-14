@@ -174,7 +174,7 @@ public class FormationJdbcDao implements FormationDao{
 
     @Override
     public Formation findById(long id) {
-        final List<Formation> list = jdbcTemplate.query("SELECT * FROM formation LEFT JOIN playsas ON formationid = playsas.formation WHERE formationid = ?", RESULT_SET_EXTRACTOR, id);
+        final List<Formation> list = jdbcTemplate.query("SELECT * FROM formation LEFT JOIN playsas ON formationid = playsas.formation WHERE formationid = ? ORDER BY formationid", RESULT_SET_EXTRACTOR, id);
         if (list.isEmpty()) {
             return null;
         }

@@ -53,9 +53,9 @@ public class ChooseTeamController extends Controller{
 
 
         List<Team> teams = new ArrayList<>();
-        teams.add(new Team(1,"River",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
-        teams.add(new Team(2,"Boca",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
-        teams.add(new Team(3,"Racing",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
+        teams.add(new Team(1,"River",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0, 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
+        teams.add(new Team(2,"Boca",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0, 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
+        teams.add(new Team(3,"Racing",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0, 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
 
 
         return teams;

@@ -92,9 +92,9 @@ public class MatchJdbcDao implements MatchDao{
     @Override
     public boolean save(Match match) {
         jdbcTemplate.update("UPDATE match SET day = ?, home = ?, away = ?, league = ?, played = ?, homescore = ?, " +
-                "awayscore = ?, homepts = ?, awaypts = ?", match.getDay(), match.getHomeId(), match.getAwayId(),
+                "awayscore = ?, homepts = ?, awaypts = ? WHERE matchid = ?", match.getDay(), match.getHomeId(), match.getAwayId(),
                 match.getLeagueId(), match.isPlayed(), match.getHomeScore(), match.getAwayScore(), match.getHomePoints(),
-                match.getAwayPoints());
+                match.getAwayPoints(), match.getId());
 
         return true;
     }

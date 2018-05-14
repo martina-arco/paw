@@ -18,8 +18,9 @@ public class PlayerStatsTest {
 
     @Before
     public void setUp(){
+        Match m = mock(Match.class);
         Player p = mock(Player.class);
-        stats = new PlayerStats(id, p, 0,0,0,0,0,0,0,0);
+        stats = new PlayerStats(id, m, p, 0,0,0,0,0,0,0,0);
     }
 
     @Test

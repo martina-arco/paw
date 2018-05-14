@@ -18,8 +18,8 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     @Transactional
-    public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, Integer fanTrust, Integer boardTrust, Integer money) {
-        return teamDao.create(name, league, stadium, formation, players, youthAcademy, fanTrust, boardTrust, money);
+    public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money) {
+        return teamDao.create(name, league, stadium, formation, players, youthAcademy, fanCount, fanTrust, boardTrust, money);
     }
 
     @Override
