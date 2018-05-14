@@ -47,7 +47,7 @@
                         <tr>
                             <th scope="col"><spring:message code="name"/> </th>
                             <th scope="col"><spring:message code="player.salary"/> </th>
-                            <th scope="col"><spring:message code="value"/> </th>
+                            <th scope="col"><spring:message code="player.value"/> </th>
                             <th scope="col"><spring:message code="fitness"/> </th>
                             <th scope="col"><spring:message code="age"/></th>
                         </tr>

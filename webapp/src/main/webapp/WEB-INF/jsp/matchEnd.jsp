@@ -42,16 +42,16 @@
                             </tr>
                         </c:forEach>
 
-                        </tbody>
-                        <%--<c:forEach items="${playerName}" var="player">--%>
+                        <%--<c:forEach items="${matches}" var="macth">--%>
                         <%--<tr>--%>
-                        <%--<td>${player.name}</td>--%>
-                        <%--<td>${player.salary}</td>--%>
-                        <%--<td>${player.value}</td>--%>
-                        <%--<td>${player.fitness}</td>--%>
-                        <%--<td>${player.age}</td>--%>
+                        <%--<td>${match.home}</td>--%>
+                        <%--<td>${match.homeScore}</td>--%>
+                        <%--<td>${match.awayScore}</td>--%>
+                        <%--<td>${match.away}</td>--%>
                         <%--</tr>--%>
                         <%--</c:forEach>--%>
+
+                        </tbody>
 
                     </table>
                 </div>

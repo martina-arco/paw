@@ -14,8 +14,6 @@ public class Controller {
     @Autowired
     private UserService us;
 
-    @Autowired
-    private TeamService team;
 
     @ModelAttribute
     public User loggedUser() {
@@ -23,15 +21,4 @@ public class Controller {
         final User user = us.findByUsername(auth.getName());
         return user;
     }
-
-    public Team getTeam() {
-//      return team.findById(loggedUser().getTeamId());
-        return null;
-    }
-
-    public int getTeamId () {
-//        return loggedUser().getTeamId();
-        return 0;
-    }
-
 }

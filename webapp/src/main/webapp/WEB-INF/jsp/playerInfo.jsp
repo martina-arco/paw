@@ -37,7 +37,7 @@
             <p><spring:message code="player.salary" arguments="${contract.salary}"/></p>
         </div>
         <div class="col-sm">
-            <p><spring:message code="value"  arguments="${player.value}"/></p>
+            <p><spring:message code="player.value" arguments="${player.value}"/></p>
         </div>
     </div>
 </div>

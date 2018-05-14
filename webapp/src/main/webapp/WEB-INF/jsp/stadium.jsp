@@ -45,61 +45,61 @@
                 </table>
             </div>
 
-            <div class="row big-height">
-                <div class="col">
-                    <h3 class="indent"><spring:message code="stadiumExpansion"/> </h3>
-                </div>
-            </div>
+            <%--<div class="row big-height">--%>
+                <%--<div class="col">--%>
+                    <%--<h3 class="indent"><spring:message code="stadiumExpansion"/> </h3>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            <form:form method="post">
-            <div class="row">
-                <table class="table width35 table-borderless table-center">
-
-
-                    <tbody>
-
-                    <tr>
-                        <td class="width60"><spring:message code="buyLowSeats"/></td> 
-                        <td>
-                            <select class="form-control">
-                                <c:forEach var="i" begin = "1" end = "50">
-                                    <option>${i}</option>
-                                </c:forEach>
-                            </select>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td class="width60"><spring:message code="buyMediumSeats"/></td>
-                        <td>
-                            <select class="form-control">
-                                <c:forEach var="i" begin = "1" end = "50">
-                                    <option>${i}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="width60"><spring:message code="buyHighSeats"/></td>
-                        <td>
-                            <select class="form-control">
-                                <c:forEach var="i" begin = "1" end = "50">
-                                    <option>${i}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-
-                    </tbody>
+            <%--<form:form method="post">--%>
+            <%--<div class="row">--%>
+                <%--<table class="table width35 table-borderless table-center">--%>
 
 
-                </table>
-            </div>
+                    <%--<tbody>--%>
 
-            <div class="container right">
-                <input type="submit" value="Save" class="btn btn-light">
-            </div>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="buyLowSeats"/></td> --%>
+                        <%--<td>--%>
+                            <%--<select class="form-control">--%>
+                                <%--<c:forEach var="i" begin = "1" end = "50">--%>
+                                    <%--<option>${i}</option>--%>
+                                <%--</c:forEach>--%>
+                            <%--</select>--%>
+                        <%--</td> --%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="buyMediumSeats"/></td>--%>
+                        <%--<td>--%>
+                            <%--<select class="form-control">--%>
+                                <%--<c:forEach var="i" begin = "1" end = "50">--%>
+                                    <%--<option>${i}</option>--%>
+                                <%--</c:forEach>--%>
+                            <%--</select>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="buyHighSeats"/></td>--%>
+                        <%--<td>--%>
+                            <%--<select class="form-control">--%>
+                                <%--<c:forEach var="i" begin = "1" end = "50">--%>
+                                    <%--<option>${i}</option>--%>
+                                <%--</c:forEach>--%>
+                            <%--</select>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
 
-            </form:form>
+                    <%--</tbody>--%>
+
+
+                <%--</table>--%>
+            <%--</div>--%>
+
+            <%--<div class="container right">--%>
+                <%--<input type="submit" value="Save" class="btn btn-light">--%>
+            <%--</div>--%>
+
+            <%--</form:form>--%>
         </div>
     </div>
 

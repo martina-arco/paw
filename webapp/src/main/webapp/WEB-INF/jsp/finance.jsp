@@ -37,14 +37,14 @@
                 <table class="table width35 table-borderless table-center">
                     <tbody>
 
-                    <tr>
-                        <td class="width60"><spring:message code="playersSold"/></td> 
-                        <td><spring:message code="currency" arguments="${playersSold}"/></td> 
-                    </tr>
-                    <tr>
-                        <td class="width60"><spring:message code="bankLoan"/></td>
-                        <td><spring:message code="currency" arguments="${bankLoanIncome}"/></td> 
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="playersSold"/></td> --%>
+                        <%--<td><spring:message code="currency" arguments="${playersSold}"/></td> --%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="bankLoan"/></td>--%>
+                        <%--<td><spring:message code="currency" arguments="${bankLoanIncome}"/></td> --%>
+                    <%--</tr>--%>
                     <tr>
                         <td class="width60"><spring:message code="ticketsSold"/></td>
                         <td><spring:message code="currency" arguments="${ticketsSold}"/></td> 
@@ -64,18 +64,18 @@
                 <table class="table width35 table-borderless table-center">
                     <tbody>
 
-                    <tr>
-                        <td class="width60"><spring:message code="playersBought"/></td> 
-                        <td><spring:message code="currency" arguments="${playersBought}"/></td> 
-                    </tr>
-                    <tr>
-                        <td class="width60"><spring:message code="bankLoan"/></td>
-                        <td><spring:message code="currency" arguments="${bankLoanExpense}"/></td> 
-                    </tr>
-                    <tr>
-                        <td class="width60"><spring:message code="stadiumExpansion"/></td>
-                        <td><spring:message code="currency" arguments="${stadiumExpansion}"/></td> 
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="playersBought"/></td> --%>
+                        <%--<td><spring:message code="currency" arguments="${playersBought}"/></td> --%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="bankLoan"/></td>--%>
+                        <%--<td><spring:message code="currency" arguments="${bankLoanExpense}"/></td> --%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td class="width60"><spring:message code="stadiumExpansion"/></td>--%>
+                        <%--<td><spring:message code="currency" arguments="${stadiumExpansion}"/></td> --%>
+                    <%--</tr>--%>
                     <tr>
                         <td class="width60"><spring:message code="salaries"/></td>
                         <td><spring:message code="currency" arguments="${salaries}"/></td> 
@@ -85,9 +85,9 @@
                 </table>
             </div>
 
-            <div class="container right">
-                <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="askBankLoan"/> </button></a>
-            </div>
+            <%--<div class="container right">--%>
+                <%--<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="askBankLoan"/> </button></a>--%>
+            <%--</div>--%>
         </div>
     </div>
 

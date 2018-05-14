@@ -11,9 +11,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <li class="nav-item ">
-                        <a href = "<c:url value="/youthAcademy"/>" class="nav-link"><spring:message code="youthAcademy"/> </a>
-                    </li>
+                    <%--<li class="nav-item ">--%>
+                        <%--<a href = "<c:url value="/youthAcademy"/>" class="nav-link"><spring:message code="youthAcademy"/> </a>--%>
+                    <%--</li>--%>
                     <li class="nav-item">
                         <a href = "<c:url value="/stadium"/>" class="nav-link"><spring:message code="stadium"/></a>
                     </li>

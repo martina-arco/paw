@@ -44,13 +44,13 @@
 
                         <jsp:include page="playerInfo.jsp"/>
 
-                        <div class="btn-toolbar justify-content-between" role="toolbar">
-                            <div class="btn-group mr-2" role="group">
-                                <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="sell"/> </button></a>
-                            </div>
-                            <div class="btn-group mr-2" role="group">
-                                    <a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="contract"/> </button></a>
-                            </div>
+                        <div class="btn-toolbar justify-content-between right" role="toolbar">
+                            <%--<div class="btn-group mr-2" role="group">--%>
+                                <%--<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="sell"/> </button></a>--%>
+                            <%--</div>--%>
+                            <%--<div class="btn-group mr-2" role="group">--%>
+                                    <%--<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="contract"/> </button></a>--%>
+                            <%--</div>--%>
                             <div class="btn-group mr-2" role="group">
                                 <a href="<c:url value="/retirePlayer"/>"><button class="btn btn-light"><spring:message code="retire"/> </button></a>
                             </div>
@@ -76,7 +76,7 @@
                         <thead>
                         <tr>
                             <th scope="col"><spring:message code="name"/> </th>
-                            <th scope="col"><spring:message code="player.salary"/> </th>
+                            <th scope="col"><spring:message code="salary"/> </th>
                             <th scope="col"><spring:message code="value"/> </th>
                             <th scope="col"><spring:message code="fitness"/> </th>
                             <th scope="col"><spring:message code="age"/></th>

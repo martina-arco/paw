@@ -31,7 +31,7 @@ public class PlayerJdbcDao implements PlayerDao{
             String name = rs.getString("name");
             int age	= rs.getInt("age");
             int fitness = rs.getInt("fitness");
-            int value = rs.getInt("value");
+            int value = rs.getInt("player.value");
             int potential = rs.getInt("potential");
             int skillLevel = rs.getInt("skillLevel");
             int goalkeeping = rs.getInt("goalKeeping");
@@ -64,7 +64,7 @@ public class PlayerJdbcDao implements PlayerDao{
         args.put("team", team.getId());
         args.put("name", name);
         args.put("age", age);
-        args.put("value", value);
+        args.put("player.value", value);
         args.put("potential", potential);
         args.put("skillLevel", skillLevel);
         args.put("goalKeeping", goalkeeping);
