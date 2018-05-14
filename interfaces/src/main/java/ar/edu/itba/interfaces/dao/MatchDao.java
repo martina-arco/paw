@@ -20,6 +20,8 @@ public interface MatchDao {
 
     List<Match> findByTeamId(long id);
 
+    List<Match> findByTeamIdFromDate(long id, Date date);
+
     List<Match> findByLeagueId(long id);
 
     List<Match> findByLeagueIdAndDate(long id, Date date);
