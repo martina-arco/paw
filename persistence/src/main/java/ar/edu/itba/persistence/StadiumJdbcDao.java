@@ -25,14 +25,14 @@ public class StadiumJdbcDao implements StadiumDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("stadium")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("stadiumid");
     }
 
     private static final RowMapper<Stadium> ROW_MAPPER = new RowMapper<Stadium>() {
         @Override
         public Stadium mapRow(ResultSet rs, int rowNumber) throws SQLException {
 
-            long id = rs.getInt("id");
+            long id = rs.getInt("stadiumid");
             String name = rs.getString("name");
             int lowClass = rs.getInt("lowClass");
             int lowClassPrice = rs.getInt("lowClassPrice");

@@ -3,6 +3,7 @@ package ar.edu.itba.model;
 import java.util.LinkedList;
 import java.util.List;
 
+@Deprecated
 public class MatchDay {
     private long id;
     private List<Long> matchesIds;

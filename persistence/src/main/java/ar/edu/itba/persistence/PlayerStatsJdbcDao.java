@@ -27,19 +27,20 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;
 
-
-
     private static final RowMapper<PlayerStats> ROW_MAPPER = new RowMapper<PlayerStats>() {
         @Override
         public PlayerStats mapRow(ResultSet rs, int rowNumber) throws SQLException {
-            int matchId = rs.getInt("match");
+            long id = rs.getLong("playerstatsid");
             int playerId = rs.getInt("player");
             int performance = rs.getInt("performance");
             int saves = rs.getInt("saves");
             int passes = rs.getInt("passes");
             int tackles = rs.getInt("tackles");
             int assists = rs.getInt("assists");
-            return null;
+
+            //TODO events
+
+            return new PlayerStats(id, playerId, saves, performance, passes, assists, 0,0,0, tackles);
         }
     };
 
@@ -47,8 +48,8 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
     public PlayerStatsJdbcDao(final DataSource ds) {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("player_stats")
-                .usingGeneratedKeyColumns("id");
+                .withTableName("playerstats")
+                .usingGeneratedKeyColumns("playerstatsid");
     }
 
     @Override
@@ -62,40 +63,6 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     @Override
     public boolean save(PlayerStats playerStats) {
-/*
-        String typeS = null;
-
-        for (PlayerStats stat : m.getStats()) {
-
-            if(stat.getPlayer().equals(p)) {
-                switch (type) {
-                    case SAVE:
-                        typeS = "saves";
-                        stat.addSave(amount);
-                        break;
-                    case ASSIST:
-                        typeS = "assists";
-                        stat.addAssist(amount);
-                        break;
-                    case PASS:
-                        typeS = "passes";
-                        stat.addPass(amount);
-                        break;
-                    case TACKLE:
-                        typeS = "tackles";
-                        stat.addTackle(amount);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-        }
-
-        if(typeS == null)
-            return;
-
-        jdbcTemplate.update("UPDATE player_stats SET ? = ? WHERE match = ? and player = ?", typeS, amount, m.getId(), p.getId());*/
         return false;
     }
 

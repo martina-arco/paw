@@ -26,33 +26,24 @@ public class TeamJdbcDao implements TeamDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("team")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("teamid");
     }
 
     private static final RowMapper<Team> ROW_MAPPER = new RowMapper<Team>() {
         @Override
         public Team mapRow(ResultSet rs, int rowNumber) throws SQLException {
-            /*
-            long id = rs.getInt("id");
+            long id = rs.getLong("teamid");
             String name = rs.getString("name");
-            League league = LeagueJdbcDao.findById(rs.getInt("league"));
-            Stadium stadium = StadiumJdbcDao.findById(rs.getInt("stadium"));
-            Formation formation = FormationJdbcDao.findById(rs.getInt("formation"));
-            List<Player> players = ContractJdbcDao.findPlayersByTeamId(id);
-            YouthAcademy youthAcademy = YouthAcademyJdbcDao.findById(rs.getInt("youthAcademy"));
+            long league = rs.getLong("league");
+            long stadium = rs.getLong("stadium");
+            long formation = rs.getLong("formation");
             int fanTrust = rs.getInt("fanTrust");
             int boardTrust = rs.getInt("boardTrust");
-            List<Receipt> finance = ReceiptJdbcDao.findReceiptsByTeamId(id);
-            private List<BankLoan> loans = nose en que base se guardan;
             int money = rs.getInt("money");
 
-            return new Team(id, name, league, stadium, formation, players, youthAcademy, fanTrust, boardTrust, finance, money);
-            */
-            return null;
+            return new Team(id, name, league, stadium, formation, fanTrust, boardTrust, money);
         }
     };
-
-
 
     @Override
     public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, Integer fanTrust, Integer boardTrust, Integer money) {
@@ -64,9 +55,8 @@ public class TeamJdbcDao implements TeamDao {
         args.put("fanTrust", fanTrust);
         args.put("boardTrust", boardTrust);
         args.put("money", money);
-        final Number id = jdbcInsert.executeAndReturnKey(args);
-        AddContracts(players, id.longValue());
 
+        final Number id = jdbcInsert.executeAndReturnKey(args);
         return new Team(id.longValue(), name, league, stadium, formation, players, youthAcademy, fanTrust, boardTrust, null, null, money);
     }
 
@@ -75,16 +65,9 @@ public class TeamJdbcDao implements TeamDao {
         return false;
     }
 
-    private void AddContracts(List<Player> players, long teamId) {
-        final Map<String, Object> args = new HashMap<>();
-        for(Player player: players) {
-            //ContractJdbcDao.create(player, teamId);
-        }
-    }
-
     @Override
     public Team findById(final long id) {
-        final List<Team> list = jdbcTemplate.query("SELECT * FROM team WHERE id = ?", ROW_MAPPER, id);
+        final List<Team> list = jdbcTemplate.query("SELECT * FROM team WHERE teamid = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -93,6 +76,10 @@ public class TeamJdbcDao implements TeamDao {
 
     @Override
     public List<Team> findAllByLeagueId(long id) {
-        return null;
+        final List<Team> list = jdbcTemplate.query("SELECT * FROM team WHERE league = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
     }
 }

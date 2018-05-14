@@ -26,11 +26,11 @@ public class ReceiptJdbcDao implements ReceiptDao {
         @Override
         public Receipt mapRow(ResultSet rs, int i) throws SQLException {
 
-            int id = rs.getInt("id");
+            int id = rs.getInt("receiptid");
             int amount = rs.getInt("amount");
-            String type = rs.getString("type");
+            Receipt.Type type = Receipt.Type.valueOf(rs.getString("type"));
 
-            return new Receipt(id, amount, Receipt.Type.valueOf(type));
+            return new Receipt(id, amount, type);
         }
     };
 
@@ -39,7 +39,7 @@ public class ReceiptJdbcDao implements ReceiptDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("receipt")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("receiptid");
     }
 
     @Override
@@ -53,7 +53,6 @@ public class ReceiptJdbcDao implements ReceiptDao {
 
     @Override
     public Receipt create(Team team, int amount, Receipt.Type type) {
-
         final Map<String, Object> args = new HashMap<>();
 
         args.put("amount", amount);
@@ -61,9 +60,6 @@ public class ReceiptJdbcDao implements ReceiptDao {
         args.put("team", team.getId());
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
-        Receipt r = new Receipt(id.longValue(), amount, type);
-        team.addReceipt(r);
-
-        return r;
+        return new Receipt(id.longValue(), amount, type);
     }
 }

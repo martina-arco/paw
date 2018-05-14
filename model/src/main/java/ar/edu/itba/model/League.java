@@ -1,61 +1,53 @@
 package ar.edu.itba.model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class League {
     private long id;
     private String name;
-    private List<Long> fixtureIds;
-    private List<MatchDay> fixture;
-    private long currentMatchDayId;
-    private MatchDay currentMatchDay;
+    private Map<Date, List<Match>> fixture;
+    private int prize;
 
-
-    public League(long id, String name, List<MatchDay> fixture, MatchDay currentMatchDate) {
+    public League(long id, String name, Map<Date, List<Match>> fixture, int prize) {
+        this.id = id;
         this.name = name;
         this.fixture = fixture;
-        this.currentMatchDay = currentMatchDate;
-        this.id = id;
+        this.prize = prize;
     }
 
-    public League(long id, String name, List<Long> fixtureIds, long currentMatchDateId) {
+    public League(long id, String name, int prize) {
         this.id = id;
         this.name = name;
-        this.fixtureIds = fixtureIds;
-        this.currentMatchDayId = currentMatchDateId;
+        this.prize = prize;
     }
 
-    public List<Long> getFixtureIds() {
+    @Deprecated
+    public Map<Date, List<Long>> getFixtureIds() {
         if(fixture != null) {
-            List<Long> ids = new LinkedList<>();
-            for (MatchDay m : fixture)
-                ids.add(m.getId());
-            return ids;
+            Map<Date, List<Long>> map = new HashMap<>();
+            List<Long> ids;
+            for (Map.Entry<Date, List<Match>> e : fixture.entrySet()) {
+                ids = new LinkedList<>();
+                for (Match m : e.getValue()) {
+                    ids.add(m.getId());
+                }
+                map.put(e.getKey(), ids);
+            }
+            return map;
         }
-        return fixtureIds;
+        return null;
     }
 
-    public long getCurrentMatchDayId() {
-        if(currentMatchDay != null)
-            return currentMatchDay.getId();
-        return currentMatchDayId;
+    public int getPrize() {
+        return prize;
     }
 
-    public List<MatchDay> getFixture() {
+    public Map<Date, List<Match>> getFixture() {
         return fixture;
     }
 
-    public void setFixture(List<MatchDay> fixture) {
+    public void setFixture(Map<Date, List<Match>> fixture) {
         this.fixture = fixture;
-    }
-
-    public MatchDay getCurrentMatchDay() {
-        return currentMatchDay;
-    }
-
-    public void setCurrentMatchDay(MatchDay currentMatchDay) {
-        this.currentMatchDay = currentMatchDay;
     }
 
     public long getId() {

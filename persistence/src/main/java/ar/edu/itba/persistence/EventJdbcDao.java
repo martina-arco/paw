@@ -26,7 +26,7 @@ public class EventJdbcDao implements EventDao {
         public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {
 
             long id = rs.getInt("eventid");
-            Event.Type type = Enum.valueOf(Event.Type.class, rs.getString("type"));
+            Event.Type type = Event.Type.valueOf(rs.getString("type"));
             int minute = rs.getInt("minute");
             long p1 = rs.getLong("player1");
             long p2 = rs.getLong("player2");

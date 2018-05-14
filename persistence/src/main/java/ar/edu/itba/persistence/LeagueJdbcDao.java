@@ -2,6 +2,7 @@ package ar.edu.itba.persistence;
 
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.model.League;
+import ar.edu.itba.model.Match;
 import ar.edu.itba.model.MatchDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,36 +28,35 @@ public class LeagueJdbcDao implements LeagueDao {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("league")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("leagueid");
     }
 
     private static final RowMapper<League> ROW_MAPPER = new RowMapper<League>() {
         @Override
         public League mapRow(ResultSet rs, int rowNumber) throws SQLException {
-            /*
-            long id = rs.getInt("id");
+            long id = rs.getLong("leagueid");
             String name = rs.getString("name");
-            List<MatchDay> fixture;
-            MatchDay currentMatchDate = MatchDayJdbcDao.findById(rs.getInt("currentMatchDate"));
-            return new League(id, name, fixture, currentMatchDate);
-            */
-            return null;
+            int prize = rs.getInt("prize");
+
+            return new League(id, name, prize);
         }
     };
 
     @Override
-    public League create(String name, List<MatchDay> fixture, MatchDay currentMatchDate) {
-        final Map<String, Object> args = new HashMap<>();
-        args.put("name", name);
-        //args.put("fixture", fixture);
-        args.put("currentMatchDate", currentMatchDate.getId());
-        final Number id = jdbcInsert.executeAndReturnKey(args);
-        return new League(id.longValue(), name, fixture, currentMatchDate);
+    public League create(String name, Map<Date, List<Match>> fixture, int prize) {
+        League league = create(name, prize);
+        league.setFixture(fixture);
+        return league;
     }
 
     @Override
-    public boolean saveCurrentMatchDay(League league) {
-        return false;
+    public League create(String name, int prize) {
+        final Map<String, Object> args = new HashMap<>();
+        args.put("name", name);
+        args.put("prize", prize);
+
+        final Number id = jdbcInsert.executeAndReturnKey(args);
+        return new League(id.longValue(), name, prize);
     }
 
     @Override

@@ -8,10 +8,8 @@ public class Match {
     private long id, homeId, awayId;
     private Team home, away;
     private int homeScore, awayScore, homePoints, awayPoints;
-    private List<Long> statsIds;
     private List<PlayerStats> stats;
     private boolean played;
-    private List<Long> eventsIds;
     private List<Event> events;
 
     public Match(long id, Team home, Team away, int homeScore, int awayScore, int homePoints,
@@ -29,7 +27,7 @@ public class Match {
     }
 
     public Match(long id, long homeId, long awayId, int homeScore, int awayScore, int homePoints, int awayPoints,
-                 List<Long> statsIds, boolean played, List<Long> eventsIds) {
+                 boolean played) {
         this.id = id;
         this.homeId = homeId;
         this.awayId = awayId;
@@ -37,9 +35,7 @@ public class Match {
         this.awayScore = awayScore;
         this.homePoints = homePoints;
         this.awayPoints = awayPoints;
-        this.statsIds = statsIds;
         this.played = played;
-        this.eventsIds = eventsIds;
     }
 
     public void finish() {
@@ -67,6 +63,7 @@ public class Match {
         return awayId;
     }
 
+    @Deprecated
     public List<Long> getStatsIds() {
         if(stats != null) {
             List<Long> ids = new LinkedList<>();
@@ -74,9 +71,10 @@ public class Match {
                 ids.add(ps.getId());
             return ids;
         }
-        return statsIds;
+        return null;
     }
 
+    @Deprecated
     public List<Long> getEventsIds() {
         if(events != null) {
             List<Long> ids = new LinkedList<>();
@@ -84,7 +82,7 @@ public class Match {
                 ids.add(e.getId());
             return ids;
         }
-        return eventsIds;
+        return null;
     }
 
     public void addHomeScore (int amount) {

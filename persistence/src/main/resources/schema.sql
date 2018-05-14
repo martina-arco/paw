@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS PLAYER (
     passing             INTEGER NOT NULL,
     finishing           INTEGER NOT NULL,
     salary              INTEGER NOT NULL,
-    contractExpiration  DATE NOT NULL
+    contractExpiration  DATE NOT NULL,
+    youth               BOOL NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS FORMATION (
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS LEAGUE (
     userid          INTEGER REFERENCES USERS,
     leagueid        SERIAL PRIMARY KEY,
     name            VARCHAR(63) NOT NULL,
-    prize           REAL NOT NULL
+    prize           INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS TEAM (
@@ -93,11 +94,11 @@ CREATE TABLE IF NOT EXISTS MATCH (
     home            INTEGER REFERENCES TEAM ON DELETE CASCADE NOT NULL,
     away            INTEGER REFERENCES TEAM ON DELETE CASCADE NOT NULL,
     league          INTEGER REFERENCES LEAGUE ON DELETE CASCADE NOT NULL,
-    played          BOOLEAN NOT NULL,
-    homeScore       INTEGER,
-    awayScore       INTEGER,
-    homePts         INTEGER,
-    awayPts         INTEGER
+    played          BOOLEAN NOT NULL DEFAULT FALSE,
+    homeScore       INTEGER NOT NULL DEFAULT 0,
+    awayScore       INTEGER NOT NULL DEFAULT 0,
+    homePts         INTEGER NOT NULL DEFAULT 0,
+    awayPts         INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS PLAYERSTATS (
@@ -126,6 +127,6 @@ CREATE TABLE IF NOT EXISTS PLAYSAS (
     player          INTEGER REFERENCES PLAYER ON DELETE CASCADE,
     formation       INTEGER REFERENCES FORMATION ON DELETE CASCADE,
     type            VARCHAR(63) NOT NULL,
-    x               INTEGER NOT NULL,
-    y               INTEGER NOT NULL
+    x               INTEGER,
+    y               INTEGER
 );

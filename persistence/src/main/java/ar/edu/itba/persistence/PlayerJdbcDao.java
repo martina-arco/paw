@@ -106,7 +106,16 @@ public class PlayerJdbcDao implements PlayerDao{
 
     @Override
     public List<Player> findAllByTeamId(long id) {
-        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ?", ROW_MAPPER, id);
+        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ? AND youth = FALSE", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Player> findYouthByTeamId(long id) {
+        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ? AND youth = TRUE", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;
         }

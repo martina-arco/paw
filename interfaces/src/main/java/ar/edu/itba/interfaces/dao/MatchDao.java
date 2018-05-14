@@ -14,5 +14,5 @@ public interface MatchDao {
 
     boolean save(Match match);
 
-    List<Match> findByTeam(Team team);
+    List<Match> findByTeamId(long id);
 }

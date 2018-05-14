@@ -21,87 +21,27 @@ public class MatchJdbcDao implements MatchDao{
 
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;
-    @Autowired
-    private EventDao eventDao;
-
-    /*private static final ResultSetExtractor<List<Match>> RESULT_SET_EXTRACTOR = new ResultSetExtractor<List<Match>>() {
-        @Override
-        public List<Match> extractData(ResultSet rs) throws SQLException, DataAccessException {
-            List<Match> matches = new ArrayList<>();
-            Match currentMatch = null;
-            while (rs.next()) {
-                long id = rs.getLong("matchid");
-                if(currentMatch == null) {
-                    currentMatch = mapRow(rs, null);
-                } else if (currentMatch.getId() != id) {
-                    matches.add(currentMatch);
-                    currentMatch = mapRow(rs, null);
-                }
-            }
-            return matches;
-        }
-    };*/
 
     private final static RowMapper<Match> ROW_MAPPER = new RowMapper<Match>() {
         @Override
         public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Match(rs.getLong("matchid"), null, null, rs.getInt("homeScore"),
+            return new Match(rs.getLong("matchid"), rs.getLong("home"), rs.getLong("away"), rs.getInt("homeScore"),
                     rs.getInt("awayScore"), rs.getInt("homePts"), rs.getInt("awayPts"),
-                    null, rs.getBoolean("played"), null);
+                    rs.getBoolean("played"));
         }
     };
-
-    /*public static Match mapRow(ResultSet rs, String alias) throws SQLException {
-        return new Match(rs.getLong("matchid"), null, null, rs.getInt("homeScore"),
-                rs.getInt("awayScore"), rs.getInt("homePts"), rs.getInt("awayPts"),
-                null, rs.getBoolean("played"), null);
-    }*/
-
-    /*private final static RowMapper<Match> ROW_MAPPER = new RowMapper<Match>() {
-        @Override
-        public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-            long id = rs.getInt("id");
-
-//            Team home = findTeamById(rs.getInt(home));
-//            Team away = findTeamById(rs.getInt(away));
-
-            Integer homeScore = rs.getInt("homeScore");
-            Integer awayScore = rs.getInt("awayScore");
-            Integer homePoints = rs.getInt("homePoints");
-            Integer awayPoints = rs.getInt("awayPoints");
-
-            boolean played = homePoints == 0 && awayPoints == 0 ? false : true;
-
-            //eventDao.findByMatchId(1);
-
-//            List<Event> events = dao.findByMatchId(id);
-//
-//            List<PlayerStats> stats = dao.findByMatchId(id);
-//
-//            Map<Player, PlayerStats> map = new HashMap<>();
-//
-//            for (PlayerStats stat: stats) {
-//                map.put(stat.getPlayer(), stat);
-//            }
-//
-//            return new Match(home, away, homeScore, awayScore, homePoints, awayPoints, stats, played, events);
-
-            return null;
-        }
-    };*/
 
     @Autowired
     public MatchJdbcDao(final DataSource ds) {
         jdbcTemplate = new JdbcTemplate(ds);
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("match")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("matchid");
     }
 
     @Override
-    public List<Match> findByTeam(Team team) {
-        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE home = ? OR away = ?", ROW_MAPPER, team.getId(), team.getId());
+    public List<Match> findByTeamId(long id) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE home = ? OR away = ?", ROW_MAPPER, id, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -114,29 +54,10 @@ public class MatchJdbcDao implements MatchDao{
 
         args.put("home", home.getName());
         args.put("away", away.getName());
-        args.put("homeScore", 0);
-        args.put("awayScore", 0);
         args.put("league", home.getLeague());
-        args.put("homePoints", 0);
-        args.put("awayPoints", 0);
 
         final Number matchId = jdbcInsert.executeAndReturnKey(args);
-
-        Match match = new Match(matchId.longValue(), home, away, 0,0,0,0, null, false, new ArrayList<Event>());
-
-//        DataSource ds;
-//
-//        for (Player p : home.getStarters().getPlayers()) {
-//            PlayerStatsJdbcDao dao = new PlayerStatsJdbcDao(ds);
-//            match.addStats(dao.create(p, match));
-//        }
-//
-//        for (Player p : away.getStarters().getPlayers()) {
-//            PlayerStatsJdbcDao dao = new PlayerStatsJdbcDao(ds);
-//            match.addStats(dao.create(p, match));
-//        }
-
-        return match;
+        return new Match(matchId.longValue(), home, away, 0,0,0,0, null, false, null);
     }
 
     @Override

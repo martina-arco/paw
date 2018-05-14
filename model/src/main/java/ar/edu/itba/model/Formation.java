@@ -12,6 +12,10 @@ public class Formation {
         //availablePositions.add(new Point());
     }
 
+    public enum PlaysAs {
+        STARTER, SUBSTITUTE
+    }
+
     private long id, captainId, freeKickTakerId, penaltyTakerId;
     private Player captain, freeKickTaker, penaltyTaker;
     private Map<Player, Point> starters;

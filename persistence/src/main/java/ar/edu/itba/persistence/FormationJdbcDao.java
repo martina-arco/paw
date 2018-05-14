@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -49,9 +50,8 @@ public class FormationJdbcDao implements FormationDao{
     }
 
     @Override
-    public Formation create(Map<Player, Point> formation, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
-        final Map<String, Object> args = new HashMap<>();
-        final Map<String, Object> args2 = new HashMap<>();
+    public Formation create(Map<Player, Point> starters, List<Player> substitutes, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
+        Map<String, Object> args = new HashMap<>();
 
         args.put("pressure", pressure);
         args.put("attitude", attitude);
@@ -61,18 +61,29 @@ public class FormationJdbcDao implements FormationDao{
 
         final Number formationId = jdbcInsertFormation.executeAndReturnKey(args);
 
-        for (Map.Entry<Player, Point> entry : formation.entrySet()) {
+        for (Map.Entry<Player, Point> entry : starters.entrySet()) {
+            args = new HashMap<>();
 
-            args2.put("formation", formationId);
-            args2.put("player", entry.getKey());
-            args2.put("x", entry.getValue().getX());
-            args2.put("y", entry.getValue().getY());
-//            type?????
+            args.put("formation", formationId);
+            args.put("player", entry.getKey().getId());
+            args.put("x", entry.getValue().getX());
+            args.put("y", entry.getValue().getY());
+            args.put("type", Formation.PlaysAs.STARTER.toString());
 
-            jdbcInsertPlaysAs.execute(args2);
+            jdbcInsertPlaysAs.execute(args);
         }
 
-        return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, null, null, pressure, attitude);
+        for (Player player : substitutes) {
+            args = new HashMap<>();
+
+            args.put("formation", formationId);
+            args.put("player", player.getId());
+            args.put("type", Formation.PlaysAs.SUBSTITUTE.toString());
+
+            jdbcInsertPlaysAs.execute(args);
+        }
+
+        return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, starters, substitutes, pressure, attitude);
     }
 
     @Override
@@ -83,9 +94,10 @@ public class FormationJdbcDao implements FormationDao{
 
     @Override
     public Formation findById(long id) {
-
-        //ToDo
-
-        return null;
+        final List<Formation> list = jdbcTemplate.query("SELECT * FROM formation WHERE formationid = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

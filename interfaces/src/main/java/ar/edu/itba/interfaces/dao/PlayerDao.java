@@ -23,6 +23,8 @@ public interface PlayerDao {
 
     List<Player> findAllByTeamId(long id);
 
+    List<Player> findYouthByTeamId(long id);
+
     boolean delete(Player player);
 
 }

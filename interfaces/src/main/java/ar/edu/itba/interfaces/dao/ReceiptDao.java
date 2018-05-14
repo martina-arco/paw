@@ -11,5 +11,6 @@ import java.util.List;
 public interface ReceiptDao {
 
     Receipt create(Team t, int amount, Receipt.Type type);
+
     List<Receipt> findAllbyTeamId(long id);
 }

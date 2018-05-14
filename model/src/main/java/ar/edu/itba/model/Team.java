@@ -10,14 +10,10 @@ public class Team {
     private League league;
     private Stadium stadium;
     private Formation formation;
-    private List<Long> playersIds;
     private List<Player> players;
-    private List<Long> youthAcademyIds;
     private List<Player> youthAcademy;
     private Integer fanTrust, boardTrust;
-    private List<Long> financeIds;
     private List<Receipt> finance;
-    private List<Long> loansIds;
     private List<BankLoan> loans;
     private Integer money;
 
@@ -38,20 +34,15 @@ public class Team {
         this.money = money;
     }
 
-    public Team(long id, long leagueId, long stadiumId, long formationId, String name, List<Long> playersIds,
-                List<Long> youthAcademyIds, Integer fanTrust, Integer boardTrust, List<Long> financeIds,
-                List<Long> loansIds, Integer money) {
+    public Team(long id, String name, long leagueId, long stadiumId, long formationId, Integer fanTrust,
+                Integer boardTrust, Integer money) {
         this.id = id;
         this.leagueId = leagueId;
         this.stadiumId = stadiumId;
         this.formationId = formationId;
         this.name = name;
-        this.playersIds = playersIds;
-        this.youthAcademyIds = youthAcademyIds;
         this.fanTrust = fanTrust;
         this.boardTrust = boardTrust;
-        this.financeIds = financeIds;
-        this.loansIds = loansIds;
         this.money = money;
     }
 
@@ -73,6 +64,7 @@ public class Team {
         return formationId;
     }
 
+    @Deprecated
     public List<Long> getPlayersIds() {
         if(players != null) {
             List<Long> ids = new LinkedList<>();
@@ -80,9 +72,10 @@ public class Team {
                 ids.add(p.getId());
             return ids;
         }
-        return playersIds;
+        return null;
     }
 
+    @Deprecated
     public List<Long> getYouthAcademyIds() {
         if(youthAcademy != null) {
             List<Long> ids = new LinkedList<>();
@@ -90,9 +83,10 @@ public class Team {
                 ids.add(p.getId());
             return ids;
         }
-        return youthAcademyIds;
+        return null;
     }
 
+    @Deprecated
     public List<Long> getFinanceIds() {
         if(finance != null) {
             List<Long> ids = new LinkedList<>();
@@ -100,7 +94,7 @@ public class Team {
                 ids.add(r.getId());
             return ids;
         }
-        return financeIds;
+        return null;
     }
 
     /*public List<Long> getLoansIds() {
