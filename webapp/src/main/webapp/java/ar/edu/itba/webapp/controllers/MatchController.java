@@ -1,13 +1,15 @@
 package ar.edu.itba.webapp.controllers;
 
+import ar.edu.itba.interfaces.service.MatchService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @org.springframework.stereotype.Controller
 public class MatchController extends Controller{
 
-//    @Autowired
-//    private MatchService matchService;
+    @Autowired
+    private MatchService matchService;
 
 //    @Autowired
 //    private StadiumService stadiumService;
@@ -33,6 +35,7 @@ public class MatchController extends Controller{
 //        mav.addObject("awayAssists", matchService.getAwayAssists(matchId));
 //        mav.addObject("homeFouls", matchService.getHomeFouls(matchId));
 //        mav.addObject("awayFouls", matchService.getAwayFouls(matchId));
+
         return mav;
     }
 }

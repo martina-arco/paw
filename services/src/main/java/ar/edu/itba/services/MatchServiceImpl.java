@@ -1,8 +1,11 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.MatchDao;
+import ar.edu.itba.interfaces.dao.ReceiptDao;
+import ar.edu.itba.interfaces.dao.StadiumDao;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.Match;
+import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +38,42 @@ public class MatchServiceImpl implements MatchService {
 //
 //        return teamNames;
         return new ArrayList<>();
+    }
+
+    @Autowired
+    private ReceiptDao receiptDao;
+
+    @Autowired
+    private StadiumDao stadiumDao;
+
+    public void MatchEnd(long matchId) {
+        Match match = findById(matchId);
+        Team team = match.getHome();
+
+        //Cargar el resultado
+        addMatchEarnings(team);
+        boolean isNextMonth = advanceDate(match);
+        if(isNextMonth) {
+            subtractPlayerSalaries(team);
+        }
+
+    }
+
+    private void subtractPlayerSalaries(Team team) {
+        int amount = team.getSalaries();
+        receiptDao.create(team, amount, Receipt.Type.PLAYERSSALARIES);
+        team.subtractMoney(amount);
+    }
+
+    private void addMatchEarnings(Team team) {
+        int amount = stadiumDao.findById(team.getStadiumId()).calculateMatchEarnings(team.getFanCount());
+        receiptDao.create(team, amount, Receipt.Type.MATCHINCOME);
+        team.addMoney(amount);
+    }
+
+    private boolean advanceDate(Match match) {
+        match.setPlayed(true);
+        save(match);
+        return false;
     }
 }
