@@ -18,7 +18,7 @@
                         <a href = "<c:url value="/stadium"/>" class="nav-link"><spring:message code="stadium"/></a>
                     </li>
                     <li class="nav-item">
-                        <a href = "<c:url value="league.jsp" var="leagueUrl"/>" class="nav-link"><spring:message code="league"/></a>
+                        <a href = "<c:url value="/league"/>" class="nav-link"><spring:message code="league"/></a>
                     </li>
                     <li class="nav-item">
                         <a href = "<c:url value="/finance"/>" class="nav-link"><spring:message code="finance"/></a>

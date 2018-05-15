@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <c:forEach items="${teamList}" var="team">
-                        <form:radiobutton path="teamChosen" value="${team.id}"/>${team.name}
+                        <form:radiobutton path="teamChosen" required="true" value="${team.id}"/>${team.name}
                         <br>
                     </c:forEach>
                 </div>
