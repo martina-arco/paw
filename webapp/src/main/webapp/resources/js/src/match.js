@@ -2,30 +2,6 @@ var  json;
 
 $(document).ready(function(){
     fetchData();
-
-    // setTimeout(function () {
-    //     window.location.href= '/matchEnd';
-    //
-    // },30000);
-
-    var i = 0;
-    var width = 0;
-
-    var counterBack = setInterval(function () {
-
-        if (i <= 90) {
-
-            $('.progress-bar').css('width', width + '%');
-            document.getElementById("time").innerHTML = i.toString() + "'";
-
-        } else
-            clearInterval(counterBack);
-
-        i++;
-        width += 1.1;
-    }, 333);
-
-    // let timer = setInterval(fetchData, 250);
 });
 
 function fetchData() {
@@ -33,47 +9,61 @@ function fetchData() {
         var eventContainer;
         var homeScoreContainer;
         var awayScoreContainer;
+        var minute = 0;
 
-        for(var match in json) {
+        for(var matchId in json) {
 
-            var events = new String();
+            if(minute == 0)
+                minute = json[matchId].minute;
 
-            for(var event in json[match].events) {
+            eventContainer = document.getElementById(matchId + "event");
+            homeScoreContainer = document.getElementById(matchId + "homeScore");
+            awayScoreContainer = document.getElementById(matchId + "awayScore");
 
-                console.log(json[match]);
+            homeScoreContainer.innerHTML = json[matchId].homeScore;
+            awayScoreContainer.innerHTML = json[matchId].awayScore;
 
-                var type = new String();
-                var event = json[match].events[event];
+            var oldEvents = eventContainer.children;
+            for (var i = oldEvents.length - 1; i >= 0 ; i--) {
+                if(oldEvents[i].getAttribute("name") < minute - 5) {
+                    eventContainer.removeChild(oldEvents[i]);
+                }
+            }
+
+            for(var eventId in json[matchId].events) {
+
+                var event = json[matchId].events[eventId];
+                var type = document.createElement("span");
+                type.setAttribute("name", minute.toString());
+                type.style.display = "block";
 
                 switch(event.type) {
                     case "SCORE":
-                        type = event.p1 + " - " + document.getElementById("goalScored").value + " ( " + event.minute + " )<br>";
+                        type.innerHTML = event.p1 + " - " + document.getElementById("goalScored").value + " ( " + event.minute + " )";
                         break;
                     case "YELLOW_CARD":
-                        type = event.p1 + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )<br>";
+                        type.innerHTML = event.p1 + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )";
                         break;
                     case "RED_CARD":
-                        type = event.p1 + " - " + document.getElementById("redCard").value + " ( " + event.minute + " )<br>";
+                        type.innerHTML = event.p1 + " - " + document.getElementById("redCard").value + " ( " + event.minute + " )";
                         break;
                     // case "SUBSTITUTE":
 
                     //     type = json[match][event].p1.name + " " + document.getElementById("goalScored").value + " " + json[match][event].p2.name + "( " + json[match][event].minute + " )<br>";
                     //     break;
-                    default:break;
+                    default:
+                        break;
                 }
 
-                events += type;
+                eventContainer.appendChild(type);
             }
 
-            eventContainer = document.getElementById(match + "event");
-            homeScoreContainer = document.getElementById(match + "homeScore");
-            awayScoreContainer = document.getElementById(match + "awayScore");
-
-            eventContainer.innerHTML = events;
-            homeScoreContainer.innerHTML = json[match].homeScore;
-            awayScoreContainer.innerHTML = json[match].awayScore;
-
         }
+
+        $('.progress-bar').css('width', (minute * 1.1) + '%');
+        document.getElementById("time").innerHTML = minute + "'";
+
+        setTimeout(fetchData, 1000);
     });
 }
 

@@ -9,9 +9,10 @@ public class MatchStatus {
     private int homeScore, awayScore, minute;
     private List<Event> events;
 
-    public MatchStatus(int homeScore, int awayScore, List<Event> events){
+    public MatchStatus(int homeScore, int awayScore, int minute, List<Event> events){
         this.homeScore = homeScore;
         this.awayScore = awayScore;
+        this.minute = minute;
         this.events = events;
     }
 
@@ -19,7 +20,7 @@ public class MatchStatus {
         List<Event> aux = new ArrayList<>();
         aux.addAll(events);
         events = new ArrayList<>();
-        return new MatchStatus(homeScore,awayScore,aux);
+        return new MatchStatus(homeScore,awayScore,minute,aux);
     }
 
     public MatchStatus filterEvents(){
