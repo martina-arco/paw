@@ -46,6 +46,7 @@ public class Match {
     }
 
     public void finish() {
+
         if(homeScore > awayScore)
             homePoints = 3;
         else if(awayScore > homeScore)
