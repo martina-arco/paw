@@ -3,10 +3,12 @@ package ar.edu.itba.services;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.Point;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-public class SimulationServiceImpl implements SimulationService {
+@Service
+public class SimulationServiceImpl implements SimulationService{
 
     private static final int pitchSize = 4;
     private final Random rand;
@@ -49,6 +51,11 @@ public class SimulationServiceImpl implements SimulationService {
             playingMatches.add(aux);
             aux.run();
         }
+    }
+
+    @Override
+    public Map<Integer, List<Event>> getEvents() {
+        return null;
     }
 
     private class MatchThread extends Thread {

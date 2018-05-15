@@ -1,7 +1,16 @@
 package ar.edu.itba.webapp.controllers;
 
+import ar.edu.itba.interfaces.service.SimulationService;
+import ar.edu.itba.model.Event;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @org.springframework.stereotype.Controller
 public class MatchController extends Controller{
@@ -12,11 +21,31 @@ public class MatchController extends Controller{
 //    @Autowired
 //    private StadiumService stadiumService;
 
+    @Autowired
+    private SimulationService simulationService;
+
     @RequestMapping("/match")
     public ModelAndView match() {
         ModelAndView mav = new ModelAndView("match");
 //        mav.addObject("matches", );
         return mav;
+    }
+
+    @RequestMapping(value = "/data", produces = "application/json")
+    @ResponseBody
+    public Object json() {
+        Map<Integer, List<Event>> map = new HashMap<>();
+        List<Event> l1 = new ArrayList<>();
+        List<Event> l2 = new ArrayList<>();
+        l1.add(new Event(1,null, Event.Type.YELLOW_CARD, 1));
+        l1.add(new Event(2,null, Event.Type.RED_CARD, 1));
+        l1.add(new Event(2,null, Event.Type.SCORE, 1));
+        l2.add(new Event(3,null, Event.Type.RED_CARD, 1));
+        l2.add(new Event(4,null, Event.Type.ASSIST, 1));
+        map.put(1,l1);
+        map.put(2,l2);
+        return map;
+//        return simulationService.getEvents();
     }
 
     @RequestMapping("/matchEnd")

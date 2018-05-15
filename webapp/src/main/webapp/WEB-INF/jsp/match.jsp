@@ -5,6 +5,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="/js/src/jquery-3.3.1.min.js" ></script>
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
@@ -46,24 +47,32 @@
 
                     <tbody>
 
-                    <c:forEach var = "i" begin = "1" end = "6">
-                        <tr>
+
+                        <tr id="1">
                             <td class="width15">Monumental</td>
                             <td class="width15">River</td> 
-                            <td class="width10" id="homeScore">1</td> 
-                            <td class="width10" id="awayScore">0</td>
+                            <td class="width10" id="1homeScore"></td> 
+                            <td class="width10" id="1awayScore"></td>
                             <td class="width15">Boca</td> 
-                            <td class="width35" id="event">Gol</td>
+                            <td class="width35" id="1event"></td>
                         </tr>
-                    </c:forEach>
+                        <tr id="2">
+                            <td class="width15">Monumental</td>
+                            <td class="width15">River</td> 
+                            <td class="width10" id="2homeScore"></td> 
+                            <td class="width10" id="2awayScore"></td>
+                            <td class="width15">Boca</td> 
+                            <td class="width35" id="2event"></td>
+                        </tr>
+
 
                     </tbody>
 
                     <%--<c:forEach items="${matches}" var="match">--%>
-                        <%--<tr>--%>
-                            <%--<td>${match.home.stadium}</td>--%>
+                        <%--<tr id="${match.id}">--%>
+                            <%--<td >${match.home.stadium}</td>--%>
                             <%--<td>${match.home}</td>--%>
-                            <%--<td>${match.homeScore}</td>--%>
+                            <%--<td id="${match.id}homeScore">${match.homeScore}</td>--%>
                             <%--<td>${match.awayScore}</td>--%>
                             <%--<td>${match.away}</td>--%>
                             <%--<td>${match.event}</td>--%>
@@ -75,7 +84,7 @@
     </div>
 
 
-    <script src="/js/match.js"\></script>
+    <script src="/js/src/match.js"></script>
 
 </body>
 </html>
