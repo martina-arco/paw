@@ -9,6 +9,7 @@ import java.util.*;
 public class SimulationServiceImpl implements SimulationService {
 
     private static final int pitchSize = 4;
+    private final Random rand;
 
     public enum NodeAtt{
         DEF, PASS, FIN, POSS
@@ -26,6 +27,7 @@ public class SimulationServiceImpl implements SimulationService {
 
     public SimulationServiceImpl() {
         this.playingMatches = new HashSet<>();
+        rand = new Random(System.nanoTime());
     }
 
     public Grid createGrid(Formation home, Formation away){
@@ -61,6 +63,7 @@ public class SimulationServiceImpl implements SimulationService {
         }
 
         public MatchThread(Match match, Formation home, Formation away){
+            this.events = new ArrayList<>();
             this.match = match;
             this.home = home;
             this.away = away;
@@ -175,18 +178,30 @@ public class SimulationServiceImpl implements SimulationService {
         }
     }
 
-    public class Grid {
+    private class Grid {
         private GridNode matrix[][];
         private Player homeGK, awayGK;
 
         public Grid(Formation home, Formation away){
 
+            for(Map.Entry entry : home.getStarters().entrySet()){
+                Point point = ((Point) entry.getValue());
+                if(point.getY() == 4 && point.getX() == 0)
+                    homeGK = (Player) entry.getKey();
+            }
+
+            for(Map.Entry entry : away.getStarters().entrySet()){
+                Point point = ((Point) entry.getValue());
+                if(point.getY() == 4 && point.getX() == 0)
+                    awayGK = (Player) entry.getKey();
+            }
+
             matrix = new GridNode[pitchSize][pitchSize];
             for(int x=0; x<pitchSize;x++){
                 for(int y=0;y<pitchSize;y++){
                     matrix[x][y] = new GridNode(new Point(x,y));
-                    SimulationNode sNodeHome = new SimulationNode(matrix[x][y],MyTeam.HOME);
-                    SimulationNode sNodeAway = new SimulationNode(matrix[x][y],MyTeam.AWAY);
+                    SimulationNode sNodeHome = new SimulationNode(matrix[x][y],MyTeam.HOME,homeGK, this);
+                    SimulationNode sNodeAway = new SimulationNode(matrix[x][y],MyTeam.AWAY,awayGK, this);
                     matrix[x][y].setNode(MyTeam.HOME,sNodeHome);
                     matrix[x][y].setNode(MyTeam.AWAY,sNodeAway);
                 }
@@ -199,11 +214,20 @@ public class SimulationServiceImpl implements SimulationService {
         }
 
         private SimulationNode kickOff(MyTeam team){
-            double rand = Math.random();
+            double check = rand.nextDouble();
             if(team.equals(MyTeam.AWAY)){
-                return rand < 0.5?matrix[2][1].away:matrix[2][2].away;
+                return check < 0.5?matrix[2][1].away:matrix[2][2].away;
             }
-            return rand < 0.5?matrix[1][1].home:matrix[1][2].home;
+            return check < 0.5?matrix[1][1].home:matrix[1][2].home;
+        }
+
+        private SimulationNode goalKick(MyTeam team){
+            double check = rand.nextDouble();
+            if(team.equals(MyTeam.AWAY)){
+                return check < 0.5?matrix[3][1].away:matrix[3][2].away;
+            }
+            return check < 0.5?matrix[0][1].home:matrix[0][2].home;
+
         }
 
         private void setFormation(MyTeam team,Formation formation){
@@ -220,19 +244,19 @@ public class SimulationServiceImpl implements SimulationService {
             for (int xx = 0; xx < pitchSize; xx++) {
                 for (int yy = 0; yy < pitchSize; yy++) {
                     int auxX;
-                    if(team.equals(MyTeam.HOME)){
+                   if (team.equals(MyTeam.HOME)) {
                         auxX = xx + 1;
-                        if(auxX < pitchSize && auxX > x) {
+                        if (auxX < pitchSize && auxX > x && !matrix[auxX][yy].home.influenceMap.isEmpty()) {
                             neighbors.add(matrix[auxX][yy].home);
-                            accum += node.node.getAtt(team, NodeAtt.PASS)*attitude / Point.manhattanSq(new Point(x, y), new Point(auxX, yy));
+                            accum += node.node.getAtt(team, NodeAtt.PASS) * attitude / Point.manhattanSq(new Point(x, y), new Point(auxX, yy));
                         }
-                    }else{
-                        auxX = pitchSize-xx-1;
-                        if(auxX >= 0 && auxX < x) {
+                   } else {
+                        auxX = pitchSize - xx - 1;
+                        if (auxX >= 0 && auxX < x && !matrix[auxX][yy].away.influenceMap.isEmpty()) {
                             neighbors.add(matrix[auxX][yy].away);
-                            accum += node.node.getAtt(team, NodeAtt.PASS)*attitude / Point.manhattanSq(new Point(x, y), new Point(auxX, yy));
+                            accum += node.node.getAtt(team, NodeAtt.PASS) * attitude / Point.manhattanSq(new Point(x, y), new Point(auxX, yy));
                         }
-                    }
+                   }
                 }
             }
 
@@ -312,14 +336,18 @@ public class SimulationServiceImpl implements SimulationService {
     }
 
     private class SimulationNode {
+        private final Player opGK;
+        private final Grid grid;
         private final GridNode node;
         private final MyTeam possession;
         private Map<Player,Integer> influenceMap;
         private final Collection<SimulationArc> neighbors;
 
-        private SimulationNode(GridNode node, MyTeam possession) {
+        private SimulationNode(GridNode node, MyTeam possession, Player opGK, Grid grid) {
+            this.opGK = opGK;
             this.node = node;
             this.possession = possession;
+            this.grid = grid;
             this.influenceMap = new HashMap<>();
             this.neighbors = new HashSet<>();
         }
@@ -329,12 +357,11 @@ public class SimulationServiceImpl implements SimulationService {
             int myPoss = node.getAtt(possession,NodeAtt.POSS);
 
             int sum = myPoss + opponentDef + 1;
-            double nMyPoss = myPoss/sum;
+            double nMyPoss = (double) myPoss/sum;
 
-            boolean taken =  Math.random()*sum < nMyPoss;
+            boolean taken =  rand.nextDouble() < nMyPoss;
 
             if(taken) {
-
                 events.add(new Event(0, node.getSNode(otherTeam(possession)).whoDidIt(), Event.Type.TACKLE, minute));
             }
 
@@ -342,14 +369,35 @@ public class SimulationServiceImpl implements SimulationService {
         }
 
         private SimulationNode shot(int minute, List<Event> events){
-            double random = Math.random();
-            double accum = 0;
+            double check = rand.nextDouble();
 
-            int sum =
+            int sum = node.getAtt(possession, NodeAtt.FIN) + opGK.getGoalKeeping();
+            double norm = node.getAtt(possession, NodeAtt.FIN);
+
+            boolean goal = check*sum < norm;
+
+            if(goal){
+                System.out.println("Goal for " + possession);
+                events.add(new Event(0,whoDidIt(),Event.Type.SCORE,minute));
+                return grid.kickOff(otherTeam(possession));
+            }
+
+            events.add(new Event(0, opGK, Event.Type.SAVE, minute));
+            return grid.goalKick(otherTeam(possession));
+        }
+
+        private int distanceToGoal(){
+            return Point.manhattanSq(node.position,possession.equals(MyTeam.AWAY)?new Point(0,2):new Point(3,2));
         }
 
         private SimulationNode advance(int minute, List<Event> events){
-            double random = Math.random();
+            double chanceToShoot = distanceToGoal()==0?1.0:1/distanceToGoal()*2;
+            boolean shooting = rand.nextDouble() < chanceToShoot;
+
+            if(shooting)
+                return shot(minute, events);
+
+            double random = rand.nextDouble();
             double accum = 0;
             SimulationNode last = null;
             for(SimulationArc arc : neighbors){
@@ -362,7 +410,7 @@ public class SimulationServiceImpl implements SimulationService {
         }
 
         private Player whoDidIt(){
-            double action = Math.random();
+            double action = rand.nextDouble();
             int accum = 0;
             Player guilty = null;
 
