@@ -118,6 +118,20 @@ public class Team {
         return loans;
     }*/
 
+    public int getSalaries() {
+        int result = 0;
+
+        for (Player player : players) {
+            result += player.getSalary();
+        }
+
+        return result;
+    }
+
+    public void addMoney(int amount) {
+        money += amount;
+    }
+
     public int getFanCount() {
         return fanCount;
     }

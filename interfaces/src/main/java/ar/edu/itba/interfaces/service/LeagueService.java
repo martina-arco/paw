@@ -10,5 +10,5 @@ import java.util.Map;
 
 public interface LeagueService {
     List<League> findByUser(User user);
-    Map<String, Integer> getTeamPoints(League league, Date currentDate);
+    Map<Team, Integer> getTeamPoints(League league, java.util.Date currentDate);
 }

@@ -28,7 +28,7 @@ public class LeagueController extends Controller {
 
 //        User user = loggedUser();
 //        List<String> upcomingMatches = matchService.getUpcomingMatches(user.getTeam(), user.getCurrentDay());
-//        Map<String, Integer> teams = leagueService.getTeamPoints(user.getTeam().getLeague(), user.getCurrentDay());
+//        Map<Team, Integer> teams = leagueService.getTeamPoints(user.getTeam().getLeague(), user.getCurrentDay());
 //
 //        mav.addObject("upcomingMatches", upcomingMatches);
 //        mav.addObject("teams", teams);
