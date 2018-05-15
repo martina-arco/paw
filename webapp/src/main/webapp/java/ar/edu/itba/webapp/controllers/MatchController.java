@@ -47,8 +47,6 @@ public class MatchController extends Controller{
         l2.add(new Event(3,null, Event.Type.RED_CARD, 1));
         l2.add(new Event(4,null, Event.Type.ASSIST, 1));
 
-
-
         map.put(1, new MatchStatus(2,0,l1));
         map.put(2, new MatchStatus(0,0,l2));
 
