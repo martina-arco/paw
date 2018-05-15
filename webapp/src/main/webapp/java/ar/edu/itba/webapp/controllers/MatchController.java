@@ -28,25 +28,25 @@ public class MatchController extends Controller{
     public ModelAndView match() {
         ModelAndView mav = new ModelAndView("match");
 //        mav.addObject("matches", );
-        simulationService.start();
+//        simulationService.start();
         return mav;
     }
 
     @RequestMapping(value = "/data", produces = "application/json")
     @ResponseBody
     public Object json() {
-        Map<Integer, List<Event>> map = null;
+        Map<Integer, List<Event>> map = new HashMap<>();
 //        map = simulationService.getEvents();
-//        List<Event> l1 = new ArrayList<>();
-//        List<Event> l2 = new ArrayList<>();
-//        l1.add(new Event(1,null, Event.Type.YELLOW_CARD, 1));
-//        l1.add(new Event(2,null, Event.Type.RED_CARD, 1));
-//        l1.add(new Event(2,null, Event.Type.SCORE, 1));
-//        l2.add(new Event(3,null, Event.Type.RED_CARD, 1));
-//        l2.add(new Event(4,null, Event.Type.ASSIST, 1));
-//        map.put(1,l1);
-//        map.put(2,l2);
-//        return map;
+
+        List<Event> l1 = new ArrayList<>();
+        List<Event> l2 = new ArrayList<>();
+        l1.add(new Event(1,null, Event.Type.YELLOW_CARD, 1));
+        l1.add(new Event(2,null, Event.Type.RED_CARD, 1));
+        l1.add(new Event(2,null, Event.Type.SCORE, 1));
+        l2.add(new Event(3,null, Event.Type.RED_CARD, 1));
+        l2.add(new Event(4,null, Event.Type.ASSIST, 1));
+        map.put(1,l1);
+        map.put(2,l2);
 
         return map;
     }

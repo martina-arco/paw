@@ -5,7 +5,6 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="/js/src/jquery-3.3.1.min.js" ></script>
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
@@ -13,6 +12,20 @@
 </head>
 <body>
     <c:url value="/match" var="matchUrl" />
+
+
+    <c:set var="yellowCard"><spring:message code="yellowCard"/></c:set>
+    <input id="yellowCard" type="hidden" value="${yellowCard}"/>
+
+    <c:set var="redCard"><spring:message code="redCard"/></c:set>
+    <input id="redCard" type="hidden" value="${redCard}"/>
+
+    <c:set var="substitute"><spring:message code="substitute"/></c:set>
+    <input id="substitute" type="hidden" value="${substitute}"/>
+
+    <c:set var="goal"><spring:message code="goalScored"/></c:set>
+    <input id="goalScored" type="hidden" value="${goal}"/>
+
     <jsp:include page="navBar.jsp" />
 
     <div class="contain">
@@ -80,6 +93,7 @@
     </div>
 
 
+    <script src="/js/src/jquery-3.3.1.min.js"></script>
     <script src="/js/src/match.js"></script>
 
 </body>

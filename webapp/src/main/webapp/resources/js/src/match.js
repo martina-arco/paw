@@ -9,18 +9,20 @@ $(document).ready(function(){
     // },30000);
 
     var i = 0;
+    var width = 0;
 
     var counterBack = setInterval(function () {
 
         if (i <= 90) {
 
-            $('.progress-bar').css('width', i + '%');
+            $('.progress-bar').css('width', width + '%');
             document.getElementById("time").innerHTML = i.toString() + "'";
 
         } else
             clearInterval(counterBack);
 
         i++;
+        width += 1.1;
     }, 333);
 
     // let timer = setInterval(fetchData, 250);
@@ -48,14 +50,18 @@ function fetchData() {
 
                     switch(json[match][event].type) {
                         case "SCORE":
-                            type = json[match][event].p1 + " - gol ( " + json[match][event].minute + " )<br>";
+                            type = json[match][event].p1 + " - " + document.getElementById("goalScored").value + " ( " + json[match][event].minute + " )<br>";
                             break;
                         case "YELLOW_CARD":
-                            type = json[match][event].p1 + " - tarjeta amarilla ( " + json[match][event].minute + " )<br>";
+                            type = json[match][event].p1 + " - " + document.getElementById("yellowCard").value + " ( " + json[match][event].minute + " )<br>";
                             break;
                         case "RED_CARD":
-                            type = json[match][event].p1 + "- tarjeta roja ( " + json[match][event].minute + " )<br>";
+                            type = json[match][event].p1 + " - " + document.getElementById("redCard").value + " ( " + json[match][event].minute + " )<br>";
                             break;
+                        // case "SUBSTITUTE":
+
+                        //     type = json[match][event].p1.name + " " + document.getElementById("goalScored").value + " " + json[match][event].p2.name + "( " + json[match][event].minute + " )<br>";
+                        //     break;
                         default:break;
                     }
 
