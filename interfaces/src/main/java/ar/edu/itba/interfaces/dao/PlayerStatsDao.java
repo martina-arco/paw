@@ -7,9 +7,6 @@ import ar.edu.itba.model.PlayerStats;
 
 import java.util.List;
 
-/**
- * Created by martina on 01/05/2018.
- */
 public interface PlayerStatsDao {
 
     boolean save(PlayerStats playerStats);
