@@ -41,24 +41,25 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public List<String> getUpcomingMatches(Team team, Date currentDate) {
-//        List<String> teamNames = new ArrayList<>();
-//        List<Match> matches = matchDao.findByTeamIdFromDate(team.getId(), currentDate);
-//
-//        for (Match match:matches) {
-//
-//            Team home = match.getHome();
-//            Team away = match.getAway();
-//
-//            if(home.equals(team))
-//                teamNames.add(home.getName());
-//            else
-//                teamNames.add(away.getName());
-//        }
-//
-//        return teamNames;
-        return new ArrayList<>();
+        List<String> teamNames = new ArrayList<>();
+        List<Match> matches = matchDao.findByTeamIdFromDate(team.getId(), currentDate);
+
+        for (Match match:matches) {
+
+            Team home = match.getHome();
+            Team away = match.getAway();
+
+            if(home.equals(team))
+                teamNames.add(home.getName());
+            else
+                teamNames.add(away.getName());
+        }
+
+        return teamNames;
+
     }
 
+    @Override
     public void UserMatchEnd(Match match, User user) {
         Team team = match.getHome();
         if(match.getHome().equals(user.getTeam())) {
@@ -115,6 +116,7 @@ public class MatchServiceImpl implements MatchService {
         }
     }
 
+    @Override
     public void FinishMatches(List<Match> matches) {
         for (Match match: matches) {
             match.finish();
@@ -126,5 +128,61 @@ public class MatchServiceImpl implements MatchService {
             }
             matchDao.save(match);
         }
+    }
+
+    @Override
+    public Match getUserMatch(List<Match> matches, Team userTeam) {
+        for (Match match :matches) {
+            if(match.getHome().equals(userTeam) || match.getAway().equals(userTeam)) {
+                return match;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public Match create(League league, Team home, Team away, Date day) {
+        return matchDao.create(league, home, away, day);
+    }
+
+    @Override
+    public Match create(long league, long home, long away, Date day) {
+        return matchDao.create(league, home, away, day);
+    }
+
+    @Override
+    public boolean save(Match match) {
+        return matchDao.save(match);
+    }
+
+    @Override
+    public Match findById(long id) {
+        return matchDao.findById(id);
+    }
+
+    @Override
+    public List<Match> findByTeamId(long id) {
+        return matchDao.findByTeamId(id);
+    }
+
+    @Override
+    public List<Match> findByTeamIdFromDate(long id, Date date) {
+        return matchDao.findByTeamIdFromDate(id, date);
+    }
+
+    @Override
+    public List<Match> findByLeagueId(long id) {
+        return matchDao.findByLeagueId(id);
+    }
+
+    @Override
+    public List<Match> findByLeagueIdAndDate(long id, Date date) {
+        return matchDao.findByLeagueIdAndDate(id, date);
+    }
+
+    @Override
+    public List<Match> findByLeagueIdAndBeforeDate(long id, Date date) {
+        return matchDao.findByLeagueIdAndBeforeDate(id, date);
     }
 }
