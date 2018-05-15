@@ -12,6 +12,20 @@
 </head>
 <body>
     <c:url value="/match" var="matchUrl" />
+
+
+    <c:set var="yellowCard"><spring:message code="yellowCard"/></c:set>
+    <input id="yellowCard" type="hidden" value="${yellowCard}"/>
+
+    <c:set var="redCard"><spring:message code="redCard"/></c:set>
+    <input id="redCard" type="hidden" value="${redCard}"/>
+
+    <c:set var="substitute"><spring:message code="substitute"/></c:set>
+    <input id="substitute" type="hidden" value="${substitute}"/>
+
+    <c:set var="goal"><spring:message code="goalScored"/></c:set>
+    <input id="goalScored" type="hidden" value="${goal}"/>
+
     <jsp:include page="navBar.jsp" />
 
     <div class="contain">
@@ -19,15 +33,11 @@
             <div class = "content">
 
                 <div class="row">
-                    <div class="col">
-                        <a href="<c:url value="/"/>"><input type="button" value="Make Changes" class="btn btn-light"/></a>
-                    </div>
-                    <div class="col text-md-right">
-                        <p>25'</p>
+                    <div class="col text-md-right" id="time">
                     </div>
                     <div class="col-3">
                         <div class="progress">
-                            <div class="progress-bar green" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar green" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="90"></div>
                         </div>
                     </div>
                 </div>
@@ -46,24 +56,32 @@
 
                     <tbody>
 
-                    <c:forEach var = "i" begin = "1" end = "6">
-                        <tr>
+
+                        <tr id="1">
                             <td class="width15">Monumental</td>
                             <td class="width15">River</td> 
-                            <td class="width10" id="homeScore">1</td> 
-                            <td class="width10" id="awayScore">0</td>
+                            <td class="width10" id="1homeScore"></td> 
+                            <td class="width10" id="1awayScore"></td>
                             <td class="width15">Boca</td> 
-                            <td class="width35" id="event">Gol</td>
+                            <td class="width35" id="1event"></td>
                         </tr>
-                    </c:forEach>
+                        <tr id="2">
+                            <td class="width15">Monumental</td>
+                            <td class="width15">River</td> 
+                            <td class="width10" id="2homeScore"></td> 
+                            <td class="width10" id="2awayScore"></td>
+                            <td class="width15">Boca</td> 
+                            <td class="width35" id="2event"></td>
+                        </tr>
+
 
                     </tbody>
 
                     <%--<c:forEach items="${matches}" var="match">--%>
-                        <%--<tr>--%>
-                            <%--<td>${match.home.stadium}</td>--%>
+                        <%--<tr id="${match.id}">--%>
+                            <%--<td >${match.home.stadium}</td>--%>
                             <%--<td>${match.home}</td>--%>
-                            <%--<td>${match.homeScore}</td>--%>
+                            <%--<td id="${match.id}homeScore">${match.homeScore}</td>--%>
                             <%--<td>${match.awayScore}</td>--%>
                             <%--<td>${match.away}</td>--%>
                             <%--<td>${match.event}</td>--%>
@@ -75,7 +93,8 @@
     </div>
 
 
-    <script src="/js/match.js"\></script>
+    <script src="/js/src/jquery-3.3.1.min.js"></script>
+    <script src="/js/src/match.js"></script>
 
 </body>
 </html>
