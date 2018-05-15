@@ -58,6 +58,11 @@ public class SimulationServiceImpl implements SimulationService{
         return null;
     }
 
+    @Override
+    public void start() {
+
+    }
+
     private class MatchThread extends Thread {
         private final Match match;
         private List<Event> events;

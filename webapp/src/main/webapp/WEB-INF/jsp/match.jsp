@@ -20,15 +20,11 @@
             <div class = "content">
 
                 <div class="row">
-                    <div class="col">
-                        <a href="<c:url value="/"/>"><input type="button" value="Make Changes" class="btn btn-light"/></a>
-                    </div>
-                    <div class="col text-md-right">
-                        <p>25'</p>
+                    <div class="col text-md-right" id="time">
                     </div>
                     <div class="col-3">
                         <div class="progress">
-                            <div class="progress-bar green" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar green" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="90"></div>
                         </div>
                     </div>
                 </div>

@@ -1,29 +1,29 @@
 var  json;
 
-// var request = new XMLHttpRequest();
-//
-// request.open('GET', '/json');
-//
-// request.onload = function() {
-//     var match = JSON.parse(request.responseText);
-//     eventContainer.insertAdjacentHTML('beforeennd', match.event);
-//     homeScoreContainer.insertAdjacentHTML('beforeend', match.homeScore);
-//     awayScoreContainer.insertAdjacentHTML('beforeend', match.awayScore);
-// };
-//
-// request.onerror = function() {
-//
-// };
-//
-//
-// function requests() {
-//     request.send();
-// }
-
 $(document).ready(function(){
     fetchData();
 
-    let timer = setInterval(fetchData, 250);
+    // setTimeout(function () {
+    //     window.location.href= '/matchEnd';
+    //
+    // },30000);
+
+    var i = 0;
+
+    var counterBack = setInterval(function () {
+
+        if (i <= 90) {
+
+            $('.progress-bar').css('width', i + '%');
+            document.getElementById("time").innerHTML = i.toString() + "'";
+
+        } else
+            clearInterval(counterBack);
+
+        i++;
+    }, 333);
+
+    // let timer = setInterval(fetchData, 250);
 });
 
 function fetchData() {
@@ -48,13 +48,13 @@ function fetchData() {
 
                     switch(json[match][event].type) {
                         case "SCORE":
-                            type = json[match][event].p1 + " metio gol en minuto " + json[match][event].minute + "<br>";
+                            type = json[match][event].p1 + " - gol ( " + json[match][event].minute + " )<br>";
                             break;
                         case "YELLOW_CARD":
-                            type = "A " + json[match][event].p1 + " le sacaron tarjeta amarilla en minuto " + json[match][event].minute + "<br>";
+                            type = json[match][event].p1 + " - tarjeta amarilla ( " + json[match][event].minute + " )<br>";
                             break;
                         case "RED_CARD":
-                            type = "A " + json[match][event].p1 + " le sacaron tarjeta roja en minuto " + json[match][event].minute + "<br>";
+                            type = json[match][event].p1 + "- tarjeta roja ( " + json[match][event].minute + " )<br>";
                             break;
                         default:break;
                     }
@@ -71,10 +71,6 @@ function fetchData() {
                 eventContainer.innerHTML = events;
 
             }
-
-        // eventContainer.insertAdjacentHTML('beforeennd', match.event);
-        // homeScoreContainer.insertAdjacentHTML('beforeend', match.homeScore);
-        // awayScoreContainer.insertAdjacentHTML('beforeend', match.awayScore);
     });
 }
 
