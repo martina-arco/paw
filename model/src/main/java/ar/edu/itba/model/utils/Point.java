@@ -1,6 +1,11 @@
 package ar.edu.itba.model.utils;
 
 public class Point {
+
+    public static int manhattanSq(Point point1, Point point2){
+        return (int) ((int) Math.pow((point1.x-point2.x),2) + Math.pow((point1.y-point2.y),2));
+    }
+
     private int x, y;
 
     public Point(int x, int y) {
@@ -22,5 +27,9 @@ public class Point {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public String toString(){
+        return "X: " + x + "\tY: " + y;
     }
 }
