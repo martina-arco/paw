@@ -84,4 +84,8 @@ public class Stadium {
                 break;
         }
     }
+
+    public int calculateMatchEarnings() {
+        return highClass*highClassPrice + mediumClass*mediumClassPrice + lowClass*lowClassPrice;
+    }
 }

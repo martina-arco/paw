@@ -1,14 +1,13 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
+import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -24,6 +23,15 @@ public class MatchServiceImpl implements MatchService {
 
     @Autowired
     private TeamDao teamDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private LeagueDao leagueDao;
+
+    @Autowired
+    private LeagueService leagueService;
 
     @Autowired
     private EventDao eventDao;
@@ -51,30 +59,19 @@ public class MatchServiceImpl implements MatchService {
         return new ArrayList<>();
     }
 
-    public void MatchEnd(long matchId) {
-        Match match = matchDao.findById(matchId);
+    public void UserMatchEnd(Match match, User user) {
         Team team = match.getHome();
-
-        saveEvents(match);
-        addMatchEarnings(team);
-
-        boolean isNextMonth = advanceDate(match);
-        if(isNextMonth) {
-            subtractPlayerSalaries(team);
+        if(match.getHome().equals(user.getTeam())) {
+            addMatchEarnings(team);
         }
+        else {
+            team = match.getAway();
+        }
+        advanceDate(match, user ,team);
 
         teamDao.save(team);
         matchDao.save(match);
-    }
-
-    private void saveEvents(Match match) {
-        for (Event event : match.getEvents()) {
-            eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
-        }
-
-        for (PlayerStats playerStat : match.getStats()) {
-            playerStatsDao.save(playerStat);
-        }
+        userDao.save(user);
     }
 
     private void subtractPlayerSalaries(Team team) {
@@ -84,13 +81,50 @@ public class MatchServiceImpl implements MatchService {
     }
 
     private void addMatchEarnings(Team team) {
-        int amount = stadiumDao.findById(team.getStadiumId()).calculateMatchEarnings(team.getFanCount());
+        int amount = stadiumDao.findById(team.getStadiumId()).calculateMatchEarnings();
         receiptDao.create(team, amount, Receipt.Type.MATCHINCOME);
         team.addMoney(amount);
     }
 
-    private boolean advanceDate(Match match) {
-        match.finish();
-        return false;
+    private void advanceDate(Match match ,User user, Team team) {
+        Calendar cal = Calendar.getInstance();
+        Date currentDate = user.getCurrentDay();
+        cal.setTime(currentDate);
+        cal.add(Calendar.DATE, 7);
+        Date newDate = cal.getTime();
+        user.setCurrentDay(newDate);
+        if(newDate.getMonth() > currentDate.getMonth()) {
+            subtractPlayerSalaries(team);
+        }
+        if(matchDao.findByTeamIdFromDate(team.getId(), newDate).isEmpty()) {
+            League league = leagueDao.findById(team.getLeagueId());
+            int higherPoints = 0;
+            Team higherTeam = null;
+            for (Map.Entry<Team, Integer> entry : leagueService.getTeamPoints(league, currentDate).entrySet())
+            {
+                if(entry.getValue() > higherPoints) {
+                    higherPoints = entry.getValue();
+                    higherTeam = entry.getKey();
+                }
+            }
+            int amount = league.getPrize();
+            if(higherTeam.equals(team)) {
+                receiptDao.create(team, amount, Receipt.Type.TOURNAMENTPRICE);
+                team.addMoney(amount);
+            }
+        }
+    }
+
+    public void FinishMatches(List<Match> matches) {
+        for (Match match: matches) {
+            match.finish();
+            for (Event event: match.getEvents()) {
+                eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
+            }
+            for (PlayerStats playerStats: match.getStats()) {
+                playerStatsDao.save(playerStats);
+            }
+            matchDao.save(match);
+        }
     }
 }

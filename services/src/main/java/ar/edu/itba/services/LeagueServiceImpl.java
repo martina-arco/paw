@@ -34,9 +34,9 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public Map<String, Integer> getTeamPoints(League league, Date currentDate) {
+    public Map<Team, Integer> getTeamPoints(League league, java.util.Date currentDate) {
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<Team, Integer> map = new HashMap<>();
 //        List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
 //
 //        for (Match match : matches) {

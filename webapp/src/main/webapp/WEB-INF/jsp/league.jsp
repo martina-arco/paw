@@ -71,7 +71,7 @@
 
                         <%--<c:forEach items="teams" var="team">--%>
                             <%--<tr>--%>
-                                <%--<td><c:out value="${team.key}"/></td> --%>
+                                <%--<td><c:out value="${team.key.name}"/></td> --%>
                                 <%--<td><c:out value="${team.value}"/></td> --%>
                             <%--</tr>--%>
                         <%--</c:forEach>--%>
