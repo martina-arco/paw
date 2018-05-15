@@ -40,22 +40,6 @@ public class SimulationServiceImpl implements SimulationService{
         for(Match match : matches){
             playingMatches.add(new MatchThread(match));
         }
-        int minute = 0;
-
-        while(minute < 90){
-            minute++;
-
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            synchronized (lock){
-                lock.notifyAll();
-            }
-        }
-
     }
 
     @Override
@@ -72,13 +56,30 @@ public class SimulationServiceImpl implements SimulationService{
     @Override
     public void start() {
         for(MatchThread matchThread : playingMatches){
-            matchThread.run();
+            matchThread.start();
+        }
+
+        int minute = 0;
+        while(minute < 90){
+            minute++;
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (lock) {
+                lock.notifyAll();
+            }
+        }
+        for(MatchThread matchThread : playingMatches){
+            while(matchThread.isAlive());
         }
     }
 
     private class MatchThread extends Thread {
         private final Match match;
-        private MatchStatus matchStatus;
+        private final MatchStatus matchStatus;
 
         private MatchThread(Match match) {
             super();
@@ -109,6 +110,9 @@ public class SimulationServiceImpl implements SimulationService{
 
             int minute = 0;
             while(minute < 90){
+                if(minute == 45)
+                    currentState = matchGrid.kickOff(MyTeam.AWAY);
+
                 matchStatus.setMinute(minute);
 
                 currentState = currentState.dispute(matchStatus);
@@ -118,8 +122,6 @@ public class SimulationServiceImpl implements SimulationService{
                 }else {
                     lastState = currentState;
                 }
-
-                System.out.println("Minute: " + minute + "\t" + currentState);
 
                 minute++;
 
@@ -392,11 +394,10 @@ public class SimulationServiceImpl implements SimulationService{
 
         private SimulationNode shot(MatchStatus matchStatus){
             double check = rand.nextDouble();
-            int shot = node.getAtt(possession,NodeAtt.FIN)/distanceToGoal();
+            int shot = node.getAtt(possession,NodeAtt.FIN)/(distanceToGoal()+1);
 
             int sum = shot + opGK.getGoalKeeping();
-            double norm = shot/sum;
-
+            double norm = (double) shot/sum;
             boolean goal = check < norm;
 
             if(goal){
@@ -422,7 +423,7 @@ public class SimulationServiceImpl implements SimulationService{
             double chanceToShoot = distanceToGoal()==0?1.0:1/(distanceToGoal()*2);
             boolean shooting = rand.nextDouble() < chanceToShoot;
 
-            if(shooting)
+            if(distanceToGoal() < 2 || shooting)
                 return shot(matchStatus);
 
             double random = rand.nextDouble();
