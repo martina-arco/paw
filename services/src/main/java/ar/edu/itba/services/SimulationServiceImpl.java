@@ -2,6 +2,7 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
+import ar.edu.itba.model.utils.MatchStatus;
 import ar.edu.itba.model.utils.Point;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,10 @@ import java.util.*;
 public class SimulationServiceImpl implements SimulationService{
 
     private static final int pitchSize = 4;
+
+    private final Object lock = new Object();
     private final Random rand;
+    private Set<MatchThread> playingMatches;
 
     public enum NodeAtt{
         DEF, PASS, FIN, POSS
@@ -25,104 +29,99 @@ public class SimulationServiceImpl implements SimulationService{
         return team.equals(MyTeam.AWAY)?MyTeam.HOME:MyTeam.AWAY;
     }
 
-    private final Set<MatchThread> playingMatches;
 
     public SimulationServiceImpl() {
         this.playingMatches = new HashSet<>();
         rand = new Random(System.nanoTime());
     }
 
-    public Grid createGrid(Formation home, Formation away){
-        Grid grid = new Grid(home, away);
-        grid.setFormation(MyTeam.HOME,home);
-        grid.setFormation(MyTeam.AWAY,away);
-        return grid;
-    }
-
-    public void playMatch(Formation home, Formation away){
-        MatchThread matchThread = new MatchThread(null,home,away);
-        matchThread.run();
-    }
-
     @Override
     public void simulateFixture(List<Match> matches) {
+
         for(Match match : matches){
-            MatchThread aux = new MatchThread(match);
-            playingMatches.add(aux);
-            aux.run();
+            playingMatches.add(new MatchThread(match));
         }
+
+        int minute = 0;
+
+        while(minute < 90){
+            minute++;
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            synchronized (lock){
+                lock.notifyAll();
+            }
+        }
+
     }
 
     @Override
-    public Map<Integer, List<Event>> getEvents() {
-        return null;
+    public Map<Long, MatchStatus> getStatus() {
+        Map<Long, MatchStatus> ret = new HashMap<>();
+
+        for(MatchThread mThread : playingMatches){
+            ret.put(mThread.match.getId(),mThread.matchStatus.cloneAndFlush().filterEvents());
+        }
+
+        return ret;
     }
 
     @Override
     public void start() {
-
+        for(MatchThread matchThread : playingMatches){
+            matchThread.run();
+        }
     }
 
     private class MatchThread extends Thread {
         private final Match match;
-        private List<Event> events;
-        Formation home, away;
+        private MatchStatus matchStatus;
 
         private MatchThread(Match match) {
             super();
+            this.matchStatus = new MatchStatus(0,0,new ArrayList<Event>());
             this.match = match;
-            this.events = new ArrayList<>();
-        }
-
-        public MatchThread(Match match, Formation home, Formation away){
-            this.events = new ArrayList<>();
-            this.match = match;
-            this.home = home;
-            this.away = away;
         }
 
         @Override
         public void run(){
-            simulate(home,away);
+            simulate();
         }
 
-        private void simulate(Formation home, Formation away){
-            //Team home = match.getHome(), away = match.getAway();
+        private void simulate(){
+            Formation home = match.getHome().getFormation(), away = match.getAway().getFormation();
             Grid matchGrid = new Grid(home, away);
             SimulationNode currentState = matchGrid.kickOff(MyTeam.HOME),lastState = null;
 
             int minute = 0;
-            while(minute <= 90){
+            while(minute < 90){
+                matchStatus.setMinute(minute);
 
-                currentState = currentState.dispute(minute,events);
+                currentState = currentState.dispute(matchStatus);
 
                 if(currentState.equals(lastState)){
-                    currentState = currentState.advance(minute,events);
+                    currentState = currentState.advance(matchStatus);
                 }else {
                     lastState = currentState;
                 }
 
                 System.out.println("Minute: " + minute + "\t" + currentState);
 
-
                 minute++;
 
-                /*
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    minute++;
+                synchronized (lock){
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                lastState = currentState;
-                */
             }
-        }
-
-        public List<Event> getEvents(){
-            List<Event> aux = events;
-            events = new ArrayList<>();
-            return aux;
         }
 
         public boolean equals(Object o){
@@ -364,7 +363,7 @@ public class SimulationServiceImpl implements SimulationService{
             this.neighbors = new HashSet<>();
         }
 
-        private SimulationNode dispute(int minute, List<Event> events){
+        private SimulationNode dispute(MatchStatus matchStatus){
             int opponentDef = node.getAtt(otherTeam(possession),NodeAtt.DEF);
             int myPoss = node.getAtt(possession,NodeAtt.POSS);
 
@@ -374,27 +373,33 @@ public class SimulationServiceImpl implements SimulationService{
             boolean taken =  rand.nextDouble() < nMyPoss;
 
             if(taken) {
-                events.add(new Event(0, node.getSNode(otherTeam(possession)).whoDidIt(), Event.Type.TACKLE, minute));
+                matchStatus.getEvents().add(new Event(0, node.getSNode(otherTeam(possession)).whoDidIt(), Event.Type.TACKLE, matchStatus.getMinute()));
             }
 
             return node.getSNode(taken?otherTeam(possession):possession);
         }
 
-        private SimulationNode shot(int minute, List<Event> events){
+        private SimulationNode shot(MatchStatus matchStatus){
             double check = rand.nextDouble();
+            int shot = node.getAtt(possession,NodeAtt.FIN)/distanceToGoal();
 
-            int sum = node.getAtt(possession, NodeAtt.FIN) + opGK.getGoalKeeping();
-            double norm = node.getAtt(possession, NodeAtt.FIN);
+            int sum = shot + opGK.getGoalKeeping();
+            double norm = shot/sum;
 
-            boolean goal = check*sum < norm;
+            boolean goal = check < norm;
 
             if(goal){
-                System.out.println("Goal for " + possession);
-                events.add(new Event(0,whoDidIt(),Event.Type.SCORE,minute));
+
+                if(possession.equals(MyTeam.AWAY))
+                    matchStatus.setAwayScore(matchStatus.getAwayScore()+1);
+                else
+                    matchStatus.setHomeScore(matchStatus.getHomeScore()+1);
+
+                matchStatus.getEvents().add(new Event(0,whoDidIt(),Event.Type.SCORE,matchStatus.getMinute()));
                 return grid.kickOff(otherTeam(possession));
             }
 
-            events.add(new Event(0, opGK, Event.Type.SAVE, minute));
+            matchStatus.getEvents().add(new Event(0, opGK, Event.Type.SAVE, matchStatus.getMinute()));
             return grid.goalKick(otherTeam(possession));
         }
 
@@ -402,12 +407,12 @@ public class SimulationServiceImpl implements SimulationService{
             return Point.manhattanSq(node.position,possession.equals(MyTeam.AWAY)?new Point(0,2):new Point(3,2));
         }
 
-        private SimulationNode advance(int minute, List<Event> events){
-            double chanceToShoot = distanceToGoal()==0?1.0:1/distanceToGoal()*2;
+        private SimulationNode advance(MatchStatus matchStatus){
+            double chanceToShoot = distanceToGoal()==0?1.0:1/(distanceToGoal()*2);
             boolean shooting = rand.nextDouble() < chanceToShoot;
 
             if(shooting)
-                return shot(minute, events);
+                return shot(matchStatus);
 
             double random = rand.nextDouble();
             double accum = 0;
@@ -418,6 +423,9 @@ public class SimulationServiceImpl implements SimulationService{
                     return arc.getNeighbor();
                 last = arc.getNeighbor();
             }
+
+            matchStatus.getEvents().add(new Event(0,whoDidIt(),Event.Type.PASS,matchStatus.getMinute()));
+
             return last;
         }
 

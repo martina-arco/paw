@@ -66,7 +66,7 @@ public class SimulationServiceImplTest {
         Match match = new Match(0,0,1,0,new Date(),0,0,0,0,false);
         List<Match> list = new ArrayList<>();
         list.add(match);
-        ss.playMatch(f1,f2);
+        //ss.playMatch(f1,f2);
     }
 
 
