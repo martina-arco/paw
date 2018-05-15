@@ -31,10 +31,10 @@ public class MatchController extends Controller{
     @RequestMapping("/matchEnd")
     public ModelAndView matchEnd() {
         ModelAndView mav = new ModelAndView("matchEnd");
-        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(loggedUser().getCurrentDay());
-        Match userMatch = matchService.getUserMatch(matches, loggedUser().getTeam());
-        matchService.FinishMatches(matches);
-        matchService.UserMatchEnd(userMatch, loggedUser());
+        //List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(loggedUser().getCurrentDay());
+        //Match userMatch = matchService.getUserMatch(matches, loggedUser().getTeam());
+        //matchService.FinishMatches(matches);
+        //matchService.UserMatchEnd(userMatch, loggedUser());
 //        int matchId = matchService.findByTeamId(getTeamId());
 //        mav.addObject("match", matchService.findById(matchId));
 //        mav.addObject("stadium", matchService.getStadiumById(matchId));

@@ -36,9 +36,6 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     private EventDao eventDao;
 
-    @Autowired
-    private PlayerStatsDao playerStatsDao;
-
     @Override
     public List<String> getUpcomingMatches(Team team, Date currentDate) {
         List<String> teamNames = new ArrayList<>();
@@ -122,9 +119,6 @@ public class MatchServiceImpl implements MatchService {
             match.finish();
             for (Event event: match.getEvents()) {
                 eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
-            }
-            for (PlayerStats playerStats: match.getStats()) {
-                playerStatsDao.save(playerStats);
             }
             matchDao.save(match);
         }
