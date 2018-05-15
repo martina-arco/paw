@@ -37,11 +37,9 @@ public class SimulationServiceImpl implements SimulationService{
 
     @Override
     public void simulateFixture(List<Match> matches) {
-
         for(Match match : matches){
             playingMatches.add(new MatchThread(match));
         }
-
         int minute = 0;
 
         while(minute < 90){
@@ -93,6 +91,17 @@ public class SimulationServiceImpl implements SimulationService{
             simulate();
         }
 
+        private void finish(){
+            for(Event event : matchStatus.getEvents()){
+                match.addEvent(event);
+            }
+
+            match.addAwayScore(matchStatus.getAwayScore());
+            match.addHomeScore(matchStatus.getHomeScore());
+
+            match.finish();
+        }
+
         private void simulate(){
             Formation home = match.getHome().getFormation(), away = match.getAway().getFormation();
             Grid matchGrid = new Grid(home, away);
@@ -122,6 +131,8 @@ public class SimulationServiceImpl implements SimulationService{
                     }
                 }
             }
+
+            finish();
         }
 
         public boolean equals(Object o){
