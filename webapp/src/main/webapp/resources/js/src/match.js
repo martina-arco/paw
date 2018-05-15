@@ -33,50 +33,47 @@ function fetchData() {
         var eventContainer;
         var homeScoreContainer;
         var awayScoreContainer;
-        console.log(JSON.stringify(json));
-        console.log(json);
 
-            console.log( json["1"][0].type );
+        for(var match in json) {
 
-            for(var match in json) {
+            var events = new String();
 
-                var events = new String();
+            for(var event in json[match].events) {
 
-                for(var event in json[match]) {
+                console.log(json[match]);
 
-                    console.log(json[match]);
+                var type = new String();
+                var event = json[match].events[event];
 
-                    var type = new String();
+                switch(event.type) {
+                    case "SCORE":
+                        type = event.p1 + " - " + document.getElementById("goalScored").value + " ( " + event.minute + " )<br>";
+                        break;
+                    case "YELLOW_CARD":
+                        type = event.p1 + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )<br>";
+                        break;
+                    case "RED_CARD":
+                        type = event.p1 + " - " + document.getElementById("redCard").value + " ( " + event.minute + " )<br>";
+                        break;
+                    // case "SUBSTITUTE":
 
-                    switch(json[match][event].type) {
-                        case "SCORE":
-                            type = json[match][event].p1 + " - " + document.getElementById("goalScored").value + " ( " + json[match][event].minute + " )<br>";
-                            break;
-                        case "YELLOW_CARD":
-                            type = json[match][event].p1 + " - " + document.getElementById("yellowCard").value + " ( " + json[match][event].minute + " )<br>";
-                            break;
-                        case "RED_CARD":
-                            type = json[match][event].p1 + " - " + document.getElementById("redCard").value + " ( " + json[match][event].minute + " )<br>";
-                            break;
-                        // case "SUBSTITUTE":
-
-                        //     type = json[match][event].p1.name + " " + document.getElementById("goalScored").value + " " + json[match][event].p2.name + "( " + json[match][event].minute + " )<br>";
-                        //     break;
-                        default:break;
-                    }
-
-
-                    events += type;
-
+                    //     type = json[match][event].p1.name + " " + document.getElementById("goalScored").value + " " + json[match][event].p2.name + "( " + json[match][event].minute + " )<br>";
+                    //     break;
+                    default:break;
                 }
 
-                eventContainer = document.getElementById(match + "event");
-                homeScoreContainer = document.getElementById(match + "homeScore");
-                awayScoreContainer = document.getElementById(match + "awayScore");
-
-                eventContainer.innerHTML = events;
-
+                events += type;
             }
+
+            eventContainer = document.getElementById(match + "event");
+            homeScoreContainer = document.getElementById(match + "homeScore");
+            awayScoreContainer = document.getElementById(match + "awayScore");
+
+            eventContainer.innerHTML = events;
+            homeScoreContainer.innerHTML = json[match].homeScore;
+            awayScoreContainer.innerHTML = json[match].awayScore;
+
+        }
     });
 }
 

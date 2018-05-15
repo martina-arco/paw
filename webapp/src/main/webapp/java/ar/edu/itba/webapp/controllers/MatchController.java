@@ -2,6 +2,7 @@ package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.Event;
+import ar.edu.itba.model.utils.MatchStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +36,7 @@ public class MatchController extends Controller{
     @RequestMapping(value = "/data", produces = "application/json")
     @ResponseBody
     public Object json() {
-        Map<Integer, List<Event>> map = new HashMap<>();
+        Map<Integer, MatchStatus> map = new HashMap<>();
 //        map = simulationService.getEvents();
 
         List<Event> l1 = new ArrayList<>();
@@ -45,8 +46,11 @@ public class MatchController extends Controller{
         l1.add(new Event(2,null, Event.Type.SCORE, 1));
         l2.add(new Event(3,null, Event.Type.RED_CARD, 1));
         l2.add(new Event(4,null, Event.Type.ASSIST, 1));
-        map.put(1,l1);
-        map.put(2,l2);
+
+
+
+        map.put(1, new MatchStatus(2,0,l1));
+        map.put(2, new MatchStatus(0,0,l2));
 
         return map;
     }
