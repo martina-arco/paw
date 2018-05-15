@@ -86,6 +86,15 @@ public class MatchJdbcDao implements MatchDao{
     }
 
     @Override
+    public List<Match> findByLeagueIdAndBeforeDate(long id, Date date) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day < ?", ROW_MAPPER, id, date);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    @Override
     public Match create(League league, Team home, Team away, Date day) {
         Match match = create(league.getId(), home.getId(), away.getId(), day);
         match.setLeague(league);
@@ -102,6 +111,11 @@ public class MatchJdbcDao implements MatchDao{
         args.put("away", away);
         args.put("league", league);
         args.put("day", day);
+        args.put("played", false);
+        args.put("homeScore", 0);
+        args.put("awayScore", 0);
+        args.put("homePts", 0);
+        args.put("awayPts", 0);
 
         final Number matchId = jdbcInsert.executeAndReturnKey(args);
         return new Match(matchId.longValue(), home, away, league, day, 0,0,0,0, false);
