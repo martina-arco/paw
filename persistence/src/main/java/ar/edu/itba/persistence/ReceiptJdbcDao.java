@@ -43,7 +43,7 @@ public class ReceiptJdbcDao implements ReceiptDao {
     }
 
     @Override
-    public List<Receipt> findAllbyTeamId(long id) {
+    public List<Receipt> findAllByTeamId(long id) {
         final List<Receipt> list = jdbcTemplate.query("SELECT * FROM receipt WHERE team = ?", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;

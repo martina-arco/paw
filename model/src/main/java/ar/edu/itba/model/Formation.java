@@ -85,6 +85,10 @@ public class Formation {
         return substitutesIds;
     }
 
+    public void setStarters(Map<Player, Point> starters) {
+        this.starters = starters;
+    }
+
     public void movePlayer(final Player p1, final Point position){
         if(availablePositions.contains(position))
             starters.put(p1,position);

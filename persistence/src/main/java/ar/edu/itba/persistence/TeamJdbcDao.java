@@ -48,7 +48,7 @@ public class TeamJdbcDao implements TeamDao {
 
     @Override
     public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money) {
-        Team team = create(name, league.getId(), stadium.getId(), formation.getId(), fanCount, fanTrust, boardTrust, money);
+        Team team = create(name, league == null ? 0 : league.getId(), stadium == null ? 0 : stadium.getId(), formation == null ? 0 : formation.getId(), fanCount, fanTrust, boardTrust, money);
         team.setLeague(league);
         team.setStadium(stadium);
         team.setFormation(formation);
@@ -61,9 +61,9 @@ public class TeamJdbcDao implements TeamDao {
     public Team create(String name, long league, long stadium, long formation, int fanCount, int fanTrust, int boardTrust, int money) {
         final Map<String, Object> args = new HashMap<>();
         args.put("name", name);
-        args.put("league", league);
-        args.put("stadium", stadium);
-        args.put("formation", formation);
+        args.put("league", league == 0 ? null : league);
+        args.put("stadium", stadium == 0 ? null : stadium);
+        args.put("formation", formation == 0 ? null : formation);
         args.put("fanCount", fanCount);
         args.put("fanTrust", fanTrust);
         args.put("boardTrust", boardTrust);

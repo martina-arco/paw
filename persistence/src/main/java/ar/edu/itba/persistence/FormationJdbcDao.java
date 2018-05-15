@@ -80,6 +80,11 @@ public class FormationJdbcDao implements FormationDao{
                     }
                 }
             }
+            if(currFormation != null) {
+                currFormation.setStartersIds(currStarters);
+                currFormation.setSubstitutesIds(currSubstitutes);
+                formations.add(currFormation);
+            }
             return formations;
         }
     };

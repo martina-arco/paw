@@ -6,6 +6,8 @@ import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -31,14 +33,14 @@ public class PlayerJdbcDao implements PlayerDao{
             String name = rs.getString("name");
             int age	= rs.getInt("age");
             int fitness = rs.getInt("fitness");
-            int value = rs.getInt("player.value");
+            int value = rs.getInt("value");
             int potential = rs.getInt("potential");
             int skillLevel = rs.getInt("skillLevel");
             int goalkeeping = rs.getInt("goalKeeping");
-            int defending = rs.getInt("defending	");
+            int defending = rs.getInt("defending");
             int passing	= rs.getInt("passing");
             int finishing = rs.getInt("finishing");
-            int salary = rs.getInt("finishing");
+            int salary = rs.getInt("salary");
             Date contractExpiration = rs.getDate("contractExpiration");
             boolean youth = rs.getBoolean("youth");
 
@@ -65,13 +67,14 @@ public class PlayerJdbcDao implements PlayerDao{
         }
 
     @Override
-    public Player create(String name, long team, int age, int value, int potential, int skillLevel, int goalkeeping, int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
+    public Player create(String name, long team, int age, int value, int potential, int skillLevel, int goalkeeping,
+                         int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
         final HashMap<String, Object> args = new HashMap<>();
 
         args.put("team", team);
         args.put("name", name);
         args.put("age", age);
-        args.put("player.value", value);
+        args.put("value", value);
         args.put("potential", potential);
         args.put("skillLevel", skillLevel);
         args.put("goalKeeping", goalkeeping);
@@ -110,7 +113,10 @@ public class PlayerJdbcDao implements PlayerDao{
 
     @Override
     public List<Player> findAllByIdIn(List<Long> ids) {
-        final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE playerid IN ?", ROW_MAPPER, ids);
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ids", ids);
+        final List<Player> list = namedParameterJdbcTemplate.query("SELECT * FROM player WHERE playerid IN (:ids)", params ,ROW_MAPPER);
         if (list.isEmpty()) {
             return null;
         }
@@ -118,7 +124,7 @@ public class PlayerJdbcDao implements PlayerDao{
     }
 
     @Override
-    public List<Player> findAllByTeamId(long id) {
+    public List<Player> findAdultsByTeamId(long id) {
         final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ? AND youth = FALSE", ROW_MAPPER, id);
         if (list.isEmpty()) {
             return null;

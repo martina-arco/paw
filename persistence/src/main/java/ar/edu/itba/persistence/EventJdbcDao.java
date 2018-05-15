@@ -55,7 +55,7 @@ public class EventJdbcDao implements EventDao {
 
     @Override
     public Event create(Match match, Player p1, Player p2, Event.Type type, int minute) {
-        Event event = create(match.getId(), p1.getId(), p2 == null ? -1 : p2.getId(), type, minute);
+        Event event = create(match.getId(), p1.getId(), p2 == null ? 0 : p2.getId(), type, minute);
         event.setP1(p1);
         event.setP2(p2);
         return event;
@@ -67,7 +67,7 @@ public class EventJdbcDao implements EventDao {
 
         args.put("match", match);
         args.put("player1", p1);
-        args.put("player2", p2 == -1 ? null : p2);
+        args.put("player2", p2 == 0 ? null : p2);
         args.put("type", type.toString());
         args.put("minute", minute);
 

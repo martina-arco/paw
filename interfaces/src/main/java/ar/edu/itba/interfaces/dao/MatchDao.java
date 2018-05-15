@@ -25,4 +25,6 @@ public interface MatchDao {
     List<Match> findByLeagueIdAndDate(long id, Date date);
 
     List<Match> findByLeagueIdAndBeforeDate(long id, Date date);
+
+    //Match findFirstByLeagueIdAndAfterDate(long id, Date date);
 }

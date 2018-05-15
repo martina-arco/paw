@@ -6,9 +6,7 @@ import ar.edu.itba.model.Player;
 
 import java.util.List;
 
-/**
- * Created by martina on 01/05/2018.
- */
+
 public interface EventDao {
 
     Event create(Match m, Player p1, Player p2, Event.Type eventType, int minute);
