@@ -67,7 +67,7 @@
                             <h5><spring:message code="homeAndAwayScore" arguments="${match.homeScore}, ${match.awayScore}"/></h5>
                         </div>
                         <div class="col">
-                            <h5><c:out value="${match.home}"/></h5>
+                            <h5><c:out value="${match.away}"/></h5>
                         </div>
                     </div>
 
@@ -92,6 +92,7 @@
                         </tbody>
                     </table>
 
+                    <%-- Esto de playerStats por ahora no
                     <h6><spring:message code="matchStats"/> </h6>
 
                     <table class="table width60 table-borderless table-center">
@@ -124,6 +125,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    --%>
 
                 </div>
             </div>
