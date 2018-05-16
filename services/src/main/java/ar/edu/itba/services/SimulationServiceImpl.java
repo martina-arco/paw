@@ -4,12 +4,16 @@ import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.MatchStatus;
 import ar.edu.itba.model.utils.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class SimulationServiceImpl implements SimulationService{
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimulationServiceImpl.class);
 
     private Map<Long,SimFixture> table;
 
