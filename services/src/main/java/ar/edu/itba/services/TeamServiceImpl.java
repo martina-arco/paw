@@ -1,5 +1,6 @@
 package ar.edu.itba.services;
 
+import ar.edu.itba.interfaces.dao.PlayerDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.*;
@@ -15,6 +16,8 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamDao teamDao;
+    @Autowired
+    private PlayerDao playerDao;
 
     @Override
     @Transactional
@@ -59,6 +62,10 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team findByUserId(long id) {
-        return teamDao.findByUserId(id);
+        Team team = teamDao.findByUserId(id);
+        if(team != null) {
+            team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
+        }
+        return team;
     }
 }

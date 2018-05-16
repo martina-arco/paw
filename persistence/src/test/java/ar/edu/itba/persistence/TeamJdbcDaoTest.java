@@ -115,4 +115,19 @@ public class TeamJdbcDaoTest {
         assertEquals(MONEY, team.getMoney());
         assertEquals(id, team.getId());
     }
+
+    @Test
+    public void testFindByUserId() {
+        final long id = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
+        Team team = teamDao.findByUserId(user.getId());
+        assertNotNull(team);
+        assertEquals(NAME, team.getName());
+        assertEquals(league.getId(), team.getLeagueId());
+        assertEquals(SQL_NULL_INT, team.getFormationId());
+        assertEquals(FANCOUNT, team.getFanCount());
+        assertEquals(FANTRUST, team.getFanTrust());
+        assertEquals(BOARDTRUST, team.getBoardTrust());
+        assertEquals(MONEY, team.getMoney());
+        assertEquals(id, team.getId());
+    }
 }

@@ -19,10 +19,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private TeamDao teamDao;
-    @Autowired
-    private PlayerDao playerDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -34,15 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        User user = userDao.findByUsername(username);
-        if(user != null) {
-            Team team = teamDao.findById(user.getTeamId());
-            if(team != null) {
-                team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
-                user.setTeam(team);
-            }
-        }
-        return user;
+        return userDao.findByUsername(username);
     }
 
     @Override
