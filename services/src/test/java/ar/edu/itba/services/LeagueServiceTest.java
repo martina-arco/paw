@@ -66,22 +66,22 @@ public class LeagueServiceTest {
     private Date date;
     private Team home, away;
     private User user;
+    private Match m1, m2, m3;
 
     @Before
     public void setUp() {
-        league = mock(League.class);
-        date = mock(Date.class);
+        league = new League(0,null,1);
+        date = new Date();
         user = mock(User.class);
         List<Match> matches = new ArrayList<>();
 
-        Match m1 = mock(Match.class);
-        Match m2 = mock(Match.class);
-        Match m3 = mock(Match.class);
+        m1 = mock(Match.class);
+        m2 = mock(Match.class);
+        m3 = mock(Match.class);
 
         home = mock(Team.class);
         away = mock(Team.class);
 
-        when(league.getId()).thenReturn((long) 0);
 
         when(m1.getHome()).thenReturn(home);
         when(m2.getHome()).thenReturn(home);
@@ -99,12 +99,18 @@ public class LeagueServiceTest {
         when(m2.getAwayPoints()).thenReturn(3);
         when(m3.getAwayPoints()).thenReturn(1);
 
+        when(m1.getDay()).thenReturn(date);
+        when(m2.getDay()).thenReturn(date);
+        when(m3.getDay()).thenReturn(date);
+
+        when(user.getCurrentDay()).thenReturn(date);
+
         matches.add(m1);
         matches.add(m2);
         matches.add(m3);
 
         when(matchDao.findByLeagueIdAndBeforeDate((long) 0, date)).thenReturn(matches);
-        when(matchDao.findByLeagueIdAndFromDate((long)0, date)).thenReturn(matches);
+        when(matchDao.findByLeagueIdAndFromDate((long) 0, date)).thenReturn(matches);
     }
 
     @Test
@@ -115,10 +121,14 @@ public class LeagueServiceTest {
         assertTrue(points.get(away) == 7);
     }
 
-//    @Test
-//    public void fillFixture() {
-//        leagueService.fillFixture(user, league);
-//
-//    }
+    @Test
+    public void fillFixture() {
+        leagueService.fillFixture(user, league);
+
+        assertTrue(league.getFixture().get(date).contains(m1));
+        assertTrue(league.getFixture().get(date).contains(m2));
+        assertTrue(league.getFixture().get(date).contains(m3));
+        assertTrue(league.getFixture().get(date).size() == 3);
+    }
 
 }
