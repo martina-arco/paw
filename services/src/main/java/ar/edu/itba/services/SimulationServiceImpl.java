@@ -87,6 +87,7 @@ public class SimulationServiceImpl implements SimulationService{
             Map<Long, MatchStatus> ret = new HashMap<>();
 
             for (MatchThread mThread : playingMatches) {
+                mThread.persistedMatchStatus.getEvents().addAll(mThread.matchStatus.getEvents());
                 ret.put(mThread.match.getId(), mThread.matchStatus.cloneAndFlush().filterEvents());
             }
 
@@ -126,11 +127,12 @@ public class SimulationServiceImpl implements SimulationService{
 
         private class MatchThread extends Thread {
             private final Match match;
-            private final MatchStatus matchStatus;
+            private final MatchStatus matchStatus, persistedMatchStatus;
 
             private MatchThread(Match match) {
                 super();
                 this.matchStatus = new MatchStatus(0, 0,0, new ArrayList<Event>());
+                this.persistedMatchStatus = new MatchStatus(0,0,0,new ArrayList<>());
                 this.match = match;
             }
 
@@ -139,15 +141,16 @@ public class SimulationServiceImpl implements SimulationService{
                 simulate();
             }
 
-            private void finish() {
+            synchronized private void finish() {
                 matchStatus.setMinute(90);
+                persistedMatchStatus.setMinute(90);
 
-                for (Event event : matchStatus.getEvents()) {
+                for (Event event : persistedMatchStatus.getEvents()) {
                     match.addEvent(event);
                 }
 
-                match.addAwayScore(matchStatus.getAwayScore());
-                match.addHomeScore(matchStatus.getHomeScore());
+                match.addAwayScore(persistedMatchStatus.getAwayScore());
+                match.addHomeScore(persistedMatchStatus.getHomeScore());
 
                 match.finish();
             }
@@ -445,7 +448,7 @@ public class SimulationServiceImpl implements SimulationService{
                 double check = rand.nextDouble();
                 int shot = node.getAtt(possession, NodeAtt.FIN) / (distanceToGoal() + 1);
 
-                int sum = shot + opGK.getGoalKeeping();
+                int sum = shot + opGK.getGoalKeeping() + node.getAtt(otherTeam(possession), NodeAtt.DEF);
                 double norm = (double) shot / sum;
                 boolean goal = check < norm;
 
