@@ -42,7 +42,7 @@
                             </tr>
                         </c:forEach>
 
-                        <%--<c:forEach items="${matches}" var="macth">--%>
+                        <%--<c:forEach items="${matches}" var="match">--%>
                         <%--<tr>--%>
                         <%--<td>${match.home}</td>--%>
                         <%--<td>${match.homeScore}</td>--%>
@@ -89,6 +89,20 @@
                                     <td>Juan 40'</td> 
                                 </tr>
 
+
+                                <%--<c:forEach items="${homeScores}" var="score">--%>
+                                    <%--<tr>--%>
+                                        <%--<td>${score.key} ${score.value}'</td>--%>
+                                    <%--</tr>--%>
+                                <%--</c:forEach>--%>
+
+                                <%--<c:forEach items="${awayScores}" var="score">--%>
+                                    <%--<tr>--%>
+                                        <%--<td></td>--%>
+                                        <%--<td>${score.key} ${score.value}'</td>--%>
+                                    <%--</tr>--%>
+                                <%--</c:forEach>--%>
+
                         </tbody>
                     </table>
 
@@ -129,7 +143,6 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 </body>

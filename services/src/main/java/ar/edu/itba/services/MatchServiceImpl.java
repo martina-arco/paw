@@ -37,6 +37,22 @@ public class MatchServiceImpl implements MatchService {
     private EventDao eventDao;
 
     @Override
+    public void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores) {
+
+        for (Event event : match.getEvents()) {
+            if(event.getType() == Event.Type.SCORE) {
+                Player player = event.getP1();
+
+                if(player.getTeam().equals(match.getHome()))
+                    homeScores.put(player.getName(), event.getMinute());
+                else
+                    awayScores.put(player.getName(), event.getMinute());
+            }
+        }
+
+    }
+
+    @Override
     public List<String> getUpcomingMatches(Team team, Date currentDate) {
         List<String> teamNames = new ArrayList<>();
         List<Match> matches = matchDao.findByTeamIdFromDate(team.getId(), currentDate);

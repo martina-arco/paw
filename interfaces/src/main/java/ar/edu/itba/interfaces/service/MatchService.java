@@ -7,6 +7,7 @@ import ar.edu.itba.model.User;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface MatchService {
 
@@ -34,5 +35,7 @@ public interface MatchService {
     List<Match> findByLeagueIdAndDate(long id, Date date);
 
     List<Match> findByLeagueIdAndBeforeDate(long id, Date date);
+
+    void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores);
 
 }
