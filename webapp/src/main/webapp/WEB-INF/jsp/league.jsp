@@ -56,12 +56,12 @@
 
                     <h5 class="center"><spring:message code="positionTable"/> </h5>
 
-                    <table class="table bg-white small center">
+                    <table class="table bg-white small center header-fixed">
 
                         <thead>
                         <tr>
-                            <th scope="col"><spring:message code="team"/> </th>
-                            <th scope="col"><spring:message code="points"/> </th>
+                            <th scope="col" class="width60"><spring:message code="team"/> </th>
+                            <th scope="col" class="width40"><spring:message code="points"/> </th>
                         </tr>
                         </thead>
 
@@ -69,8 +69,8 @@
 
                         <c:forEach items="${teams}" var="team">
                             <tr>
-                                <td><c:out value="${team.key.name}"/></td> 
-                                <td><c:out value="${team.value}"/></td> 
+                                <td class="width60"><c:out value="${team.key.name}"/></td> 
+                                <td class="width40"><c:out value="${team.value}"/></td> 
                             </tr>
                         </c:forEach>
 

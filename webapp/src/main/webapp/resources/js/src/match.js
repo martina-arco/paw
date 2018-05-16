@@ -48,7 +48,7 @@ function fetchData() {
 
                 switch(event.type) {
                     case "SCORE":
-                        type.innerHTML = event.p1.name + " - " + document.getElementById("goalScored").value + " ( " + event.minute + " )";
+                        type.innerHTML = event.p1.name + " - " + document.getElementById("goalScored").value + " ( " + event.minute + "' )";
                         break;
                     case "YELLOW_CARD":
                         type.innerHTML = event.p1.name + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )";

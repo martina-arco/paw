@@ -1,9 +1,6 @@
 package ar.edu.itba.interfaces.service;
 
-import ar.edu.itba.model.League;
-import ar.edu.itba.model.Match;
-import ar.edu.itba.model.Team;
-import ar.edu.itba.model.User;
+import ar.edu.itba.model.*;
 
 import java.util.Date;
 import java.util.List;
@@ -40,4 +37,8 @@ public interface MatchService {
     void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores);
 
     void setTeamsAndFormations(List<Match> matches);
+
+    Stadium getUpcomingMatchStadium(Team team, Date currentDate);
+
+    Team getUpcomingMatchTeam (Team team, Date currentDate);
 }

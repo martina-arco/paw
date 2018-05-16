@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -51,6 +53,13 @@ public class UserServiceImpl implements UserService {
         user.setTeam(team);
 
         userDao.save(user);
+    }
+
+    @Override
+    public String getCurrentDay(User user) {
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM YYY");
+
+        return format.format(user.getCurrentDay());
     }
 
 

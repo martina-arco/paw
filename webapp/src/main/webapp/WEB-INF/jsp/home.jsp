@@ -27,6 +27,9 @@
                         <div class="col">
                             <h4><c:out value="${team.name}"/></h4>
                         </div>
+                        <div class="col right">
+                            <h4><c:out value="${date}"/></h4>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-3">
@@ -44,23 +47,28 @@
                             <p><c:out value="${team.fanTrust}"/></p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <p><spring:message code="nextMatch" arguments="${teamAgainst.name},${stadium.name}"/> </p>
+                        </div>
+                    </div>
 
 
                     <div class = "player green">
 
                         <jsp:include page="playerInfo.jsp"/>
 
-                        <div class="btn-toolbar justify-content-between right" role="toolbar">
-                            <%--<div class="btn-group mr-2" role="group">--%>
-                                <%--<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="sell"/> </button></a>--%>
-                            <%--</div>--%>
-                            <%--<div class="btn-group mr-2" role="group">--%>
-                                    <%--<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="contract"/> </button></a>--%>
-                            <%--</div>--%>
-                            <div class="btn-group mr-2" role="group">
-                                <a href="<c:url value="/retirePlayer"/>"><button class="btn btn-light"><spring:message code="retire"/> </button></a>
-                            </div>
-                        </div>
+                        <%--<div class="btn-toolbar justify-content-between right" role="toolbar">--%>
+                            <%--&lt;%&ndash;<div class="btn-group mr-2" role="group">&ndash;%&gt;--%>
+                                <%--&lt;%&ndash;<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="sell"/> </button></a>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<div class="btn-group mr-2" role="group">&ndash;%&gt;--%>
+                                    <%--&lt;%&ndash;<a href="<c:url value="/"/>"><button class="btn btn-light"><spring:message code="contract"/> </button></a>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<div class="btn-group mr-2" role="group">&ndash;%&gt;--%>
+                                <%--&lt;%&ndash;<a href="<c:url value="/retirePlayer"/>"><button class="btn btn-light"><spring:message code="retire"/> </button></a>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                        <%--</div>--%>
 
                     </div>
 
@@ -90,16 +98,6 @@
                         </thead>
 
                         <tbody>
-
-                            <%--<c:forEach var = "i" begin = "1" end = "23">--%>
-                                <%--<tr>--%>
-                                    <%--<th scope="row"><a href="<c:url value="/home/${i}" />">Perez</a></th>--%>
-                                    <%--<td>3,000</td> --%>
-                                    <%--<td>400k</td> --%>
-                                    <%--<td>93</td> --%>
-                                    <%--<td>35</td>--%>
-                                <%--</tr>--%>
-                            <%--</c:forEach>--%>
 
                             <c:forEach items="${players}" var="player">
                                 <tr>

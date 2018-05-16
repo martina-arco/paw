@@ -16,4 +16,6 @@ public interface UserService {
     void setTeam(User user, Team team);
 
     void advanceDate(User user);
+
+    String getCurrentDay(User user);
 }

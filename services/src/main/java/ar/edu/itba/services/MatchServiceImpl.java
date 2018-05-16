@@ -86,7 +86,29 @@ public class MatchServiceImpl implements MatchService {
     public List<Match> getUpcomingMatches(Team team, Date currentDate) {
         List<Match> matches = matchDao.findByTeamIdFromDate(team.getId(), currentDate);
         setTeams(matches);
+
+        Collections.sort(matches, new Comparator<Match>() {
+            @Override
+            public int compare(Match o1, Match o2) {
+                if (o1.getDay() == null || o2.getDay() == null)
+                    return 0;
+                return o1.getDay().compareTo(o2.getDay());
+            }
+        });
+
         return matches;
+    }
+
+    @Override
+    public Team getUpcomingMatchTeam (Team team, Date currentDate) {
+        Match match = getUpcomingMatches(team, currentDate).get(0);
+        return match.getHome().equals(team) ? match.getAway() : match.getHome();
+    }
+
+    @Override
+    public Stadium getUpcomingMatchStadium(Team team, Date currentDate) {
+        Match match = getUpcomingMatches(team, currentDate).get(0);
+        return match.getHome().getStadium();
     }
 
     public void setTeams(List<Match> matches) {

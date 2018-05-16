@@ -1,11 +1,10 @@
 package ar.edu.itba.webapp.controllers;
 
-import ar.edu.itba.interfaces.service.ContractService;
-import ar.edu.itba.interfaces.service.PlayerService;
-import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.interfaces.service.UserService;
+import ar.edu.itba.interfaces.service.*;
+import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
+import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +23,12 @@ public class HomeController extends Controller {
     @Autowired
     private TeamService teamService;
 
+    @Autowired
+    private MatchService matchService;
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/home")
     public ModelAndView home(){
         Team team = teamService.findByUserId(loggedUser().getId());
@@ -31,8 +36,8 @@ public class HomeController extends Controller {
         if(team == null)
             return new ModelAndView("redirect:chooseTeam");
 
-        teamService.setPlayers(team);
         long playerId;
+        teamService.setPlayers(team);
 
         if(team.getPlayers().size() > 0)
             playerId = team.getPlayers().get(0).getId();
@@ -46,25 +51,28 @@ public class HomeController extends Controller {
     public ModelAndView home(@PathVariable int playerId) {
         ModelAndView mav = new ModelAndView("home");
 
-        Team team = teamService.findByUserId(loggedUser().getId());
+        User user = loggedUser();
+        Team team = teamService.findByUserId(user.getId());
         teamService.setPlayers(team);
 
-        Player currentPlayer = playerService.findById(playerId);
 
         mav.addObject("team", team);
+        mav.addObject("teamAgainst", matchService.getUpcomingMatchTeam(team, user.getCurrentDay()));
+        mav.addObject("stadium", matchService.getUpcomingMatchStadium(team, user.getCurrentDay()));
+        mav.addObject("date", userService.getCurrentDay(user));
         mav.addObject("players", playerService.getPlayers(team));
         mav.addObject("player", playerService.findById(playerId));
 
         return mav;
     }
 
-    @RequestMapping("/retirePlayer")
-    public ModelAndView retirePlayer() {
-//        Player currentPlayer = playerService.findById(playerId);
-//
-//        playerService.retire(currentPlayer);
-        return new ModelAndView("redirect:home");
-    }
+//    @RequestMapping("/retirePlayer")
+//    public ModelAndView retirePlayer() {
+////        Player currentPlayer = playerService.findById(playerId);
+////
+////        playerService.retire(currentPlayer);
+//        return new ModelAndView("redirect:home");
+//    }
 
 //    @RequestMapping("/youthAcademy")
 //    public ModelAndView youthAcademy() {

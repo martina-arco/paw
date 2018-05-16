@@ -40,11 +40,11 @@
 
                     </form:form>
 
+
+                    Already have an account?
+                    <a href="<c:url value="/login"/>"><input type="button" value="Login!" class="btn btn-light"/></a>
+
                 </div>
-
-                Already have an account?
-                <a href="<c:url value="/login"/>"><input type="button" value="Login!" class="btn btn-light"/></a>
-
             </div>
         </div>
     </div>
