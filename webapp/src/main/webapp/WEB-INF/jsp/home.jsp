@@ -49,7 +49,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <p><spring:message code="nextMatch" arguments="${teamAgainst.name},${stadium.name}"/> </p>
+                            <p><spring:message code="nextMatch" arguments="${team1.name},${team2.name},${stadium.name}"/> </p>
                         </div>
                     </div>
 

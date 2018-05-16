@@ -54,11 +54,13 @@ public class HomeController extends Controller {
         User user = loggedUser();
         Team team = teamService.findByUserId(user.getId());
         teamService.setPlayers(team);
+        Match nextMatch = matchService.getUpcomingMatches(team, user.getCurrentDay()).get(0);
 
 
         mav.addObject("team", team);
-        mav.addObject("teamAgainst", matchService.getUpcomingMatchTeam(team, user.getCurrentDay()));
-        mav.addObject("stadium", matchService.getUpcomingMatchStadium(team, user.getCurrentDay()));
+        mav.addObject("team1",nextMatch.getHome());
+        mav.addObject("team2", nextMatch.getAway());
+        mav.addObject("stadium", nextMatch.getHome().getStadium());
         mav.addObject("date", userService.getCurrentDay(user));
         mav.addObject("players", playerService.getPlayers(team));
         mav.addObject("player", playerService.findById(playerId));

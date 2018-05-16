@@ -99,18 +99,6 @@ public class MatchServiceImpl implements MatchService {
         return matches;
     }
 
-    @Override
-    public Team getUpcomingMatchTeam (Team team, Date currentDate) {
-        Match match = getUpcomingMatches(team, currentDate).get(0);
-        return match.getHome().equals(team) ? match.getAway() : match.getHome();
-    }
-
-    @Override
-    public Stadium getUpcomingMatchStadium(Team team, Date currentDate) {
-        Match match = getUpcomingMatches(team, currentDate).get(0);
-        return match.getHome().getStadium();
-    }
-
     public void setTeams(List<Match> matches) {
 
         Set<Team> teams = new HashSet<>();
