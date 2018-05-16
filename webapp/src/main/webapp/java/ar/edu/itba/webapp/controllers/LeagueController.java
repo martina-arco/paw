@@ -24,16 +24,22 @@ public class LeagueController extends Controller {
     @Autowired
     private LeagueService leagueService;
 
+    @Autowired
+    private TeamService teamService;
+
     @RequestMapping("/league")
     public ModelAndView league() {
         ModelAndView mav = new ModelAndView();
 
         User user = loggedUser();
-//        List<Match> upcomingMatches = matchService.getUpcomingMatches(user.getTeam(), user.getCurrentDay());
-//        Map<Team, Integer> teams = leagueService.getTeamPoints(user.getTeam().getLeague(), user.getCurrentDay());
-//
-//        mav.addObject("upcomingMatches", upcomingMatches);
-//        mav.addObject("teams", teams);
+        Team team = teamService.findByUserId(user.getId());
+        League league = leagueService.findByUser(loggedUser()).get(0);
+
+        List<Match> upcomingMatches = matchService.getUpcomingMatches(team, user.getCurrentDay());
+        Map<Team, Integer> teams = leagueService.getTeamPoints(league, user.getCurrentDay());
+
+        mav.addObject("upcomingMatches", upcomingMatches);
+        mav.addObject("teams", teams);
         return mav;
     }
 }

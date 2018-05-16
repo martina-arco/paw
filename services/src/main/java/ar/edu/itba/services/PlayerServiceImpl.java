@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -38,5 +39,10 @@ public class PlayerServiceImpl implements PlayerService {
         Team team = player.getTeam();
         team.removePlayer(player);
         teamDao.save(team);
+    }
+
+    @Override
+    public List<Player> getPlayers(Team team) {
+        return playerDao.findAdultsByTeamId(team.getId());
     }
 }

@@ -5,6 +5,7 @@ import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 
 import java.util.Date;
+import java.util.List;
 
 public interface PlayerService {
 
@@ -14,5 +15,7 @@ public interface PlayerService {
     Player findById(long id);
 
     void retire(Player player);
+
+    List<Player> getPlayers(Team team);
 
 }

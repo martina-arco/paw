@@ -5,6 +5,7 @@ import ar.edu.itba.interfaces.service.AiService;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.interfaces.service.TeamService;
+import ar.edu.itba.interfaces.service.StadiumService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,9 @@ public class MatchServiceImpl implements MatchService {
 
     @Autowired
     private AiService AiService;
+
+    @Autowired
+    private StadiumService stadiumService;
 
     @Autowired
     private EventDao eventDao;
@@ -80,7 +84,27 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public List<Match> getUpcomingMatches(Team team, Date currentDate) {
-        return matchDao.findByTeamIdFromDate(team.getId(), currentDate);
+        List<Match> matches = matchDao.findByTeamIdFromDate(team.getId(), currentDate);
+        setTeams(matches);
+        return matches;
+    }
+
+    public void setTeams(List<Match> matches) {
+
+        Set<Team> teams = new HashSet<>();
+
+        for (Match match:matches) {
+
+            Team home = teamDao.findById(match.getHomeId());
+            Team away = teamDao.findById(match.getAwayId());
+
+            match.setHome(home);
+            match.setAway(away);
+
+            teams.add(home);
+        }
+
+        stadiumService.setStadium(teams);
 
     }
 

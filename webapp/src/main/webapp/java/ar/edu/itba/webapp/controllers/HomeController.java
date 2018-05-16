@@ -52,7 +52,7 @@ public class HomeController extends Controller {
         Player currentPlayer = playerService.findById(playerId);
 
         mav.addObject("team", team);
-        mav.addObject("players", team.getPlayers());
+        mav.addObject("players", playerService.getPlayers(team));
         mav.addObject("player", playerService.findById(playerId));
 
         return mav;

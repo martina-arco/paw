@@ -1,6 +1,9 @@
 package ar.edu.itba.model;
 
+import ar.edu.itba.model.utils.*;
+
 import java.util.*;
+import java.util.Date;
 
 public class League {
     private long id;
@@ -36,6 +39,10 @@ public class League {
             return map;
         }
         return null;
+    }
+
+    public List<Match> getMatches(Date date) {
+        return fixture.get(date);
     }
 
     public int getPrize() {

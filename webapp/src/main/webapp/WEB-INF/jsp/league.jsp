@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/css/match.css"/>"/>
 
 </head>
 <body>
@@ -24,14 +25,14 @@
             <div class="row">
                 <div class="col">
 
-                    <h5><spring:message code="upcomingMatches"/> </h5>
+                    <h5 class="center"><spring:message code="upcomingMatches"/> </h5>
 
-                    <table class="table bg-white small center">
+                    <table class="table bg-white small center header-fixed">
 
                         <thead>
                             <tr>
-                                <th scope="col"><spring:message code="stadium"/> </th>
-                                <th scope="col"><spring:message code="teams"/> </th>
+                                <th scope="col" class="width40"><spring:message code="stadium"/> </th>
+                                <th scope="col" class="width60"><spring:message code="teams"/> </th>
                             </tr>
                         </thead>
 
@@ -39,8 +40,8 @@
 
                         <c:forEach items="${upcomingMatches}" var="match">
                             <tr>
-                                <td><c:out value="${match.home.stadium}"/></td>
-                                <td><spring:message code="versus" arguments="${match.home.name}, ${match.away.name}"/></td> 
+                                <td class="width40"><c:out value="${match.home.stadium.name}"/></td>
+                                <td class="width60"><spring:message code="versus" arguments="${match.home.name}, ${match.away.name}"/></td> 
                             </tr>
                         </c:forEach>
 
@@ -52,6 +53,8 @@
                 </div>
 
                 <div class="col">
+
+                    <h5 class="center"><spring:message code="positionTable"/> </h5>
 
                     <table class="table bg-white small center">
 

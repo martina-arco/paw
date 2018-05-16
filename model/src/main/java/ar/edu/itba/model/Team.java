@@ -121,6 +121,10 @@ public class Team {
         return result;
     }
 
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
     public void addMoney(int amount) {
         money += amount;
     }

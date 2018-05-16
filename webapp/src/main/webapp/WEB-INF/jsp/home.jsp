@@ -24,6 +24,11 @@
                 <div class="col-sm">
 
                     <div class="row">
+                        <div class="col">
+                            <h4><c:out value="${team.name}"/></h4>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-3">
                             <h5><spring:message code="boardTrust"/> </h5>
                         </div>
@@ -39,6 +44,7 @@
                             <p><c:out value="${team.fanTrust}"/></p>
                         </div>
                     </div>
+
 
                     <div class = "player green">
 

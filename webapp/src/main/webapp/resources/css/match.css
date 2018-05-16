@@ -3,7 +3,9 @@ th, td {
 }
 
 .header-fixed {
-    width: 100%
+    width: 100%;
+    padding:0;
+    margin:0;
 }
 
 .header-fixed > thead,
@@ -25,7 +27,7 @@ th, td {
 
 .header-fixed > tbody {
     overflow-y: auto;
-    height: 500px;
+    height: 450px;
 }
 
 .header-fixed > tbody > tr > td.width10 {
@@ -43,6 +45,16 @@ th, td {
     float: left;
 }
 
+.header-fixed > tbody > tr > td.width60 {
+    width: 60%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width40 {
+    width: 40%;
+    float: left;
+}
+
 .header-fixed > thead > tr > th.width15{
     width: 15%;
     float: left;
@@ -55,5 +67,17 @@ th, td {
 
 .header-fixed > thead > tr > th.width35{
     width: 35%;
+    float: left;
+}
+
+
+.header-fixed > thead > tr > th.width60{
+    width: 60%;
+    float: left;
+}
+
+
+.header-fixed > thead > tr > th.width40{
+    width: 40%;
     float: left;
 }

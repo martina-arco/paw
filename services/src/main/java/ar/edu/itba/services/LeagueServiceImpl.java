@@ -22,6 +22,10 @@ public class LeagueServiceImpl implements LeagueService {
     @Autowired
     private MatchDao matchDao;
 
+    @Autowired
+    private TeamDao teamDao;
+
+
     @Override
     public List<League> findByUser(User user) {
         List<League> leagues = leagueDao.findAllByUserId(user.getId());
@@ -51,24 +55,32 @@ public class LeagueServiceImpl implements LeagueService {
 
         List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
 
-        for (Match match : matches) {
-            Team home = match.getHome();
-            Team away = match.getAway();
+        if(matches != null) {
 
-            int homeInitialPoints = 0;
-            int awayInitialPoints = 0;
+            for (Match match : matches) {
+                Team home = match.getHome();
+                Team away = match.getAway();
 
-            if(map.containsKey(home))
-                homeInitialPoints = map.get(home);
+                int homeInitialPoints = 0;
+                int awayInitialPoints = 0;
 
-            if(map.containsKey(away))
-                awayInitialPoints = map.get(away);
+                if(map.containsKey(home))
+                    homeInitialPoints = map.get(home);
 
-            homeInitialPoints += match.getHomePoints();
-            awayInitialPoints += match.getAwayPoints();
+                if(map.containsKey(away))
+                    awayInitialPoints = map.get(away);
 
-            map.put(home, homeInitialPoints);
-            map.put(away, awayInitialPoints);
+                homeInitialPoints += match.getHomePoints();
+                awayInitialPoints += match.getAwayPoints();
+
+                map.put(home, homeInitialPoints);
+                map.put(away, awayInitialPoints);
+            }
+
+        } else {
+            for (Team team : teamDao.findAllByLeagueId(league.getId())) {
+                map.put(team, 0);
+            }
         }
 
         return map;

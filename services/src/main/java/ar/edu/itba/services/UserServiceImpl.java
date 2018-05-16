@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setTeam(User user, Team team) {
         user.setTeam(team);
+
         userDao.save(user);
     }
 }

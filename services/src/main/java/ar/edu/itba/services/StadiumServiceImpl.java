@@ -8,15 +8,26 @@ import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class StadiumServiceImpl implements StadiumService {
 
     @Autowired
-    StadiumDao stadiumDao;
+    private StadiumDao stadiumDao;
 
     @Override
     public Stadium findByTeam(Team team) {
-//        return stadiumDao.findByTeamId(team.getId());
-        return new Stadium(1,"Monumental", team,10,10,20,20,30,30);
+        return stadiumDao.findByTeamId(team.getId());
+    }
+
+    @Override
+    public void setStadium(Set<Team> teams) {
+        for (Team team:teams) {
+            Stadium stadium = stadiumDao.findByTeamId(team.getId());
+
+            team.setStadium(stadium);
+        }
     }
 }
