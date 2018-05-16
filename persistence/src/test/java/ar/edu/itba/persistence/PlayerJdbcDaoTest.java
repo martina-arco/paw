@@ -213,6 +213,49 @@ public class PlayerJdbcDaoTest {
         assertNotNull(player);
 
         Team team2 = teamDao.create("", league, null, null, null, null, 0,0,0,0);
+        final int AGE2 = 322;
+        final int FITNESS2 = 4123;
+        final int VALUE2 = 4635;
+        final int POTENTIAL2 = 723;
+        final int SKILLLEVEL2 = 832;
+        final int GOALKEEPING2 = 897;
+        final int DEFENDING2 = 576;
+        final int PASSING2 = 908;
+        final int FINISHING2 = 677;
+        final int SALARY2 = 1893403;
+        final Date CONTRACT_EXPIRATION2 = new Date(2015, 8, 15);
+        final boolean YOUTH2 = false;
 
+        player.setTeam(team2);
+        player.setAge(AGE2);
+        player.setFitness(FITNESS2);
+        player.setValue(VALUE2);
+        player.setPotential(POTENTIAL2);
+        player.setSkillLevel(SKILLLEVEL2);
+        player.setGoalKeeping(GOALKEEPING2);
+        player.setDefending(DEFENDING2);
+        player.setPassing(PASSING2);
+        player.setFinish(FINISHING2);
+        player.setSalary(SALARY2);
+        player.setContractExpiration(CONTRACT_EXPIRATION2);
+        player.setYouth(YOUTH2);
+
+        playerDao.save(player);
+        player = playerDao.findById(id);
+
+        assertEquals(NAME, player.getName());
+        assertEquals(team2.getId(), player.getTeamId());
+        assertEquals(AGE2, player.getAge());
+        assertEquals(VALUE2, player.getValue());
+        assertEquals(POTENTIAL2, player.getPotential());
+        assertEquals(SKILLLEVEL2, player.getSkillLevel());
+        assertEquals(GOALKEEPING2, player.getGoalKeeping());
+        assertEquals(FINISHING2, player.getFinish());
+        assertEquals(DEFENDING2, player.getDefending());
+        assertEquals(PASSING2, player.getPassing());
+        assertEquals(FITNESS2, player.getFitness());
+        assertEquals(SALARY2, player.getSalary());
+        assertEquals(CONTRACT_EXPIRATION2, player.getContractExpiration());
+        assertEquals(YOUTH2, player.isYouth());
     }
 }

@@ -73,4 +73,13 @@ public class PlayerStatsJdbcDaoTest {
         assertEquals(match.getId(), playerStats.getMatchId());
         assertEquals(id, playerStats.getId());
     }
+
+    @Test
+    public void testSave() {
+        final long id = playerStatsDao.create(player, match).getId();
+        PlayerStats playerStats = playerStatsDao.findByMatchId(match.getId()).get(0);
+        assertNotNull(playerStats);
+
+        
+    }
 }

@@ -63,7 +63,7 @@ public class SimulationServiceTest {
     }
 
 
-    @Test
+
     public void influenceTest(){
         SimulationServiceImpl ss = new SimulationServiceImpl();
         List<Match> list = new ArrayList<>();
