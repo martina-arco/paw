@@ -151,6 +151,9 @@ public class SimulationServiceImpl implements SimulationService{
                     match.addEvent(event);
                 }
 
+                persistedMatchStatus.setHomeScore(matchStatus.getHomeScore());
+                persistedMatchStatus.setAwayScore(matchStatus.getAwayScore());
+
                 match.addAwayScore(persistedMatchStatus.getAwayScore());
                 match.addHomeScore(persistedMatchStatus.getHomeScore());
 
