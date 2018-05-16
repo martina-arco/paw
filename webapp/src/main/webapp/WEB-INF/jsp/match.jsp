@@ -56,38 +56,34 @@
 
                     <tbody>
 
-                            <tr id="1">
-                                <td class="width15">Monumental</td>
-                                <td class="width15">River</td> 
-                                <td class="width10" id="1homeScore"></td> 
-                                <td class="width10" id="1awayScore"></td>
-                                <td class="width15">Boca</td> 
-                                <td class="width35" id="1event"></td>
-                            </tr>
-                            <tr id="2">
-                                <td class="width15">Monumental</td>
-                                <td class="width15">River</td> 
-                                <td class="width10" id="2homeScore">1</td> 
-                                <td class="width10" id="2awayScore">1</td>
-                                <td class="width15">Boca</td> 
-                                <td class="width35" id="2event"></td>
-                            </tr>
-
-
+                            <%--<tr id="1">--%>
+                                <%--<td class="width15">Monumental</td>--%>
+                                <%--<td class="width15">River</td> --%>
+                                <%--<td class="width10" id="1homeScore"></td> --%>
+                                <%--<td class="width10" id="1awayScore"></td>--%>
+                                <%--<td class="width15">Boca</td> --%>
+                                <%--<td class="width35" id="1event"></td>--%>
+                            <%--</tr>--%>
+                            <%--<tr id="2">--%>
+                                <%--<td class="width15">Monumental</td>--%>
+                                <%--<td class="width15">River</td> --%>
+                                <%--<td class="width10" id="2homeScore">1</td> --%>
+                                <%--<td class="width10" id="2awayScore">1</td>--%>
+                                <%--<td class="width15">Boca</td> --%>
+                                <%--<td class="width35" id="2event"></td>--%>
+                            <%--</tr>--%>
+                            <c:forEach items="${matches}" var="match">
+                                <tr id="${match.id}">
+                                    <td class="width15">${match.home.stadium.name}</td>
+                                    <td class="width15">${match.home.name}</td> 
+                                    <td class="width10" id="${match.id}homeScore">0</td> 
+                                    <td class="width10" id="${match.id}awayScore">0</td>
+                                    <td class="width15">${match.away.name}</td> 
+                                    <td class="width35" id="${match.id}event"></td>
+                                </tr>
+                            </c:forEach>
 
                     </tbody>
-
-                    <%--<c:forEach items="${matches}" var="match">--%>
-                        <%--<tr id="${match.id}">--%>
-                            <%--<td >${match.home.stadium}</td>--%>
-                            <%--<td>${match.home}</td>--%>
-                            <%--<td id="${match.id}homeScore">${match.homeScore}</td>--%>
-                            <%--<td>${match.awayScore}</td>--%>
-                            <%--<td>${match.away}</td>--%>
-                            <%--<td>${match.event}</td>--%>
-                        <%--</tr>--%>
-                    <%--</c:forEach>--%>
-
                 </table>
             </div>
     </div>

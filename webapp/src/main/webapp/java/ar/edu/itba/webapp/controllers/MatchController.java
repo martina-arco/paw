@@ -39,7 +39,7 @@ public class MatchController extends Controller{
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
         matchService.setTeamsAndFormations(matches);
         mav.addObject("matches", matches);
-        simulationService.simulateFixture(user.getId(),matches);
+        simulationService.simulateFixture(user.getId(), matches);
         simulationService.start(user.getId());  //No termina hasta que termina la simulacion. TODO @lemery
         return mav;
     }
