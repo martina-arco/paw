@@ -35,20 +35,19 @@ public class TeamJdbcDao implements TeamDao {
             long id = rs.getLong("teamid");
             String name = rs.getString("name");
             long league = rs.getLong("league");
-            long stadium = rs.getLong("stadium");
             long formation = rs.getLong("formation");
             int fanCount = rs.getInt("fanCount");
             int fanTrust = rs.getInt("fanTrust");
             int boardTrust = rs.getInt("boardTrust");
             int money = rs.getInt("money");
 
-            return new Team(id, league, stadium, formation, name, fanCount, fanTrust, boardTrust, money);
+            return new Team(id, league, formation, name, fanCount, fanTrust, boardTrust, money);
         }
     };
 
     @Override
     public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money) {
-        Team team = create(name, league == null ? 0 : league.getId(), stadium == null ? 0 : stadium.getId(), formation == null ? 0 : formation.getId(), fanCount, fanTrust, boardTrust, money);
+        Team team = create(name, league == null ? 0 : league.getId(), formation == null ? 0 : formation.getId(), fanCount, fanTrust, boardTrust, money);
         team.setLeague(league);
         team.setStadium(stadium);
         team.setFormation(formation);
@@ -58,11 +57,10 @@ public class TeamJdbcDao implements TeamDao {
     }
 
     @Override
-    public Team create(String name, long league, long stadium, long formation, int fanCount, int fanTrust, int boardTrust, int money) {
+    public Team create(String name, long league, long formation, int fanCount, int fanTrust, int boardTrust, int money) {
         final Map<String, Object> args = new HashMap<>();
         args.put("name", name);
         args.put("league", league == 0 ? null : league);
-        args.put("stadium", stadium == 0 ? null : stadium);
         args.put("formation", formation == 0 ? null : formation);
         args.put("fanCount", fanCount);
         args.put("fanTrust", fanTrust);
@@ -70,14 +68,14 @@ public class TeamJdbcDao implements TeamDao {
         args.put("money", money);
 
         final Number id = jdbcInsert.executeAndReturnKey(args);
-        return new Team(id.longValue(), league, stadium, formation, name, fanCount, fanTrust, boardTrust, money);
+        return new Team(id.longValue(), league, formation, name, fanCount, fanTrust, boardTrust, money);
     }
 
     @Override
     public boolean save(Team team) {
         jdbcTemplate.update("UPDATE team SET name = ?, fancount = ?, fantrust = ?, boardtrust = ?, league = ?, " +
-                "stadium = ?, formation = ? WHERE teamid = ?", team.getName(), team.getFanCount(), team.getFanTrust(),
-                team.getBoardTrust(), team.getLeagueId(), team.getStadiumId(), team.getFormationId(), team.getId());
+                "formation = ? WHERE teamid = ?", team.getName(), team.getFanCount(), team.getFanTrust(),
+                team.getBoardTrust(), team.getLeagueId(), team.getFormationId(), team.getId());
         return true;
     }
 

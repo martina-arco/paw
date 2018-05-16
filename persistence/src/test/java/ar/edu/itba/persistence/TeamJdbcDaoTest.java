@@ -47,7 +47,6 @@ public class TeamJdbcDaoTest {
     private JdbcTemplate jdbcTemplate;
     private League league;
     private User user;
-    private Stadium stadium;
 
     @Before
     public void setUp() {
@@ -55,17 +54,15 @@ public class TeamJdbcDaoTest {
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "users", "league", "team", "stadium");
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
-        stadium = stadiumDao.create("",0,0,0,0,0,0);
     }
 
     @Test
     public void testCreate() {
-        final Team team = teamDao.create(NAME, league, stadium, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY);
+        final Team team = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY);
         assertNotNull(team);
         assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "team"));
         assertEquals(NAME, team.getName());
         assertEquals(league, team.getLeague());
-        assertEquals(stadium, team.getStadium());
         assertEquals(SQL_NULL_INT, team.getFormationId());
         assertEquals(FANCOUNT, team.getFanCount());
         assertEquals(FANTRUST, team.getFanTrust());
@@ -75,13 +72,12 @@ public class TeamJdbcDaoTest {
 
     @Test
     public void testCreateById() {
-        final Team team = teamDao.create(NAME, league.getId(), stadium.getId(), NO_ID, FANCOUNT, FANTRUST, BOARDTRUST, MONEY);
+        final Team team = teamDao.create(NAME, league.getId(), NO_ID, FANCOUNT, FANTRUST, BOARDTRUST, MONEY);
         assertNotNull(team);
         assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "team"));
         assertEquals(NAME, team.getName());
         assertEquals(NAME, team.getName());
         assertEquals(league.getId(), team.getLeagueId());
-        assertEquals(stadium.getId(), team.getStadiumId());
         assertEquals(SQL_NULL_INT, team.getFormationId());
         assertEquals(FANCOUNT, team.getFanCount());
         assertEquals(FANTRUST, team.getFanTrust());
@@ -92,12 +88,11 @@ public class TeamJdbcDaoTest {
 
     @Test
     public void testFindById() {
-        final long id = teamDao.create(NAME, league, stadium, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
+        final long id = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
         Team team = teamDao.findById(id);
         assertNotNull(team);
         assertEquals(NAME, team.getName());
         assertEquals(league.getId(), team.getLeagueId());
-        assertEquals(stadium.getId(), team.getStadiumId());
         assertEquals(SQL_NULL_INT, team.getFormationId());
         assertEquals(FANCOUNT, team.getFanCount());
         assertEquals(FANTRUST, team.getFanTrust());
@@ -108,12 +103,11 @@ public class TeamJdbcDaoTest {
 
     @Test
     public void testFindAllByLeagueId() {
-        final long id = teamDao.create(NAME, league, stadium, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
+        final long id = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
         Team team = teamDao.findAllByLeagueId(league.getId()).get(0);
         assertNotNull(team);
         assertEquals(NAME, team.getName());
         assertEquals(league.getId(), team.getLeagueId());
-        assertEquals(stadium.getId(), team.getStadiumId());
         assertEquals(SQL_NULL_INT, team.getFormationId());
         assertEquals(FANCOUNT, team.getFanCount());
         assertEquals(FANTRUST, team.getFanTrust());

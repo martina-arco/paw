@@ -204,4 +204,15 @@ public class PlayerJdbcDaoTest {
 
         assertNotNull(playerDao.findById(player2.getId()));
     }
+
+    @Test
+    public void testSave() {
+        final long id = playerDao.create(NAME, team, AGE, VALUE, POTENTIAL, SKILLLEVEL, GOALKEEPING, FINISHING,
+                DEFENDING, PASSING, FITNESS, SALARY, CONTRACT_EXPIRATION, YOUTH).getId();
+        Player player = playerDao.findById(id);
+        assertNotNull(player);
+
+        Team team2 = teamDao.create("", league, null, null, null, null, 0,0,0,0);
+
+    }
 }

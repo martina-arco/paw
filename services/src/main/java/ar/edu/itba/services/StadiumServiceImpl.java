@@ -17,6 +17,6 @@ public class StadiumServiceImpl implements StadiumService {
     @Override
     public Stadium findByTeam(Team team) {
 //        return stadiumDao.findByTeamId(team.getId());
-        return new Stadium(1,"Monumental",10,10,20,20,30,30);
+        return new Stadium(1,"Monumental", team,10,10,20,20,30,30);
     }
 }

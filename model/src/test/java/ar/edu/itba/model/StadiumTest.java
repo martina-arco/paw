@@ -4,16 +4,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class StadiumTest {
 
     private final Integer testConst = 30;
     private final String testName = "Test";
     private Stadium stadium;
+    private Team team = mock(Team.class);
 
     @Before
     public void setUp(){
-        stadium = new Stadium(0, testName,0, 0, 0, 0, 0, 0 );
+        stadium = new Stadium(0, testName, team, 0, 0, 0, 0, 0, 0 );
     }
 
     @Test

@@ -1,13 +1,3 @@
-CREATE TABLE IF NOT EXISTS STADIUM (
-    stadiumid         SERIAL PRIMARY KEY,
-    lowClass          INTEGER NOT NULL,
-    lowClassPrice     INTEGER NOT NULL,
-    mediumClass       INTEGER NOT NULL,
-    mediumClassPrice  INTEGER NOT NULL,
-    highClass         INTEGER NOT NULL,
-    highClassPrice    INTEGER NOT NULL,
-    name              VARCHAR(63) NOT NULL
-);
 
 CREATE TABLE IF NOT EXISTS PLAYER (
     playerid            SERIAL PRIMARY KEY,
@@ -59,9 +49,20 @@ CREATE TABLE IF NOT EXISTS TEAM (
     fanTrust        INTEGER NOT NULL,
     boardTrust      INTEGER NOT NULL,
     league          INTEGER REFERENCES LEAGUE ON DELETE CASCADE,
-    stadium         INTEGER REFERENCES STADIUM ON DELETE SET NULL,
     formation       INTEGER REFERENCES FORMATION ON DELETE SET NULL,
     money           INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS STADIUM (
+    stadiumid         SERIAL PRIMARY KEY,
+    lowClass          INTEGER NOT NULL,
+    lowClassPrice     INTEGER NOT NULL,
+    mediumClass       INTEGER NOT NULL,
+    mediumClassPrice  INTEGER NOT NULL,
+    highClass         INTEGER NOT NULL,
+    highClassPrice    INTEGER NOT NULL,
+    name              VARCHAR(63) NOT NULL,
+    team              INTEGER NOT NULL REFERENCES TEAM ON DELETE CASCADE
 );
 
 ALTER TABLE USERS DROP CONSTRAINT IF EXISTS users_team_fk;

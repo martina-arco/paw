@@ -81,7 +81,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     private void addMatchEarnings(Team team) {
-        int amount = stadiumDao.findById(team.getStadiumId()).calculateMatchEarnings();
+        int amount = stadiumDao.findByTeamId(team.getId()).calculateMatchEarnings();
         receiptDao.create(team, amount, Receipt.Type.MATCHINCOME);
         team.addMoney(amount);
     }

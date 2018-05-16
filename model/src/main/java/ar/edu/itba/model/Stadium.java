@@ -8,19 +8,48 @@ public class Stadium {
     private static final int lowCost = 50, mediumCost = 100, highCost = 200;
     private long id;
     private String name;
+    private long teamId;
+    private Team team;
     private int lowClass, lowClassPrice;
     private int mediumClass, mediumClassPrice;
     private int highClass, highClassPrice;
 
-    public Stadium(long id, String name, int lowClass, int lowClassPrice, int mediumClass, int mediumClassPrice, int highClass, int highClassPrice) {
+    public Stadium(long id, String name, Team team, int lowClass, int lowClassPrice, int mediumClass, int mediumClassPrice, int highClass, int highClassPrice) {
         this.id = id;
         this.name = name;
+        this.team = team;
         this.lowClass = lowClass;
         this.lowClassPrice = lowClassPrice;
         this.mediumClass = mediumClass;
         this.mediumClassPrice = mediumClassPrice;
         this.highClass = highClass;
         this.highClassPrice = highClassPrice;
+    }
+
+    public Stadium(long id, String name, long teamId, int lowClass, int lowClassPrice, int mediumClass, int mediumClassPrice, int highClass, int highClassPrice) {
+        this.id = id;
+        this.name = name;
+        this.teamId = teamId;
+        this.lowClass = lowClass;
+        this.lowClassPrice = lowClassPrice;
+        this.mediumClass = mediumClass;
+        this.mediumClassPrice = mediumClassPrice;
+        this.highClass = highClass;
+        this.highClassPrice = highClassPrice;
+    }
+
+    public long getTeamId() {
+        if(team != null)
+            return team.getId();
+        return teamId;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public static int getHighCost() {

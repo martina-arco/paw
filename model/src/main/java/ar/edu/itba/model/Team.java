@@ -36,11 +36,10 @@ public class Team {
         this.money = money;
     }
 
-    public Team(long id, long leagueId, long stadiumId, long formationId, String name, int fanCount, int fanTrust,
+    public Team(long id, long leagueId, long formationId, String name, int fanCount, int fanTrust,
                 int boardTrust, int money) {
         this.id = id;
         this.leagueId = leagueId;
-        this.stadiumId = stadiumId;
         this.formationId = formationId;
         this.name = name;
         this.fanCount = fanCount;
@@ -53,12 +52,6 @@ public class Team {
         if(league != null)
             return league.getId();
         return leagueId;
-    }
-
-    public long getStadiumId() {
-        if(stadium != null)
-            return stadium.getId();
-        return stadiumId;
     }
 
     public long getFormationId() {

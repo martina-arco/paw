@@ -48,6 +48,7 @@ public class StadiumJdbcDaoTest {
     private JdbcTemplate jdbcTemplate;
     private User user;
     private League league;
+    private Team team;
 
     @Before
     public void setUp() {
@@ -55,14 +56,16 @@ public class StadiumJdbcDaoTest {
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "stadium");
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
+        team = teamDao.create("", league, null, null, null, null, 0,0,0,0);
     }
 
     @Test
     public void testCreate() {
-        final Stadium stadium = stadiumDao.create(NAME, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
+        final Stadium stadium = stadiumDao.create(NAME, team, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
         assertNotNull(stadium);
         assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "stadium"));
         assertEquals(NAME, stadium.getName());
+        assertEquals(team, stadium.getTeam());
         assertEquals(LOWCLASS, stadium.getLowClass());
         assertEquals(LOWCLASS_PRICE, stadium.getLowClassPrice());
         assertEquals(MEDIUMCLASS, stadium.getMediumClass());
@@ -73,10 +76,11 @@ public class StadiumJdbcDaoTest {
 
     @Test
     public void testFindById() {
-        final long id = stadiumDao.create(NAME, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE).getId();
+        final long id = stadiumDao.create(NAME, team, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE).getId();
         Stadium stadium = stadiumDao.findById(id);
         assertNotNull(stadium);
         assertEquals(NAME, stadium.getName());
+        assertEquals(team.getId(), stadium.getTeamId());
         assertEquals(LOWCLASS, stadium.getLowClass());
         assertEquals(LOWCLASS_PRICE, stadium.getLowClassPrice());
         assertEquals(MEDIUMCLASS, stadium.getMediumClass());
@@ -88,12 +92,12 @@ public class StadiumJdbcDaoTest {
 
     @Test
     public void testFindByTeamId() {
-        final Stadium expectedStadium = stadiumDao.create(NAME, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
-        Team team = teamDao.create("", league, expectedStadium, null, null, null, 0,0,0,0);
+        final Stadium expectedStadium = stadiumDao.create(NAME, team, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
         Stadium actualStadium = stadiumDao.findByTeamId(team.getId());
         
         assertNotNull(actualStadium);
         assertEquals(NAME, actualStadium.getName());
+        assertEquals(team.getId(), actualStadium.getTeamId());
         assertEquals(LOWCLASS, actualStadium.getLowClass());
         assertEquals(LOWCLASS_PRICE, actualStadium.getLowClassPrice());
         assertEquals(MEDIUMCLASS, actualStadium.getMediumClass());
