@@ -38,7 +38,9 @@ public class SimulationServiceImpl implements SimulationService{
 
     @Override
     public List<Match> getMatches(Long userId) {
-        return table.get(userId).getMatches();
+        List<Match> ret = table.get(userId).getMatches();
+        table.remove(userId);
+        return ret;
     }
 
     public enum NodeAtt {
