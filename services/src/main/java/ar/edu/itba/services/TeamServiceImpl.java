@@ -1,6 +1,7 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.PlayerDao;
+import ar.edu.itba.interfaces.dao.ReceiptDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.AiService;
 import ar.edu.itba.interfaces.service.TeamService;
@@ -21,6 +22,8 @@ public class TeamServiceImpl implements TeamService {
     private PlayerDao playerDao;
     @Autowired
     private AiService formationService;
+    @Autowired
+    private ReceiptDao receiptDao;
 
     @Override
     @Transactional
@@ -42,9 +45,9 @@ public class TeamServiceImpl implements TeamService {
     public int getSalaries(Team team) {
         int salaries = 0;
 
-//        for (Player player:team.getPlayers()) {
-//            salaries += player.getSalary();
-//        }
+        for (Player player: team.getPlayers()) {
+            salaries += player.getSalary();
+        }
 
         return salaries;
     }
@@ -54,11 +57,13 @@ public class TeamServiceImpl implements TeamService {
 
         int ticketsSold = 0;
 
-//        for (Receipt receipt:team.getFinance()) {
-//
-//            if(receipt.getType() == Receipt.Type.MATCHINCOME)
-//                ticketsSold += receipt.getAmount();
-//        }
+        if(team.getFinance() != null) {
+            for (Receipt receipt : team.getFinance()) {
+
+                if (receipt.getType() == Receipt.Type.MATCHINCOME)
+                    ticketsSold += receipt.getAmount();
+            }
+        }
 
         return ticketsSold;
     }
@@ -72,6 +77,13 @@ public class TeamServiceImpl implements TeamService {
     public void setPlayers(Team team) {
         if(team != null){
             team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
+        }
+    }
+
+    @Override
+    public void setFinance(Team team) {
+        if(team != null){
+            team.setFinance(receiptDao.findAllByTeamId(team.getId()));
         }
     }
 

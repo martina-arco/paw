@@ -16,14 +16,16 @@ public class FinanceController extends Controller {
     public ModelAndView finance() {
         ModelAndView mav = new ModelAndView("finance");
 
-//        Team team = loggedUser().getTeam();
-//
-//        int salaries = teamService.getSalaries(team);
-//        int ticketsSold = teamService.getTicketsSold(team);
-//
-//        mav.addObject("money", team.getMoney());
-//        mav.addObject("salaries", salaries);
-//        mav.addObject("ticketsSold", ticketsSold);
+        Team team = teamService.findByUserId(loggedUser().getId());
+        teamService.setPlayers(team);
+        teamService.setFinance(team);
+
+        int salaries = teamService.getSalaries(team);
+        int ticketsSold = teamService.getTicketsSold(team);
+
+        mav.addObject("money", team.getMoney());
+        mav.addObject("salaries", salaries);
+        mav.addObject("ticketsSold", ticketsSold);
 
         return mav;
     }

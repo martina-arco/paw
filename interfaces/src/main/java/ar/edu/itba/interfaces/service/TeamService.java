@@ -20,6 +20,8 @@ public interface TeamService {
 
     void setPlayers(Team team);
 
+    void setFinance(Team team);
+
     void setFormation(Team team);
 
 }
