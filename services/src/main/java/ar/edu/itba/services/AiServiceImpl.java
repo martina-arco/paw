@@ -28,31 +28,39 @@ public class AiServiceImpl implements AiService {
         tired.sort((player, t1) -> player.getFitness() - t1.getFitness());
 
         players.sort((player, t1) -> player.getAge() - t1.getAge());
-        captain = players.get(0);
+        captain = useLast(players,false);
+
+        players.sort((player, t1) -> player.getFinish() - t1.getFinish());
+        penaltyTaker = useLast(players, false);
+
+        players.sort((player, t1) -> player.getPassing() - t1.getPassing());
+        fkTaker = useLast(players, false);
 
         players.sort((player, t1) -> player.getGoalKeeping() - t1.getGoalKeeping());
-        starters.put(players.get(0), new Point(0,4));
-        players.remove(0);
+        starters.put(useLast(players, true), new Point(0,4));
+
         players.sort((player, t1) -> player.getDefending() - t1.getDefending());
         for (int i = 0; i < 4; i++) {
-            starters.put(players.get(i), new Point(1, 1 + 2*i));
-            players.remove(i);
+            starters.put(useLast(players, true), new Point(1, 1 + 2*i));
         }
+
         players.sort((player, t1) -> player.getPassing() - t1.getPassing());
-        fkTaker = players.get(0);
-        starters.put(players.get(0), new Point(5, 4));
-        starters.put(players.get(1), new Point(4, 1));
-        starters.put(players.get(2), new Point(4, 7));
-        starters.put(players.get(3), new Point(3, 4));
-        players.remove(0);
-        players.remove(1);
-        players.remove(2);
-        players.remove(3);
+        starters.put(useLast(players,true), new Point(5, 4));
+        starters.put(useLast(players,true), new Point(4, 1));
+        starters.put(useLast(players,true), new Point(4, 7));
+        starters.put(useLast(players,true), new Point(3, 4));
+
         players.sort((player, t1) -> player.getFinish() - t1.getFinish());
-        penaltyTaker = players.get(0);
-        starters.put(players.get(0), new Point(7,3));
-        starters.put(players.get(1), new Point(7, 5));
+        starters.put(useLast(players,true), new Point(7,3));
+        starters.put(useLast(players,true), new Point(7, 5));
 
         return new Formation(0,captain,fkTaker,penaltyTaker,starters,tired,50,50);
+    }
+
+    private Player useLast(List<Player> list, boolean remove){
+        Player ret = list.get(list.size() - 1);
+        if(remove)
+            list.remove(list.size() - 1);
+        return ret;
     }
 }

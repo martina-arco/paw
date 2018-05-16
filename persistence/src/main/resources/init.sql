@@ -148,7 +148,7 @@ INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-15','Clu
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Club Atletico River Plate','Club Atletico Boca Juniors','Superliga');
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Racing Club','Club Atletico Independiente','Superliga');
 
-INSERT INTO match (day, home, away, league) SELECT DISTINCT day, t1.teamid, t2.teamid, league.leagueid FROM matchtmp a JOIN team t1 ON t1.name = a.homename JOIN team t2 ON t2.name = a.awayname JOIN league ON league.name = a.leaguename AND userid = ?;
+INSERT INTO match (day, home, away, league) SELECT DISTINCT day, t1.teamid, t2.teamid, league.leagueid FROM matchtmp a JOIN team t1 ON t1.name = a.homename JOIN team t2 ON t2.name = a.awayname JOIN league ON league.name = a.leaguename AND userid = ? AND t1.league = league.leagueid AND t2.league = league.leagueid;
 
 DROP TABLE matchtmp;
 DROP TABLE playertmp;
