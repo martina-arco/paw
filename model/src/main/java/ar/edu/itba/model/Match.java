@@ -65,6 +65,14 @@ public class Match {
         return leagueId;
     }
 
+    public void setHomeScore(int homeScore) {
+        this.homeScore = homeScore;
+    }
+
+    public void setAwayScore(int awayScore) {
+        this.awayScore = awayScore;
+    }
+
     public League getLeague() {
         return league;
     }

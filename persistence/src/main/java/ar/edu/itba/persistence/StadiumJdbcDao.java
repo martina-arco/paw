@@ -77,7 +77,11 @@ public class StadiumJdbcDao implements StadiumDao {
     }
 
     @Override
-    public Stadium findStadiumByTeamId(long id) {
-        return null;
+    public Stadium findByTeamId(long id) {
+        final List<Stadium> list = jdbcTemplate.query("SELECT * FROM stadium JOIN team ON stadiumid = team.stadium WHERE teamid = ?", ROW_MAPPER, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

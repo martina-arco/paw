@@ -1,6 +1,9 @@
 package ar.edu.itba.persistence;
 
+import ar.edu.itba.model.League;
 import ar.edu.itba.model.Stadium;
+import ar.edu.itba.model.Team;
+import ar.edu.itba.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,13 +38,23 @@ public class StadiumJdbcDaoTest {
     private DataSource ds;
     @Autowired
     private StadiumJdbcDao stadiumDao;
+    @Autowired
+    private TeamJdbcDao teamDao;
+    @Autowired
+    private LeagueJdbcDao leagueDao;
+    @Autowired
+    private UserJdbcDao userDao;
 
     private JdbcTemplate jdbcTemplate;
+    private User user;
+    private League league;
 
     @Before
     public void setUp() {
         jdbcTemplate = new JdbcTemplate(ds);
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "stadium");
+        user = userDao.create("c","","", new Date());
+        league = leagueDao.create("", 0, user);
     }
 
     @Test
@@ -71,5 +84,22 @@ public class StadiumJdbcDaoTest {
         assertEquals(HIGHCLASS, stadium.getHighClass());
         assertEquals(HIGHCLASS_PRICE, stadium.getHighClassPrice());
         assertEquals(id, stadium.getId());
+    }
+
+    @Test
+    public void testFindByTeamId() {
+        final Stadium expectedStadium = stadiumDao.create(NAME, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
+        Team team = teamDao.create("", league, expectedStadium, null, null, null, 0,0,0,0);
+        Stadium actualStadium = stadiumDao.findByTeamId(team.getId());
+        
+        assertNotNull(actualStadium);
+        assertEquals(NAME, actualStadium.getName());
+        assertEquals(LOWCLASS, actualStadium.getLowClass());
+        assertEquals(LOWCLASS_PRICE, actualStadium.getLowClassPrice());
+        assertEquals(MEDIUMCLASS, actualStadium.getMediumClass());
+        assertEquals(MEDIUMCLASS_PRICE, actualStadium.getMediumClassPrice());
+        assertEquals(HIGHCLASS, actualStadium.getHighClass());
+        assertEquals(HIGHCLASS_PRICE, actualStadium.getHighClassPrice());
+        assertEquals(expectedStadium.getId(), actualStadium.getId());
     }
 }

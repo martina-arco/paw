@@ -1,9 +1,6 @@
 package ar.edu.itba.persistence;
 
-import ar.edu.itba.model.League;
-import ar.edu.itba.model.Match;
-import ar.edu.itba.model.Team;
-import ar.edu.itba.model.User;
+import ar.edu.itba.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +13,8 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import javax.sql.DataSource;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -145,5 +144,45 @@ public class MatchJdbcDaoTest {
         assertEquals(away.getId(), match.getAwayId());
         assertEquals(DATE, match.getDay());
         assertEquals(id, match.getId());
+    }
+
+    @Test
+    public void testSave() {
+        final long id = matchDao.create(league, home, away, DATE).getId();
+        Match match = matchDao.findById(id);
+        assertNotNull(match);
+
+        League league2 = league = leagueDao.create("", 0, user);
+        Team home2 = teamDao.create("a", league, null, null, null, null, 0,0,0,0);
+        Team away2 = teamDao.create("b", league, null, null, null, null, 0,0,0,0);
+        Date date2 = new Date(2012, 11, 7);
+        boolean played = true;
+        int homeScore = 4;
+        int awayScore = 2;
+
+        match.setLeague(league2);
+        match.setHome(home2);
+        match.setAway(away2);
+        match.setDay(date2);
+        match.setPlayed(played);
+        match.setHomeScore(homeScore);
+        match.setAwayScore(awayScore);
+        match.finish();
+        int homePoints = match.getHomePoints();
+        int awayPoints = match.getAwayPoints();
+
+
+        matchDao.save(match);
+        match = matchDao.findById(id);
+
+        assertEquals(league2.getId(), match.getLeagueId());
+        assertEquals(home2.getId(), match.getHomeId());
+        assertEquals(away2.getId(), match.getAwayId());
+        assertEquals(date2, match.getDay());
+        assertEquals(played, match.isPlayed());
+        assertEquals(homeScore, match.getHomeScore());
+        assertEquals(awayScore, match.getAwayScore());
+        assertEquals(homePoints, match.getHomePoints());
+        assertEquals(awayPoints, match.getAwayPoints());
     }
 }
