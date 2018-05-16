@@ -2,10 +2,12 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
+import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Team;
+import ar.edu.itba.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +22,7 @@ import java.util.Date;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,6 +46,11 @@ public class LeagueServiceTest {
         public LeagueDao leagueDao() {
             return mock(LeagueDao.class);
         }
+
+        @Bean
+        public TeamDao teamDao() {
+            return mock(TeamDao.class);
+        }
     }
 
     @Autowired
@@ -51,14 +59,19 @@ public class LeagueServiceTest {
     @Autowired
     private MatchDao matchDao;
 
+    @Autowired
+    private TeamDao teamDao;
+
     private League league;
     private Date date;
     private Team home, away;
+    private User user;
 
     @Before
     public void setUp() {
         league = mock(League.class);
         date = mock(Date.class);
+        user = mock(User.class);
         List<Match> matches = new ArrayList<>();
 
         Match m1 = mock(Match.class);
@@ -91,6 +104,7 @@ public class LeagueServiceTest {
         matches.add(m3);
 
         when(matchDao.findByLeagueIdAndBeforeDate((long) 0, date)).thenReturn(matches);
+        when(matchDao.findByLeagueIdAndFromDate((long)0, date)).thenReturn(matches);
     }
 
     @Test
@@ -100,5 +114,11 @@ public class LeagueServiceTest {
         assertTrue(points.get(home) == 1);
         assertTrue(points.get(away) == 7);
     }
+
+//    @Test
+//    public void fillFixture() {
+//        leagueService.fillFixture(user, league);
+//
+//    }
 
 }

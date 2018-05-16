@@ -33,7 +33,8 @@ public class LeagueServiceImpl implements LeagueService {
         return leagues;
     }
 
-    private void fillFixture(User user, League league){
+    @Override
+    public void fillFixture(User user, League league){
         Map<Date,List<Match>> fixture = new HashMap<>();
 
         List<Match> toPlay = matchDao.findByLeagueIdAndFromDate(league.getId(),user.getCurrentDay());
