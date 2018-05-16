@@ -37,8 +37,10 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByUsername(username);
         if(user != null) {
             Team team = teamDao.findById(user.getTeamId());
-            team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
-            user.setTeam(team);
+            if(team != null) {
+                team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
+                user.setTeam(team);
+            }
         }
         return user;
     }
