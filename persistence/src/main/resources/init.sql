@@ -126,9 +126,10 @@ INSERT INTO playertmp(playername,playerage,playerfitness,playervalue,playerpoten
 INSERT INTO playertmp(playername,playerage,playerfitness,playervalue,playerpotential,playerskillLevel,playergoalkeeping,playerdefending,playerpassing,playerfinishing,playersalary,playercontractExpiration,playeryouth,teamname,teamfanCount,teamfanTrust,teamboardTrust,teammoney,leaguename,leagueprize,stadiumlowClass,stadiumlowClassPrice,stadiummediumClass,stadiummediumClassPrice,stadiumhighClass,stadiumhighClassPrice,stadiumname,formationpressure,formationattitude) VALUES ('Gonzalo Veron',28,100,10000000,72,69,0,34,62,69,5000,'2020-01-01',NULL,'Club Atletico Independiente',100000,100,100,100000000,'Superliga',10000000,'21000','300','30000','800','1000','2000','Libertadores de America',50,50);
 
 INSERT INTO league (userid, name, prize) SELECT DISTINCT ?, leaguename, leagueprize FROM playertmp;
-INSERT INTO stadium (name, lowClass, lowClassPrice, mediumClass, mediumClassPrice, highClass, highClassPrice) SELECT DISTINCT stadiumName, stadiumLowClass,stadiumLowClassPrice, stadiumMediumClass, stadiumMediumClassPrice, stadiumHighClass, stadiumHighClassPrice FROM playertmp;
-INSERT INTO team (name, fanCount, fanTrust, boardTrust, league, stadium, money) SELECT DISTINCT teamName, teamFanCount, teamFanTrust, teamBoardTrust, l.leagueid, s.stadiumid, teammoney FROM playertmp a JOIN stadium s ON s.name = a.stadiumName JOIN league l ON l.name = a.leaguename AND ? = l.leagueid;
+INSERT INTO team (name, fanCount, fanTrust, boardTrust, league, money) SELECT DISTINCT teamName, teamFanCount, teamFanTrust, teamBoardTrust, l.leagueid, teammoney FROM playertmp a JOIN league l ON l.name = a.leaguename AND ? = l.leagueid;
+INSERT INTO stadium (name, lowClass, lowClassPrice, mediumClass, mediumClassPrice, highClass, highClassPrice, team) SELECT DISTINCT stadiumName, stadiumLowClass,stadiumLowClassPrice, stadiumMediumClass, stadiumMediumClassPrice, stadiumHighClass, stadiumHighClassPrice, teamid FROM playertmp JOIN league ON ? = leagueid JOIN team ON teamname = team.name AND league.leagueid = team.league;
 INSERT INTO player (team, name, age, fitness, value, potential, skilllevel, goalkeeping, defending, passing, finishing, salary, contractExpiration) SELECT DISTINCT team.teamid, playername, playerage, playerfitness, playervalue, playerpotential, playerskillLevel, playergoalkeeping, playerdefending, playerpassing, playerfinishing, playersalary, playercontractExpiration FROM playertmp a JOIN league ON ? = leagueid JOIN team ON team.name = a.teamname AND leagueid = team.league;
+
 CREATE TABLE IF NOT EXISTS matchtmp(
     id        SERIAL PRIMARY KEY
   ,day        DATE  NOT NULL
@@ -147,3 +148,6 @@ INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Clu
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Racing Club','Club Atletico Independiente','Superliga');
 
 INSERT INTO match (day, home, away, league) SELECT DISTINCT day, t1.teamid, t2.teamid, league.leagueid FROM matchtmp a JOIN team t1 ON t1.name = a.homename JOIN team t2 ON t2.name = a.awayname JOIN league ON league.name = a.leaguename;
+
+DROP TABLE matchtmp;
+DROP TABLE playertmp;
