@@ -15,9 +15,9 @@ public interface MatchService {
 
     void UserMatchEnd(Match match, User user);
 
-    void FinishMatches(List<Match> matches);
+    void saveMatches(List<Match> matches, User user);
 
-    Match getUserMatch(List<Match> matches, Team userTeam);
+    Match getUserMatch(List<Match> matches, User user);
 
     Match create(League league, Team home, Team away, Date day);
 

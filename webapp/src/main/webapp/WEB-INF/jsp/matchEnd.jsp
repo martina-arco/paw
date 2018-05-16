@@ -33,23 +33,23 @@
 
                         <tbody>
 
-                        <c:forEach var = "i" begin = "1" end = "6">
+                        <%--<c:forEach var = "i" begin = "1" end = "6">--%>
+                            <%--<tr>--%>
+                                <%--<td>River</td> --%>
+                                <%--<td>1</td> --%>
+                                <%--<td>0</td>--%>
+                                <%--<td>Boca</td> --%>
+                            <%--</tr>--%>
+                        <%--</c:forEach>--%>
+
+                        <c:forEach items="${matches}" var="match">
                             <tr>
-                                <td>River</td> 
-                                <td>1</td> 
-                                <td>0</td>
-                                <td>Boca</td> 
+                                <td>${match.home}</td>
+                                <td>${match.homeScore}</td>
+                                <td>${match.awayScore}</td>
+                                <td>${match.away}</td>
                             </tr>
                         </c:forEach>
-
-                        <%--<c:forEach items="${matches}" var="match">--%>
-                        <%--<tr>--%>
-                        <%--<td>${match.home}</td>--%>
-                        <%--<td>${match.homeScore}</td>--%>
-                        <%--<td>${match.awayScore}</td>--%>
-                        <%--<td>${match.away}</td>--%>
-                        <%--</tr>--%>
-                        <%--</c:forEach>--%>
 
                         </tbody>
 
@@ -80,14 +80,14 @@
                     <table class="table width60 table-borderless table-center">
                         <tbody>
 
-                                <tr>
-                                    <td>Perez 5'</td> 
-                                    <td>Juan 6'</td> 
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Juan 40'</td> 
-                                </tr>
+                                <%--<tr>--%>
+                                    <%--<td>Perez 5'</td> --%>
+                                    <%--<td>Juan 6'</td> --%>
+                                <%--</tr>--%>
+                                <%--<tr>--%>
+                                    <%--<td></td>--%>
+                                    <%--<td>Juan 40'</td> --%>
+                                <%--</tr>--%>
 
 
                                 <%--<c:forEach items="${homeScores}" var="score">--%>

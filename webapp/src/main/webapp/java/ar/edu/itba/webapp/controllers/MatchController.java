@@ -1,30 +1,26 @@
 package ar.edu.itba.webapp.controllers;
 
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.MatchService;
-import ar.edu.itba.interfaces.service.StadiumService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.Event;
 import ar.edu.itba.model.utils.MatchStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @org.springframework.stereotype.Controller
 public class MatchController extends Controller{
 
     @Autowired
     private MatchService matchService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private LeagueService leagueService;
@@ -76,19 +72,24 @@ public class MatchController extends Controller{
     @RequestMapping("/matchEnd")
     public ModelAndView matchEnd() {
         ModelAndView mav = new ModelAndView("matchEnd");
+        User user = loggedUser();
 
 //        Map<String, Integer> homeScores = new HashMap<>();
 //        Map<String, Integer> awayScores = new HashMap<>();
 //
-//        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(loggedUser().getCurrentDay());
+//        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(.getCurrentDay());
 //        Match userMatch = matchService.getUserMatch(matches, loggedUser().getTeam());
 //
 //        matchService.getScores(userMatch, homeScores, awayScores);
-//        matchService.FinishMatches(matches);
-//        matchService.UserMatchEnd(userMatch, loggedUser());
-//        mav.addObject("matches", matches);
-//        mav.addObject("match", userMatch);
-//        mav.addObject("stadium", loggedUser().getTeam().getStadium());
+        List<Match> matches = simulationService.getMatches(user.getId());
+        matchService.saveMatches(matches, user);
+        userService.advanceDate(user);
+
+        Match userMatch = matchService.getUserMatch(matches, user);
+
+        mav.addObject("matches", matches);
+        mav.addObject("match", userMatch);
+        mav.addObject("stadium", stadiumService.findByTeam(userMatch.getHome()));
 //        mav.addObject("homeScores", homeScores);
 //        mav.addObject("awayScores", awayScores);
 

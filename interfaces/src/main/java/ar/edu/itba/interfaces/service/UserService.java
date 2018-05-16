@@ -14,4 +14,6 @@ public interface UserService {
     User create(String username, String password, String mail, Date currentDay);
 
     void setTeam(User user, Team team);
+
+    void advanceDate(User user);
 }

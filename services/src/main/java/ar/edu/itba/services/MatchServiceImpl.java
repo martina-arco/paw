@@ -111,23 +111,13 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void UserMatchEnd(Match match, User user) {
         Team team = match.getHome();
-        if(match.getHome().equals(user.getTeam())) {
+        if(match.getHomeId() == user.getTeamId()) {
             addMatchEarnings(team);
         }
         else {
             team = match.getAway();
         }
-        advanceDate(match, user ,team);
-
         teamDao.save(team);
-        matchDao.save(match);
-        userDao.save(user);
-    }
-
-    private void subtractPlayerSalaries(Team team) {
-        int amount = team.getSalaries();
-        receiptDao.create(team, amount, Receipt.Type.PLAYERSSALARIES);
-        team.addMoney(-amount);
     }
 
     private void addMatchEarnings(Team team) {
@@ -136,50 +126,23 @@ public class MatchServiceImpl implements MatchService {
         team.addMoney(amount);
     }
 
-    private void advanceDate(Match match ,User user, Team team) {
-        Calendar cal = Calendar.getInstance();
-        Date currentDate = user.getCurrentDay();
-        cal.setTime(currentDate);
-        cal.add(Calendar.DATE, 7);
-        Date newDate = cal.getTime();
-        user.setCurrentDay(newDate);
-        if(newDate.getMonth() > currentDate.getMonth()) {
-            subtractPlayerSalaries(team);
-        }
-        if(matchDao.findByTeamIdFromDate(team.getId(), newDate).isEmpty()) {
-            League league = leagueDao.findById(team.getLeagueId());
-            int higherPoints = 0;
-            Team higherTeam = null;
-            for (Map.Entry<Team, Integer> entry : leagueService.getTeamPoints(league, currentDate).entrySet())
-            {
-                if(entry.getValue() > higherPoints) {
-                    higherPoints = entry.getValue();
-                    higherTeam = entry.getKey();
-                }
-            }
-            int amount = league.getPrize();
-            if(higherTeam.equals(team)) {
-                receiptDao.create(team, amount, Receipt.Type.TOURNAMENTPRICE);
-                team.addMoney(amount);
-            }
-        }
-    }
-
     @Override
-    public void FinishMatches(List<Match> matches) {
+    public void saveMatches(List<Match> matches, User user) {
         for (Match match: matches) {
-            match.finish();
-            for (Event event: match.getEvents()) {
-                eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
+            if(match.getHomeId() == user.getTeamId()) {
+                addMatchEarnings(match.getHome());
             }
-            matchDao.save(match);
+            for (Event event: match.getEvents()) {
+                //eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
+            }
+            //matchDao.save(match);
         }
     }
 
     @Override
-    public Match getUserMatch(List<Match> matches, Team userTeam) {
+    public Match getUserMatch(List<Match> matches, User user) {
         for (Match match :matches) {
-            if(match.getHome().equals(userTeam) || match.getAway().equals(userTeam)) {
+            if(match.getHomeId() == user.getTeamId() || match.getAwayId() == user.getTeamId()) {
                 return match;
             }
         }
