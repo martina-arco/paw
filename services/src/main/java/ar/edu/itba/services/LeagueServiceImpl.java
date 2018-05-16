@@ -26,9 +26,6 @@ public class LeagueServiceImpl implements LeagueService {
     public List<League> findByUser(User user) {
         List<League> leagues = leagueDao.findAllByUserId(user.getId());
 
-        for(League league : leagues)
-            fillFixture(user, league);
-
         return leagues;
     }
 
@@ -75,5 +72,13 @@ public class LeagueServiceImpl implements LeagueService {
         }
 
         return map;
+    }
+
+    @Override
+    public List<Match> findMatchesForDate(League league, Date date) {
+        if(league != null)
+            return matchDao.findByLeagueIdAndDate(league.getId(), date);
+        else
+            return null;
     }
 }

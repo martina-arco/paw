@@ -1,8 +1,10 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
+import ar.edu.itba.interfaces.service.AiService;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.MatchService;
+import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,12 @@ public class MatchServiceImpl implements MatchService {
     private LeagueService leagueService;
 
     @Autowired
+    private TeamService teamService;
+
+    @Autowired
+    private AiService AiService;
+
+    @Autowired
     private EventDao eventDao;
 
     @Override
@@ -50,6 +58,24 @@ public class MatchServiceImpl implements MatchService {
             }
         }
 
+    }
+
+    @Override
+    public void setTeamsAndFormations(List<Match> matches) {
+        for (Match match : matches) {
+            Team home = teamDao.findById(match.getHomeId());
+            if(home != null) {
+                teamService.setPlayers(home);
+                home.setFormation(AiService.getFormation(home.getPlayers()));
+            }
+            Team away = teamDao.findById(match.getHomeId());
+            if(away != null) {
+                teamService.setPlayers(away);
+                away.setFormation(AiService.getFormation(away.getPlayers()));
+            }
+            match.setHome(home);
+            match.setAway(away);
+        }
     }
 
     @Override

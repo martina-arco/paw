@@ -39,4 +39,5 @@ public interface MatchService {
 
     void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores);
 
+    void setTeamsAndFormations(List<Match> matches);
 }

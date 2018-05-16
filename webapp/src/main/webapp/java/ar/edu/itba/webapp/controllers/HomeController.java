@@ -31,7 +31,14 @@ public class HomeController extends Controller {
         if(team == null)
             return new ModelAndView("redirect:chooseTeam");
 
-        long playerId = team.getPlayers().get(0).getId();
+        teamService.setPlayers(team);
+        long playerId;
+
+        if(team.getPlayers().size() > 0)
+            playerId = team.getPlayers().get(0).getId();
+        else
+            playerId = 0;
+
         return home((int)playerId);
     }
 
@@ -40,6 +47,7 @@ public class HomeController extends Controller {
         ModelAndView mav = new ModelAndView("home");
 
         Team team = teamService.findByUserId(loggedUser().getId());
+        teamService.setPlayers(team);
 
         Player currentPlayer = playerService.findById(playerId);
 

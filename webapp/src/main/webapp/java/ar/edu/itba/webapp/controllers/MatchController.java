@@ -2,7 +2,9 @@ package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.MatchService;
+import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
+import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.Event;
@@ -32,10 +34,13 @@ public class MatchController extends Controller{
     @RequestMapping("/match")
     public ModelAndView match() {
         ModelAndView mav = new ModelAndView("match");
-        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(loggedUser().getCurrentDay());
+        User user = loggedUser();
+        League league = leagueService.findByUser(user).get(0);
+        List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        matchService.setTeamsAndFormations(matches);
         mav.addObject("matches", matches);
-        simulationService.simulateFixture(loggedUser().getId(),matches);
-        simulationService.start(loggedUser().getId());  //No termina hasta que termina la simulacion. TODO @lemery
+        simulationService.simulateFixture(user.getId(),matches);
+        simulationService.start(user.getId());  //No termina hasta que termina la simulacion. TODO @lemery
         return mav;
     }
 
