@@ -32,18 +32,19 @@ public class MatchController extends Controller{
     @RequestMapping("/match")
     public ModelAndView match() {
         ModelAndView mav = new ModelAndView("match");
-//        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(loggedUser().getCurrentDay());
-//        mav.addObject("matches", matches);
-//        simulationService.start();
+        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(loggedUser().getCurrentDay());
+        mav.addObject("matches", matches);
+        simulationService.simulateFixture(loggedUser().getId(),matches);
+        simulationService.start(loggedUser().getId());  //No termina hasta que termina la simulacion. TODO @lemery
         return mav;
     }
 
     @RequestMapping(value = "/data", produces = "application/json")
     @ResponseBody
     public Object json() {
-        Map<Integer, MatchStatus> map = new HashMap<>();
-//        map = simulationService.getEvents();
-
+        Map<Long, MatchStatus> map = new HashMap<>();
+        map = simulationService.getStatus(loggedUser().getId());
+        /*
         List<Event> l1 = new ArrayList<>();
         List<Event> l2 = new ArrayList<>();
         l1.add(new Event(1,null, Event.Type.YELLOW_CARD, 1));
@@ -54,7 +55,7 @@ public class MatchController extends Controller{
 
         map.put(1, new MatchStatus(2,0, (int) Math.round( Math.random() * 90), l1));
         map.put(2, new MatchStatus(0,0, (int) Math.round( Math.random() * 90), l2));
-
+        */
         return map;
     }
 

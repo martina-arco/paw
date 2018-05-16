@@ -95,6 +95,15 @@ public class MatchJdbcDao implements MatchDao{
     }
 
     @Override
+    public List<Match> findByLeagueIdAndFromDate(long id, Date date) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day >= ?", ROW_MAPPER, id, date);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    @Override
     public Match create(League league, Team home, Team away, Date day) {
         Match match = create(league.getId(), home.getId(), away.getId(), day);
         match.setLeague(league);

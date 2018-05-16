@@ -11,10 +11,7 @@ import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class LeagueServiceImpl implements LeagueService {
@@ -27,7 +24,27 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public List<League> findByUser(User user) {
-        return leagueDao.findAllByUserId(user.getId());
+        List<League> leagues = leagueDao.findAllByUserId(user.getId());
+
+        for(League league : leagues)
+            fillFixture(user, league);
+
+        return leagues;
+    }
+
+    private void fillFixture(User user, League league){
+        Map<Date,List<Match>> fixture = new HashMap<>();
+
+        List<Match> toPlay = matchDao.findByLeagueIdAndFromDate(league.getId(),user.getCurrentDay());
+
+        for(Match match : toPlay){
+            if(!fixture.containsKey(match.getDay())){
+                fixture.put(match.getDay(), new ArrayList<>());
+            }
+            fixture.get(match.getDay()).add(match);
+        }
+
+        league.setFixture(fixture);
     }
 
     @Override

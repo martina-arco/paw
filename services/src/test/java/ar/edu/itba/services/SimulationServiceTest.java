@@ -83,7 +83,7 @@ public class SimulationServiceTest {
             homePoints += m.getHomePoints();
             awayPoints += m.getAwayPoints();
         }
-        
+
     }
 
 
