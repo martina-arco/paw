@@ -1,6 +1,6 @@
 package ar.edu.itba.model;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -154,7 +154,7 @@ public class Match {
 
     public void addEvent(Event e) {
         if(events == null)
-            events = new ArrayList<>();
+            events = new LinkedList<>();
         events.add(e);
     }
 
