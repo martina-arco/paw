@@ -96,4 +96,12 @@ public class TeamJdbcDao implements TeamDao {
         }
         return list;
     }
+
+    @Override
+    public Team findByUserId(long id) {
+        List<Team> list = jdbcTemplate.query("SELECT * FROM users WHERE team = ?", ROW_MAPPER, id);
+        if(list.isEmpty())
+            return null;
+        return list.get(0);
+    }
 }

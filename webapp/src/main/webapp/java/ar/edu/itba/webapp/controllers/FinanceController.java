@@ -17,7 +17,7 @@ public class FinanceController extends Controller {
         ModelAndView mav = new ModelAndView("finance");
 
 //        Team team = loggedUser().getTeam();
-
+//
 //        int salaries = teamService.getSalaries(team);
 //        int ticketsSold = teamService.getTicketsSold(team);
 //

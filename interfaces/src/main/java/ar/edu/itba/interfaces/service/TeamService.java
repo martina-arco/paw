@@ -16,4 +16,6 @@ public interface TeamService {
 
     int getTicketsSold(Team team);
 
+    Team findByUserId(long id);
+
 }

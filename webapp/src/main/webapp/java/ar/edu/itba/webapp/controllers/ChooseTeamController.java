@@ -5,6 +5,8 @@ import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.webapp.form.ChooseTeamForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -21,7 +23,6 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 public class ChooseTeamController extends Controller{
 
-    private League league;
 
     @Autowired
     private LeagueService leagueService;
@@ -34,7 +35,6 @@ public class ChooseTeamController extends Controller{
 
     @RequestMapping(value = "/chooseTeam")
     public ModelAndView chooseTeam(@ModelAttribute("chooseTeamForm") final ChooseTeamForm form) {
-//        league = leagueService.findByUser(loggedUser());
         return new ModelAndView("chooseTeam");
     }
 
@@ -45,7 +45,9 @@ public class ChooseTeamController extends Controller{
             return chooseTeam(form);
         }
 
-//        userService.setTeam(loggedUser(), teamService.findById(form.getTeamChosen()));
+        Team t = teamService.findById(form.getTeamChosen());
+
+        userService.setTeam(loggedUser(), t);
 
         return new ModelAndView("redirect:home");
     }
@@ -53,14 +55,9 @@ public class ChooseTeamController extends Controller{
     @ModelAttribute("teamList")
     public List<Team> getTeamList(){
 
-//        List<Team> teams = teamService.findByLeague(league);
+        League league = leagueService.findByUser(loggedUser()).get(0);
 
-
-        List<Team> teams = new ArrayList<>();
-        teams.add(new Team(1,"River",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0, 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
-        teams.add(new Team(2,"Boca",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0, 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
-        teams.add(new Team(3,"Racing",null,null,null,new ArrayList<Player>(), new ArrayList<Player>(), 0, 0,0,new ArrayList<Receipt>(), new ArrayList<BankLoan>(),0));
-
+        List<Team> teams = teamService.findByLeague(league);
 
         return teams;
     }

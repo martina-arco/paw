@@ -16,4 +16,6 @@ public interface TeamDao {
     Team findById(long id);
 
     List<Team> findAllByLeagueId(long id);
+
+    Team findByUserId(long id);
 }

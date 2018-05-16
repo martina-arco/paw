@@ -29,17 +29,16 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> findByLeague(League league) {
-//        return teamDao.findAllByLeagueId(league.getId());
-        return new ArrayList<>();
+        return teamDao.findAllByLeagueId(league.getId());
     }
 
     @Override
     public int getSalaries(Team team) {
         int salaries = 0;
 
-        for (Player player:team.getPlayers()) {
-            salaries += player.getSalary();
-        }
+//        for (Player player:team.getPlayers()) {
+//            salaries += player.getSalary();
+//        }
 
         return salaries;
     }
@@ -49,12 +48,17 @@ public class TeamServiceImpl implements TeamService {
 
         int ticketsSold = 0;
 
-        for (Receipt receipt:team.getFinance()) {
-
-            if(receipt.getType() == Receipt.Type.MATCHINCOME)
-                ticketsSold += receipt.getAmount();
-        }
+//        for (Receipt receipt:team.getFinance()) {
+//
+//            if(receipt.getType() == Receipt.Type.MATCHINCOME)
+//                ticketsSold += receipt.getAmount();
+//        }
 
         return ticketsSold;
+    }
+
+    @Override
+    public Team findByUserId(long id) {
+        return teamDao.findByUserId(id);
     }
 }

@@ -18,10 +18,6 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 public class HomeController extends Controller {
 
-    private Team team;
-    private Player currentPlayer;
-
-
     @Autowired
     private PlayerService playerService;
 
@@ -30,7 +26,7 @@ public class HomeController extends Controller {
 
     @RequestMapping("/home")
     public ModelAndView home(){
-        team = loggedUser().getTeam();
+        Team team = teamService.findByUserId(loggedUser().getId());
 
         if(team == null)
             return new ModelAndView("redirect:chooseTeam");
@@ -43,7 +39,9 @@ public class HomeController extends Controller {
     public ModelAndView home(@PathVariable int playerId) {
         ModelAndView mav = new ModelAndView("home");
 
-        currentPlayer = playerService.findById(playerId);
+        Team team = teamService.findByUserId(loggedUser().getId());
+
+        Player currentPlayer = playerService.findById(playerId);
 
         mav.addObject("team", team);
         mav.addObject("players", team.getPlayers());
@@ -54,7 +52,9 @@ public class HomeController extends Controller {
 
     @RequestMapping("/retirePlayer")
     public ModelAndView retirePlayer() {
-        playerService.retire(currentPlayer);
+//        Player currentPlayer = playerService.findById(playerId);
+//
+//        playerService.retire(currentPlayer);
         return new ModelAndView("redirect:home");
     }
 

@@ -86,7 +86,7 @@ public class UserJdbcDao implements UserDao {
     @Override
     public boolean save(User user) {
         jdbcTemplate.update("UPDATE users SET username = ?, password = ?, mail = ?, currentday = ?, team = ? " +
-                "WHERE userid = ?", user.getUsername(), user.getPassword(), user.getMail(), user.getCurrentDay(),user.getTeam(), user.getId());
+                "WHERE userid = ?", user.getUsername(), user.getPassword(), user.getMail(), user.getCurrentDay(),user.getTeam().getId(), user.getId());
         return true;
     }
 
