@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -46,8 +48,8 @@ public class HomeController extends Controller{
     @RequestMapping("/home/{playerId}")
     public ModelAndView home(@PathVariable int playerId) {
         ModelAndView mav = new ModelAndView("home");
-//        mav.addObject("team", team);
-//        mav.addObject("players", players);
+        mav.addObject("team", team);
+        mav.addObject("players", players);
         mav.addObject("player", playerService.findById(playerId));
         return mav;
     }
@@ -68,7 +70,14 @@ public class HomeController extends Controller{
     @RequestMapping("/finance")
     public ModelAndView finance() {
         ModelAndView mav = new ModelAndView("finance");
+
+//        int salaries = teamService.getSalaries(team);
+//        int ticketsSold = teamService.getTicketsSold(team);
+//
 //        mav.addObject("money", team.getMoney());
+//        mav.addObject("salaries", salaries);
+//        mav.addObject("ticketsSold", ticketsSold);
+
         return mav;
     }
 

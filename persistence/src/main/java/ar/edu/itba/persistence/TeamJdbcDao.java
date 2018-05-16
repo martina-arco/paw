@@ -98,4 +98,9 @@ public class TeamJdbcDao implements TeamDao {
         }
         return list;
     }
+
+    @Override
+    public Stadium findStadiumByTeamId(long id) {
+        return null;
+    }
 }

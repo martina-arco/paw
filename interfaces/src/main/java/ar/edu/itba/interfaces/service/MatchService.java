@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface MatchService {
 
-    List<String> getUpcomingMatches(Team team, Date currentDate);
+    List<Match> getUpcomingMatches(Team team, Date currentDate);
 
     void UserMatchEnd(Match match, User user);
 
@@ -20,6 +20,7 @@ public interface MatchService {
     Match getUserMatch(List<Match> matches, Team userTeam);
 
     Match create(League league, Team home, Team away, Date day);
+
     Match create(long league,long home, long away, Date day);
 
     boolean save(Match match);

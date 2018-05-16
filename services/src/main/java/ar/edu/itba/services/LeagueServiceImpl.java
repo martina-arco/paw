@@ -37,18 +37,19 @@ public class LeagueServiceImpl implements LeagueService {
     public Map<Team, Integer> getTeamPoints(League league, java.util.Date currentDate) {
 
         Map<Team, Integer> map = new HashMap<>();
-//        List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
-//
-//        for (Match match : matches) {
-//            Team home = match.getHome();
-//            Team away = match.getAway();
-//
-//            int homeInitialPoints = map.get(home.getName());
-//            int awayInitialPoints = map.get(away.getName());
-//
-//            map.put(home.getName(), homeInitialPoints += match.getHomePoints());
-//            map.put(away.getName(), awayInitialPoints += match.getAwayPoints());
-//        }
+
+        List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
+
+        for (Match match : matches) {
+            Team home = match.getHome();
+            Team away = match.getAway();
+
+            int homeInitialPoints = map.get(home);
+            int awayInitialPoints = map.get(away);
+
+            map.put(home, homeInitialPoints += match.getHomePoints());
+            map.put(away, awayInitialPoints += match.getAwayPoints());
+        }
 
         return map;
     }

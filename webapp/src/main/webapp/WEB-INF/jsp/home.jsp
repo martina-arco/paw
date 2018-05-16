@@ -85,27 +85,28 @@
 
                         <tbody>
 
-                            <c:forEach var = "i" begin = "1" end = "23">
+                            <%--<c:forEach var = "i" begin = "1" end = "23">--%>
+                                <%--<tr>--%>
+                                    <%--<th scope="row"><a href="<c:url value="/home/${i}" />">Perez</a></th>--%>
+                                    <%--<td>3,000</td> --%>
+                                    <%--<td>400k</td> --%>
+                                    <%--<td>93</td> --%>
+                                    <%--<td>35</td>--%>
+                                <%--</tr>--%>
+                            <%--</c:forEach>--%>
+
+                            <c:forEach items="${players}" var="player">
                                 <tr>
-                                    <th scope="row"><a href="<c:url value="/home/${i}" />">Perez</a></th>
-                                    <td>3,000</td> 
-                                    <td>400k</td> 
-                                    <td>93</td> 
-                                    <td>35</td>
+                                    <th scope="row"><a href="<c:url value="/home/${i}" />"><c:out value="${player.name}"/></a></th>
+                                    <td><c:out value="${player.salary}"/></td>
+                                    <td><c:out value="${player.value}"/></td>
+                                    <td><c:out value="${player.fitness}"/></td>
+                                    <td><c:out value="${player.age}"/></td>
                                 </tr>
                             </c:forEach>
+
+
                         </tbody>
-
-                        <%--<c:forEach items="${players}" var="player">--%>
-                            <%--<tr>--%>
-                                <%--<td><c:out value="${player.name}"/></td>--%>
-                                <%--<td><c:out value="${player.salary}"/></td>--%>
-                                <%--<td><c:out value="${player.value}"/></td>--%>
-                                <%--<td><c:out value="${player.fitness}"/></td>--%>
-                                <%--<td><c:out value="${player.age}"/></td>--%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
-
                     </table>
 
                 </div>

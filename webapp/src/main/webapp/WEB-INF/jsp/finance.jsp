@@ -23,7 +23,7 @@
                     <h3 class="indent"><spring:message code="money"/></h3>
                 </div>
                 <div class="col">
-                    <h5><c:out value="${money}"/></h5>
+                    <h5><spring:message code="currency" arguments="${money}"/></h5>
                 </div>
             </div>
 

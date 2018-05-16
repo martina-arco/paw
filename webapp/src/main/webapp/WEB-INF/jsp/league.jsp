@@ -28,19 +28,21 @@
 
                     <table class="table bg-white small center">
 
+                        <thead>
+                            <tr>
+                                <th scope="col"><spring:message code="stadium"/> </th>
+                                <th scope="col"><spring:message code="teams"/> </th>
+                            </tr>
+                        </thead>
+
                         <tbody>
 
-                        <c:forEach var = "i" begin = "1" end = "5">
+                        <c:forEach items="${upcomingMatches}" var="match">
                             <tr>
-                                <td>River</td> 
+                                <td><c:out value="${match.home.stadium}"/></td>
+                                <td><spring:message code="versus" arguments="${match.home.name}, ${match.away.name}"/></td> 
                             </tr>
                         </c:forEach>
-
-                        <%--<c:forEach items="upcomingMatches" var="match">--%>
-                            <%--<tr>--%>
-                                <%--<td><c:out value="match"/></td> --%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
 
                         </tbody>
 
@@ -62,19 +64,12 @@
 
                         <tbody>
 
-                        <c:forEach var = "i" begin = "1" end = "5">
+                        <c:forEach items="${teams}" var="team">
                             <tr>
-                                <td>River</td> 
-                                <td>20</td> 
+                                <td><c:out value="${team.key.name}"/></td> 
+                                <td><c:out value="${team.value}"/></td> 
                             </tr>
                         </c:forEach>
-
-                        <%--<c:forEach items="teams" var="team">--%>
-                            <%--<tr>--%>
-                                <%--<td><c:out value="${team.key.name}"/></td> --%>
-                                <%--<td><c:out value="${team.value}"/></td> --%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
 
                         </tbody>
                     </table>

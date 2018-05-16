@@ -32,4 +32,29 @@ public class TeamServiceImpl implements TeamService {
 //        return teamDao.findAllByLeagueId(league.getId());
         return new ArrayList<>();
     }
+
+    @Override
+    public int getSalaries(Team team) {
+        int salaries = 0;
+
+//        for (Player player:team.getPlayers()) {
+//            salaries += player.getSalary();
+//        }
+
+        return salaries;
+    }
+
+    @Override
+    public int getTicketsSold(Team team) {
+
+        int ticketsSold = 0;
+
+//        for (Receipt receipt:team.getFinance()) {
+//
+//            if(receipt.getType() == Receipt.Type.MATCHINCOME)
+//                ticketsSold += receipt.getAmount();
+//        }
+
+        return 0;
+    }
 }

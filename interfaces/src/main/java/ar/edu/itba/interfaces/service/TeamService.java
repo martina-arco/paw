@@ -12,4 +12,8 @@ public interface TeamService {
 
     List<Team> findByLeague(League league);
 
+    int getSalaries(Team team);
+
+    int getTicketsSold(Team team);
+
 }

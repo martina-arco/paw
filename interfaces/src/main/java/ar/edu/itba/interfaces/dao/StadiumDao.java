@@ -9,4 +9,5 @@ public interface StadiumDao {
     boolean save(Stadium stadium);
 
     Stadium findById(long id);
+
 }
