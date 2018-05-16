@@ -77,7 +77,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void setFormation(Team team) {
-        if(team != null && team.getPlayers() != null){
+        if (team != null && team.getPlayers() != null) {
             team.setFormation(formationService.getFormation(team.getPlayers()));
         }
     }

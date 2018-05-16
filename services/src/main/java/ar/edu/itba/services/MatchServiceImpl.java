@@ -66,12 +66,12 @@ public class MatchServiceImpl implements MatchService {
             Team home = teamDao.findById(match.getHomeId());
             if(home != null) {
                 teamService.setPlayers(home);
-                home.setFormation(AiService.getFormation(home.getPlayers()));
+                teamService.setFormation(home);
             }
             Team away = teamDao.findById(match.getAwayId());
             if(away != null) {
                 teamService.setPlayers(away);
-                away.setFormation(AiService.getFormation(away.getPlayers()));
+                teamService.setFormation(away);
             }
             match.setHome(home);
             match.setAway(away);
