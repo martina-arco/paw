@@ -76,7 +76,7 @@ public class SimulationServiceImpl implements SimulationService{
             return this;
         }
 
-        public Map<Long, MatchStatus> getStatus() {
+        synchronized public Map<Long, MatchStatus> getStatus() {
             Map<Long, MatchStatus> ret = new HashMap<>();
 
             for (MatchThread mThread : playingMatches) {
@@ -414,7 +414,7 @@ public class SimulationServiceImpl implements SimulationService{
                 this.neighbors = new HashSet<>();
             }
 
-            private SimulationNode dispute(MatchStatus matchStatus) {
+            synchronized private SimulationNode dispute(MatchStatus matchStatus) {
                 int opponentDef = node.getAtt(otherTeam(possession), NodeAtt.DEF);
                 int myPoss = node.getAtt(possession, NodeAtt.POSS);
 
@@ -430,7 +430,7 @@ public class SimulationServiceImpl implements SimulationService{
                 return node.getSNode(taken ? otherTeam(possession) : possession);
             }
 
-            private SimulationNode shot(MatchStatus matchStatus) {
+            synchronized private SimulationNode shot(MatchStatus matchStatus) {
                 double check = rand.nextDouble();
                 int shot = node.getAtt(possession, NodeAtt.FIN) / (distanceToGoal() + 1);
 
@@ -457,7 +457,7 @@ public class SimulationServiceImpl implements SimulationService{
                 return Point.manhattanSq(node.position, possession.equals(MyTeam.AWAY) ? new Point(0, 2) : new Point(3, 2));
             }
 
-            private SimulationNode advance(MatchStatus matchStatus) {
+            synchronized private SimulationNode advance(MatchStatus matchStatus) {
                 double chanceToShoot = distanceToGoal() == 0 ? 1.0 : 1 / (distanceToGoal() * 2);
                 boolean shooting = rand.nextDouble() < chanceToShoot;
 
