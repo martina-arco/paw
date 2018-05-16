@@ -14,4 +14,6 @@ public interface SimulationService {
     Map<Long, MatchStatus> getStatus(Long userId);
 
     void start(Long userId);
+
+    List<Match> getMatches(Long userId);
 }

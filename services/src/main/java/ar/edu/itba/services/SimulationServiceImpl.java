@@ -36,6 +36,11 @@ public class SimulationServiceImpl implements SimulationService{
         table.get(userId).start();
     }
 
+    @Override
+    public List<Match> getMatches(Long userId) {
+        return table.get(userId).getMatches();
+    }
+
     public enum NodeAtt {
         DEF, PASS, FIN, POSS
     }
@@ -55,6 +60,7 @@ public class SimulationServiceImpl implements SimulationService{
 
         private final Object lock = new Object();
         private final Random rand;
+        private List<Match> matches;
         private Thread vivaldi;
 
         private Set<MatchThread> playingMatches;
@@ -70,6 +76,7 @@ public class SimulationServiceImpl implements SimulationService{
         }
 
         public SimFixture simulateFixture(List<Match> matches) {
+            this.matches = matches;
             for (Match match : matches) {
                 playingMatches.add(new MatchThread(match));
             }
@@ -111,6 +118,10 @@ public class SimulationServiceImpl implements SimulationService{
                 }
             });
             vivaldi.start();
+        }
+
+        synchronized public List<Match> getMatches() {
+            return matches;
         }
 
         private class MatchThread extends Thread {
