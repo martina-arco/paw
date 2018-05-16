@@ -28,6 +28,8 @@ public class SimulationServiceImpl implements SimulationService{
 
     @Override
     public Map<Long, MatchStatus> getStatus(Long userId) {
+        if(!table.containsKey(userId))
+            return null;
         return table.get(userId).getStatus();
     }
 
