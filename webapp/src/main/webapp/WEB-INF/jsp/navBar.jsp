@@ -10,7 +10,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <%--<li class="nav-item ">--%>
                         <%--<a href = "<c:url value="/youthAcademy"/>" class="nav-link"><spring:message code="youthAcademy"/> </a>--%>
                     <%--</li>--%>
@@ -24,6 +24,9 @@
                         <a href = "<c:url value="/finance"/>" class="nav-link"><spring:message code="finance"/></a>
                     </li>
                 </ul>
+                <span class="nav-item navbar-nav">
+                    <a href = "<c:url value="/logout"/>" class="nav-link"><spring:message code="logout"/></a>
+                </span>
             </div>
         </nav>
 </body>
