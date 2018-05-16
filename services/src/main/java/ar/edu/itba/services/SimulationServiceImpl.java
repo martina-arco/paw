@@ -129,6 +129,8 @@ public class SimulationServiceImpl implements SimulationService{
             }
 
             private void finish() {
+                matchStatus.setMinute(90);
+
                 for (Event event : matchStatus.getEvents()) {
                     match.addEvent(event);
                 }

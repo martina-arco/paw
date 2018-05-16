@@ -28,7 +28,7 @@ public class MatchStatus {
 
         for(Event event : events){
             Event.Type type = event.getType();
-            if(type.equals(Event.Type.SCORE) || type.equals(Event.Type.RED_CARD) || type.equals(Event.Type.YELLOW_CARD) || type.equals(Event.Type.SUBSTITUTE))
+            if(!(type.equals(Event.Type.SCORE) || type.equals(Event.Type.RED_CARD) || type.equals(Event.Type.YELLOW_CARD) || type.equals(Event.Type.SUBSTITUTE)))
                 toFilter.add(event);
         }
 
