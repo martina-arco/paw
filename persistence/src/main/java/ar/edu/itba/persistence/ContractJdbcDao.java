@@ -50,9 +50,6 @@ public class ContractJdbcDao implements ContractDao{
     @Override
     public List<Contract> findByTeam(Team team) {
         final List<Contract> list = jdbcTemplate.query("SELECT * FROM contract WHERE team = ?", ROW_MAPPER, team.getId());
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 

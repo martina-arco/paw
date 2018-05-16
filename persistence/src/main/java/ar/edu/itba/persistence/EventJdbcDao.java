@@ -46,9 +46,6 @@ public class EventJdbcDao implements EventDao {
     @Override
     public List<Event> findByMatchId(long id) {
         final List<Event> list = jdbcTemplate.query("SELECT * FROM event WHERE match = ?", ROW_MAPPER, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 

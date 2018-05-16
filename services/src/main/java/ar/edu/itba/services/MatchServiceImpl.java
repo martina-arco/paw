@@ -143,9 +143,9 @@ public class MatchServiceImpl implements MatchService {
                 addMatchEarnings(match.getHome());
             }
             for (Event event: match.getEvents()) {
-                //eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
+                eventDao.create(match, event.getP1(), event.getP2(), event.getType(), event.getMinute());
             }
-            //matchDao.save(match);
+            matchDao.save(match);
         }
     }
 

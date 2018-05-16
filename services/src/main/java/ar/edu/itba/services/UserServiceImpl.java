@@ -87,9 +87,11 @@ public class UserServiceImpl implements UserService {
                 }
             }
             int amount = league.getPrize();
-            if(higherTeam.getId() == team.getId()) {
-                receiptDao.create(team, amount, Receipt.Type.TOURNAMENTPRIZE);
-                team.addMoney(amount);
+            if(higherTeam != null) {
+                if (higherTeam.getId() == team.getId()) {
+                    receiptDao.create(team, amount, Receipt.Type.TOURNAMENTPRIZE);
+                    team.addMoney(amount);
+                }
             }
         }
         userDao.save(user);

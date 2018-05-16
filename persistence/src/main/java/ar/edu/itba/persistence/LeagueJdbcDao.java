@@ -78,9 +78,6 @@ public class LeagueJdbcDao implements LeagueDao {
     @Override
     public List<League> findAllByUserId(long id) {
         final List<League> list = jdbcTemplate.query("SELECT * FROM league WHERE userid = ?", ROW_MAPPER, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 }

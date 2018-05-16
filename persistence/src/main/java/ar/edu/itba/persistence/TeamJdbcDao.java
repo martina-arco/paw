@@ -91,9 +91,6 @@ public class TeamJdbcDao implements TeamDao {
     @Override
     public List<Team> findAllByLeagueId(long id) {
         final List<Team> list = jdbcTemplate.query("SELECT * FROM team WHERE league = ?", ROW_MAPPER, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
