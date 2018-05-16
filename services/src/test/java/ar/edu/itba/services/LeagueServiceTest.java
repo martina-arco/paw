@@ -64,7 +64,7 @@ public class LeagueServiceTest {
 
     private League league;
     private Date date;
-    private Team home, away;
+    private Team t1, t2;
     private User user;
     private Match m1, m2, m3;
 
@@ -79,17 +79,17 @@ public class LeagueServiceTest {
         m2 = mock(Match.class);
         m3 = mock(Match.class);
 
-        home = mock(Team.class);
-        away = mock(Team.class);
+        t1 = mock(Team.class);
+        t2 = mock(Team.class);
 
 
-        when(m1.getHome()).thenReturn(home);
-        when(m2.getHome()).thenReturn(home);
-        when(m3.getHome()).thenReturn(home);
+        when(m1.getHome()).thenReturn(t1);
+        when(m2.getHome()).thenReturn(t1);
+        when(m3.getHome()).thenReturn(t2);
 
-        when(m1.getAway()).thenReturn(away);
-        when(m2.getAway()).thenReturn(away);
-        when(m3.getAway()).thenReturn(away);
+        when(m1.getAway()).thenReturn(t2);
+        when(m2.getAway()).thenReturn(t2);
+        when(m3.getAway()).thenReturn(t1);
 
         when(m1.getHomePoints()).thenReturn(0);
         when(m2.getHomePoints()).thenReturn(0);
@@ -117,8 +117,9 @@ public class LeagueServiceTest {
     public void getPoints() {
         Map<Team, Integer> points = leagueService.getTeamPoints(league, date);
 
-        assertTrue(points.get(home) == 1);
-        assertTrue(points.get(away) == 7);
+        assertTrue(points.get(t1) == 1);
+        assertTrue(points.get(t2) == 7);
+        assertTrue(points.size() == 2);
     }
 
     @Test

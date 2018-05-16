@@ -57,3 +57,8 @@ input[type="radio"]{
     line-height: 40px;
     vertical-align: middle;
 }
+
+.big-padding {
+    padding-top: 20%;
+    padding-bottom: 20%;
+}

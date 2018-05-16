@@ -40,8 +40,10 @@ public class SimulationServiceImpl implements SimulationService{
 
     @Override
     public List<Match> getMatches(Long userId) {
-        if(!table.containsKey(userId))
+        if(!table.containsKey(userId)){
             return null;
+        }
+
         List<Match> ret = table.get(userId).getMatches();
         table.remove(userId);
         return ret;

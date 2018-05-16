@@ -21,7 +21,7 @@
 
             <div class="row">
                 <div class="col">
-                    <table class="table bg-white width60 table-sm">
+                    <table class="table bg-white">
 
                         <thead class="green">
                         <tr>
@@ -33,23 +33,14 @@
 
                         <tbody>
 
-                        <%--<c:forEach var = "i" begin = "1" end = "6">--%>
-                            <%--<tr>--%>
-                                <%--<td>River</td> --%>
-                                <%--<td>1</td> --%>
-                                <%--<td>0</td>--%>
-                                <%--<td>Boca</td> --%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
-
-                        <c:forEach items="${matches}" var="match">
-                            <tr>
-                                <td>${match.home.name}</td>
-                                <td>${match.homeScore}</td>
-                                <td>${match.awayScore}</td>
-                                <td>${match.away.name}</td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach items="${matches}" var="match">
+                                <tr>
+                                    <td>${match.home.name}</td>
+                                    <td>${match.homeScore}</td>
+                                    <td>${match.awayScore}</td>
+                                    <td>${match.away.name}</td>
+                                </tr>
+                            </c:forEach>
 
                         </tbody>
 
@@ -58,7 +49,7 @@
 
                 <div class="col">
 
-                    <div class="row green center big-height">
+                    <div class="row green center big-height big-padding">
 
                         <div class="col">
                             <h5><c:out value="${match.home.name}"/></h5>
@@ -78,7 +69,9 @@
                     <h6><spring:message code="goals"/> </h6>
 
                     <table class="table width60 table-borderless table-center">
+
                         <tbody>
+
                             <c:forEach items="${match.events}" var="event">
                                 <c:if test="${event.type == 'SCORE' || event.type == 'YELLOW_CARD' || event.type == 'RED_CARD'}">
                                     <tr>
@@ -95,20 +88,6 @@
                                     </tr>
                                 </c:if>
                             </c:forEach>
-
-
-                                <%--<c:forEach items="${homeScores}" var="score">--%>
-                                    <%--<tr>--%>
-                                        <%--<td>${score.key} ${score.value}'</td>--%>
-                                    <%--</tr>--%>
-                                <%--</c:forEach>--%>
-
-                                <%--<c:forEach items="${awayScores}" var="score">--%>
-                                    <%--<tr>--%>
-                                        <%--<td></td>--%>
-                                        <%--<td>${score.key} ${score.value}'</td>--%>
-                                    <%--</tr>--%>
-                                <%--</c:forEach>--%>
 
                         </tbody>
                     </table>
