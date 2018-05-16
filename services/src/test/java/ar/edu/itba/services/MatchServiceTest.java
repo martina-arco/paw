@@ -84,7 +84,7 @@ public class MatchServiceTest {
     private User user;
     private Team home1, away1, home2, away2;
     private Match m1, m2;
-    private League league;
+    private Event event;
     private Stadium stadium;
     private List<Match> matches;
 
@@ -98,13 +98,13 @@ public class MatchServiceTest {
         away2 = mock(Team.class);
         user = mock(User.class);
         stadium = mock(Stadium.class);
-
-        home1.setMoney(10000);
+        event = mock(Event.class);
 
         when(m1.getHome()).thenReturn(home1);
         when(m1.getHomeId()).thenReturn((long)0);
         when(user.getTeamId()).thenReturn((long)0);
         when(home1.getId()).thenReturn((long)0);
+        when(home1.getMoney()).thenReturn(10000);
         when(stadiumDao.findByTeamId((long)0)).thenReturn(stadium);
         when(stadium.calculateMatchEarnings()).thenReturn(10000);
 
@@ -117,6 +117,16 @@ public class MatchServiceTest {
 
         when(m2.getHomeId()).thenReturn((long)2);
         when(m1.getAwayId()).thenReturn((long)3);
+
+        List<Event> events = new LinkedList<Event>();
+        events.add(event);
+        when(m1.getEvents()).thenReturn(events);
+        Player p1 = mock(Player.class);
+        Player p2 = mock(Player.class);
+        when(event.getP1()).thenReturn(p1);
+        when(event.getP2()).thenReturn(p2);
+        when(event.getType()).thenReturn(Event.Type.SCORE);
+        when(event.getMinute()).thenReturn(2);
     }
 
     @Test
@@ -124,7 +134,6 @@ public class MatchServiceTest {
         matchService.saveMatches(matches, user);
         Match match = matchService.getUserMatch(matches, user);
         assertTrue(match.equals(m1));
-        //assertTrue(home1.getMoney() == 20000);
-        //assertTrue(user.getCurrentDay() == new Date("24/05/2018"));
+        assertTrue(home1.getMoney() == 10000);
     }
 }
