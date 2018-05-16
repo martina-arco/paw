@@ -1,7 +1,10 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.PlayerDao;
+import ar.edu.itba.interfaces.dao.ReceiptDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
+import ar.edu.itba.interfaces.service.AiService;
+import ar.edu.itba.interfaces.service.FormationService;
 import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.Player;
@@ -36,8 +39,23 @@ public class TeamServiceTest {
         }
 
         @Bean
+        public AiService formationService() {
+            return new AiServiceImpl();
+        }
+
+        @Bean
         public TeamDao teamDao() {
             return mock(TeamDao.class);
+        }
+
+        @Bean
+        public PlayerDao playerDao() {
+            return mock(PlayerDao.class);
+        }
+
+        @Bean
+        public ReceiptDao receiptDao() {
+            return mock(ReceiptDao.class);
         }
     }
 

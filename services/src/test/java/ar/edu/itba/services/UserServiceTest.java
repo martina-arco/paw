@@ -1,8 +1,7 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.dao.PlayerDao;
-import ar.edu.itba.interfaces.dao.TeamDao;
-import ar.edu.itba.interfaces.dao.UserDao;
+import ar.edu.itba.interfaces.dao.*;
+import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.Team;
@@ -28,8 +27,13 @@ public class UserServiceTest {
     static class UserServiceConfig {
 
         @Bean
-        public UserService teamService() {
+        public UserService userService() {
             return new UserServiceImpl();
+        }
+
+        @Bean
+        public LeagueService leagueService() {
+            return mock(LeagueService.class);
         }
 
         @Bean
@@ -38,19 +42,30 @@ public class UserServiceTest {
         }
 
         @Bean
-        public TeamDao teamDao() {
-            return mock(TeamDao.class);
+        public LeagueDao leagueDao() {
+            return mock(LeagueDao.class);
         }
 
         @Bean
-        public PlayerDao playerDao() {
-            return mock(PlayerDao.class);
+        public MatchDao matchDao() {
+            return mock(MatchDao.class);
+        }
+
+        @Bean
+        public ReceiptDao receiptDao() {
+            return mock(ReceiptDao.class);
+        }
+
+        @Bean
+        public TeamDao teamDao() {
+            return mock(TeamDao.class);
         }
 
         @Bean
         public PasswordEncoder passwordEncoder() {
             return mock(PasswordEncoder.class);
         }
+
     }
 
     @Autowired
