@@ -73,8 +73,8 @@ public class SimulationServiceImplTest {
             list.add(new Match(0,t1,t2,mock(League.class),new Date(),0,0,0,0,null,false,new ArrayList<Event>()));
         }
 
-        ss.simulateFixture(list);
-        ss.start();
+        ss.simulateFixture(1L,list);
+        ss.start(1L);
 
         int homePoints = 0, awayPoints = 0, homeGoals = 0, awayGoals = 0;
         for(Match m : list){
