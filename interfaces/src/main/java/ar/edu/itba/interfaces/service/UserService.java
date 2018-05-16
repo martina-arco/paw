@@ -13,5 +13,5 @@ public interface UserService {
 
     User create(String username, String password, String mail, Date currentDay);
 
-    void setTeam(Team team);
+    void setTeam(User user, Team team);
 }

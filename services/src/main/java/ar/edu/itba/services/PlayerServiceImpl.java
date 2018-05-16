@@ -39,8 +39,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void retire(Player player) {
-//        Team team = player.getTeam();
-//        team.removePlayer(player);
-//        teamDao.save(team);
+        Team team = player.getTeam();
+        team.removePlayer(player);
+        teamDao.save(team);
     }
 }

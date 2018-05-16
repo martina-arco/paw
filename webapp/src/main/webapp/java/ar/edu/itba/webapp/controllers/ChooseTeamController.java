@@ -2,6 +2,7 @@ package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.TeamService;
+import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.webapp.form.ChooseTeamForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ChooseTeamController extends Controller{
     @Autowired
     private TeamService teamService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "/chooseTeam")
     public ModelAndView chooseTeam(@ModelAttribute("chooseTeamForm") final ChooseTeamForm form) {
 //        league = leagueService.findByUser(loggedUser());
@@ -41,7 +45,7 @@ public class ChooseTeamController extends Controller{
             return chooseTeam(form);
         }
 
-//        loggedUser().setTeam(teamService.findById(form.getTeamChosen()));
+//        userService.setTeam(loggedUser(), teamService.findById(form.getTeamChosen()));
 
         return new ModelAndView("redirect:home");
     }

@@ -2,6 +2,7 @@ package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.MatchService;
+import ar.edu.itba.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.Event;

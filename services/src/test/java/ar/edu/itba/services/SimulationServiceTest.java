@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class SimulationServiceImplTest {
+public class SimulationServiceTest {
 
     List<Player> players = new ArrayList<>();
     Formation f1,f2;
@@ -21,7 +21,7 @@ public class SimulationServiceImplTest {
         return new Player(0,0,"pepe",20,10,80,80,70,70,70,70,100,10,new Date(),false);
     }
 
-    public SimulationServiceImplTest(){
+    public SimulationServiceTest(){
         Map<Player,Point> map1 = new HashMap<>(), map2 = new HashMap<>();
         List<Player> sub1 = new ArrayList<>(), sub2 = new ArrayList<>();
 
