@@ -110,7 +110,7 @@ public class SimulationServiceImpl implements SimulationService{
 
             private MatchThread(Match match) {
                 super();
-                this.matchStatus = new MatchStatus(0, 0, new ArrayList<Event>());
+                this.matchStatus = new MatchStatus(0, 0,0, new ArrayList<Event>());
                 this.match = match;
             }
 
