@@ -24,6 +24,7 @@ body {
     -moz-opacity: 0.3;
     filter:alpha(opacity=30);
 }
+
 .content {
     position: relative;
     width:100%;

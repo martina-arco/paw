@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <table class="table bg-white">
+                <table class="table bg-white table-striped header-fixed">
 
                     <thead class = "green">
                     <tr>
@@ -56,23 +56,23 @@
 
                     <tbody>
 
+                            <tr id="1">
+                                <td class="width15">Monumental</td>
+                                <td class="width15">River</td> 
+                                <td class="width10" id="1homeScore"></td> 
+                                <td class="width10" id="1awayScore"></td>
+                                <td class="width15">Boca</td> 
+                                <td class="width35" id="1event"></td>
+                            </tr>
+                            <tr id="2">
+                                <td class="width15">Monumental</td>
+                                <td class="width15">River</td> 
+                                <td class="width10" id="2homeScore">1</td> 
+                                <td class="width10" id="2awayScore">1</td>
+                                <td class="width15">Boca</td> 
+                                <td class="width35" id="2event"></td>
+                            </tr>
 
-                        <tr id="1">
-                            <td class="width15">Monumental</td>
-                            <td class="width15">River</td> 
-                            <td class="width10" id="1homeScore"></td> 
-                            <td class="width10" id="1awayScore"></td>
-                            <td class="width15">Boca</td> 
-                            <td class="width35" id="1event"></td>
-                        </tr>
-                        <tr id="2">
-                            <td class="width15">Monumental</td>
-                            <td class="width15">River</td> 
-                            <td class="width10" id="2homeScore"></td> 
-                            <td class="width10" id="2awayScore"></td>
-                            <td class="width15">Boca</td> 
-                            <td class="width35" id="2event"></td>
-                        </tr>
 
 
                     </tbody>

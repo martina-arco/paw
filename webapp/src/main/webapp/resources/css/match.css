@@ -1,3 +1,59 @@
 th, td {
     text-align: center;
 }
+
+.header-fixed {
+    width: 100%
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.header-fixed > tbody > tr > td.width10 {
+    width: 10%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width15 {
+    width: 15%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width35 {
+    width: 35%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width15{
+    width: 15%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width20{
+    width: 20%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width35{
+    width: 35%;
+    float: left;
+}
