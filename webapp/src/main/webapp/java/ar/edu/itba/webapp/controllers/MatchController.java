@@ -64,13 +64,6 @@ public class MatchController extends Controller{
         ModelAndView mav = new ModelAndView("matchEnd");
         User user = loggedUser();
 
-//        Map<String, Integer> homeScores = new HashMap<>();
-//        Map<String, Integer> awayScores = new HashMap<>();
-//
-//        List<Match> matches = leagueService.findByUser(loggedUser()).get(0).getFixture().get(.getCurrentDay());
-//        Match userMatch = matchService.getUserMatch(matches, loggedUser().getTeam());
-//
-//        matchService.getScores(userMatch, homeScores, awayScores);
         List<Match> matches = simulationService.getMatches(user.getId());
         matchService.saveMatches(matches, user);
         userService.advanceDate(user);
@@ -80,8 +73,6 @@ public class MatchController extends Controller{
         mav.addObject("matches", matches);
         mav.addObject("match", userMatch);
         mav.addObject("stadium", stadiumService.findByTeam(userMatch.getHome()));
-//        mav.addObject("homeScores", homeScores);
-//        mav.addObject("awayScores", awayScores);
 
         return mav;
     }

@@ -117,27 +117,18 @@ public class PlayerJdbcDao implements PlayerDao{
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ids", ids);
         final List<Player> list = namedParameterJdbcTemplate.query("SELECT * FROM player WHERE playerid IN (:ids)", params ,ROW_MAPPER);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Player> findAdultsByTeamId(long id) {
         final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ? AND youth = FALSE", ROW_MAPPER, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Player> findYouthByTeamId(long id) {
         final List<Player> list = jdbcTemplate.query("SELECT * FROM player WHERE team = ? AND youth = TRUE", ROW_MAPPER, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 

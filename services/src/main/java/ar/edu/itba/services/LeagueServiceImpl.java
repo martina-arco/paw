@@ -56,7 +56,7 @@ public class LeagueServiceImpl implements LeagueService {
 
         List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
 
-        if(matches != null) {
+        if(!matches.isEmpty()) {
 
             for (Match match : matches) {
                 Team home = match.getHome();

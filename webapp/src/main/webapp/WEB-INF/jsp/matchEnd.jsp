@@ -44,10 +44,10 @@
 
                         <c:forEach items="${matches}" var="match">
                             <tr>
-                                <td>${match.home}</td>
+                                <td>${match.home.name}</td>
                                 <td>${match.homeScore}</td>
                                 <td>${match.awayScore}</td>
-                                <td>${match.away}</td>
+                                <td>${match.away.name}</td>
                             </tr>
                         </c:forEach>
 
@@ -61,33 +61,40 @@
                     <div class="row green center big-height">
 
                         <div class="col">
-                            <h5><c:out value="${match.home}"/></h5>
+                            <h5><c:out value="${match.home.name}"/></h5>
                         </div>
                         <div class="col">
-                            <h5><spring:message code="homeAndAwayScore" arguments="${match.homeScore}, ${match.awayScore}"/></h5>
+                            <h5><spring:message code="homeAndAwayScore" arguments="${match.homeScore},${match.awayScore}"/></h5>
                         </div>
                         <div class="col">
-                            <h5><c:out value="${match.away}"/></h5>
+                            <h5><c:out value="${match.away.name}"/></h5>
                         </div>
                     </div>
 
                     <div class="container center">
-                        <h5><c:out value="${stadium}"/></h5>
+                        <h5><c:out value="${stadium.name}"/></h5>
                     </div>
 
                     <h6><spring:message code="goals"/> </h6>
 
                     <table class="table width60 table-borderless table-center">
                         <tbody>
-
-                                <%--<tr>--%>
-                                    <%--<td>Perez 5'</td> --%>
-                                    <%--<td>Juan 6'</td> --%>
-                                <%--</tr>--%>
-                                <%--<tr>--%>
-                                    <%--<td></td>--%>
-                                    <%--<td>Juan 40'</td> --%>
-                                <%--</tr>--%>
+                            <c:forEach items="${match.events}" var="event">
+                                <c:if test="${event.type == 'SCORE' || event.type == 'YELLOW_CARD' || event.type == 'RED_CARD'}">
+                                    <tr>
+                                        <td>
+                                        <c:if test="${event.p1.teamId == match.homeId}">
+                                            <spring:message code="event.${event.type}" arguments="${event.minute},${event.p1.name}"/>
+                                        </c:if>
+                                        </td>
+                                        <td>
+                                        <c:if test="${event.p1.teamId == match.awayId}">
+                                            <spring:message code="event.${event.type}" arguments="${event.minute},${event.p1.name}"/>
+                                        </c:if>
+                                        </td>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
 
 
                                 <%--<c:forEach items="${homeScores}" var="score">--%>

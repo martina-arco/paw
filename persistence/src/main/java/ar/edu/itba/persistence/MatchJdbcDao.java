@@ -52,54 +52,36 @@ public class MatchJdbcDao implements MatchDao{
     @Override
     public List<Match> findByTeamId(long id) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE home = ? OR away = ?", ROW_MAPPER, id, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Match> findByTeamIdFromDate(long id, Date date) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE (home = ? OR away = ?) AND day >= ?", ROW_MAPPER, id, id, date);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Match> findByLeagueId(long id) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ?", ROW_MAPPER, id);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Match> findByLeagueIdAndDate(long id, Date date) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day = ?", ROW_MAPPER, id, date);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Match> findByLeagueIdAndBeforeDate(long id, Date date) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day < ?", ROW_MAPPER, id, date);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
     @Override
     public List<Match> findByLeagueIdAndFromDate(long id, Date date) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day >= ?", ROW_MAPPER, id, date);
-        if (list.isEmpty()) {
-            return null;
-        }
         return list;
     }
 
