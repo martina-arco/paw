@@ -9,9 +9,9 @@ import java.util.Map;
 
 public interface SimulationService {
 
-    void simulateFixture(List<Match> matches);
+    void simulateFixture(Long userId, List<Match> matches);
 
-    Map<Long, MatchStatus> getStatus();
+    Map<Long, MatchStatus> getStatus(Long userId);
 
-    void start();
+    void start(Long userId);
 }
