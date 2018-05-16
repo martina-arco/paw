@@ -118,7 +118,9 @@ public class TeamJdbcDaoTest {
 
     @Test
     public void testFindByUserId() {
-        final long id = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY).getId();
+        final Team expectedTeam = teamDao.create(NAME, league, null, null, null, null, FANCOUNT, FANTRUST, BOARDTRUST, MONEY);
+        user.setTeam(expectedTeam);
+        userDao.save(user);
         Team team = teamDao.findByUserId(user.getId());
         assertNotNull(team);
         assertEquals(NAME, team.getName());
@@ -128,6 +130,6 @@ public class TeamJdbcDaoTest {
         assertEquals(FANTRUST, team.getFanTrust());
         assertEquals(BOARDTRUST, team.getBoardTrust());
         assertEquals(MONEY, team.getMoney());
-        assertEquals(id, team.getId());
+        assertEquals(expectedTeam.getId(), team.getId());
     }
 }
