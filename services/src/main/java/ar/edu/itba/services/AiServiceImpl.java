@@ -4,9 +4,11 @@ import ar.edu.itba.interfaces.service.AiService;
 import ar.edu.itba.model.Formation;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.utils.Point;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class AiServiceImpl implements AiService {
 
     @Override

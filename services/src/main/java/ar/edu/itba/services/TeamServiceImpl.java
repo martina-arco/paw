@@ -2,6 +2,7 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.PlayerDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
+import ar.edu.itba.interfaces.service.AiService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class TeamServiceImpl implements TeamService {
     private TeamDao teamDao;
     @Autowired
     private PlayerDao playerDao;
+    @Autowired
+    private AiService formationService;
 
     @Override
     @Transactional
@@ -62,10 +65,22 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team findByUserId(long id) {
-        Team team = teamDao.findByUserId(id);
-        if(team != null) {
+        return teamDao.findByUserId(id);
+    }
+
+    @Override
+    public void setPlayers(Team team) {
+        if(team != null){
             team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
         }
-        return team;
     }
+
+    @Override
+    public void setFormation(Team team) {
+        if(team != null && team.getPlayers() != null){
+            team.setFormation(formationService.getFormation(team.getPlayers()));
+        }
+    }
+
+
 }

@@ -18,4 +18,8 @@ public interface TeamService {
 
     Team findByUserId(long id);
 
+    void setPlayers(Team team);
+
+    void setFormation(Team team);
+
 }

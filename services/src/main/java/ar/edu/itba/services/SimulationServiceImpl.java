@@ -55,6 +55,7 @@ public class SimulationServiceImpl implements SimulationService{
 
         private final Object lock = new Object();
         private final Random rand;
+        private Thread vivaldi;
 
         private Set<MatchThread> playingMatches;
 
@@ -86,26 +87,30 @@ public class SimulationServiceImpl implements SimulationService{
         }
 
         public void start() {
-            for (MatchThread matchThread : playingMatches) {
-                matchThread.start();
-            }
+            vivaldi = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (MatchThread matchThread : playingMatches) {
+                        matchThread.start();
+                    }
 
-            int minute = 0;
-            while (minute < 90) {
-                minute++;
+                    int minute = 0;
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    while (minute < 90) {
+                        minute++;
+
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        synchronized (lock) {
+                            lock.notifyAll();
+                        }
+                    }
                 }
-                synchronized (lock) {
-                    lock.notifyAll();
-                }
-            }
-            for (MatchThread matchThread : playingMatches) {
-                while (matchThread.isAlive()) ;
-            }
+            });
+            vivaldi.start();
         }
 
         private class MatchThread extends Thread {
