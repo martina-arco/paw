@@ -4,6 +4,7 @@ import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Team;
@@ -15,6 +16,10 @@ import java.util.*;
 
 @Service
 public class LeagueServiceImpl implements LeagueService {
+
+
+    @Autowired
+    private MatchService matchService;
 
     @Autowired
     private LeagueDao leagueDao;
@@ -56,32 +61,80 @@ public class LeagueServiceImpl implements LeagueService {
 
         List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
 
+        matchService.setTeams(matches);
+
+
+
+        for (Team team : teamDao.findAllByLeagueId(league.getId())) {
+            map.put(team, 0);
+        }
+
         if(!matches.isEmpty()) {
 
             for (Match match : matches) {
+
                 Team home = match.getHome();
                 Team away = match.getAway();
 
-                int homeInitialPoints = 0;
-                int awayInitialPoints = 0;
+                Integer homePoints = map.get(home);
+                Integer awayPoints = map.get(away);
 
-                if(map.containsKey(home))
-                    homeInitialPoints = map.get(home);
+                if(homePoints == null)
+                    homePoints = 0;
 
-                if(map.containsKey(away))
-                    awayInitialPoints = map.get(away);
+                if(awayPoints == null)
+                    awayPoints = 0;
 
-                homeInitialPoints += match.getHomePoints();
-                awayInitialPoints += match.getAwayPoints();
+                homePoints += match.getHomePoints();
+                awayPoints += match.getAwayPoints();
 
-                map.put(home, homeInitialPoints);
-                map.put(away, awayInitialPoints);
+                map.put(home, homePoints);
+                map.put(away, awayPoints);
             }
 
-        } else {
-            for (Team team : teamDao.findAllByLeagueId(league.getId())) {
-                map.put(team, 0);
+        }
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Integer> getTeamPointsName(League league, Date currentDate) {
+
+        Map<String, Integer> map = new HashMap<>();
+
+        List<Match> matches = matchDao.findByLeagueIdAndBeforeDate(league.getId(), currentDate);
+
+        matchService.setTeams(matches);
+
+
+
+        for (Team team : teamDao.findAllByLeagueId(league.getId())) {
+            map.put(team.getName(), 0);
+        }
+
+        if(!matches.isEmpty()) {
+
+            for (Match match : matches) {
+
+                Team home = match.getHome();
+                Team away = match.getAway();
+
+                Integer homePoints = map.get(home);
+                Integer awayPoints = map.get(away);
+
+                if(homePoints == null)
+                    homePoints = 0;
+
+                if(awayPoints == null)
+                    awayPoints = 0;
+
+                homePoints += match.getHomePoints();
+                awayPoints += match.getAwayPoints();
+
+                map.put(home.getName(), homePoints);
+                map.put(away.getName(), awayPoints);
             }
+
         }
 
         return map;

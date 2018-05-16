@@ -82,6 +82,11 @@ public class LeagueServiceTest {
         t1 = mock(Team.class);
         t2 = mock(Team.class);
 
+        List<Team> teams = new ArrayList<>();
+
+        teams.add(t1);
+        teams.add(t2);
+
 
         when(m1.getHome()).thenReturn(t1);
         when(m2.getHome()).thenReturn(t1);
@@ -111,6 +116,7 @@ public class LeagueServiceTest {
 
         when(matchDao.findByLeagueIdAndBeforeDate((long) 0, date)).thenReturn(matches);
         when(matchDao.findByLeagueIdAndFromDate((long) 0, date)).thenReturn(matches);
+        when(teamDao.findAllByLeagueId(league.getId())).thenReturn(teams);
     }
 
     @Test

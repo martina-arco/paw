@@ -14,4 +14,5 @@ public interface LeagueService {
     Map<Team, Integer> getTeamPoints(League league, Date currentDate);
     List<Match> findMatchesForDate(League league, Date date);
     void fillFixture(User user, League league);
+    Map<String, Integer> getTeamPointsName(League league, Date currentDate);
 }

@@ -69,7 +69,7 @@
 
                         <c:forEach items="${teams}" var="team">
                             <tr>
-                                <td class="width60"><c:out value="${team.key.name}"/></td> 
+                                <td class="width60"><c:out value="${team.key}"/></td> 
                                 <td class="width40"><c:out value="${team.value}"/></td> 
                             </tr>
                         </c:forEach>
