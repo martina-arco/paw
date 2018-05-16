@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 public class StadiumServiceImpl implements StadiumService {
 
     @Autowired
-    TeamDao teamDao;
+    StadiumDao stadiumDao;
 
     @Override
     public Stadium findByTeam(Team team) {
-//        return teamDao.findStadiumByTeamId(team.getId());
+//        return stadiumDao.findStadiumByTeamId(team.getId());
         return new Stadium(1,"Monumental",10,10,20,20,30,30);
     }
 }

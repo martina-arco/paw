@@ -75,4 +75,9 @@ public class StadiumJdbcDao implements StadiumDao {
         }
         return list.get(0);
     }
+
+    @Override
+    public Stadium findStadiumByTeamId(long id) {
+        return null;
+    }
 }

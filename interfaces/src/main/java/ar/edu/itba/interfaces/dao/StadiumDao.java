@@ -10,4 +10,6 @@ public interface StadiumDao {
 
     Stadium findById(long id);
 
+    Stadium findStadiumByTeamId(long id);
+
 }

@@ -16,11 +16,10 @@ import java.util.Date;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-public class HomeController extends Controller{
+public class HomeController extends Controller {
 
     private Team team;
     private Player currentPlayer;
-    private List<Player> players;
 
 
     @Autowired
@@ -29,9 +28,6 @@ public class HomeController extends Controller{
     @Autowired
     private TeamService teamService;
 
-    @Autowired
-    private ContractService contractService;
-
     @RequestMapping("/home")
     public ModelAndView home(){
         team = loggedUser().getTeam();
@@ -39,7 +35,6 @@ public class HomeController extends Controller{
 //        if(team == null)
 //            return new ModelAndView("redirect:chooseTeam");
 
-//        players = team.getPlayers();
 //        long playerId = players.get(0).getId();
         int playerId = 1;
         return home(playerId);
@@ -48,9 +43,13 @@ public class HomeController extends Controller{
     @RequestMapping("/home/{playerId}")
     public ModelAndView home(@PathVariable int playerId) {
         ModelAndView mav = new ModelAndView("home");
-        mav.addObject("team", team);
-        mav.addObject("players", players);
-        mav.addObject("player", playerService.findById(playerId));
+
+        currentPlayer = playerService.findById(playerId);
+
+//        mav.addObject("team", team);
+//        mav.addObject("players", team.getPlayers());
+//        mav.addObject("player", playerService.findById(playerId));
+
         return mav;
     }
 
@@ -60,26 +59,10 @@ public class HomeController extends Controller{
         return new ModelAndView("redirect:home");
     }
 
-    @RequestMapping("/youthAcademy")
-    public ModelAndView youthAcademy() {
-        ModelAndView mav = new ModelAndView("youthAcademy");
-//        mav.addObject("players", team.getYouthAcademy());
-        return mav;
-    }
-
-    @RequestMapping("/finance")
-    public ModelAndView finance() {
-        ModelAndView mav = new ModelAndView("finance");
-
-//        int salaries = teamService.getSalaries(team);
-//        int ticketsSold = teamService.getTicketsSold(team);
-//
-//        mav.addObject("money", team.getMoney());
-//        mav.addObject("salaries", salaries);
-//        mav.addObject("ticketsSold", ticketsSold);
-
-        return mav;
-    }
-
-
+//    @RequestMapping("/youthAcademy")
+//    public ModelAndView youthAcademy() {
+//        ModelAndView mav = new ModelAndView("youthAcademy");
+////        mav.addObject("players", team.getYouthAcademy());
+//        return mav;
+//    }
 }
