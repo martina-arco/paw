@@ -119,6 +119,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    @Deprecated
     public void UserMatchEnd(Match match, User user) {
         Team team = match.getHome();
         if(match.getHomeId() == user.getTeamId()) {
