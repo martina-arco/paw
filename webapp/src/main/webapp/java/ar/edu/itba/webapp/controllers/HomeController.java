@@ -32,12 +32,11 @@ public class HomeController extends Controller {
     public ModelAndView home(){
         team = loggedUser().getTeam();
 
-//        if(team == null)
-//            return new ModelAndView("redirect:chooseTeam");
+        if(team == null)
+            return new ModelAndView("redirect:chooseTeam");
 
-//        long playerId = players.get(0).getId();
-        int playerId = 1;
-        return home(playerId);
+        long playerId = team.getPlayers().get(0).getId();
+        return home((int)playerId);
     }
 
     @RequestMapping("/home/{playerId}")
@@ -46,9 +45,9 @@ public class HomeController extends Controller {
 
         currentPlayer = playerService.findById(playerId);
 
-//        mav.addObject("team", team);
-//        mav.addObject("players", team.getPlayers());
-//        mav.addObject("player", playerService.findById(playerId));
+        mav.addObject("team", team);
+        mav.addObject("players", team.getPlayers());
+        mav.addObject("player", playerService.findById(playerId));
 
         return mav;
     }

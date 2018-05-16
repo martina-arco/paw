@@ -97,7 +97,7 @@
 
                             <c:forEach items="${players}" var="player">
                                 <tr>
-                                    <th scope="row"><a href="<c:url value="/home/${i}" />"><c:out value="${player.name}"/></a></th>
+                                    <th scope="row"><a href="<c:url value="/home/${player.id}" />"><c:out value="${player.name}"/></a></th>
                                     <td><c:out value="${player.salary}"/></td>
                                     <td><c:out value="${player.value}"/></td>
                                     <td><c:out value="${player.fitness}"/></td>

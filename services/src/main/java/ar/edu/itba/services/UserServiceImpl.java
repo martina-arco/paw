@@ -1,7 +1,10 @@
 package ar.edu.itba.services;
 
+import ar.edu.itba.interfaces.dao.PlayerDao;
+import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.dao.UserDao;
 import ar.edu.itba.interfaces.service.UserService;
+import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private TeamDao teamDao;
+    @Autowired
+    private PlayerDao playerDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -27,7 +34,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+        User user = userDao.findByUsername(username);
+        if(user != null) {
+            Team team = teamDao.findById(user.getTeamId());
+            team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
+            user.setTeam(team);
+        }
+        return user;
     }
 
     @Override

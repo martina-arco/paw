@@ -30,11 +30,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player findById(long id) {
-        Team t1 = new Team(1,1,1,"River",0,0,0,0);
-
-//        return playerDao.findById(id);
-        return new Player(1,t1,"pepe1",1,1,1,1,1,1,1,1,1,1,new Date(),false);
-
+        return playerDao.findById(id);
     }
 
     @Override
