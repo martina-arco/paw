@@ -11,9 +11,6 @@ import java.util.LinkedList;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 
-/**
- * Created by martina on 30/04/2018.
- */
 public class MatchTest {
 
     private Match match1;

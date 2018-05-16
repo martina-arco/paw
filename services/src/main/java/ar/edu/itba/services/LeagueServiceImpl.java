@@ -8,10 +8,10 @@ import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
-import ar.edu.itba.model.utils.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +25,13 @@ public class LeagueServiceImpl implements LeagueService {
     @Autowired
     private MatchDao matchDao;
 
-    @Autowired
-    private TeamDao teamDao;
-
     @Override
     public List<League> findByUser(User user) {
         return leagueDao.findAllByUserId(user.getId());
     }
 
     @Override
-    public Map<Team, Integer> getTeamPoints(League league, java.util.Date currentDate) {
+    public Map<Team, Integer> getTeamPoints(League league, Date currentDate) {
 
         Map<Team, Integer> map = new HashMap<>();
 
@@ -44,11 +41,20 @@ public class LeagueServiceImpl implements LeagueService {
             Team home = match.getHome();
             Team away = match.getAway();
 
-            int homeInitialPoints = map.get(home);
-            int awayInitialPoints = map.get(away);
+            int homeInitialPoints = 0;
+            int awayInitialPoints = 0;
 
-            map.put(home, homeInitialPoints += match.getHomePoints());
-            map.put(away, awayInitialPoints += match.getAwayPoints());
+            if(map.containsKey(home))
+                homeInitialPoints = map.get(home);
+
+            if(map.containsKey(away))
+                awayInitialPoints = map.get(away);
+
+            homeInitialPoints += match.getHomePoints();
+            awayInitialPoints += match.getAwayPoints();
+
+            map.put(home, homeInitialPoints);
+            map.put(away, awayInitialPoints);
         }
 
         return map;

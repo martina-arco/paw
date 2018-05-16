@@ -6,9 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-/**
- * Created by martina on 01/05/2018.
- */
 public class PlayerStatsTest {
 
     private final Integer testConst = 10;
