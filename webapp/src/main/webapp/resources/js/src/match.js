@@ -1,7 +1,8 @@
-var  json;
+var currentMinute = 0;
 
 $(document).ready(function(){
     fetchData();
+    setInterval(fetchData, 500);
 });
 
 function fetchData() {
@@ -9,12 +10,20 @@ function fetchData() {
         var eventContainer;
         var homeScoreContainer;
         var awayScoreContainer;
-        var minute = 0;
+        var minute = -1;
+        var eventMinutes = 10;
+
+        console.log(json);
 
         for(var matchId in json) {
 
-            if(minute == 0)
+            if(minute == -1) {
                 minute = json[matchId].minute;
+                if (minute > currentMinute)
+                    currentMinute = minute;
+                else if (minute < currentMinute - eventMinutes)
+                    return;
+            }
 
             eventContainer = document.getElementById(matchId + "event");
             homeScoreContainer = document.getElementById(matchId + "homeScore");
@@ -25,7 +34,7 @@ function fetchData() {
 
             var oldEvents = eventContainer.children;
             for (var i = oldEvents.length - 1; i >= 0 ; i--) {
-                if(oldEvents[i].getAttribute("name") < minute - 5) {
+                if(oldEvents[i].getAttribute("name") < currentMinute - eventMinutes) {
                     eventContainer.removeChild(oldEvents[i]);
                 }
             }
@@ -34,18 +43,18 @@ function fetchData() {
 
                 var event = json[matchId].events[eventId];
                 var type = document.createElement("span");
-                type.setAttribute("name", minute.toString());
+                type.setAttribute("name", event.minute.toString());
                 type.style.display = "block";
 
                 switch(event.type) {
                     case "SCORE":
-                        type.innerHTML = event.p1 + " - " + document.getElementById("goalScored").value + " ( " + event.minute + " )";
+                        type.innerHTML = event.p1.name + " - " + document.getElementById("goalScored").value + " ( " + event.minute + " )";
                         break;
                     case "YELLOW_CARD":
-                        type.innerHTML = event.p1 + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )";
+                        type.innerHTML = event.p1.name + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )";
                         break;
                     case "RED_CARD":
-                        type.innerHTML = event.p1 + " - " + document.getElementById("redCard").value + " ( " + event.minute + " )";
+                        type.innerHTML = event.p1.name + " - " + document.getElementById("redCard").value + " ( " + event.minute + " )";
                         break;
                     // case "SUBSTITUTE":
 
@@ -60,10 +69,12 @@ function fetchData() {
 
         }
 
-        $('.progress-bar').css('width', (minute * 1.1) + '%');
-        document.getElementById("time").innerHTML = minute + "'";
+        $('.progress-bar').css('width', (currentMinute * 1.1) + '%');
+        document.getElementById("time").innerHTML = currentMinute + "'";
 
-        setTimeout(fetchData, 1000);
+        if(currentMinute == 90) {
+            window.location.href = "../matchEnd";
+        }
     });
 }
 
