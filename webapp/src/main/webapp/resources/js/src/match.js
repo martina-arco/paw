@@ -2,7 +2,6 @@ var currentMinute = 0;
 
 $(document).ready(function(){
     fetchData();
-    setInterval(fetchData, 500);
 });
 
 function fetchData() {
@@ -74,6 +73,9 @@ function fetchData() {
 
         if(currentMinute == 90) {
             window.location.href = "../matchEnd";
+        }
+        else{
+            setTimeout(fetchData, 200);
         }
     });
 }

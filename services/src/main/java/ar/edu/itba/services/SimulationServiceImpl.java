@@ -45,7 +45,6 @@ public class SimulationServiceImpl implements SimulationService{
         }
 
         List<Match> ret = table.get(userId).getMatches();
-        table.remove(userId);
         return ret;
     }
 
