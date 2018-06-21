@@ -159,6 +159,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>${maven-war-plugin.version}</version>
         <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
           <packagingExcludes>**/logback-test.xml</packagingExcludes>
         </configuration>
       </plugin>
