@@ -63,7 +63,7 @@ public class SimulationServiceTest {
     }
 
 
-
+    @Test
     public void influenceTest(){
         SimulationServiceImpl ss = new SimulationServiceImpl();
         List<Match> list = new ArrayList<>();
@@ -74,15 +74,17 @@ public class SimulationServiceTest {
         }
 
         ss.simulateFixture(1L,list);
-        ss.start(1L);
 
-        int homePoints = 0, awayPoints = 0, homeGoals = 0, awayGoals = 0;
+        float homePoints = 0, awayPoints = 0, homeGoals = 0, awayGoals = 0;
         for(Match m : list){
             homeGoals += m.getHomeScore();
             awayGoals += m.getAwayScore();
             homePoints += m.getHomePoints();
             awayPoints += m.getAwayPoints();
         }
+
+        System.out.println("Home pts avg= " + homePoints/cases);
+        System.out.println("Away pts avg= " + awayPoints/cases);
 
     }
 

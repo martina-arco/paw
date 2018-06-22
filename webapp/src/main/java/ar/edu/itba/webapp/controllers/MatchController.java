@@ -42,7 +42,6 @@ public class MatchController extends Controller{
         matchService.setTeamsAndFormations(matches);
         stadiumService.setStadium(matches);
         simulationService.simulateFixture(user.getId(), matches);
-        simulationService.start(user.getId());
 
         mav.addObject("matches", matches);
 
