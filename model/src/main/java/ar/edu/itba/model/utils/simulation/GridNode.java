@@ -62,11 +62,11 @@ public class GridNode {
         return position;
     }
 
-    public SimulationNode getHome() {
-        return home;
+    public SimulationNode getNode(MyTeam team) {
+        if(team == MyTeam.AWAY)
+            return away;
+        else
+            return home;
     }
 
-    public SimulationNode getAway() {
-        return away;
-    }
 }

@@ -58,18 +58,23 @@ public class Grid {
     public SimulationNode kickOff(MyTeam team) {
         double check = rand.nextDouble();
         if (team.equals(MyTeam.AWAY)) {
-            return check < 0.5 ? matrix[2][1].getAway() : matrix[2][2].getAway();
+            return check < 0.5 ? matrix[2][1].getNode(AWAY) : matrix[2][2].getNode(AWAY);
         }
-        return check < 0.5 ? matrix[1][1].getHome() : matrix[1][2].getHome();
+        return check < 0.5 ? matrix[1][1].getNode(HOME) : matrix[1][2].getNode(HOME);
     }
 
     public SimulationNode goalKick(MyTeam team) {
         double check = rand.nextDouble();
         if (team.equals(MyTeam.AWAY)) {
-            return check < 0.5 ? matrix[3][1].getAway() : matrix[3][2].getAway();
+            return check < 0.5 ? matrix[3][1].getNode(AWAY) : matrix[3][2].getNode(AWAY);
         }
-        return check < 0.5 ? matrix[0][1].getHome() : matrix[0][2].getHome();
+        return check < 0.5 ? matrix[0][1].getNode(HOME) : matrix[0][2].getNode(HOME);
+    }
 
+    public SimulationNode getNode(Point position, MyTeam team){
+        if(team.equals(AWAY))
+            return matrix[position.getX()][position.getY()].getNode(AWAY);
+        return matrix[position.getX()][position.getY()].getNode(HOME);
     }
 
     private void setFormation(MyTeam team, Formation formation) {
@@ -88,14 +93,14 @@ public class Grid {
                 int auxX;
                 if (team.equals(MyTeam.HOME)) {
                     auxX = xx + 1;
-                    if (auxX < pitchSize && auxX > x && !matrix[auxX][yy].getHome().getInfluenceMap().isEmpty()) {
-                        neighbors.add(matrix[auxX][yy].getHome());
+                    if (auxX < pitchSize && auxX > x && !matrix[auxX][yy].getNode(HOME).getInfluenceMap().isEmpty()) {
+                        neighbors.add(matrix[auxX][yy].getNode(HOME));
                         accum += node.getNode().getAtt(team, NodeAtt.PASS) * attitude / Point.manhattanSq(new Point(x, y), new Point(auxX, yy));
                     }
                 } else {
                     auxX = pitchSize - xx - 1;
-                    if (auxX >= 0 && auxX < x && !matrix[auxX][yy].getAway().getInfluenceMap().isEmpty()) {
-                        neighbors.add(matrix[auxX][yy].getAway());
+                    if (auxX >= 0 && auxX < x && !matrix[auxX][yy].getNode(AWAY).getInfluenceMap().isEmpty()) {
+                        neighbors.add(matrix[auxX][yy].getNode(AWAY));
                         accum += node.getNode().getAtt(team, NodeAtt.PASS) * attitude / Point.manhattanSq(new Point(x, y), new Point(auxX, yy));
                     }
                 }
@@ -124,8 +129,8 @@ public class Grid {
     public void configureNeighbors(int homeAttitude, int awayAttitude) {
         for (int x = 0; x < pitchSize; x++) {
             for (int y = 0; y < pitchSize; y++) {
-                nodeNeighbors(MyTeam.HOME, matrix[x][y].getHome(), homeAttitude);
-                nodeNeighbors(MyTeam.AWAY, matrix[x][y].getAway(), awayAttitude);
+                nodeNeighbors(MyTeam.HOME, matrix[x][y].getNode(HOME), homeAttitude);
+                nodeNeighbors(MyTeam.AWAY, matrix[x][y].getNode(AWAY), awayAttitude);
             }
         }
     }

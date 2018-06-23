@@ -6,6 +6,7 @@ import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.*;
 import ar.edu.itba.model.utils.simulation.Grid;
 import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
+import ar.edu.itba.model.utils.simulation.MyTeam;
 import ar.edu.itba.model.utils.simulation.SimulationNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,11 @@ public class SimulationServiceImpl implements SimulationService{
     public SimulationServiceImpl(){
 
     }
+
     @Override
     public void simulateFixture(Long userId, List<Match> matches) {
         for(Match match : matches){
-            new MatchSimulator(match).simulate();
+            new MatchSimulator(match, null).simulate();
         }
     }
 
@@ -41,8 +43,10 @@ public class SimulationServiceImpl implements SimulationService{
         return null;
     }
 
-    public void resimulate(Long userId, Match match, Team team, Player in, Player out){
-
+    public void resimulate(Long userId,int minute, Match match, Team team, Player in, Player out){
+        team.getFormation().replacePlayer(in, out);
+        MatchDeepStatus matchDeepStatus = matchStateDao.findByMatch(match);
+        new MatchSimulator(match, matchDeepStatus).simulate(minute, matchDeepStatus.positionByMinute(minute), matchDeepStatus.ownerByMinute(minute));
     }
 
     private class MatchSimulator{
@@ -50,12 +54,16 @@ public class SimulationServiceImpl implements SimulationService{
         private final MatchStatus matchStatus, persistedMatchStatus;
         private final MatchDeepStatus deepStatus;
 
-        private MatchSimulator(Match match) {
+
+        private MatchSimulator(Match match, MatchDeepStatus matchDeepStatus) {
             super();
             this.matchStatus = new MatchStatus(0, 0,0, new ArrayList<Event>());
             this.persistedMatchStatus = new MatchStatus(0,0,0,new ArrayList<>());
             this.match = match;
-            this.deepStatus = new MatchDeepStatus(match);
+            if(matchDeepStatus == null)
+                this.deepStatus = new MatchDeepStatus(match);
+            else
+                this.deepStatus = matchDeepStatus;
         }
 
         private void finish() {
@@ -77,25 +85,32 @@ public class SimulationServiceImpl implements SimulationService{
             matchStateDao.save(deepStatus);
         }
 
-        private void simulate() {
+        private void simulate(){
+            simulate(0, null, HOME);
+        }
+
+        private void simulate(int minute, Point position, MyTeam possession) {
             Formation home = match.getHome().getFormation(), away = match.getAway().getFormation();
             Grid matchGrid = new Grid(home, away);
-            SimulationNode currentState = matchGrid.kickOff(HOME), lastState = null;
+            SimulationNode currentState, lastState;
 
-            int minute = 0;
+            if(position == null){
+                currentState = matchGrid.kickOff(HOME);
+            } else {
+                currentState = matchGrid.getNode(position,possession);
+            }
+
             while (minute < 90) {
                 if (minute == 45)
                     currentState = matchGrid.kickOff(AWAY);
 
                 matchStatus.setMinute(minute);
 
+                lastState = currentState;
                 currentState = currentState.dispute(matchStatus);
 
-                if (currentState.equals(lastState)) {
+                if (currentState.equals(lastState))
                     currentState = currentState.advance(matchStatus);
-                } else {
-                    lastState = currentState;
-                }
 
                 deepStatus.registerState(currentState.getNode().getPosition(), minute, currentState.getPossession());
                 minute++;
