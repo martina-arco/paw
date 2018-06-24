@@ -33,6 +33,7 @@ public class MatchDeepStatus {
     private Match match;
 
     @ElementCollection
+    @CollectionTable(name = "matchstate_states", joinColumns = @JoinColumn(name = "matchstate"))
     private List<State> states;
     
     public MatchDeepStatus(){}
