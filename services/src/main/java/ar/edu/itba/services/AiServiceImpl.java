@@ -30,7 +30,7 @@ public class AiServiceImpl implements AiService {
         players.sort((player, t1) -> player.getAge() - t1.getAge());
         captain = useLast(players,false);
 
-        players.sort((player, t1) -> player.getFinish() - t1.getFinish());
+        players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
         penaltyTaker = useLast(players, false);
 
         players.sort((player, t1) -> player.getPassing() - t1.getPassing());
@@ -50,7 +50,7 @@ public class AiServiceImpl implements AiService {
         starters.put(useLast(players,true), new Point(4, 7));
         starters.put(useLast(players,true), new Point(3, 4));
 
-        players.sort((player, t1) -> player.getFinish() - t1.getFinish());
+        players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
         starters.put(useLast(players,true), new Point(7,3));
         starters.put(useLast(players,true), new Point(7, 5));
 
