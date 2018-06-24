@@ -76,7 +76,6 @@ public class SimulationServiceImpl implements SimulationService{
             super();
             this.matchStatus = new MatchStatus(0, 0,0, new ArrayList<Event>());
             this.match = match;
-            matchService.fetchEvents(match);
             if(matchDeepStatus == null)
                 this.deepStatus = matchStateDao.create(match);
             else

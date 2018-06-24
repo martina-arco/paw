@@ -11,10 +11,12 @@ import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class LeagueServiceImpl implements LeagueService {
 
 
@@ -142,9 +144,11 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public List<Match> findMatchesForDate(League league, Date date) {
-        if(league != null)
-            return matchDao.findByLeagueIdAndDate(league.getId(), date);
-        else
-            return null;
+        if(league != null) {
+            List<Match> matches =  matchDao.findByLeagueIdAndDate(league.getId(), date);
+            matchService.setTeamsAndFormations(matches);
+            return matches;
+        }
+        return null;
     }
 }

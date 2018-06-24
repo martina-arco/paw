@@ -36,11 +36,11 @@ public class Team {
     private Formation formation;
 
     @OneToMany(mappedBy = "team")
-    @Where(clause = "youth = FALSE")
+    @Where(clause = "youth = 'FALSE'")
     private List<Player> players;
 
     @OneToMany(mappedBy = "team")
-    @Where(clause = "youth = TRUE")
+    @Where(clause = "youth = 'TRUE'")
     private List<Player> youthAcademy;
 
     @Column(nullable = false)

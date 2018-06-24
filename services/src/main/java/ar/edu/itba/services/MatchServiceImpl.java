@@ -9,10 +9,12 @@ import ar.edu.itba.interfaces.service.StadiumService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class MatchServiceImpl implements MatchService {
 
     @Autowired
@@ -67,18 +69,9 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void setTeamsAndFormations(List<Match> matches) {
         for (Match match : matches) {
-            Team home = teamDao.findById(match.getHomeId());
-            if(home != null) {
-                teamService.setPlayers(home);
-                teamService.setFormation(home);
-            }
-            Team away = teamDao.findById(match.getAwayId());
-            if(away != null) {
-                teamService.setPlayers(away);
-                teamService.setFormation(away);
-            }
-            match.setHome(home);
-            match.setAway(away);
+            fetchEvents(match);
+            teamService.setPlayers(match.getHome());
+            teamService.setPlayers(match.getAway());
         }
     }
 
@@ -101,32 +94,12 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public void setTeams(List<Match> matches) {
-
-        Set<Team> teams = new HashSet<>();
-
-        for (Match match:matches) {
-
-            Team home = teamDao.findById(match.getHomeId());
-            Team away = teamDao.findById(match.getAwayId());
-
-            match.setHome(home);
-            match.setAway(away);
-
-            teams.add(home);
-        }
-
-        stadiumService.setStadium(teams);
-
+        //Not necessary with hibernate, default fetch is EAGER
     }
 
     @Override
     public void fetchEvents(Match match) {
-        List<Event> events = match.getEvents();
-        if(events != null) {
-            events.size();
-        } else {
-            match.setEvents(new LinkedList<>());
-        }
+        match.getEvents().size();
     }
 
     @Override

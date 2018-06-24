@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class TeamServiceImpl implements TeamService {
 
     @Autowired
@@ -26,7 +27,6 @@ public class TeamServiceImpl implements TeamService {
     private ReceiptDao receiptDao;
 
     @Override
-    @Transactional
     public Team create(String name, League league, Stadium stadium, Formation formation, List<Player> players, List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money) {
         return teamDao.create(name, league, stadium, formation, players, youthAcademy, fanCount, fanTrust, boardTrust, money);
     }
@@ -74,24 +74,29 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public Team findByUserIdAndFetchPlayers(long id) {
+        Team team = findByUserId(id);
+        setPlayers(team);
+        return team;
+    }
+
+    @Override
     public void setPlayers(Team team) {
         if(team != null){
-            team.setPlayers(playerDao.findAdultsByTeamId(team.getId()));
+            team.getPlayers().size();
         }
     }
 
     @Override
     public void setFinance(Team team) {
         if(team != null){
-            team.setFinance(receiptDao.findAllByTeamId(team.getId()));
+            team.getFinance().size();
         }
     }
 
     @Override
     public void setFormation(Team team) {
-        if (team != null && team.getPlayers() != null) {
-            team.setFormation(formationService.getFormation(team.getPlayers()));
-        }
+        //Not necessary with hibernate, default fetch is EAGER
     }
 
 

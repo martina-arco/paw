@@ -39,8 +39,6 @@ public class MatchController extends Controller{
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
 
-        matchService.setTeamsAndFormations(matches);
-        stadiumService.setStadium(matches);
         simulationService.simulateFixture(user.getId(), matches);
 
         mav.addObject("matches", matches);
