@@ -3,7 +3,6 @@ package ar.edu.itba.persistence;
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
-import ar.edu.itba.model.MatchDay;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class LeagueJdbcDao implements LeagueDao {
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;

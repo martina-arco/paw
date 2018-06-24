@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-@Repository
+
 public class PlayerJdbcDao implements PlayerDao{
 
     private JdbcTemplate jdbcTemplate;
@@ -97,7 +97,7 @@ public class PlayerJdbcDao implements PlayerDao{
                 "skilllevel = ?, goalkeeping = ?, defending = ?, passing = ?, finishing = ?, salary = ?, " +
                 "contractexpiration = ?, youth = ? WHERE playerid = ?", player.getTeamId(), player.getName(), player.getAge(),
                 player.getFitness(), player.getValue(), player.getPotential(), player.getSkillLevel(), player.getGoalKeeping(),
-                player.getDefending(), player.getPassing(), player.getFinish(), player.getSalary(), player.getContractExpiration(),
+                player.getDefending(), player.getPassing(), player.getFinishing(), player.getSalary(), player.getContractExpiration(),
                 player.isYouth(), player.getId());
         return true;
     }

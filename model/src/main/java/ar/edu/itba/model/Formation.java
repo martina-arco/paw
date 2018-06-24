@@ -2,8 +2,11 @@ package ar.edu.itba.model;
 
 import ar.edu.itba.model.utils.Point;
 
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "formation")
 public class Formation {
 
     public static final Collection<Point> availablePositions = new HashSet<>();
@@ -16,13 +19,53 @@ public class Formation {
         STARTER, SUBSTITUTE
     }
 
-    private long id, captainId, freeKickTakerId, penaltyTakerId;
-    private Player captain, freeKickTaker, penaltyTaker;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "formation_formationid_seq")
+    @SequenceGenerator(sequenceName = "formation_formationid_seq", name = "formation_formationid_seq", allocationSize = 1)
+    @Column(name = "formationid")
+    private long id;
+
+    @Transient
+    private long captainId, freeKickTakerId, penaltyTakerId;
+
+    @OneToOne
+    @JoinColumn(name = "captain")
+    private Player captain;
+
+    @OneToOne
+    @JoinColumn(name = "freeKickTaker")
+    private Player freeKickTaker;
+
+    @OneToOne
+    @JoinColumn(name = "penaltyTaker")
+    private Player penaltyTaker;
+
+    @ElementCollection
     private Map<Player, Point> starters;
+
+    @Transient
     private Map<Long, Point> startersIds;
+
+    @OneToMany
     private List<Player> substitutes;
+
+    @Transient
     private List<Long> substitutesIds;
+
+    @Column(nullable = false)
     private int pressure, attitude;
+
+    public Formation(){}
+
+    public Formation(Player captain, Player freeKickTaker, Player penaltyTaker, Map<Player, Point> starters, List<Player> substitutes, int pressure, int attitude) {
+        this.captain = captain;
+        this.freeKickTaker = freeKickTaker;
+        this.penaltyTaker = penaltyTaker;
+        this.starters = starters;
+        this.substitutes = substitutes;
+        this.pressure = pressure;
+        this.attitude = attitude;
+    }
 
     public Formation(long id, Player captain, Player freeKickTaker, Player penaltyTaker, Map<Player, Point> starters, List<Player> substitutes, int pressure, int attitude) {
         this.id = id;

@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-@Repository
+
 public class MatchJdbcDao implements MatchDao{
 
     private JdbcTemplate jdbcTemplate;

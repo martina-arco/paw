@@ -1,22 +1,73 @@
 package ar.edu.itba.model;
 
+import com.sun.istack.internal.Nullable;
+import org.hibernate.annotations.JoinFormula;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
+@Entity
+@Table(name = "team")
 public class Team {
-    private long id, leagueId, stadiumId, formationId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "team_teamid_seq")
+    @SequenceGenerator(sequenceName = "team_teamid_seq", name = "team_teamid_seq", allocationSize = 1)
+    @Column(name = "teamid")
+    private long id;
+
+    @Transient
+    private long leagueId, stadiumId, formationId;
+
+    @Column(nullable = false)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "league")
     private League league;
+
+    @OneToOne(mappedBy = "team")
     private Stadium stadium;
+
+    @OneToOne
+    @JoinColumn(name = "formation")
     private Formation formation;
+
+    @OneToMany(mappedBy = "team")
+    @Where(clause = "youth = FALSE")
     private List<Player> players;
+
+    @OneToMany(mappedBy = "team")
+    @Where(clause = "youth = TRUE")
     private List<Player> youthAcademy;
-    private int fanCount;
-    private int fanTrust;
-    private int boardTrust;
+
+    @Column(nullable = false)
+    private int fanCount, fanTrust, boardTrust, money;
+
+    @OneToMany(mappedBy = "team")
     private List<Receipt> finance;
+
+    @Transient
     private List<BankLoan> loans;
-    private int money;
+
+    public Team(){}
+
+    public Team(String name, League league, Stadium stadium, Formation formation, List<Player> players,
+                List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, int money, List<Receipt> finance) {
+        this.name = name;
+        this.league = league;
+        this.stadium = stadium;
+        this.formation = formation;
+        this.players = players;
+        this.youthAcademy = youthAcademy;
+        this.fanCount = fanCount;
+        this.fanTrust = fanTrust;
+        this.boardTrust = boardTrust;
+        this.money = money;
+        this.finance = finance;
+    }
 
     public Team(long id, String name, League league, Stadium stadium, Formation formation, List<Player> players,
                 List<Player> youthAcademy, int fanCount, int fanTrust, int boardTrust, List<Receipt> finance,

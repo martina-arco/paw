@@ -30,7 +30,7 @@ public class AiServiceImplTest {
             when(aux.getDefending()).thenReturn(50);
             when(aux.getFitness()).thenReturn(80);
             when(aux.getGoalKeeping()).thenReturn(20);
-            when(aux.getFinish()).thenReturn(20);
+            when(aux.getFinishing()).thenReturn(20);
 
             if(i == 0) {
                 when(aux.getAge()).thenReturn(21);
@@ -40,7 +40,7 @@ public class AiServiceImplTest {
             } else if( i >= 5 && i < 9 ) {
                 when(aux.getPassing()).thenReturn(80 + i);
             } else if (i >= 9 && i < 11){
-                when(aux.getFinish()).thenReturn(80 + i);
+                when(aux.getFinishing()).thenReturn(80 + i);
             }
 
             players.add(aux);

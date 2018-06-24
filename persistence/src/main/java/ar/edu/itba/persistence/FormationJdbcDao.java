@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class FormationJdbcDao implements FormationDao{
 
     private JdbcTemplate jdbcTemplate;

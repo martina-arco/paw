@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class EventJdbcDao implements EventDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -47,6 +48,11 @@ public class EventJdbcDao implements EventDao {
     public List<Event> findByMatchId(long id) {
         final List<Event> list = jdbcTemplate.query("SELECT * FROM event WHERE match = ?", ROW_MAPPER, id);
         return list;
+    }
+
+    @Override
+    public List<Event> findByMatchAndPlayerId(long matchId, long playerId) {
+        throw new NotImplementedException();
     }
 
 

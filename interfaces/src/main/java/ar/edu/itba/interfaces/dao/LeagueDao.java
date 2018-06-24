@@ -2,7 +2,6 @@ package ar.edu.itba.interfaces.dao;
 
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
-import ar.edu.itba.model.MatchDay;
 import ar.edu.itba.model.User;
 
 import java.util.Date;

@@ -83,7 +83,7 @@ public class PlayerJdbcDaoTest {
         assertEquals(POTENTIAL, player.getPotential());
         assertEquals(SKILLLEVEL, player.getSkillLevel());
         assertEquals(GOALKEEPING, player.getGoalKeeping());
-        assertEquals(FINISHING, player.getFinish());
+        assertEquals(FINISHING, player.getFinishing());
         assertEquals(DEFENDING, player.getDefending());
         assertEquals(PASSING, player.getPassing());
         assertEquals(FITNESS, player.getFitness());
@@ -105,7 +105,7 @@ public class PlayerJdbcDaoTest {
         assertEquals(POTENTIAL, player.getPotential());
         assertEquals(SKILLLEVEL, player.getSkillLevel());
         assertEquals(GOALKEEPING, player.getGoalKeeping());
-        assertEquals(FINISHING, player.getFinish());
+        assertEquals(FINISHING, player.getFinishing());
         assertEquals(DEFENDING, player.getDefending());
         assertEquals(PASSING, player.getPassing());
         assertEquals(FITNESS, player.getFitness());
@@ -132,7 +132,7 @@ public class PlayerJdbcDaoTest {
         assertEquals(POTENTIAL, player.getPotential());
         assertEquals(SKILLLEVEL, player.getSkillLevel());
         assertEquals(GOALKEEPING, player.getGoalKeeping());
-        assertEquals(FINISHING, player.getFinish());
+        assertEquals(FINISHING, player.getFinishing());
         assertEquals(DEFENDING, player.getDefending());
         assertEquals(PASSING, player.getPassing());
         assertEquals(FITNESS, player.getFitness());
@@ -155,7 +155,7 @@ public class PlayerJdbcDaoTest {
         assertEquals(POTENTIAL, player.getPotential());
         assertEquals(SKILLLEVEL, player.getSkillLevel());
         assertEquals(GOALKEEPING, player.getGoalKeeping());
-        assertEquals(FINISHING, player.getFinish());
+        assertEquals(FINISHING, player.getFinishing());
         assertEquals(DEFENDING, player.getDefending());
         assertEquals(PASSING, player.getPassing());
         assertEquals(FITNESS, player.getFitness());
@@ -178,7 +178,7 @@ public class PlayerJdbcDaoTest {
         assertEquals(POTENTIAL, player.getPotential());
         assertEquals(SKILLLEVEL, player.getSkillLevel());
         assertEquals(GOALKEEPING, player.getGoalKeeping());
-        assertEquals(FINISHING, player.getFinish());
+        assertEquals(FINISHING, player.getFinishing());
         assertEquals(DEFENDING, player.getDefending());
         assertEquals(PASSING, player.getPassing());
         assertEquals(FITNESS, player.getFitness());
@@ -235,7 +235,7 @@ public class PlayerJdbcDaoTest {
         player.setGoalKeeping(GOALKEEPING2);
         player.setDefending(DEFENDING2);
         player.setPassing(PASSING2);
-        player.setFinish(FINISHING2);
+        player.setFinishing(FINISHING2);
         player.setSalary(SALARY2);
         player.setContractExpiration(CONTRACT_EXPIRATION2);
         player.setYouth(YOUTH2);
@@ -250,7 +250,7 @@ public class PlayerJdbcDaoTest {
         assertEquals(POTENTIAL2, player.getPotential());
         assertEquals(SKILLLEVEL2, player.getSkillLevel());
         assertEquals(GOALKEEPING2, player.getGoalKeeping());
-        assertEquals(FINISHING2, player.getFinish());
+        assertEquals(FINISHING2, player.getFinishing());
         assertEquals(DEFENDING2, player.getDefending());
         assertEquals(PASSING2, player.getPassing());
         assertEquals(FITNESS2, player.getFitness());

@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
 public class ReceiptJdbcDao implements ReceiptDao {
 
     private JdbcTemplate jdbcTemplate;

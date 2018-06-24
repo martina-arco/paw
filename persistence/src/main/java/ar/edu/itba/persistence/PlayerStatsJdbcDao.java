@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-@Repository
+
 public class PlayerStatsJdbcDao implements PlayerStatsDao {
 
     private JdbcTemplate jdbcTemplate;
