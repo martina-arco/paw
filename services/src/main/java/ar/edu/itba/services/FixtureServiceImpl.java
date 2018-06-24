@@ -19,25 +19,67 @@ public class FixtureServiceImpl implements FixtureService {
     public Map<Date, List<Match>> generateFixture(League league, Date from){
         List<Team> teams = teamDao.findAllByLeagueId(league.getId());
         Map<Date, List<Match>> map = new HashMap<>();
+        int N = teams.size();
 
-        Date aux = (Date) from.clone();
-        for(Team t1 : teams){
-            map.put(aux,new ArrayList<>());
-            for(Team t2 : teams){
-                if(!t1.equals(t2)){
-                    map.get(aux).add(new Match(0,t1,t2,league,aux,0,0,0,0,null,false,null));
-                }
+        Date firstHalf, secondHalf;
+
+        firstHalf = from;
+        secondHalf = advanceWeeks(from, N - 1);
+
+        for (int i = 0; i < N - 1; i++) {
+            List<Match> firstHalfList = new ArrayList<>();
+            List<Match> secondHalfList = new ArrayList<>();
+
+            for (int j = 0; j < N/2; j++) {
+                firstHalfList.add(new Match(teams.get(j), teams.get(N/2 + j), league, firstHalf));
+                secondHalfList.add(new Match(teams.get(N/2 + j), teams.get(j), league, secondHalf));
             }
-            aux = nextWeek(aux);
-        }
 
+            map.put(firstHalf, firstHalfList);
+            map.put(secondHalf, secondHalfList);
+
+            firstHalf = nextWeek(firstHalf);
+            secondHalf = nextWeek(secondHalf);
+
+            teams = RRrotation(teams);
+
+        }
         return map;
     }
 
-    private Date nextWeek(Date date){
+    private List<Team> RRrotation(List<Team> teams){
+        Team first[] = new Team[teams.size()/2], second[] = new Team[teams.size()/2];
+        List<Team> ret = new ArrayList<>();
+        first[0] = teams.get(0);
+
+        for (int i = 1; i < teams.size()/2 - 1; i++) {
+            first[i + 1] = teams.get(i);
+            second[i - 1] = teams.get(i + teams.size()/2);
+        }
+
+        second[teams.size()/2 - 2] = teams.get(teams.size() - 1);
+        first[1] = teams.get(teams.size()/2);
+        second[teams.size()/2 - 1] = teams.get(teams.size()/2 - 1);
+
+        for (int i = 0; i < teams.size()/2; i++) {
+            ret.add(first[i]);
+        }
+
+        for (int i = 0; i < teams.size()/2; i++) {
+            ret.add(second[i]);
+        }
+
+        return ret;
+    }
+
+    private Date advanceWeeks(Date date, int amount){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.DATE, 7);
+        cal.add(Calendar.DATE, 7 * amount);
         return cal.getTime();
+    }
+
+    private Date nextWeek(Date date){
+        return advanceWeeks(date, 1);
     }
 }

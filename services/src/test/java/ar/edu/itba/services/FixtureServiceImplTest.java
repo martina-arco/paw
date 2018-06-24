@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 import static org.mockito.Mockito.mock;
@@ -61,7 +63,9 @@ public class FixtureServiceImplTest {
         teams = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            teams.add(mock(Team.class));
+            Team team = mock(Team.class);
+            when(team.toString()).thenReturn(String.valueOf(i));
+            teams.add(team);
         }
 
         league = mock(League.class);
@@ -73,18 +77,19 @@ public class FixtureServiceImplTest {
     @Test
     public void generateFixtureTest() {
         Map<Date,List<Match>> map = fixtureService.generateFixture(league,from);
-        assertTrue(map.size() == 20);
+        assertEquals(map.size(), teams.size()*2 - 2);
 
         int count = 0;
         Team t1 = teams.get(0);
         for(Map.Entry entry : map.entrySet()){
-            for(Match match : (List<Match>) entry.getValue()){
+            List<Match> matches = (List<Match>) entry.getValue();
+            assertEquals(matches.size(), teams.size()/2);
+            for(Match match : matches){
                 if(match.getAway().equals(t1) || match.getHome().equals(t1))
                     count++;
             }
         }
 
-        System.out.println(count);
-        assertTrue(count == 38);
+        assertEquals(count, teams.size()*2 - 2);
     }
 }

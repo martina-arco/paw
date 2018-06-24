@@ -16,6 +16,10 @@ public class Match {
     private boolean played;
     private List<Event> events;
 
+    public Match(Team home, Team away, League league, Date day){
+        this(0, home, away, league, day, 0, 0, 0, 0, null, false, null);
+    }
+
     public Match(long id, Team home, Team away, League league, Date day, int homeScore, int awayScore, int homePoints,
                  int awayPoints, List<PlayerStats> stats, boolean played, List<Event> events) {
         this.id = id;
