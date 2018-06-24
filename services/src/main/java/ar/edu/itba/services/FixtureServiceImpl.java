@@ -1,5 +1,6 @@
 package ar.edu.itba.services;
 
+import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.FixtureService;
 import ar.edu.itba.model.League;
@@ -14,6 +15,9 @@ public class FixtureServiceImpl implements FixtureService {
 
     @Autowired
     private TeamDao teamDao;
+
+    @Autowired
+    private MatchDao matchDao;
 
     @Override
     public Map<Date, List<Match>> generateFixture(League league, Date from){
@@ -31,8 +35,10 @@ public class FixtureServiceImpl implements FixtureService {
             List<Match> secondHalfList = new ArrayList<>();
 
             for (int j = 0; j < N/2; j++) {
-                firstHalfList.add(new Match(teams.get(j), teams.get(N/2 + j), league, firstHalf));
-                secondHalfList.add(new Match(teams.get(N/2 + j), teams.get(j), league, secondHalf));
+                Match first = matchDao.create(league, teams.get(j), teams.get(N/2 + j), firstHalf);
+                Match second = matchDao.create(league, teams.get(j + N/2), teams.get(j), secondHalf);
+                firstHalfList.add(first);
+                secondHalfList.add(second);
             }
 
             map.put(firstHalf, firstHalfList);

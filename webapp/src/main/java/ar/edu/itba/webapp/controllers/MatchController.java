@@ -39,6 +39,7 @@ public class MatchController extends Controller{
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
 
+
         matchService.setTeamsAndFormations(matches);
         stadiumService.setStadium(matches);
         simulationService.simulateFixture(user.getId(), matches);
@@ -63,9 +64,13 @@ public class MatchController extends Controller{
     public ModelAndView matchEnd() {
         ModelAndView mav = new ModelAndView("matchEnd");
         User user = loggedUser();
-
+        League league = leagueService.findByUser(user).get(0);
         List<Match> matches = simulationService.getMatches(user.getId());
         matchService.saveMatches(matches, user);
+        if(leagueService.isFinished(league, user)){
+            leagueService.generateFixture(user, league);
+        }
+
         userService.advanceDate(user);
 
         Match userMatch = matchService.getUserMatch(matches, user);

@@ -2,6 +2,7 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
 import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class UserServiceImpl implements UserService {
     private TeamDao teamDao;
     @Autowired
     private LeagueService leagueService;
+    @Autowired
+    private TeamService teamService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -45,7 +48,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(String username, String password, String mail, Date currentDay) {
-        return userDao.create(username, passwordEncoder.encode(password), mail, currentDay);
+        User user = userDao.create(username, passwordEncoder.encode(password), mail, currentDay);
+        leagueService.generateFixture(user, leagueService.findByUser(user).get(0));
+        return user;
     }
 
     @Override
@@ -72,6 +77,7 @@ public class UserServiceImpl implements UserService {
         Date newDate = cal.getTime();
         user.setCurrentDay(newDate);
         Team team = teamDao.findByUserId(user.getId());
+        teamService.setPlayers(team);
         if(newDate.getMonth() > currentDate.getMonth()) {
             subtractPlayerSalaries(team);
         }
