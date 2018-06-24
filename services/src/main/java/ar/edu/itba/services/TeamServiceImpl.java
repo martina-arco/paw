@@ -96,7 +96,11 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void setFormation(Team team) {
-        //Not necessary with hibernate, default fetch is EAGER
+        Formation formation = team.getFormation();
+        if(formation != null) {
+            formation.getStarters().size();
+            formation.getSubstitutes().size();
+        }
     }
 
 

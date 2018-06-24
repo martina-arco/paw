@@ -12,7 +12,7 @@ import java.util.List;
 public class MatchDeepStatus {
 
     @Embeddable
-    private class State {
+    private static class State {
 
         private Point position;
 

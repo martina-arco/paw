@@ -42,7 +42,7 @@ public class MatchServiceImpl implements MatchService {
     private TeamService teamService;
 
     @Autowired
-    private AiService AiService;
+    private AiService aiService;
 
     @Autowired
     private StadiumService stadiumService;
@@ -70,8 +70,21 @@ public class MatchServiceImpl implements MatchService {
     public void setTeamsAndFormations(List<Match> matches) {
         for (Match match : matches) {
             fetchEvents(match);
-            teamService.setPlayers(match.getHome());
-            teamService.setPlayers(match.getAway());
+
+            Team home = match.getHome();
+            teamService.setPlayers(home);
+            if(home.getFormation() == null) {
+                home.setFormation(aiService.getFormation(home.getPlayers()));
+            }
+            teamService.setFormation(home);
+
+
+            Team away = match.getAway();
+            teamService.setPlayers(away);
+            if(away.getFormation() == null) {
+                away.setFormation(aiService.getFormation(away.getPlayers()));
+            }
+            teamService.setFormation(away);
         }
     }
 
