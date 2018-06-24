@@ -10,6 +10,7 @@ import ar.edu.itba.persistence.jdbc.StadiumJdbcDao;
 import ar.edu.itba.persistence.jdbc.TeamJdbcDao;
 import ar.edu.itba.persistence.jdbc.UserJdbcDao;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 @Sql("classpath:schema.sql")
+@Ignore("JDBC Dao test ignored")
 public class StadiumJdbcDaoTest {
 
     private final String NAME = "Estadio";

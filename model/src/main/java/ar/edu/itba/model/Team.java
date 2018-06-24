@@ -1,7 +1,5 @@
 package ar.edu.itba.model;
 
-import com.sun.istack.internal.Nullable;
-import org.hibernate.annotations.JoinFormula;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;

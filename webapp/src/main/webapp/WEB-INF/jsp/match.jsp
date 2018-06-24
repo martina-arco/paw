@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -90,7 +91,7 @@
 
 
     <script src="/js/src/jquery-3.3.1.min.js"></script>
-    <script src="/js/src/match.js"></script>
+    <script src="<c:url value="/js/match.js"/>"></script>
 
 </body>
 </html>
