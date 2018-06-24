@@ -2,6 +2,7 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.MatchStateDao;
+import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.*;
@@ -23,10 +24,13 @@ import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
 public class SimulationServiceImpl implements SimulationService{
 
     @Autowired
-    MatchStateDao matchStateDao;
+    private MatchStateDao matchStateDao;
 
     @Autowired
-    MatchDao matchDao;
+    private MatchDao matchDao;
+
+    @Autowired
+    private MatchService matchService;
 
     public SimulationServiceImpl(){
 
@@ -72,6 +76,7 @@ public class SimulationServiceImpl implements SimulationService{
             super();
             this.matchStatus = new MatchStatus(0, 0,0, new ArrayList<Event>());
             this.match = match;
+            matchService.fetchEvents(match);
             if(matchDeepStatus == null)
                 this.deepStatus = matchStateDao.create(match);
             else

@@ -120,6 +120,16 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public void fetchEvents(Match match) {
+        List<Event> events = match.getEvents();
+        if(events != null) {
+            events.size();
+        } else {
+            match.setEvents(new LinkedList<>());
+        }
+    }
+
+    @Override
     @Deprecated
     public void UserMatchEnd(Match match, User user) {
         Team team = match.getHome();
