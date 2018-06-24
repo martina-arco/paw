@@ -81,6 +81,14 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public Team findByUserIdAndFetchPlayersAndFinance(long id) {
+        Team team = findByUserId(id);
+        setPlayers(team);
+        setFinance(team);
+        return team;
+    }
+
+    @Override
     public void setPlayers(Team team) {
         if(team != null){
             team.getPlayers().size();
