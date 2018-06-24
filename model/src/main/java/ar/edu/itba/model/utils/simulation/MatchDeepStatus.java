@@ -3,19 +3,39 @@ package ar.edu.itba.model.utils.simulation;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.utils.Point;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "matchstate")
 public class MatchDeepStatus {
 
+    @Embeddable
     private class State {
+
         private Point position;
+
         private int minute;
+
+        @Enumerated(value = EnumType.STRING)
         private MyTeam team;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matchstate_matchstateid_seq")
+    @SequenceGenerator(sequenceName = "matchstate_matchstateid_seq", name = "matchstate_matchstateid_seq", allocationSize = 1)
+    @Column(name = "matchstateid")
+    private long id;
+
+    @OneToOne
+    @JoinColumn(name = "match", nullable = false)
     private Match match;
+
+    @ElementCollection
     private List<State> states;
+    
+    public MatchDeepStatus(){}
 
     public MatchDeepStatus(Match match){
         this.match = match;
