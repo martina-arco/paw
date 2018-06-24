@@ -5,6 +5,8 @@ import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
 
 public interface MatchStateDao {
 
+    MatchDeepStatus create(Match match);
+
     MatchDeepStatus findByMatch(Match match);
 
     boolean save(MatchDeepStatus matchDeepStatus);

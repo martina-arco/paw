@@ -54,14 +54,13 @@ public class SimulationServiceImpl implements SimulationService{
         private final MatchStatus matchStatus, persistedMatchStatus;
         private final MatchDeepStatus deepStatus;
 
-
         private MatchSimulator(Match match, MatchDeepStatus matchDeepStatus) {
             super();
             this.matchStatus = new MatchStatus(0, 0,0, new ArrayList<Event>());
             this.persistedMatchStatus = new MatchStatus(0,0,0,new ArrayList<>());
             this.match = match;
             if(matchDeepStatus == null)
-                this.deepStatus = new MatchDeepStatus(match);
+                this.deepStatus = matchStateDao.create(match);
             else
                 this.deepStatus = matchDeepStatus;
         }
