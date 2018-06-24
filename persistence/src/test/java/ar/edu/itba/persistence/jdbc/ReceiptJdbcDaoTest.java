@@ -1,9 +1,11 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.jdbc;
 
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
+import ar.edu.itba.persistence.TestConfig;
+import ar.edu.itba.persistence.jdbc.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

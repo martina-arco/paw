@@ -1,6 +1,11 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.jdbc;
 
 import ar.edu.itba.model.*;
+import ar.edu.itba.persistence.TestConfig;
+import ar.edu.itba.persistence.jdbc.LeagueJdbcDao;
+import ar.edu.itba.persistence.jdbc.MatchJdbcDao;
+import ar.edu.itba.persistence.jdbc.TeamJdbcDao;
+import ar.edu.itba.persistence.jdbc.UserJdbcDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +18,6 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import javax.sql.DataSource;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

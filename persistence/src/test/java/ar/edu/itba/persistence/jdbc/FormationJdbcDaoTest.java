@@ -1,7 +1,9 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.jdbc;
 
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.Point;
+import ar.edu.itba.persistence.TestConfig;
+import ar.edu.itba.persistence.jdbc.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.jdbc;
 
 import ar.edu.itba.interfaces.dao.EventDao;
 import ar.edu.itba.model.*;

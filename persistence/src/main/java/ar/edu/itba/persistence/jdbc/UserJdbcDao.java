@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.jdbc;
 
 import ar.edu.itba.interfaces.dao.UserDao;
 import ar.edu.itba.model.User;
@@ -6,15 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.io.*;

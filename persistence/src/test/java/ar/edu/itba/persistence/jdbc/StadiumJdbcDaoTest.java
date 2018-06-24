@@ -1,9 +1,14 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.jdbc;
 
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
+import ar.edu.itba.persistence.TestConfig;
+import ar.edu.itba.persistence.jdbc.LeagueJdbcDao;
+import ar.edu.itba.persistence.jdbc.StadiumJdbcDao;
+import ar.edu.itba.persistence.jdbc.TeamJdbcDao;
+import ar.edu.itba.persistence.jdbc.UserJdbcDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +19,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
-import javax.print.attribute.standard.MediaSize;
 import javax.sql.DataSource;
 import java.util.Date;
 

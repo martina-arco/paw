@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.interfaces.dao.ReceiptDao;
 import ar.edu.itba.model.Receipt;
