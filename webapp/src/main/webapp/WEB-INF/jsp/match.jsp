@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
 <%--<c:set var="yellowCard"><spring:message code="yellowCard"/></c:set>
@@ -24,7 +24,6 @@
     <script src="<c:url value="/js/match.js"/>"></script>
   </jsp:attribute>
   <jsp:body>
-
     <div class="contain">
       <div class="translucent"></div>
       <div class="content">
