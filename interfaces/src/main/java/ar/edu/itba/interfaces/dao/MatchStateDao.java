@@ -9,5 +9,5 @@ public interface MatchStateDao {
 
     MatchDeepStatus findByMatch(Match match);
 
-    boolean save(MatchDeepStatus matchDeepStatus);
+    MatchDeepStatus save(MatchDeepStatus matchDeepStatus);
 }

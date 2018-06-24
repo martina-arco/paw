@@ -33,8 +33,7 @@ public class MatchStateHibernateDao implements MatchStateDao {
     }
 
     @Override
-    public boolean save(MatchDeepStatus matchDeepStatus) {
-        em.merge(matchDeepStatus);
-        return true;
+    public MatchDeepStatus save(MatchDeepStatus matchDeepStatus) {
+        return em.merge(matchDeepStatus);
     }
 }
