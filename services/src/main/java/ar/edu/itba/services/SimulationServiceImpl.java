@@ -5,6 +5,7 @@ import ar.edu.itba.interfaces.dao.MatchStateDao;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
+import ar.edu.itba.model.DTOs.MatchDTO;
 import ar.edu.itba.model.utils.*;
 import ar.edu.itba.model.utils.simulation.Grid;
 import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
@@ -44,13 +45,15 @@ public class SimulationServiceImpl implements SimulationService{
     }
 
     @Override
-    public Map<Long, MatchStatus> getStatus(Long userId) {
-        return null;
-    }
+    public List<MatchDTO> getMatches(Long leagueId, User user) {
+        List<Match> matches = matchDao.findByLeagueIdAndDate(leagueId, user.getCurrentDay());
+        List<MatchDTO> ret = new ArrayList<>();
+        for(Match match : matches){
+            matchService.fetchEvents(match);
+            ret.add(new MatchDTO(match));
+        }
 
-    @Override
-    public List<Match> getMatches(Long userId) {
-        return null;
+        return ret;
     }
 
     @Override

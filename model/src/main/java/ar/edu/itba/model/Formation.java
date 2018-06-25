@@ -1,12 +1,15 @@
 package ar.edu.itba.model;
 
 import ar.edu.itba.model.utils.Point;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "formation")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Formation {
 
     public static final Collection<Point> availablePositions = new HashSet<>();
