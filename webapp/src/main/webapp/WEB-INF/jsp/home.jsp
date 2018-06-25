@@ -78,7 +78,7 @@
               <tbody>
               <c:forEach items="${players}" var="player">
                 <tr>
-                  <th scope="row"><a href="<c:url value="/home/${player.id}" />"><c:out
+                  <th scope="row"><a href="<c:url value="/${player.id}" />"><c:out
                       value="${player.name}"/></a></th>
                   <td><c:out value="${player.salary}"/></td>
                   <td><c:out value="${player.value}"/></td>
