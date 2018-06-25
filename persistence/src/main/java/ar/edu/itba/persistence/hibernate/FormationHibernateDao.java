@@ -53,9 +53,8 @@ public class FormationHibernateDao implements FormationDao{
     }
 
     @Override
-    public boolean save(Formation formation) {
-        em.merge(formation);
-        return true;
+    public Formation save(Formation formation) {
+        return em.merge(formation);
     }
 
     @Override
