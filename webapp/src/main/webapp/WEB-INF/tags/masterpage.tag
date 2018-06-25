@@ -6,8 +6,8 @@
 
 <t:genericpage>
     <jsp:attribute name="styles">
-        <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
-        <link rel="stylesheet" href="<c:url value="/css/navbar.css"/>"/>
+        <link rel="stylesheet" href="<c:url value="/assets/css/background.css"/>"/>
+        <link rel="stylesheet" href="<c:url value="/assets/css/navbar.css"/>"/>
         <jsp:invoke fragment="styles"/>
     </jsp:attribute>
   <jsp:attribute name="scripts">

@@ -6,7 +6,7 @@
 
 <t:masterpage>
     <jsp:attribute name="styles">
-        <link rel="stylesheet" href="<c:url value="/css/formation.css"/>"/>
+        <link rel="stylesheet" href="<c:url value="/assets/css/formation.css"/>"/>
     </jsp:attribute>
     <jsp:body>
         <c:url value="/formation" var="formationUrl" />

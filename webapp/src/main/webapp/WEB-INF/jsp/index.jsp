@@ -4,8 +4,8 @@
 
 <t:genericpage>
   <jsp:attribute name="styles">
-    <link rel="stylesheet" href="<c:url value="/css/background.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/css/register.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/assets/css/background.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/assets/css/register.css"/>"/>
   </jsp:attribute>
   <jsp:body>
     <c:url value="/create" var="postPath"/>

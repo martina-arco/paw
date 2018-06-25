@@ -5,7 +5,7 @@
 
 <t:masterpage>
   <jsp:attribute name="styles">
-    <link rel="stylesheet" href="<c:url value="/css/match.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/assets/css/match.css"/>"/>
   </jsp:attribute>
   <jsp:body>
     <div class="contain">
