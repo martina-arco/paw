@@ -68,8 +68,12 @@ public class MatchController extends Controller{
         ModelAndView mav = new ModelAndView("matchEnd");
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
-
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+
+        if(leagueService.isFinished(league, user)){
+            leagueService.generateFixture(user, league);
+        }
+
         userService.advanceDate(user);
 
         Match userMatch = matchService.getUserMatch(matches, user);

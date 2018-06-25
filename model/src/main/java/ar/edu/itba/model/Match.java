@@ -56,6 +56,10 @@ public class Match {
     @OneToMany(mappedBy = "match")
     private List<Event> events;
 
+    public Match(Team home, Team away, League league, Date day){
+        this(0, home, away, league, day, 0, 0, 0, 0, null, false, null);
+    }
+
     public Match(){}
 
     public Match(Team home, Team away, League league, Date day, int homeScore, int awayScore, int homePoints,

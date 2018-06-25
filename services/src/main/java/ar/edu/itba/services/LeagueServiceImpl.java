@@ -3,6 +3,7 @@ package ar.edu.itba.services;
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
+import ar.edu.itba.interfaces.service.FixtureService;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.League;
@@ -19,6 +20,9 @@ import java.util.*;
 @Transactional
 public class LeagueServiceImpl implements LeagueService {
 
+
+    @Autowired
+    private FixtureService fixtureService;
 
     @Autowired
     private MatchService matchService;
@@ -38,6 +42,17 @@ public class LeagueServiceImpl implements LeagueService {
         List<League> leagues = leagueDao.findAllByUserId(user.getId());
 
         return leagues;
+    }
+
+    @Override
+    public boolean isFinished(League league, User user) {
+        fillFixture(user, league);
+        Map<Date, List<Match>> fixture = league.getFixture();
+        for (Map.Entry<Date, List<Match>> entry: fixture.entrySet()) {
+            if(entry.getKey().after(user.getCurrentDay()))
+                return false;
+        }
+        return true;
     }
 
     @Override
@@ -140,6 +155,12 @@ public class LeagueServiceImpl implements LeagueService {
         }
 
         return map;
+    }
+
+    @Override
+    public void generateFixture(User user, League league) {
+        Map<Date, List<Match>> fixture = fixtureService.generateFixture(league, user.getCurrentDay());
+        league.setFixture(fixture);
     }
 
     @Override

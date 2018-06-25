@@ -88,6 +88,7 @@ public class MatchHibernateDao implements MatchDao{
     @Override
     public Match create(League league, Team home, Team away, Date day) {
         final Match match = new Match(home, away, league, day, 0, 0, 0, 0, null, false, null);
+        em.persist(match);
         return match;
     }
 

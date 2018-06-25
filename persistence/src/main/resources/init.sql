@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS matchtmp(
   ,awayname   VARCHAR(27) NOT NULL
   ,leaguename VARCHAR(9) NOT NULL
 );
-
+/*
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-01','Club Atletico Boca Juniors','Club Atletico River Plate','Superliga');
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-01','Club Atletico Independiente','Racing Club','Superliga');
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-08','Racing Club','Club Atletico Boca Juniors','Superliga');
@@ -149,6 +149,6 @@ INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Clu
 INSERT INTO matchtmp(day,homename,awayname,leaguename) VALUES ('2018-01-22','Racing Club','Club Atletico Independiente','Superliga');
 
 INSERT INTO match (day, home, away, league) SELECT DISTINCT day, t1.teamid, t2.teamid, league.leagueid FROM matchtmp a JOIN team t1 ON t1.name = a.homename JOIN team t2 ON t2.name = a.awayname JOIN league ON league.name = a.leaguename AND userid = ? AND t1.league = league.leagueid AND t2.league = league.leagueid;
-
+*/
 DROP TABLE matchtmp;
 DROP TABLE playertmp;

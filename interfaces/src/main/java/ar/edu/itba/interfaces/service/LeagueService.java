@@ -11,8 +11,10 @@ import java.util.Map;
 
 public interface LeagueService {
     List<League> findByUser(User user);
+    boolean isFinished(League league, User user);
     Map<Team, Integer> getTeamPoints(League league, Date currentDate);
     List<Match> findMatchesForDate(League league, Date date);
     void fillFixture(User user, League league);
     Map<String, Integer> getTeamPointsName(League league, Date currentDate);
+    void generateFixture(User user, League league);
 }

@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
     private TeamDao teamDao;
     @Autowired
     private LeagueService leagueService;
-
     @Autowired
     private TeamService teamService;
 
@@ -51,7 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(String username, String password, String mail, Date currentDay) {
-        return userDao.create(username, passwordEncoder.encode(password), mail, currentDay);
+        User user = userDao.create(username, passwordEncoder.encode(password), mail, currentDay);
+        leagueService.generateFixture(user, leagueService.findByUser(user).get(0));
+        return user;
     }
 
     @Override
