@@ -177,7 +177,7 @@ public class FormationJdbcDao implements FormationDao{
     }
 
     @Override
-    public boolean save(Formation formation) {
+    public Formation save(Formation formation) {
         long formationId = formation.getId();
 
         jdbcTemplate.update("UPDATE formation SET pressure = ?, attitude = ?, penaltytaker = ?, freekicktaker = ?, " +
@@ -211,7 +211,7 @@ public class FormationJdbcDao implements FormationDao{
             jdbcInsertPlaysAs.execute(args);
         }
 
-        return true;
+        return formation;
     }
 
     @Override

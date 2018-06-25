@@ -31,7 +31,7 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public boolean save(Formation formation) {
+    public Formation save(Formation formation) {
         return formationDao.save(formation);
     }
 }
