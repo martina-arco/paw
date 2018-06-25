@@ -58,6 +58,7 @@ public class UserHibernateDao implements UserDao {
     public User create(String username, String password, String mail, Date currentDay) {
         final User user = new User(username, password, mail, null, currentDay);
         em.persist(user);
+        em.flush();
         initDataSet(user.getId());
         return user;
     }
@@ -86,13 +87,8 @@ public class UserHibernateDao implements UserDao {
             script.replace(index, index + 1, Long.toString(userId));
         }
 
-        try {
-            ScriptUtils.executeSqlScript(ds.getConnection(),
-                    new InputStreamResource( new ByteArrayInputStream(script.toString().getBytes())));
-        } catch (SQLException e) {
-            LOGGER.error("Failed to get datasource", e);
-            return false;
-        }
+        em.createNativeQuery(script.toString()).executeUpdate();
+
         return true;
     }
 }
