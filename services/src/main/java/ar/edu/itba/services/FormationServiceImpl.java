@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class FormationServiceImpl implements FormationService {
 
     @Autowired
@@ -27,5 +28,10 @@ public class FormationServiceImpl implements FormationService {
     @Override
     public Formation findById(long id) {
         return formationDao.findById(id);
+    }
+
+    @Override
+    public boolean save(Formation formation) {
+        return formationDao.save(formation);
     }
 }

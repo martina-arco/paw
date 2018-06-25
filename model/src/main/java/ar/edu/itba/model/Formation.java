@@ -146,6 +146,98 @@ public class Formation {
         starters.put(p2,position);
     }
 
+    public Player getGk(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 0 && e.getValue().getY() == 4)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLb(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 1)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRb(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 7)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLcb(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 3)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRcb(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 5)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLm(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 5 && e.getValue().getY() == 4)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLcm(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 1)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRcm(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 7)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRm(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 3 && e.getValue().getY() == 4)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLf(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 7 && e.getValue().getY() == 3)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRf(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 7 && e.getValue().getY() == 5)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public void changeFormation(int formation, Map<Player, Point> players){
+        starters = players;
+    }
+
     //Solo sirve para 442 por ahora
     public String getPlayerPosition(long playerId) {
 
@@ -204,6 +296,15 @@ public class Formation {
 
     public List<Player> getSubstitutes() {
         return substitutes;
+    }
+
+    public List<Player> getReserves(List<Player> players){
+        List<Player> reserves = new ArrayList<>();
+        for (Player p : players) {
+            if(!starters.containsValue(p) && !substitutes.contains(p))
+                reserves.add(p);
+        }
+        return reserves;
     }
 
     public void setSubstitutes(List<Player> substitutes) {
