@@ -15,4 +15,6 @@ public interface FormationService {
 
     Formation save(Formation formation);
 
+    boolean isValid(Formation formation);
+
 }

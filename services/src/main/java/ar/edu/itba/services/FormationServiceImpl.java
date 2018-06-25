@@ -34,4 +34,13 @@ public class FormationServiceImpl implements FormationService {
     public Formation save(Formation formation) {
         return formationDao.save(formation);
     }
+
+    @Override
+    public boolean isValid(Formation formation) {
+        if(formation.getStarters().size() != 11)
+            return false;
+        if(formation.getSubstitutes().size() != 7)
+            return false;
+        return formation.getCaptain() != null && formation.getFreeKickTaker() != null && formation.getPenaltyTaker() != null;
+    }
 }
