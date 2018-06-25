@@ -22,6 +22,8 @@ public interface TeamService {
 
     Team findByUserIdAndFetchPlayersAndFinance(long id);
 
+    Team findByUserIdAndFetchPlayersAndFormation(long id);
+
     void setPlayers(Team team);
 
     void setFinance(Team team);

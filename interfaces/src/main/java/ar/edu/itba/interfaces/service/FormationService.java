@@ -13,4 +13,6 @@ public interface FormationService {
 
     Formation findById(long id);
 
+    boolean save(Formation formation);
+
 }
