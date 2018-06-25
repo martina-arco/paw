@@ -113,7 +113,8 @@ public class MatchServiceImpl implements MatchService {
     public void payTickets(Match match) {
         Team home = match.getHome();
         Stadium stadium = home.getStadium();
-        int income = stadium.calculateMatchEarnings()*home.getFanTrust()/100;
+        float factor = home.getFanTrust()/100;
+        int income = (int) (stadium.calculateMatchEarnings()*factor);
         economyService.submitReceipt(home, Receipt.Type.MATCHINCOME, income);
     }
 

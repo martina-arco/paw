@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Calendar.MONTH;
@@ -78,10 +79,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void advanceDate(User user) {
         League league = leagueService.findByUser(user).get(0);
-        Team team = teamService.findByUserId(user.getId());
+        List<Team> teams = teamService.findByLeague(league);
         
         if(isNextMonth(user.getCurrentDay())) {
-            economyService.submitReceipt(team, Receipt.Type.PLAYERSSALARIES, -team.getSalaries());
+            for(Team team : teams)
+                economyService.submitReceipt(team, Receipt.Type.PLAYERSSALARIES, -team.getSalaries());
         }
 
         if(leagueService.isLastMatch(league, user)){
@@ -102,7 +104,7 @@ public class UserServiceImpl implements UserService {
         aux.setTime(date);
         cal.add(Calendar.DATE, 7);
 
-        return cal.get(MONTH) < aux.get(MONTH);
+        return cal.get(MONTH) != aux.get(MONTH);
     }
 
     private Date advanceWeeks(Date date, int amount){

@@ -19,7 +19,7 @@ public class Grid {
     private Random rand;
 
     public static MyTeam otherTeam(MyTeam possession){
-        return possession == AWAY? AWAY:HOME;
+        return possession == AWAY? HOME:AWAY;
     }
 
     public Grid(Formation home, Formation away) {

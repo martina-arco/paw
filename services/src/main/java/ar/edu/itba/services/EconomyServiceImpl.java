@@ -27,7 +27,7 @@ public class EconomyServiceImpl implements EconomyService {
 
     @Override
     public void submitReceipt(Team recv, Receipt.Type type, int amount) {
-        teamService.setFinance(recv);
+        recv = teamService.findByIdAndFetchPlayersAndFinance(recv.getId());
         recv.addReceipt(receiptDao.create(recv, amount, type));
         recv.addMoney(amount);
     }

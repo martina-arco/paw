@@ -109,6 +109,18 @@ public class SimulationNode {
         return guilty;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o == null)
+            return false;
+        if(o == this)
+            return true;
+        if(!o.getClass().equals(SimulationNode.class))
+            return false;
+        SimulationNode other = (SimulationNode) o;
+        return other.possession == possession && node.getPosition().equals(((SimulationNode) o).getNode().getPosition());
+    }
+
     public String toString() {
         return node.toString() + "\t" + possession;
     }

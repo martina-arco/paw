@@ -277,4 +277,12 @@ public class Team {
     public void addReceipt(Receipt r) {
         finance.add(r);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null || !obj.getClass().equals(Team.class))
+            return false;
+        Team o = (Team) obj;
+        return o.getId() == id;
+    }
 }

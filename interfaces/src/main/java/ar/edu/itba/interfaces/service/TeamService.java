@@ -12,6 +12,8 @@ public interface TeamService {
 
     List<Team> findByLeague(League league);
 
+    List<Team> findByLeagueAndFetchPlayers(League league);
+
     int getSalaries(Team team);
 
     int getTicketsSold(Team team);
@@ -21,6 +23,8 @@ public interface TeamService {
     Team findByUserIdAndFetchPlayers(long id);
 
     Team findByUserIdAndFetchPlayersAndFinance(long id);
+
+    Team findByIdAndFetchPlayersAndFinance(long id);
 
     void setPlayers(Team team);
 
