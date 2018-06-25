@@ -29,7 +29,7 @@ public class HomeController extends Controller {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public ModelAndView home(){
         Team team = teamService.findByUserIdAndFetchPlayers(loggedUser().getId());
 
@@ -46,7 +46,7 @@ public class HomeController extends Controller {
         return home((int)playerId);
     }
 
-    @RequestMapping("/home/{playerId}")
+    @RequestMapping("/{playerId}")
     public ModelAndView home(@PathVariable int playerId) {
         ModelAndView mav = new ModelAndView("home");
 

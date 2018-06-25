@@ -225,4 +225,23 @@ public class Player {
     public void increaseAge() {
         age++;
     }
+
+    public int getPosition() {
+        int pos = 0, maxAttribute = 0;
+        if(goalKeeping > maxAttribute) {
+            maxAttribute = goalKeeping;
+        }
+        if(defending > maxAttribute) {
+            maxAttribute = defending;
+            pos++;
+        }
+        if(passing > maxAttribute) {
+            maxAttribute = passing;
+            pos++;
+        }
+        if(finishing > maxAttribute) {
+            pos++;
+        }
+        return pos;
+    }
 }

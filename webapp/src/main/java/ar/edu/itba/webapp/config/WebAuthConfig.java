@@ -35,13 +35,13 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement()
                 .invalidSessionUrl("/login")
             .and().authorizeRequests()
-                .antMatchers("/", "/create", "/login").anonymous()
+                .antMatchers("/register", "/create", "/login").anonymous()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             .and().formLogin()
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
-                .defaultSuccessUrl("/home", false)
+                .defaultSuccessUrl("/", false)
                 .loginPage("/login")
             .and().rememberMe()
                 .rememberMeParameter("j_rememberme")
@@ -65,6 +65,6 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(final WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico", "/403");
+        web.ignoring().antMatchers("/assets/**", "/favicon.ico", "/403", "/404");
     }
 }

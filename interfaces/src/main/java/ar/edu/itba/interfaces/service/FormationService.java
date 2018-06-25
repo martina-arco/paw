@@ -13,4 +13,8 @@ public interface FormationService {
 
     Formation findById(long id);
 
+    Formation save(Formation formation);
+
+    boolean isValid(Formation formation);
+
 }

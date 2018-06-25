@@ -174,7 +174,8 @@ public class FormationJdbcDao{
         return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, starters, substitutes, pressure, attitude);
     }
 
-    public boolean save(Formation formation) {
+    @Override
+    public Formation save(Formation formation) {
         long formationId = formation.getId();
 
         jdbcTemplate.update("UPDATE formation SET pressure = ?, attitude = ?, penaltytaker = ?, freekicktaker = ?, " +
@@ -208,7 +209,7 @@ public class FormationJdbcDao{
             jdbcInsertPlaysAs.execute(args);
         }
 
-        return true;
+        return formation;
     }
 
     public Formation findById(long id) {

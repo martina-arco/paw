@@ -22,7 +22,7 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private PlayerDao playerDao;
     @Autowired
-    private AiService formationService;
+    private AiService aiService;
     @Autowired
     private ReceiptDao receiptDao;
 
@@ -86,6 +86,17 @@ public class TeamServiceImpl implements TeamService {
     public Team findByUserIdAndFetchPlayers(long id) {
         Team team = findByUserId(id);
         setPlayers(team);
+        return team;
+    }
+
+    @Override
+    public Team findByUserIdAndFetchPlayersAndFormation(long id) {
+        Team team = findByUserId(id);
+        setPlayers(team);
+        if(team.getFormation() == null){
+            team.setFormation(aiService.getFormation(team.getPlayers()));
+        }
+        setFormation(team);
         return team;
     }
 

@@ -5,7 +5,7 @@
 
 <t:masterpage>
   <jsp:attribute name="styles">
-    <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/assets/css/home.css"/>"/>
   </jsp:attribute>
   <jsp:body>
     <div class="contain">

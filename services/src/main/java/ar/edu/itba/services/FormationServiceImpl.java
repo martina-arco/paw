@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class FormationServiceImpl implements FormationService {
 
     @Autowired
@@ -27,5 +28,19 @@ public class FormationServiceImpl implements FormationService {
     @Override
     public Formation findById(long id) {
         return formationDao.findById(id);
+    }
+
+    @Override
+    public Formation save(Formation formation) {
+        return formationDao.save(formation);
+    }
+
+    @Override
+    public boolean isValid(Formation formation) {
+        if(formation.getStarters().size() != 11)
+            return false;
+        if(formation.getSubstitutes().size() != 7)
+            return false;
+        return formation.getCaptain() != null && formation.getFreeKickTaker() != null && formation.getPenaltyTaker() != null;
     }
 }

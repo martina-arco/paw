@@ -18,10 +18,10 @@
 
 <t:masterpage>
   <jsp:attribute name="styles">
-    <link rel="stylesheet" href="<c:url value="/css/match.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/assets/css/match.css"/>"/>
   </jsp:attribute>
   <jsp:attribute name="scripts">
-    <script src="<c:url value="/js/match.js"/>"></script>
+    <script src="<c:url value="/assets/js/match.js"/>"></script>
   </jsp:attribute>
   <jsp:body>
     <div class="contain">

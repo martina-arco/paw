@@ -36,7 +36,7 @@ public class HelloWorldController extends Controller{
     @Autowired
     private TeamService team;
 
-    @RequestMapping("/")
+    @RequestMapping("/register")
     public ModelAndView index(@ModelAttribute("registerForm") final UserForm form) {
         return new ModelAndView("index");
     }
