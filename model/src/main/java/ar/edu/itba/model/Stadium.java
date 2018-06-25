@@ -1,18 +1,54 @@
 package ar.edu.itba.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "stadium")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Stadium {
 
     public enum SeatType {
         LOW,MEDIUM,HIGH
     }
+
     private static final int lowCost = 50, mediumCost = 100, highCost = 200;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stadium_stadiumid_seq")
+    @SequenceGenerator(sequenceName = "stadium_stadiumid_seq", name = "stadium_stadiumid_seq", allocationSize = 1)
+    @Column(name = "stadiumid")
     private long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Transient
     private long teamId;
+
+    @OneToOne
+    @JoinColumn(name = "team")
     private Team team;
-    private int lowClass, lowClassPrice;
-    private int mediumClass, mediumClassPrice;
-    private int highClass, highClassPrice;
+
+    private int lowClass, mediumClass, highClass;
+
+    private int lowClassPrice, mediumClassPrice, highClassPrice;
+
+    public Stadium(){}
+
+    public Stadium(String name, Team team, int lowClass, int mediumClass, int highClass, int lowClassPrice,
+                   int mediumClassPrice, int highClassPrice) {
+        this.name = name;
+        this.team = team;
+        this.lowClass = lowClass;
+        this.mediumClass = mediumClass;
+        this.highClass = highClass;
+        this.lowClassPrice = lowClassPrice;
+        this.mediumClassPrice = mediumClassPrice;
+        this.highClassPrice = highClassPrice;
+    }
 
     public Stadium(long id, String name, Team team, int lowClass, int lowClassPrice, int mediumClass, int mediumClassPrice, int highClass, int highClassPrice) {
         this.id = id;

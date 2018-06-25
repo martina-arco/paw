@@ -9,10 +9,12 @@ import ar.edu.itba.interfaces.service.StadiumService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class MatchServiceImpl implements MatchService {
 
     @Autowired
@@ -40,7 +42,7 @@ public class MatchServiceImpl implements MatchService {
     private TeamService teamService;
 
     @Autowired
-    private AiService AiService;
+    private AiService aiService;
 
     @Autowired
     private StadiumService stadiumService;
@@ -67,18 +69,22 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void setTeamsAndFormations(List<Match> matches) {
         for (Match match : matches) {
-            Team home = teamDao.findById(match.getHomeId());
-            if(home != null) {
-                teamService.setPlayers(home);
-                teamService.setFormation(home);
+            fetchEvents(match);
+
+            Team home = match.getHome();
+            teamService.setPlayers(home);
+            if(home.getFormation() == null) {
+                home.setFormation(aiService.getFormation(home.getPlayers()));
             }
-            Team away = teamDao.findById(match.getAwayId());
-            if(away != null) {
-                teamService.setPlayers(away);
-                teamService.setFormation(away);
+            teamService.setFormation(home);
+
+
+            Team away = match.getAway();
+            teamService.setPlayers(away);
+            if(away.getFormation() == null) {
+                away.setFormation(aiService.getFormation(away.getPlayers()));
             }
-            match.setHome(home);
-            match.setAway(away);
+            teamService.setFormation(away);
         }
     }
 
@@ -101,22 +107,12 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public void setTeams(List<Match> matches) {
+        //Not necessary with hibernate, default fetch is EAGER
+    }
 
-        Set<Team> teams = new HashSet<>();
-
-        for (Match match:matches) {
-
-            Team home = teamDao.findById(match.getHomeId());
-            Team away = teamDao.findById(match.getAwayId());
-
-            match.setHome(home);
-            match.setAway(away);
-
-            teams.add(home);
-        }
-
-        stadiumService.setStadium(teams);
-
+    @Override
+    public void fetchEvents(Match match) {
+        match.getEvents().size();
     }
 
     @Override

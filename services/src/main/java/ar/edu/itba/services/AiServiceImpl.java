@@ -1,15 +1,20 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.service.AiService;
+import ar.edu.itba.interfaces.service.FormationService;
 import ar.edu.itba.model.Formation;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.utils.Point;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class AiServiceImpl implements AiService {
+
+    @Autowired
+    private FormationService formationService;
 
     @Override
     public Formation getFormation(List<Player> players) {
@@ -30,7 +35,7 @@ public class AiServiceImpl implements AiService {
         players.sort((player, t1) -> player.getAge() - t1.getAge());
         captain = useLast(players,false);
 
-        players.sort((player, t1) -> player.getFinish() - t1.getFinish());
+        players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
         penaltyTaker = useLast(players, false);
 
         players.sort((player, t1) -> player.getPassing() - t1.getPassing());
@@ -50,11 +55,11 @@ public class AiServiceImpl implements AiService {
         starters.put(useLast(players,true), new Point(4, 7));
         starters.put(useLast(players,true), new Point(3, 4));
 
-        players.sort((player, t1) -> player.getFinish() - t1.getFinish());
+        players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
         starters.put(useLast(players,true), new Point(7,3));
         starters.put(useLast(players,true), new Point(7, 5));
 
-        return new Formation(0,captain,fkTaker,penaltyTaker,starters,tired,50,50);
+        return formationService.create(starters, tired,50,50, captain,fkTaker,penaltyTaker);
     }
 
     private Player useLast(List<Player> list, boolean remove){

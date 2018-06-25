@@ -18,6 +18,10 @@ public interface TeamService {
 
     Team findByUserId(long id);
 
+    Team findByUserIdAndFetchPlayers(long id);
+
+    Team findByUserIdAndFetchPlayersAndFinance(long id);
+
     void setPlayers(Team team);
 
     void setFinance(Team team);

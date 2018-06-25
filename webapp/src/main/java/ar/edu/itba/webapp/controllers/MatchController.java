@@ -1,6 +1,7 @@
 package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.*;
+import ar.edu.itba.model.DTOs.MatchDTO;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.User;
@@ -38,12 +39,13 @@ public class MatchController extends Controller{
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        Match userMatch = matchService.getUserMatch(matches, user);
 
+        if(simulationService.started(userMatch)){
+            //redirect("/matchEnd");
+        }
 
-        matchService.setTeamsAndFormations(matches);
-        stadiumService.setStadium(matches);
         simulationService.simulateFixture(user.getId(), matches);
-        simulationService.start(user.getId());
 
         mav.addObject("matches", matches);
 
@@ -53,7 +55,8 @@ public class MatchController extends Controller{
     @RequestMapping(value = "/data", produces = "application/json")
     @ResponseBody
     public Object json() {
-        return simulationService.getStatus(loggedUser().getId());
+        List<MatchDTO> ret = simulationService.getMatches(leagueService.findByUser(loggedUser()).get(0).getId(),loggedUser());
+        return ret;
     }
 
     private ModelAndView matchEnds() {
@@ -65,8 +68,8 @@ public class MatchController extends Controller{
         ModelAndView mav = new ModelAndView("matchEnd");
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
-        List<Match> matches = simulationService.getMatches(user.getId());
-        matchService.saveMatches(matches, user);
+        List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+
         if(leagueService.isFinished(league, user)){
             leagueService.generateFixture(user, league);
         }

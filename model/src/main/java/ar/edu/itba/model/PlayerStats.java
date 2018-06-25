@@ -1,11 +1,72 @@
 package ar.edu.itba.model;
 
+import org.hibernate.annotations.Formula;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "playerstats")
 public class PlayerStats {
 
-    private long id, matchId, playerId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "playerstats_playerstatsid_seq")
+    @SequenceGenerator(sequenceName = "playerstats_playerstatsid_seq", name = "playerstats_playerstatsid_seq", allocationSize = 1)
+    @Column(name = "playerstatsid")
+    private long id;
+
+    @Transient
+    private long matchId, playerId;
+
+    @ManyToOne
+    @JoinColumn(name = "match")
     private Match match;
+
+    @ManyToOne
+    @JoinColumn(name = "player")
     private Player player;
-    private int saves, performance, passes, assists, scores, yellowCards, redCards, tackles;
+
+    private int saves, performance, passes, assists, tackles;
+
+    @Transient
+    private List<Event> events;
+
+    @Transient
+    private int scores, yellowCards, redCards;
+
+
+    private void postLoad() {
+        for (Event e : events) {
+            switch (e.getType()) {
+                case SCORE:
+                    scores++;
+                    break;
+                case RED_CARD:
+                    redCards++;
+                    break;
+                case YELLOW_CARD:
+                    yellowCards++;
+                    break;
+            }
+        }
+    }
+
+
+    public PlayerStats(){}
+
+    public PlayerStats(Match match, Player player, int saves, int performance, int passes, int assists, int tackles,
+                       int scores, int yellowCards, int redCards) {
+        this.match = match;
+        this.player = player;
+        this.saves = saves;
+        this.performance = performance;
+        this.passes = passes;
+        this.assists = assists;
+        this.tackles = tackles;
+        this.scores = scores;
+        this.yellowCards = yellowCards;
+        this.redCards = redCards;
+    }
 
     public PlayerStats(long id, Match match, Player player, int saves, int performance, int passes, int assists,
                        int scores, int yellowCards, int redCards, int tackles) {
@@ -151,5 +212,13 @@ public class PlayerStats {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+        scores = 0;
+        yellowCards = 0;
+        redCards = 0;
+        postLoad();
     }
 }

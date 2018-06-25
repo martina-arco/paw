@@ -14,6 +14,8 @@ public interface MatchService {
 
     void saveMatches(List<Match> matches, User user);
 
+    void fetchEvents(Match match);
+
     Match getUserMatch(List<Match> matches, User user);
 
     Match create(League league, Team home, Team away, Date day);
