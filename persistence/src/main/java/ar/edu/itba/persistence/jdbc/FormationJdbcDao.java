@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class FormationJdbcDao implements FormationDao{
+public class FormationJdbcDao{
 
     private JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsertFormation, jdbcInsertPlaysAs;
@@ -102,7 +102,6 @@ public class FormationJdbcDao implements FormationDao{
                 .usingGeneratedKeyColumns("playsasid");
     }
 
-    @Override
     public Formation create(Map<Player, Point> starters, List<Player> substitutes, int pressure, int attitude, Player captain, Player freeKickTaker, Player penaltyTaker) {
         Map<String, Object> args = new HashMap<>();
 
@@ -139,7 +138,6 @@ public class FormationJdbcDao implements FormationDao{
         return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, starters, substitutes, pressure, attitude);
     }
 
-    @Override
     public Formation create(Map<Long, Point> starters, List<Long> substitutes, int pressure, int attitude, long captain, long freeKickTaker, long penaltyTaker) {
         Map<String, Object> args = new HashMap<>();
 
@@ -176,7 +174,6 @@ public class FormationJdbcDao implements FormationDao{
         return new Formation(formationId.longValue(), captain, freeKickTaker, penaltyTaker, starters, substitutes, pressure, attitude);
     }
 
-    @Override
     public boolean save(Formation formation) {
         long formationId = formation.getId();
 
@@ -214,7 +211,6 @@ public class FormationJdbcDao implements FormationDao{
         return true;
     }
 
-    @Override
     public Formation findById(long id) {
         final List<Formation> list = jdbcTemplate.query("SELECT * FROM formation LEFT JOIN playsas ON formationid = playsas.formation WHERE formationid = ? ORDER BY formationid", RESULT_SET_EXTRACTOR, id);
         if (list.isEmpty()) {

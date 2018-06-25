@@ -70,8 +70,8 @@ public class MatchController extends Controller{
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
 
-        if(leagueService.isFinished(league, user)){
-            leagueService.generateFixture(user, league);
+        for(Match match : matches){
+            matchService.payTickets(match);
         }
 
         userService.advanceDate(user);
