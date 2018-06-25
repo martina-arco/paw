@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface PlayerService {
 
+    Player findById(List<Player> players, long id);
+
     Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping,
                   int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth);
 

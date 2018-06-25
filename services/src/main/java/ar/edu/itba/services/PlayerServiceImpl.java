@@ -22,6 +22,17 @@ public class PlayerServiceImpl implements PlayerService {
     private TeamDao teamDao;
 
     @Override
+    public Player findById(List<Player> players, long id) {
+        if(players == null)
+            return null;
+        for(Player player : players){
+            if(player.getId() == id)
+                return player;
+        }
+        return null;
+    }
+
+    @Override
     @Transactional
     public Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping,
                          int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
