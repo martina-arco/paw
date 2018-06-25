@@ -3,7 +3,9 @@ package ar.edu.itba.model.utils;
 import ar.edu.itba.model.Event;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MatchStatus {
     private int homeScore, awayScore, minute;
@@ -34,6 +36,11 @@ public class MatchStatus {
 
         events.removeAll(toFilter);
         return this;
+    }
+
+    public List<Event> getEventsByMinute(int minute){
+        List<Event> aux = new ArrayList<>(events);
+        return aux.stream().filter(event -> event.getMinute() == minute).collect(Collectors.toList());
     }
 
     public int getMinute() {

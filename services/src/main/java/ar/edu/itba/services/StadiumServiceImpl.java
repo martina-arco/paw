@@ -25,19 +25,11 @@ public class StadiumServiceImpl implements StadiumService {
 
     @Override
     public void setStadium(Set<Team> teams) {
-        for (Team team:teams) {
-            Stadium stadium = stadiumDao.findByTeamId(team.getId());
-
-            team.setStadium(stadium);
-        }
+        //Not necessary with hibernate, default is EAGER
     }
 
     @Override
     public void setStadium(List<Match> matches) {
-        for (Match match:matches) {
-            Team home = match.getHome();
-            Stadium stadium = stadiumDao.findByTeamId(home.getId());
-            home.setStadium(stadium);
-        }
+        //Not necessary with hibernate, default is EAGER
     }
 }

@@ -1,15 +1,44 @@
 package ar.edu.itba.model;
 
 import ar.edu.itba.model.utils.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import javax.persistence.*;
 import java.util.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "league")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class League {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "league_leagueid_seq")
+    @SequenceGenerator(sequenceName = "league_leagueid_seq", name = "league_leagueid_seq", allocationSize = 1)
+    @Column(name = "leagueid")
     private long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Transient
     private Map<Date, List<Match>> fixture;
+
+    @Column(nullable = false)
     private int prize;
+
+    @ManyToOne
+    @JoinColumn(name = "userid", nullable = false)
+    private User user;
+
+    public League(){}
+
+    public League(String name, int prize, User user) {
+        this.name = name;
+        this.prize = prize;
+        this.user = user;
+    }
 
     public League(long id, String name, Map<Date, List<Match>> fixture, int prize) {
         this.id = id;
@@ -22,23 +51,6 @@ public class League {
         this.id = id;
         this.name = name;
         this.prize = prize;
-    }
-
-    @Deprecated
-    public Map<Date, List<Long>> getFixtureIds() {
-        if(fixture != null) {
-            Map<Date, List<Long>> map = new HashMap<>();
-            List<Long> ids;
-            for (Map.Entry<Date, List<Match>> e : fixture.entrySet()) {
-                ids = new LinkedList<>();
-                for (Match m : e.getValue()) {
-                    ids.add(m.getId());
-                }
-                map.put(e.getKey(), ids);
-            }
-            return map;
-        }
-        return null;
     }
 
     public List<Match> getMatches(Date date) {
@@ -71,5 +83,9 @@ public class League {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

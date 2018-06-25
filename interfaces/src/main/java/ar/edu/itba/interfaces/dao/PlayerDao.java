@@ -1,6 +1,5 @@
 package ar.edu.itba.interfaces.dao;
 
-import ar.edu.itba.model.Contract;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 

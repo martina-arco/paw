@@ -16,9 +16,7 @@ public class FinanceController extends Controller {
     public ModelAndView finance() {
         ModelAndView mav = new ModelAndView("finance");
 
-        Team team = teamService.findByUserId(loggedUser().getId());
-        teamService.setPlayers(team);
-        teamService.setFinance(team);
+        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId());
 
         int salaries = teamService.getSalaries(team);
         int ticketsSold = teamService.getTicketsSold(team);

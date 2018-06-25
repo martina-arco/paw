@@ -31,13 +31,12 @@ public class HomeController extends Controller {
 
     @RequestMapping("/home")
     public ModelAndView home(){
-        Team team = teamService.findByUserId(loggedUser().getId());
+        Team team = teamService.findByUserIdAndFetchPlayers(loggedUser().getId());
 
         if(team == null)
             return new ModelAndView("redirect:chooseTeam");
 
         long playerId;
-        teamService.setPlayers(team);
 
         if(team.getPlayers().size() > 0)
             playerId = team.getPlayers().get(0).getId();
@@ -52,8 +51,7 @@ public class HomeController extends Controller {
         ModelAndView mav = new ModelAndView("home");
 
         User user = loggedUser();
-        Team team = teamService.findByUserId(user.getId());
-        teamService.setPlayers(team);
+        Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
         List<Match> matches = matchService.getUpcomingMatches(team, user.getCurrentDay());
 
         if(matches.size() > 0) {

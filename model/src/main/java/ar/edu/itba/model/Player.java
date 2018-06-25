@@ -1,18 +1,59 @@
 package ar.edu.itba.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "player")
 public class Player {
 
-    private long id, teamId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "player_playerid_seq")
+    @SequenceGenerator(sequenceName = "player_playerid_seq", name = "player_playerid_seq", allocationSize = 1)
+    @Column(name = "playerid")
+    private long id;
+
+    @Transient
+    private long teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "team")
     private Team team;
+
+    @Column(nullable = false)
     private String name;
-    private int age, value, potential, skillLevel, goalKeeping, finish, defending, passing, fitness, salary;
+
+    @Column(nullable = false)
+    private int age, value, potential, skillLevel, goalKeeping, finishing, defending, passing, fitness, salary;
+
+    @Column(nullable = false)
     private Date contractExpiration;
+
+    @Column(nullable = false)
     private boolean youth;
 
+    public Player(){}
+
+    public Player(Team team, String name, int age, int value, int potential, int skillLevel, int goalKeeping,
+                  int finishing, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
+        this.team = team;
+        this.name = name;
+        this.age = age;
+        this.value = value;
+        this.potential = potential;
+        this.skillLevel = skillLevel;
+        this.goalKeeping = goalKeeping;
+        this.finishing = finishing;
+        this.defending = defending;
+        this.passing = passing;
+        this.fitness = fitness;
+        this.salary = salary;
+        this.contractExpiration = contractExpiration;
+        this.youth = youth;
+    }
+
     public Player(long id, Team team, String name, int age, int value, int potential, int skillLevel, int goalKeeping,
-                  int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
+                  int finishing, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
         this.id = id;
         this.team = team;
         this.name = name;
@@ -21,7 +62,7 @@ public class Player {
         this.potential = potential;
         this.skillLevel = skillLevel;
         this.goalKeeping = goalKeeping;
-        this.finish = finish;
+        this.finishing = finishing;
         this.defending = defending;
         this.passing = passing;
         this.fitness = fitness;
@@ -31,7 +72,7 @@ public class Player {
     }
 
     public Player(long id, long teamId, String name, int age, int value, int potential, int skillLevel, int goalkeeping,
-                  int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
+                  int finishing, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
         this.id = id;
         this.teamId = teamId;
         this.name = name;
@@ -40,13 +81,23 @@ public class Player {
         this.potential = potential;
         this.skillLevel = skillLevel;
         this.goalKeeping = goalkeeping;
-        this.finish = finish;
+        this.finishing = finishing;
         this.defending = defending;
         this.passing = passing;
         this.fitness = fitness;
         this.salary = salary;
         this.contractExpiration = contractExpiration;
         this.youth = youth;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Player && id == ((Player) obj).id;
     }
 
     public long getTeamId() {
@@ -67,8 +118,8 @@ public class Player {
         this.goalKeeping = goalKeeping;
     }
 
-    public void setFinish(int finish) {
-        this.finish = finish;
+    public void setFinishing(int finishing) {
+        this.finishing = finishing;
     }
 
     public void setDefending(int defending) {
@@ -127,8 +178,8 @@ public class Player {
         return goalKeeping;
     }
 
-    public int getFinish() {
-        return finish;
+    public int getFinishing() {
+        return finishing;
     }
 
     public int getDefending() {

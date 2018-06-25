@@ -2,11 +2,13 @@ package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
 import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,6 +17,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -29,6 +32,9 @@ public class UserServiceImpl implements UserService {
     private TeamDao teamDao;
     @Autowired
     private LeagueService leagueService;
+
+    @Autowired
+    private TeamService teamService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -71,7 +77,7 @@ public class UserServiceImpl implements UserService {
         cal.add(Calendar.DATE, 7);
         Date newDate = cal.getTime();
         user.setCurrentDay(newDate);
-        Team team = teamDao.findByUserId(user.getId());
+        Team team = teamService.findByUserId(user.getId());
         if(newDate.getMonth() > currentDate.getMonth()) {
             subtractPlayerSalaries(team);
         }

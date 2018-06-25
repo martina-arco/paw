@@ -1,20 +1,77 @@
 package ar.edu.itba.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+@Entity
+@Table(name = "match")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Match {
 
-    private long id, homeId, awayId, leagueId;
-    private Team home, away;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "match_matchid_seq")
+    @SequenceGenerator(sequenceName = "match_matchid_seq", name = "match_matchid_seq", allocationSize = 1)
+    @Column(name = "matchid")
+    private long id;
+
+    @Transient
+    private long homeId, awayId, leagueId;
+
+    @ManyToOne
+    @JoinColumn(name = "home", nullable = false)
+    private Team home;
+
+    @ManyToOne
+    @JoinColumn(name = "away", nullable = false)
+    private Team away;
+
+    @ManyToOne
+    @JoinColumn(name = "league", nullable = false)
     private League league;
+
+    @Column(nullable = false)
     private Date day;
-    private int homeScore, awayScore, homePoints, awayPoints;
+
+    @Column(nullable = false)
+    private int homeScore, awayScore;
+
+    @Column(name = "homepts", nullable = false)
+    private int homePoints;
+
+    @Column(name = "awaypts", nullable = false)
+    private int awayPoints;
+
+    @OneToMany(mappedBy = "match")
     private List<PlayerStats> stats;
+
+    @Column(nullable = false)
     private boolean played;
+
+    @OneToMany(mappedBy = "match")
     private List<Event> events;
+
+    public Match(){}
+
+    public Match(Team home, Team away, League league, Date day, int homeScore, int awayScore, int homePoints,
+                 int awayPoints, List<PlayerStats> stats, boolean played, List<Event> events) {
+        this.home = home;
+        this.away = away;
+        this.league = league;
+        this.day = day;
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+        this.homePoints = homePoints;
+        this.awayPoints = awayPoints;
+        this.stats = stats;
+        this.played = played;
+        this.events = events;
+    }
 
     public Match(long id, Team home, Team away, League league, Date day, int homeScore, int awayScore, int homePoints,
                  int awayPoints, List<PlayerStats> stats, boolean played, List<Event> events) {

@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <p><spring:message code="player.finishing" arguments="${player.finish}"/></p>
+            <p><spring:message code="player.finishing" arguments="${player.finishing}"/></p>
 
         </div>
         <div class="col-sm">

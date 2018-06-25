@@ -1,10 +1,5 @@
 package ar.edu.itba.webapp.controllers;
 
-import ar.edu.itba.interfaces.service.ContractService;
-import ar.edu.itba.interfaces.service.PlayerService;
-import ar.edu.itba.interfaces.service.TeamService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 

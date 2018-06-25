@@ -1,12 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<html>
-<head>
-    <link rel="stylesheet" href="<c:url value="/css/style.css"/>" />
-</head>
-<body>
+<t:genericpage>
+  <jsp:body>
     <h2><spring:message code="user.greeting" arguments="${user.username}"/></h2>
     <h5><spring:message code="user.id" arguments="${user.id}"/></h5>
-</body>
-</html>
+  </jsp:body>
+</t:genericpage>

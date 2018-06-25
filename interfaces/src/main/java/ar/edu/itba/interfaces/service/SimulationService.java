@@ -1,7 +1,7 @@
 package ar.edu.itba.interfaces.service;
 
-import ar.edu.itba.model.Event;
-import ar.edu.itba.model.Match;
+import ar.edu.itba.model.*;
+import ar.edu.itba.model.DTOs.MatchDTO;
 import ar.edu.itba.model.utils.MatchStatus;
 
 import java.util.List;
@@ -11,9 +11,9 @@ public interface SimulationService {
 
     void simulateFixture(Long userId, List<Match> matches);
 
-    Map<Long, MatchStatus> getStatus(Long userId);
+    void resimulate(Long userId, int minute, Match match, Team team, List<Player> in, List<Player> out);
 
-    void start(Long userId);
+    List<MatchDTO> getMatches(Long leagueId, User user);
 
-    List<Match> getMatches(Long userId);
+    boolean started(Match match);
 }
