@@ -5,9 +5,29 @@
 
 <t:masterpage>
     <jsp:attribute name="scripts">
-        <script src="<c:url value="/js/transfer.js"/>"></script>
+        <script src="<c:url value="/assets/js/transfer.js"/>"></script>
     </jsp:attribute>
     <jsp:body>
+        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticModalLabel">Transfer status</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalContent">
+                            This is a static modal, backdrop click will not close it.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div>
             <form id="filterForm" method="post">
                 <c:forEach items="${criterias}" var="criteria">

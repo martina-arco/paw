@@ -26,7 +26,7 @@ public class TransferController extends Controller {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/transfer")
+    @RequestMapping("/transfers")
     public ModelAndView transfer(){
         ModelAndView mav = new ModelAndView("transfer");
         List<String> inputs = PlayerFilter.values();
@@ -42,9 +42,9 @@ public class TransferController extends Controller {
     }
 
     @RequestMapping(value = "/transferPlayer")
-    public ModelAndView transferredPlayer(@RequestBody String transfer){
-        transferService.performTransfer(loggedUser(), transfer);
-        return new ModelAndView("redirect:home");
+    @ResponseBody
+    public Object transferredPlayer(@RequestBody String transfer){
+        return transferService.performTransfer(loggedUser(), transfer);
     }
 
 }

@@ -42,17 +42,20 @@ public class TransferServiceImpl implements TransferService {
     private PlayerDao playerDao;
 
     @Override
-    public void performTransfer(User user, String transfer) {
+    public boolean performTransfer(User user, String transfer) {
         long playerId = Long.valueOf(transfer.split("=")[0]);
         Player player = playerService.findById(playerId);
-        transferPlayer(player.getTeam(), user.getTeam(), player);
-
+        return transferPlayer(player.getTeam(), user.getTeam(), player);
     }
 
     @Override
-    public void transferPlayer(Team from, Team to, Player player) {
+    public boolean transferPlayer(Team from, Team to, Player player) {
         from = teamService.findByIdAndFetchPlayersAndFinance(from.getId());
         to = teamService.findByIdAndFetchPlayersAndFinance(to.getId());
+
+        if(to.getMoney() <= player.getValue())
+            return false;
+
         player.setTeam(to);
         from.getPlayers().remove(player);
         to.getPlayers().add(player);
@@ -60,6 +63,7 @@ public class TransferServiceImpl implements TransferService {
         economyService.submitTransfer(from, to, player.getValue());
         teamDao.save(from);
         teamDao.save(to);
+        return true;
     }
 
     @Override

@@ -36,7 +36,7 @@
 
 <jsp:doBody/>
 
-<script src="<c:url value="/assets/js/vendor/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/assets/js/vendor/jquery-3.3.1.min.js"/>"></script>
 <script src="<c:url value="/assets/js/popper.min.js"/>"></script>
 <script src="<c:url value="/assets/js/plugins.js"/>"></script>
 <script src="<c:url value="/assets/js/main.js"/>"></script>

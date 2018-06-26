@@ -1,16 +1,16 @@
 
-$(document).ready(function(){
-    $("#filterForm").submit(function(e) {
+jQuery(document).ready(function(){
+    jQuery("#filterForm").submit(function(e) {
         var myNode = document.getElementById("players");
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
         }
 
         var url = "/transferFilter";
-        $.ajax({
+        jQuery.ajax({
             type: "POST",
             url: url,
-            data: $("#filterForm").serialize(),
+            data: jQuery("#filterForm").serialize(),
             dataType: "json",
             success: function(result){
                 manageData(result)
@@ -22,7 +22,6 @@ $(document).ready(function(){
 });
 
 function manageData(json){
-    console.log(json);
     var container = document.getElementById("players")
 
     for(var index in json){
@@ -41,11 +40,30 @@ function manageData(json){
         buy.setAttribute("id", playerDTO['id']);
         buy.setAttribute("type", "button");
         buy.onclick = function (e) {
-            console.log(e.srcElement.id);
-            $.ajax({
+            jQuery.ajax({
                 type: "POST",
                 url: '/transferPlayer',
                 data: e.srcElement.id,
+                success: function(result){
+                    var popup = jQuery('#staticModal');
+                    var button = jQuery('#returnButton');
+                    var content = jQuery('#modalContent');
+                    console.log(content);
+                    if(!result){
+                        content.innerHTML = "Transfer failed. Insufficient funds.";
+                        button.innerHTML = "Retry";
+                        button.onclick = function () {
+                            popup.modal('show');
+                        }
+                    } else {
+                        content.innerHTML = "Transfer successful!";
+                        button.innerHTML = "Return to Home";
+                        button.onclick = function () {
+                            window.location.href = "../home";
+                        }
+                    }
+                    popup.modal('show');
+                }
             });
         };
         buy.innerHTML = "Buy";

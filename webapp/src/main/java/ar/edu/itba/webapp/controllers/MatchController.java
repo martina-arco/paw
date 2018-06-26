@@ -52,7 +52,7 @@ public class MatchController extends Controller{
         return mav;
     }
 
-    @RequestMapping(value = "/data", produces = "application/json")
+    @RequestMapping(value = "/matchData", produces = "application/json")
     @ResponseBody
     public Object json() {
         List<MatchDTO> ret = simulationService.getMatches(leagueService.findByUser(loggedUser()).get(0).getId(),loggedUser());

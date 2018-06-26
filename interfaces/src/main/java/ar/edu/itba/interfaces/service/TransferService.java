@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public interface TransferService {
-    void performTransfer(User user, String transfer);
+    boolean performTransfer(User user, String transfer);
 
-    void transferPlayer(Team from, Team to, Player player);
+    boolean transferPlayer(Team from, Team to, Player player);
 
     List<PlayerDTO> playersByCriteria(User user, Predicate<Player> criteria);
 

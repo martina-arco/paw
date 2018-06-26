@@ -1,11 +1,11 @@
 var eventMinutes = 10;
 var minute = 0;
-$(document).ready(function(){
+jQuery(document).ready(function(){
     fetchData();
 });
 
 function fetchData() {
-    $.getJSON('/data', function(json) {
+    jQuery.getJSON('/matchData', function(json) {
         iterate(json);
     });
 }
@@ -32,7 +32,7 @@ function iterate(json){
         }
     }
 
-    $('.progress-bar').css('width', (minute * 1.1) + '%');
+    jQuery('.progress-bar').css('width', (minute * 1.1) + '%');
     document.getElementById("time").innerHTML = minute + "'";
 
     minute++;
