@@ -42,7 +42,7 @@ public class MatchController extends Controller{
         Match userMatch = matchService.getUserMatch(matches, user);
 
         if(simulationService.started(userMatch)){
-            return new ModelAndView("redirect:matchEnd");
+            return matchEnds();
         }
 
         simulationService.simulateFixture(user.getId(), matches);

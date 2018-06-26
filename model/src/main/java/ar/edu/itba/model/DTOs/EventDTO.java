@@ -12,8 +12,10 @@ public class EventDTO {
                 return "PASS";
             case SAVE:
                 return "SAVE";
-            case SCORE:
-                return "SCORE";
+            case HOMESCORE:
+                return "HOMESCORE";
+            case AWAYSCORE:
+                return "AWAYSCORE";
             case ASSIST:
                 return "ASSIST";
             case TACKLE:

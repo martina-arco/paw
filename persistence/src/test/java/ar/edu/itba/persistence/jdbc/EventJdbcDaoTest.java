@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNotNull;
 @Ignore("JDBC Dao test ignored")
 public class EventJdbcDaoTest {
 
-    private final Event.Type TYPE = Event.Type.SCORE;
+    private final Event.Type TYPE = Event.Type.HOMESCORE;
     private final int MINUTE = 1234;
 
     @Autowired

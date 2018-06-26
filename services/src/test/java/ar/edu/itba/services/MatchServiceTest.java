@@ -125,7 +125,7 @@ public class MatchServiceTest {
         Player p2 = mock(Player.class);
         when(event.getP1()).thenReturn(p1);
         when(event.getP2()).thenReturn(p2);
-        when(event.getType()).thenReturn(Event.Type.SCORE);
+        when(event.getType()).thenReturn(Event.Type.HOMESCORE);
         when(event.getMinute()).thenReturn(2);
     }
 

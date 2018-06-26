@@ -53,7 +53,7 @@ public class MatchServiceImpl implements MatchService {
     public void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores) {
 
         for (Event event : match.getEvents()) {
-            if(event.getType() == Event.Type.SCORE) {
+            if(event.getType() == Event.Type.HOMESCORE || event.getType() == Event.Type.AWAYSCORE) {
                 Player player = event.getP1();
 
                 if(player.getTeam().equals(match.getHome()))

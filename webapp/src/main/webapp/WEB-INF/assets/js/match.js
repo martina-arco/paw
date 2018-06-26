@@ -6,36 +6,28 @@ $(document).ready(function(){
 
 function fetchData() {
     $.getJSON('/data', function(json) {
-        var leave = false;
-        console.log(json);
-        setInterval(iterate, 100, json);
-        window.location.href = "../matchEnd";
+        iterate(json);
     });
 }
 
 function iterate(json){
 
-    if(minute == 91){
+    if(minute === 91){
+        window.location.href = "../matchEnd";
         return;
     }
-    var eventContainer;
-    var homeScoreContainer;
-    var awayScoreContainer;
 
     for(var index in json){
         var matchDTO = json[index];
-        console.log(matchDTO);
         var matchId = matchDTO.matchId;
-        console.log(matchId);
-        eventContainer = document.getElementById(matchId + "event");
-        homeScoreContainer = document.getElementById(matchId + "homeScore");
-        awayScoreContainer = document.getElementById(matchId + "awayScore");
-        homeScoreContainer.innerHTML = matchDTO.homeScore;
-        awayScoreContainer.innerHTML = matchDTO.awayScore;
+        var eventContainer = document.getElementById(matchId + "event");
+        var homeScoreContainer = document.getElementById(matchId + "homeScore");
+        var awayScoreContainer = document.getElementById(matchId + "awayScore");
 
-        for(var eventDTO in matchDTO.events){
-            if(eventDTO.minute == minute){
-                updateEvents(minute, eventContainer, eventDTO);
+        for(var eventIndex in matchDTO.events){
+            var eventDTO = matchDTO.events[eventIndex];
+            if(eventDTO.minute === minute){
+                updateEvents(minute, eventContainer, eventDTO, homeScoreContainer, awayScoreContainer);
             }
         }
     }
@@ -44,9 +36,10 @@ function iterate(json){
     document.getElementById("time").innerHTML = minute + "'";
 
     minute++;
+    setTimeout(iterate,100,json);
 }
 
-function updateEvents(currentMinute, eventContainer, event){
+function updateEvents(currentMinute, eventContainer, event, homeScoreContainer, awayScoreContainer){
     var oldEvents = eventContainer.children;
     for (var i = oldEvents.length - 1; i >= 0 ; i--) {
         if(oldEvents[i].getAttribute("name") < currentMinute - eventMinutes) {
@@ -59,14 +52,19 @@ function updateEvents(currentMinute, eventContainer, event){
     type.style.display = "block";
 
     switch(event.type) {
-        case "SCORE":
-            type.innerHTML = event.player1 + " - " + document.getElementById("goalScored").value + " ( " + event.minute + "' )";
+        case "HOMESCORE":
+            type.innerHTML = event.player1 + " - " + document.getElementById("goalScored").innerHTML + " ( " + event.minute + "' )";
+            homeScoreContainer.innerHTML = parseInt(homeScoreContainer.innerHTML) + 1;
+            break;
+        case "AWAYSCORE":
+            type.innerHTML = event.player1 + " - " + document.getElementById("goalScored").innerHTML + " ( " + event.minute + "' )";
+            awayScoreContainer.innerHTML = parseInt(homeScoreContainer.innerHTML) + 1;
             break;
         case "YELLOW CARD":
-            type.innerHTML = event.player1 + " - " + document.getElementById("yellowCard").value + " ( " + event.minute + " )";
+            type.innerHTML = event.player1 + " - " + document.getElementById("yellowCard").innerHTML + " ( " + event.minute + " )";
             break;
         case "RED CARD":
-            type.innerHTML = event.player1 + " - " + document.getElementById("redCard").value + " ( " + event.minute + " )";
+            type.innerHTML = event.player1 + " - " + document.getElementById("redCard").innerHTML + " ( " + event.minute + " )";
             break;
         // case "SUBSTITUTE":
 
