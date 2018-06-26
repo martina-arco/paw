@@ -82,7 +82,7 @@ public class PlayerStatsJdbcDao implements PlayerStatsDao {
                 "sum(CASE WHEN type = ? THEN 1 ELSE 0 END) AS scores, sum(CASE WHEN type = ? THEN 1 ELSE 0 END) AS yellowCards, " +
                 "sum(CASE WHEN type = ? THEN 1 ELSE 0 END) AS redCards FROM playerStats " +
                 "LEFT JOIN event ON playerstats.match = event.match AND player = player1 WHERE playerstats.match = ? " +
-                "GROUP BY playerstats.match, player", ROW_MAPPER, Event.Type.SCORE.toString(), Event.Type.YELLOW_CARD.toString(),
+                "GROUP BY playerstats.match, player", ROW_MAPPER, Event.Type.AWAYSCORE.toString(), Event.Type.HOMESCORE.toString(), Event.Type.YELLOW_CARD.toString(),
                 Event.Type.RED_CARD.toString(), id);
         //final List<PlayerStats> list = jdbcTemplate.query("SELECT * FROM playerStats LEFT JOIN event ON playerstats.match = event.match AND player = player1 WHERE playerstats.match = ? ORDER BY playerstats.match, player", ROW_MAPPER, id);
         return list;

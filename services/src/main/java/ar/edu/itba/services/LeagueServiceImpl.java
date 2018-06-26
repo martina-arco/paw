@@ -3,13 +3,8 @@ package ar.edu.itba.services;
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
-import ar.edu.itba.interfaces.service.FixtureService;
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.MatchService;
-import ar.edu.itba.model.League;
-import ar.edu.itba.model.Match;
-import ar.edu.itba.model.Team;
-import ar.edu.itba.model.User;
+import ar.edu.itba.interfaces.service.*;
+import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +31,9 @@ public class LeagueServiceImpl implements LeagueService {
     @Autowired
     private TeamDao teamDao;
 
+    @Autowired
+    private EconomyService economyService;
+
 
     @Override
     public List<League> findByUser(User user) {
@@ -45,7 +43,7 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public boolean isFinished(League league, User user) {
+    public boolean isLastMatch(League league, User user) {
         fillFixture(user, league);
         Map<Date, List<Match>> fixture = league.getFixture();
         for (Map.Entry<Date, List<Match>> entry: fixture.entrySet()) {
@@ -172,4 +170,20 @@ public class LeagueServiceImpl implements LeagueService {
         }
         return null;
     }
+
+    @Override
+    public void finish(League league, User user){
+        Map<Team, Integer> standings = getTeamPoints(league, user.getCurrentDay());
+        Team winner = null;
+        int winnerPoints = -1;
+
+        for(Map.Entry<Team, Integer> standing : standings.entrySet()){
+            if(standing.getValue() > winnerPoints){
+                winner = standing.getKey();
+                winnerPoints = standing.getValue();
+            }
+        }
+        economyService.submitReceipt(winner, Receipt.Type.TOURNAMENTPRIZE, league.getPrize());
+    }
+
 }

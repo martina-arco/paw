@@ -7,6 +7,10 @@ import java.util.Date;
 @Table(name = "player")
 public class Player {
 
+    public enum Position{
+        GK, DEF, MID, FW
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "player_playerid_seq")
     @SequenceGenerator(sequenceName = "player_playerid_seq", name = "player_playerid_seq", allocationSize = 1)

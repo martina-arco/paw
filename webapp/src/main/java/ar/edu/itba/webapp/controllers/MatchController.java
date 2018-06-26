@@ -42,7 +42,7 @@ public class MatchController extends Controller{
         Match userMatch = matchService.getUserMatch(matches, user);
 
         if(simulationService.started(userMatch)){
-            //redirect("/matchEnd");
+            return matchEnds();
         }
 
         simulationService.simulateFixture(user.getId(), matches);
@@ -52,7 +52,7 @@ public class MatchController extends Controller{
         return mav;
     }
 
-    @RequestMapping(value = "/data", produces = "application/json")
+    @RequestMapping(value = "/matchData", produces = "application/json")
     @ResponseBody
     public Object json() {
         List<MatchDTO> ret = simulationService.getMatches(leagueService.findByUser(loggedUser()).get(0).getId(),loggedUser());
@@ -70,8 +70,8 @@ public class MatchController extends Controller{
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
 
-        if(leagueService.isFinished(league, user)){
-            leagueService.generateFixture(user, league);
+        for(Match match : matches){
+            matchService.payTickets(match);
         }
 
         userService.advanceDate(user);

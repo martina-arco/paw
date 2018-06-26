@@ -1,6 +1,7 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
+import ar.edu.itba.interfaces.service.EconomyService;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
@@ -14,7 +15,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import static java.util.Calendar.MONTH;
 
 @Service
 @Transactional
@@ -34,6 +38,9 @@ public class UserServiceImpl implements UserService {
     private LeagueService leagueService;
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private EconomyService economyService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -69,44 +76,41 @@ public class UserServiceImpl implements UserService {
         return format.format(user.getCurrentDay());
     }
 
-
     @Override
     public void advanceDate(User user) {
-        Calendar cal = Calendar.getInstance();
-        Date currentDate = user.getCurrentDay();
-        cal.setTime(currentDate);
-        cal.add(Calendar.DATE, 7);
-        Date newDate = cal.getTime();
-        user.setCurrentDay(newDate);
-        Team team = teamService.findByUserId(user.getId());
-        if(newDate.getMonth() > currentDate.getMonth()) {
-            subtractPlayerSalaries(team);
+        League league = leagueService.findByUser(user).get(0);
+        List<Team> teams = teamService.findByLeague(league);
+        
+        if(isNextMonth(user.getCurrentDay())) {
+            for(Team team : teams)
+                economyService.submitReceipt(team, Receipt.Type.PLAYERSSALARIES, -team.getSalaries());
         }
-        if(matchDao.findByLeagueIdAndFromDate(team.getLeagueId(), newDate).isEmpty()) {
-            League league = leagueDao.findById(team.getLeagueId());
-            int higherPoints = -1;
-            Team higherTeam = null;
-            for (Map.Entry<Team, Integer> entry : leagueService.getTeamPoints(league, currentDate).entrySet())
-            {
-                if(entry.getValue() > higherPoints) {
-                    higherPoints = entry.getValue();
-                    higherTeam = entry.getKey();
-                }
-            }
-            int amount = league.getPrize();
-            if(higherTeam != null) {
-                if (higherTeam.getId() == team.getId()) {
-                    receiptDao.create(team, amount, Receipt.Type.TOURNAMENTPRIZE);
-                    team.addMoney(amount);
-                }
-            }
+
+        if(leagueService.isLastMatch(league, user)){
+            leagueService.finish(league, user);
+            user.setCurrentDay(advanceWeeks(user.getCurrentDay(), 54 - 38));
+            leagueService.generateFixture(user, league);
+        } else {
+            user.setCurrentDay(advanceWeeks(user.getCurrentDay(), 1));
         }
+
         userDao.save(user);
     }
 
-    private void subtractPlayerSalaries(Team team) {
-        int amount = team.getSalaries();
-        receiptDao.create(team, amount, Receipt.Type.PLAYERSSALARIES);
-        team.addMoney(-amount);
+
+    private boolean isNextMonth(Date date){
+        Calendar cal = Calendar.getInstance(), aux = Calendar.getInstance();
+        cal.setTime(date);
+        aux.setTime(date);
+        cal.add(Calendar.DATE, 7);
+
+        return cal.get(MONTH) != aux.get(MONTH);
+    }
+
+    private Date advanceWeeks(Date date, int amount){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 7 * amount);
+        return cal.getTime();
     }
 }

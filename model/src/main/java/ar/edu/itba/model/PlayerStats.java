@@ -38,7 +38,10 @@ public class PlayerStats {
     private void postLoad() {
         for (Event e : events) {
             switch (e.getType()) {
-                case SCORE:
+                case HOMESCORE:
+                    scores++;
+                    break;
+                case AWAYSCORE:
                     scores++;
                     break;
                 case RED_CARD:

@@ -30,72 +30,7 @@ public class SimulationNode {
         this.neighbors = new HashSet<>();
     }
 
-    public SimulationNode dispute(MatchStatus matchStatus) {
-        int opponentDef = node.getAtt(otherTeam(possession), NodeAtt.DEF);
-        int myPoss = node.getAtt(possession, NodeAtt.POSS);
-
-        int sum = myPoss + opponentDef + 1;
-        double nMyPoss = (double) myPoss / sum;
-
-        boolean taken = grid.getRand().nextDouble() < nMyPoss;
-
-        if (taken) {
-            matchStatus.getEvents().add(new Event(0, node.getSNode(otherTeam(possession)).whoDidIt(), Event.Type.TACKLE, matchStatus.getMinute()));
-        }
-
-        return node.getSNode(taken ? otherTeam(possession) : possession);
-    }
-
-    SimulationNode shot(MatchStatus matchStatus) {
-        double check = grid.getRand().nextDouble();
-        int shot = node.getAtt(possession, NodeAtt.FIN) / (distanceToGoal() + 1);
-
-        int sum = shot + opGK.getGoalKeeping() + node.getAtt(otherTeam(possession), NodeAtt.DEF);
-        double norm = (double) shot / sum;
-        boolean goal = check < norm;
-
-        if (goal) {
-
-            if (possession.equals(MyTeam.AWAY))
-                matchStatus.setAwayScore(matchStatus.getAwayScore() + 1);
-            else
-                matchStatus.setHomeScore(matchStatus.getHomeScore() + 1);
-
-            matchStatus.getEvents().add(new Event(0, whoDidIt(), Event.Type.SCORE, matchStatus.getMinute()));
-            return grid.kickOff(otherTeam(possession));
-        }
-
-        matchStatus.getEvents().add(new Event(0, opGK, Event.Type.SAVE, matchStatus.getMinute()));
-        return grid.goalKick(otherTeam(possession));
-    }
-
-    private int distanceToGoal() {
-        return Point.manhattanSq(node.getPosition(), possession.equals(MyTeam.AWAY) ? new Point(0, 2) : new Point(3, 2));
-    }
-
-    public SimulationNode advance(MatchStatus matchStatus) {
-        double chanceToShoot = distanceToGoal() == 0 ? 1.0 : 1 / (distanceToGoal() * 2);
-        boolean shooting = grid.getRand().nextDouble() < chanceToShoot;
-
-        if (distanceToGoal() < 2 || shooting)
-            return shot(matchStatus);
-
-        double random = grid.getRand().nextDouble();
-        double accum = 0;
-        SimulationNode last = null;
-        for (SimulationArc arc : neighbors) {
-            accum += arc.getWeight();
-            if (random < accum)
-                return arc.getNeighbor();
-            last = arc.getNeighbor();
-        }
-
-        matchStatus.getEvents().add(new Event(0, whoDidIt(), Event.Type.PASS, matchStatus.getMinute()));
-
-        return last;
-    }
-
-    private Player whoDidIt() {
+    public Player whoDidIt() {
         double action = grid.getRand().nextDouble();
         int accum = 0;
         Player guilty = null;
@@ -107,6 +42,22 @@ public class SimulationNode {
             }
         }
         return guilty;
+    }
+
+    public int distanceToGoal() {
+        return Point.manhattanSq(node.getPosition(), possession.equals(MyTeam.AWAY) ? new Point(0, 2) : new Point(3, 2));
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == null)
+            return false;
+        if(o == this)
+            return true;
+        if(!o.getClass().equals(SimulationNode.class))
+            return false;
+        SimulationNode other = (SimulationNode) o;
+        return other.possession == possession && node.getPosition().equals(((SimulationNode) o).getNode().getPosition());
     }
 
     public String toString() {
@@ -128,5 +79,13 @@ public class SimulationNode {
 
     public MyTeam getPossession() {
         return possession;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public Player getOpGK() {
+        return opGK;
     }
 }

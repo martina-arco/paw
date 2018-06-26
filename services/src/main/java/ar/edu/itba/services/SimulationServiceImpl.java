@@ -1,5 +1,6 @@
 package ar.edu.itba.services;
 
+import ar.edu.itba.interfaces.dao.EventDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.MatchStateDao;
 import ar.edu.itba.interfaces.service.MatchService;
@@ -7,16 +8,14 @@ import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.DTOs.MatchDTO;
 import ar.edu.itba.model.utils.*;
-import ar.edu.itba.model.utils.simulation.Grid;
-import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
-import ar.edu.itba.model.utils.simulation.MyTeam;
-import ar.edu.itba.model.utils.simulation.SimulationNode;
+import ar.edu.itba.model.utils.simulation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+import static ar.edu.itba.model.utils.simulation.Grid.otherTeam;
 import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
 import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
 
@@ -29,6 +28,9 @@ public class SimulationServiceImpl implements SimulationService{
 
     @Autowired
     private MatchDao matchDao;
+
+    @Autowired
+    private EventDao eventDao;
 
     @Autowired
     private MatchService matchService;
@@ -107,7 +109,7 @@ public class SimulationServiceImpl implements SimulationService{
 
         private void simulate(int minute, Point position, MyTeam possession) {
             Formation home = match.getHome().getFormation(), away = match.getAway().getFormation();
-            Grid matchGrid = new Grid(home, away);
+            Grid matchGrid = new Grid(match, home, away);
             SimulationNode currentState, lastState;
 
             if(position == null){
@@ -123,10 +125,10 @@ public class SimulationServiceImpl implements SimulationService{
                 matchStatus.setMinute(minute);
 
                 lastState = currentState;
-                currentState = currentState.dispute(matchStatus);
+                currentState = dispute(currentState, matchStatus);
 
                 if (currentState.equals(lastState))
-                    currentState = currentState.advance(matchStatus);
+                    currentState = advance(currentState, matchStatus);
 
                 deepStatus.registerState(currentState.getNode().getPosition(), minute, currentState.getPossession());
                 minute++;
@@ -145,5 +147,75 @@ public class SimulationServiceImpl implements SimulationService{
             MatchSimulator aux = (MatchSimulator) o;
             return aux.match.equals(match);
         }
+    }
+
+    private SimulationNode dispute(SimulationNode sNode, MatchStatus matchStatus) {
+        GridNode node = sNode.getNode();
+        MyTeam possession = sNode.getPossession();
+        int opponentDef = node.getAtt(otherTeam(possession), NodeAtt.DEF);
+        int myPoss = node.getAtt(possession, NodeAtt.POSS);
+
+        int sum = myPoss + opponentDef + 1;
+        double nMyPoss = (double) myPoss / sum;
+
+        boolean taken = sNode.getGrid().getRand().nextDouble() < nMyPoss;
+
+        if (taken) {
+            matchStatus.getEvents().add(new Event(0, node.getSNode(otherTeam(possession)).whoDidIt(), Event.Type.TACKLE, matchStatus.getMinute()));
+        }
+
+        return node.getSNode(taken ? otherTeam(possession) : possession);
+    }
+
+    private SimulationNode shot(SimulationNode sNode, MatchStatus matchStatus) {
+        Grid grid = sNode.getGrid();
+        GridNode node = sNode.getNode();
+        MyTeam possession = sNode.getPossession();
+        Player opGK = sNode.getOpGK();
+        double check = grid.getRand().nextDouble();
+        int shot = node.getAtt(possession, NodeAtt.FIN) / (sNode.distanceToGoal() + 1);
+
+        int sum = shot + opGK.getGoalKeeping() + node.getAtt(otherTeam(possession), NodeAtt.DEF);
+        double norm = (double) shot / sum;
+        boolean goal = check < norm;
+
+        if (goal) {
+
+            if (possession.equals(MyTeam.AWAY)) {
+                matchStatus.setAwayScore(matchStatus.getAwayScore() + 1);
+                matchStatus.getEvents().add(eventDao.create(grid.getMatch(), sNode.whoDidIt(), null, Event.Type.AWAYSCORE, matchStatus.getMinute()));
+            }
+            else {
+                matchStatus.setHomeScore(matchStatus.getHomeScore() + 1);
+                matchStatus.getEvents().add(eventDao.create(grid.getMatch(), sNode.whoDidIt(), null,Event.Type.HOMESCORE, matchStatus.getMinute()));
+            }
+
+            return grid.kickOff(otherTeam(possession));
+        }
+
+        matchStatus.getEvents().add(eventDao.create(grid.getMatch(), opGK, null,Event.Type.SAVE, matchStatus.getMinute()));
+        return grid.goalKick(otherTeam(possession));
+    }
+
+    public SimulationNode advance(SimulationNode sNode, MatchStatus matchStatus) {
+        double chanceToShoot = sNode.distanceToGoal() == 0 ? 1.0 : 1 / (sNode.distanceToGoal() * 2);
+        boolean shooting = sNode.getGrid().getRand().nextDouble() < chanceToShoot;
+
+        if (sNode.distanceToGoal() < 2 || shooting)
+            return shot(sNode, matchStatus);
+
+        double random = sNode.getGrid().getRand().nextDouble();
+        double accum = 0;
+        SimulationNode last = null;
+        for (SimulationArc arc : sNode.getNeighbors()) {
+            accum += arc.getWeight();
+            if (random < accum)
+                return arc.getNeighbor();
+            last = arc.getNeighbor();
+        }
+
+        matchStatus.getEvents().add(eventDao.create(sNode.getGrid().getMatch(),sNode.whoDidIt(),null,Event.Type.PASS,matchStatus.getMinute()));
+
+        return last;
     }
 }

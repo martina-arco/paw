@@ -39,6 +39,10 @@
           </div>
         </div>
 
+        <p hidden id="goalScored"><spring:message code="goalScored"/></p>
+        <p hidden id="yellowCard"><spring:message code="yellowCard"/></p>
+        <p hidden id="redCard"><spring:message code="redCard"/></p>
+
         <table class="table bg-white table-striped header-fixed">
           <thead class="green">
           <tr>

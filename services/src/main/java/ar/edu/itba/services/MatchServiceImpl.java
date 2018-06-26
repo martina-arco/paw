@@ -1,11 +1,7 @@
 package ar.edu.itba.services;
 
 import ar.edu.itba.interfaces.dao.*;
-import ar.edu.itba.interfaces.service.AiService;
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.MatchService;
-import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.interfaces.service.StadiumService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,11 +46,14 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     private EventDao eventDao;
 
+    @Autowired
+    private EconomyService economyService;
+
     @Override
     public void getScores(Match match, Map<String, Integer> homeScores, Map<String, Integer> awayScores) {
 
         for (Event event : match.getEvents()) {
-            if(event.getType() == Event.Type.SCORE) {
+            if(event.getType() == Event.Type.HOMESCORE || event.getType() == Event.Type.AWAYSCORE) {
                 Player player = event.getP1();
 
                 if(player.getTeam().equals(match.getHome()))
@@ -108,6 +107,15 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void setTeams(List<Match> matches) {
         //Not necessary with hibernate, default fetch is EAGER
+    }
+
+    @Override
+    public void payTickets(Match match) {
+        Team home = match.getHome();
+        Stadium stadium = home.getStadium();
+        float factor = home.getFanTrust()/100;
+        int income = (int) (stadium.calculateMatchEarnings()*factor);
+        economyService.submitReceipt(home, Receipt.Type.MATCHINCOME, income);
     }
 
     @Override

@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Event {
 
     public enum Type {
-        RED_CARD,YELLOW_CARD,SCORE,SAVE,PASS,TACKLE,ASSIST,SUBSTITUTE
+        RED_CARD,YELLOW_CARD,HOMESCORE,AWAYSCORE,SAVE,PASS,TACKLE,ASSIST,SUBSTITUTE
     }
 
     @Id

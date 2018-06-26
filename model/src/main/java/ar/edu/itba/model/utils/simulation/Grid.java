@@ -1,6 +1,7 @@
 package ar.edu.itba.model.utils.simulation;
 
 import ar.edu.itba.model.Formation;
+import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.utils.*;
 
@@ -17,12 +18,14 @@ public class Grid {
     private GridNode matrix[][];
     private Player homeGK, awayGK;
     private Random rand;
+    private Match match;
 
     public static MyTeam otherTeam(MyTeam possession){
-        return possession == AWAY? AWAY:HOME;
+        return possession == AWAY? HOME:AWAY;
     }
 
-    public Grid(Formation home, Formation away) {
+    public Grid(Match match, Formation home, Formation away) {
+        this.match = match;
 
         for (Map.Entry entry : home.getStarters().entrySet()) {
             Point point = ((Point) entry.getValue());
@@ -179,6 +182,10 @@ public class Grid {
             node.influence(team, player, count);
         }
 
+    }
+
+    public Match getMatch() {
+        return match;
     }
 
     public Random getRand() {

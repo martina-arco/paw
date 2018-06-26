@@ -66,7 +66,7 @@
               <tbody>
 
               <c:forEach items="${match.events}" var="event">
-                <c:if test="${event.type == 'SCORE' || event.type == 'YELLOW_CARD' || event.type == 'RED_CARD'}">
+                <c:if test="${event.type == 'HOMESCORE' || event.type == 'AWAYSCORE' || event.type == 'YELLOW_CARD' || event.type == 'RED_CARD'}">
                   <tr>
                     <td>
                       <c:if test="${event.p1.teamId == match.homeId}">
