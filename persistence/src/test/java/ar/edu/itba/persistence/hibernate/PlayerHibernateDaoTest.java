@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence.jdbc;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Player;
@@ -9,26 +9,26 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("JDBC Dao test ignored")
-public class PlayerJdbcDaoTest {
-
+@Ignore("Hibernate Dao test ignored")
+@Transactional
+public class PlayerHibernateDaoTest {
     private final String NAME = "Pepe";
     private final int AGE = 22;
     private final int FITNESS = 123;
@@ -43,30 +43,28 @@ public class PlayerJdbcDaoTest {
     private final Date CONTRACT_EXPIRATION = new Date(2000, 8, 15);
     private final boolean YOUTH = true;
 
+    @PersistenceContext
+    private EntityManager em;
     @Autowired
-    private DataSource ds;
+    private LeagueHibernateDao leagueDao;
     @Autowired
-    private LeagueJdbcDao leagueDao;
+    private UserHibernateDao userDao;
     @Autowired
-    private UserJdbcDao userDao;
+    private PlayerHibernateDao playerDao;
     @Autowired
-    private PlayerJdbcDao playerDao;
+    private MatchHibernateDao matchDao;
     @Autowired
-    private MatchJdbcDao matchDao;
+    private TeamHibernateDao teamDao;
     @Autowired
-    private TeamJdbcDao teamDao;
-    @Autowired
-    private EventJdbcDao eventDao;
+    private EventHibernateDao eventDao;
 
-    private JdbcTemplate jdbcTemplate;
     private Team team;
     private League league;
     private User user;
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(ds);
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "users", "league", "team", "player");
+        em.createQuery("DELETE FROM User").executeUpdate();
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
         team = teamDao.create("", league, null, null, null, null, 0,0,0,0);
@@ -77,7 +75,6 @@ public class PlayerJdbcDaoTest {
         final Player player = playerDao.create(NAME, team, AGE, VALUE, POTENTIAL, SKILLLEVEL, GOALKEEPING, FINISHING,
                 DEFENDING, PASSING, FITNESS, SALARY, CONTRACT_EXPIRATION, YOUTH);
         assertNotNull(player);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "player"));
         assertEquals(NAME, player.getName());
         assertEquals(team, player.getTeam());
         assertEquals(AGE, player.getAge());
@@ -199,10 +196,8 @@ public class PlayerJdbcDaoTest {
 
         assertNotNull(player1);
         assertNotNull(player2);
-        assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, "player"));
 
         playerDao.delete(player1);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "player"));
 
         assertNotNull(playerDao.findById(player2.getId()));
     }

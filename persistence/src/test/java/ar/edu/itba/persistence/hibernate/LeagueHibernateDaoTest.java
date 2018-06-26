@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence.jdbc;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
@@ -8,47 +8,43 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("JDBC Dao test ignored")
-public class LeagueJdbcDaoTest {
+@Ignore("Hibernate Dao test ignored")
+@Transactional
+public class LeagueHibernateDaoTest {
 
     private final String NAME = "League";
     private final int PRIZE = 1234;
     private final Map<Date, List<Match>> FIXTURE = new HashMap<>();
 
+    @PersistenceContext
+    private EntityManager em;
     @Autowired
-    private DataSource ds;
+    private LeagueHibernateDao leagueDao;
     @Autowired
-    private LeagueJdbcDao leagueDao;
-    @Autowired
-    private UserJdbcDao userDao;
+    private UserHibernateDao userDao;
 
-    private JdbcTemplate jdbcTemplate;
     private User user;
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(ds);
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "users");
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "league");
+        em.createQuery("DELETE FROM User").executeUpdate();
         userDao.create("a","","", new Date());
         userDao.create("b","","", new Date());
         user = userDao.create("c","","", new Date());
@@ -58,7 +54,6 @@ public class LeagueJdbcDaoTest {
     public void testCreate() {
         final League league = leagueDao.create(NAME, FIXTURE, PRIZE, user);
         assertNotNull(league);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "league"));
         assertEquals(NAME, league.getName());
         assertEquals(FIXTURE, league.getFixture());
         assertEquals(PRIZE, league.getPrize());

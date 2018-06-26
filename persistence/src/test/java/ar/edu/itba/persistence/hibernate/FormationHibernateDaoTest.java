@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence.jdbc;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.utils.Point;
@@ -7,42 +7,40 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("JDBC Dao test ignored")
-public class FormationJdbcDaoTest {
-
+@Ignore("Hibernate Dao test ignored")
+@Transactional
+public class FormationHibernateDaoTest {
     private final int PRESSURE = 4;
     private final int ATTITUDE = 7;
 
+    @PersistenceContext
+    private EntityManager em;
     @Autowired
-    private DataSource ds;
+    private LeagueHibernateDao leagueDao;
     @Autowired
-    private LeagueJdbcDao leagueDao;
+    private UserHibernateDao userDao;
     @Autowired
-    private UserJdbcDao userDao;
+    private PlayerHibernateDao playerDao;
     @Autowired
-    private PlayerJdbcDao playerDao;
+    private TeamHibernateDao teamDao;
     @Autowired
-    private TeamJdbcDao teamDao;
-    @Autowired
-    private FormationJdbcDao formationDao;
+    private FormationHibernateDao formationDao;
 
-    private JdbcTemplate jdbcTemplate;
     private Map<Player, Point> starters;
     private Map<Long, Point> startersIds;
     private List<Player> substitutes;
@@ -54,8 +52,7 @@ public class FormationJdbcDaoTest {
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(ds);
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "users", "league", "team", "player", "formation");
+        em.createQuery("DELETE FROM User").executeUpdate();
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
         team = teamDao.create("", league, null, null, null, null, 0,0,0,0);
@@ -78,7 +75,6 @@ public class FormationJdbcDaoTest {
     public void testCreate() {
         final Formation formation = formationDao.create(starters, substitutes, PRESSURE, ATTITUDE, captain, freeKick, penalty);
         assertNotNull(formation);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "formation"));
         assertEquals(starters, formation.getStarters());
         assertEquals(substitutes, formation.getSubstitutes());
         assertEquals(PRESSURE, formation.getPressure());
@@ -92,7 +88,6 @@ public class FormationJdbcDaoTest {
     public void testCreateById() {
         final Formation formation = formationDao.create(startersIds, substitutesIds, PRESSURE, ATTITUDE, captain.getId(), freeKick.getId(), penalty.getId());
         assertNotNull(formation);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "formation"));
         assertEquals(startersIds.size(), formation.getStartersIds().size());
         assertEquals(startersIds.keySet().iterator().next(), formation.getStartersIds().keySet().iterator().next());
         assertEquals(startersIds.get(starter.getId()).getX(), formation.getStartersIds().get(starter.getId()).getX());
@@ -166,4 +161,5 @@ public class FormationJdbcDaoTest {
         assertEquals(freeKick2.getId(), formation.getFreeKickTakerId());
         assertEquals(penalty2.getId(), formation.getPenaltyTakerId());
     }
+
 }

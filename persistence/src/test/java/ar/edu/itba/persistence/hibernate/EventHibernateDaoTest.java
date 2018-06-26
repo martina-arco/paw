@@ -1,48 +1,53 @@
-package ar.edu.itba.persistence.jdbc;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.model.*;
+import ar.edu.itba.persistence.jdbc.TestConfig;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
+
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("JDBC Dao test ignored")
-public class EventJdbcDaoTest {
-
+@Ignore("Hibernate Dao test ignored")
+@Transactional
+public class EventHibernateDaoTest {
     private final Event.Type TYPE = Event.Type.HOMESCORE;
     private final int MINUTE = 1234;
 
+    @PersistenceContext
+    private EntityManager em;
     @Autowired
-    private DataSource ds;
+    private LeagueHibernateDao leagueDao;
     @Autowired
-    private LeagueJdbcDao leagueDao;
+    private UserHibernateDao userDao;
     @Autowired
-    private UserJdbcDao userDao;
+    private PlayerHibernateDao playerDao;
     @Autowired
-    private PlayerJdbcDao playerDao;
+    private MatchHibernateDao matchDao;
     @Autowired
-    private MatchJdbcDao matchDao;
+    private TeamHibernateDao teamDao;
     @Autowired
-    private TeamJdbcDao teamDao;
-    @Autowired
-    private EventJdbcDao eventDao;
+    private EventHibernateDao eventDao;
 
-    private JdbcTemplate jdbcTemplate;
     private Player player1;
     private Player player2;
     private Match match;
@@ -52,8 +57,7 @@ public class EventJdbcDaoTest {
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(ds);
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "users", "league", "team", "player", "match", "event");
+        em.createQuery("DELETE FROM User").executeUpdate();
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
         team = teamDao.create("", league, null, null, null, null, 0,0,0,0);
@@ -66,7 +70,6 @@ public class EventJdbcDaoTest {
     public void testCreate() {
         final Event event = eventDao.create(match, player1, player2, TYPE, MINUTE);
         assertNotNull(event);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "event"));
         assertEquals(player1, event.getP1());
         assertEquals(player2, event.getP2());
         assertEquals(TYPE, event.getType());

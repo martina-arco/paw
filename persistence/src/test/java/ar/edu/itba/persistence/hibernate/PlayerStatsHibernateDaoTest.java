@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence.jdbc;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.model.*;
 import org.junit.Before;
@@ -6,40 +6,39 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
+import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("JDBC Dao test ignored")
-public class PlayerStatsJdbcDaoTest {
+@Ignore("Hibernate Dao test ignored")
+@Transactional
+public class PlayerStatsHibernateDaoTest {
 
+    @PersistenceContext
+    private EntityManager em;
     @Autowired
-    private DataSource ds;
+    private LeagueHibernateDao leagueDao;
     @Autowired
-    private LeagueJdbcDao leagueDao;
+    private UserHibernateDao userDao;
     @Autowired
-    private UserJdbcDao userDao;
+    private PlayerHibernateDao playerDao;
     @Autowired
-    private PlayerJdbcDao playerDao;
+    private MatchHibernateDao matchDao;
     @Autowired
-    private MatchJdbcDao matchDao;
+    private TeamHibernateDao teamDao;
     @Autowired
-    private TeamJdbcDao teamDao;
-    @Autowired
-    private PlayerStatsJdbcDao playerStatsDao;
+    private PlayerStatsHibernateDao playerStatsDao;
 
-    private JdbcTemplate jdbcTemplate;
     private Player player;
     private Match match;
     private Team team;
@@ -48,8 +47,7 @@ public class PlayerStatsJdbcDaoTest {
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(ds);
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "users", "league", "team", "player", "match", "playerStats");
+        em.createQuery("DELETE FROM User").executeUpdate();
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
         team = teamDao.create("", league, null, null, null, null, 0,0,0,0);
@@ -61,7 +59,6 @@ public class PlayerStatsJdbcDaoTest {
     public void testCreate() {
         final PlayerStats playerStats = playerStatsDao.create(player, match);
         assertNotNull(playerStats);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "playerStats"));
         assertEquals(player, playerStats.getPlayer());
         assertEquals(match, playerStats.getMatch());
     }
@@ -82,6 +79,6 @@ public class PlayerStatsJdbcDaoTest {
         PlayerStats playerStats = playerStatsDao.findByMatchId(match.getId()).get(0);
         assertNotNull(playerStats);
 
-        
+
     }
 }

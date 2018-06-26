@@ -1,4 +1,4 @@
-package ar.edu.itba.persistence.jdbc;
+package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Stadium;
@@ -9,23 +9,23 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = JPAConfiguration.class)
 @Sql("classpath:schema.sql")
-@Ignore("JDBC Dao test ignored")
-public class StadiumJdbcDaoTest {
+@Ignore("Hibernate Dao test ignored")
+@Transactional
+public class StadiumHibernateDaoTest {
 
     private final String NAME = "Estadio";
     private final int LOWCLASS = 11233;
@@ -35,26 +35,24 @@ public class StadiumJdbcDaoTest {
     private final int HIGHCLASS = 7234;
     private final int HIGHCLASS_PRICE = 1094;
 
+    @PersistenceContext
+    private EntityManager em;
     @Autowired
-    private DataSource ds;
+    private StadiumHibernateDao stadiumDao;
     @Autowired
-    private StadiumJdbcDao stadiumDao;
+    private TeamHibernateDao teamDao;
     @Autowired
-    private TeamJdbcDao teamDao;
+    private LeagueHibernateDao leagueDao;
     @Autowired
-    private LeagueJdbcDao leagueDao;
-    @Autowired
-    private UserJdbcDao userDao;
+    private UserHibernateDao userDao;
 
-    private JdbcTemplate jdbcTemplate;
     private User user;
     private League league;
     private Team team;
 
     @Before
     public void setUp() {
-        jdbcTemplate = new JdbcTemplate(ds);
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "stadium");
+        em.createQuery("DELETE FROM User").executeUpdate();
         user = userDao.create("c","","", new Date());
         league = leagueDao.create("", 0, user);
         team = teamDao.create("", league, null, null, null, null, 0,0,0,0);
@@ -64,7 +62,6 @@ public class StadiumJdbcDaoTest {
     public void testCreate() {
         final Stadium stadium = stadiumDao.create(NAME, team, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
         assertNotNull(stadium);
-        assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "stadium"));
         assertEquals(NAME, stadium.getName());
         assertEquals(team, stadium.getTeam());
         assertEquals(LOWCLASS, stadium.getLowClass());
@@ -95,7 +92,7 @@ public class StadiumJdbcDaoTest {
     public void testFindByTeamId() {
         final Stadium expectedStadium = stadiumDao.create(NAME, team, LOWCLASS, LOWCLASS_PRICE, MEDIUMCLASS, MEDIUMCLASS_PRICE, HIGHCLASS, HIGHCLASS_PRICE);
         Stadium actualStadium = stadiumDao.findByTeamId(team.getId());
-        
+
         assertNotNull(actualStadium);
         assertEquals(NAME, actualStadium.getName());
         assertEquals(team.getId(), actualStadium.getTeamId());

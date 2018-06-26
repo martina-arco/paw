@@ -59,4 +59,7 @@ public class MatchDeepStatus {
         return states.get(minute).team;
     }
 
+    public Match getMatch() {
+        return match;
+    }
 }
