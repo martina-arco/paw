@@ -52,6 +52,12 @@ public class HomeController extends Controller {
 
         User user = loggedUser();
         Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
+        Player toDisplay = playerService.findById(playerService.getPlayers(team), playerId);
+
+        if(toDisplay == null){
+            return new ModelAndView("redirect:/");
+        }
+
         List<Match> matches = matchService.getUpcomingMatches(team, user.getCurrentDay());
 
         if(matches.size() > 0) {
@@ -65,10 +71,12 @@ public class HomeController extends Controller {
             mav.addObject("stadium", "no stadium");
         }
 
+
+
         mav.addObject("team", team);
         mav.addObject("date", userService.getCurrentDay(user));
         mav.addObject("players", playerService.getPlayers(team));
-        mav.addObject("player", playerService.findById(playerId));
+        mav.addObject("player", toDisplay);
 
         return mav;
     }

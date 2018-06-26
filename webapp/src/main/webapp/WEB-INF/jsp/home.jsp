@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:masterpage>
+<t:masterpage active="home">
   <jsp:attribute name="styles">
     <link rel="stylesheet" href="<c:url value="/assets/css/home.css"/>"/>
   </jsp:attribute>

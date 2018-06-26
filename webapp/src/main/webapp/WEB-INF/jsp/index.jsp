@@ -10,44 +10,40 @@
   <jsp:body>
     <c:url value="/create" var="postPath"/>
 
-    <div class="contain">
-      <div class = "translucent"></div>
-      <div class = "content">
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+      <div class="container">
+        <div class="login-content">
+          <div class="login-logo">
+            <%--<img class="align-content" src="images/logo.png" alt="">--%>
+            <span class="align-content">Football Manager</span>
+          </div>
+          <div class="login-form">
+            <form:form modelAttribute="registerForm" action="${postPath}" method="post">
+              <div class="form-group">
+                <form:label path="username">Username </form:label>
+                <form:input type="text" path="username" class="form-control" />
+                <form:errors path="username" cssClass="formError" element="p"/>
+              </div>
 
-        <h2>Register</h2>
-        <div class = "container-fluid">
+              <div class="form-group">
+                <form:label path="password">Password </form:label>
+                <form:input type="password" path="password" class="form-control" />
+                <form:errors path="password" cssClass="formError" element="p"/>
+              </div>
 
-          <form:form modelAttribute="registerForm" action="${postPath}" method="post">
-
-            <div class="form-group">
-              <form:label path="username"><h8>Username</h8> </form:label>
-              <form:input type="text" path="username" class="form-control" />
-              <form:errors path="username" cssClass="formError" element="p"/>
-            </div>
-
-            <div class="form-group">
-              <form:label path="password"><h8>Password</h8> </form:label>
-              <form:input type="password" path="password" class="form-control" />
-              <form:errors path="password" cssClass="formError" element="p"/>
-            </div>
-
-            <div class="form-group">
-              <form:label path="repeatPassword"><h8>Repeat password</h8> </form:label>
-              <form:input type="password" path="repeatPassword" class="form-control" />
-              <form:errors path="repeatPassword" cssClass="formError" element="p"/>
-            </div>
-
-            <input type="submit" value="Register!" class="btn btn-light"/>
-
-          </form:form>
-
-
-          Already have an account?
-          <a href="<c:url value="/login"/>"><input type="button" value="Login!" class="btn btn-light"/></a>
-
+              <div class="form-group">
+                <form:label path="repeatPassword">Repeat password </form:label>
+                <form:input type="password" path="repeatPassword" class="form-control" />
+                <form:errors path="repeatPassword" cssClass="formError" element="p"/>
+              </div>
+              <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+              <div class="register-link m-t-15 text-center">
+                <p>Already have account ? <a href="<c:url value="/login"/>"> Sign in</a></p>
+              </div>
+            </form:form>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </jsp:body>
 </t:genericpage>
