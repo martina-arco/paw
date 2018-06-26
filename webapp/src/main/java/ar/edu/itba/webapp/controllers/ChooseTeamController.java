@@ -49,7 +49,7 @@ public class ChooseTeamController extends Controller{
 
         userService.setTeam(loggedUser(), t);
 
-        return new ModelAndView("redirect:home");
+        return new ModelAndView("redirect:/");
     }
 
     @ModelAttribute("teamList")
