@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="<c:url value="/assets/css/match.css"/>"/>
   </jsp:attribute>
   <jsp:body>
-    <%--<div class="contain">
-      <div class="translucent"></div>
-      <div class="content">--%>
-    <div id="right-panel" class="right-panel">
       <div class="animated fadeIn p-5">
         <div class="row">
           <div class="col-lg-6">
@@ -72,12 +68,7 @@
               </div>
             </div>
           </div>
-          <div class="col">
-
-            <%--<h5 class="center"></h5>--%>
-          </div>
         </div>
       </div>
-    </div>
   </jsp:body>
 </t:masterpage>

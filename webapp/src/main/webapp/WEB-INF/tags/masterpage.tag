@@ -16,6 +16,8 @@
     </jsp:attribute>
   <jsp:body>
     <t:navBar active="${active}"/>
-    <jsp:doBody/>
+    <div id="right-panel" class="right-panel">
+      <jsp:doBody/>
+    </div>
   </jsp:body>
 </t:genericpage>
