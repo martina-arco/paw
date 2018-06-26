@@ -50,10 +50,10 @@ public class AiServiceImpl implements AiService {
         }
 
         players.sort((player, t1) -> player.getPassing() - t1.getPassing());
-        starters.put(useLast(players,true), new Point(5, 4));
+        starters.put(useLast(players,true), new Point(4, 3));
         starters.put(useLast(players,true), new Point(4, 1));
         starters.put(useLast(players,true), new Point(4, 7));
-        starters.put(useLast(players,true), new Point(3, 4));
+        starters.put(useLast(players,true), new Point(4, 5));
 
         players.sort((player, t1) -> player.getFinishing() - t1.getFinishing());
         starters.put(useLast(players,true), new Point(7,3));

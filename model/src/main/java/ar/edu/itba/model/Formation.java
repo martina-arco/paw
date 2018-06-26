@@ -156,7 +156,7 @@ public class Formation {
 
     public Player getLb(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 1 && e.getValue().getY() == 1)
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 7)
                 return e.getKey();
         }
         return null;
@@ -164,7 +164,7 @@ public class Formation {
 
     public Player getRb(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 1 && e.getValue().getY() == 7)
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 1)
                 return e.getKey();
         }
         return null;
@@ -172,7 +172,15 @@ public class Formation {
 
     public Player getLcb(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 1 && e.getValue().getY() == 3)
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 5)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getCb(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 4)
                 return e.getKey();
         }
         return null;
@@ -180,7 +188,7 @@ public class Formation {
 
     public Player getRcb(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 1 && e.getValue().getY() == 5)
+            if(e.getValue().getX() == 1 && e.getValue().getY() == 3)
                 return e.getKey();
         }
         return null;
@@ -188,7 +196,7 @@ public class Formation {
 
     public Player getLm(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 5 && e.getValue().getY() == 4)
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 7)
                 return e.getKey();
         }
         return null;
@@ -196,21 +204,13 @@ public class Formation {
 
     public Player getLcm(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 4 && e.getValue().getY() == 1)
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 5)
                 return e.getKey();
         }
         return null;
     }
 
-    public Player getRcm(){
-        for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 4 && e.getValue().getY() == 7)
-                return e.getKey();
-        }
-        return null;
-    }
-
-    public Player getRm(){
+    public Player getCdm(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
             if(e.getValue().getX() == 3 && e.getValue().getY() == 4)
                 return e.getKey();
@@ -218,15 +218,39 @@ public class Formation {
         return null;
     }
 
-    public Player getLf(){
+    public Player getCam(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 7 && e.getValue().getY() == 3)
+            if(e.getValue().getX() == 5 && e.getValue().getY() == 4)
                 return e.getKey();
         }
         return null;
     }
 
-    public Player getRf(){
+    public Player getRcm(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 3)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRm(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 1)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLw(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 7 && e.getValue().getY() == 7)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getLf(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
             if(e.getValue().getX() == 7 && e.getValue().getY() == 5)
                 return e.getKey();
@@ -234,8 +258,83 @@ public class Formation {
         return null;
     }
 
-    public void changeFormation(int formation, Map<Player, Point> players){
-        starters = players;
+    public Player getSt(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 7 && e.getValue().getY() == 4)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRf(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 7 && e.getValue().getY() == 3)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public Player getRw(){
+        for (Map.Entry<Player, Point> e : starters.entrySet()) {
+            if(e.getValue().getX() == 4 && e.getValue().getY() == 1)
+                return e.getKey();
+        }
+        return null;
+    }
+
+    public List<Integer> getPossibleFormations(){
+        List<Integer> list = new LinkedList<>();
+        list.add(343);
+        list.add(352);
+        list.add(433);
+        list.add(442);
+        list.add(451);
+        list.add(523);
+        list.add(532);
+        list.add(541);
+
+        return list;
+    }
+
+    public int getFormationPositions(){
+        int defenders = 0, mids = 0, forwards = 0;
+        int position;
+        for (Player p: starters.keySet()) {
+            position = p.getPosition();
+            if(position == 1)
+                defenders++;
+            else if(position == 2)
+                mids++;
+            else if(position == 3)
+                forwards++;
+        }
+        return defenders*100 + mids*10 + forwards;
+    }
+
+    public enum Pressures {
+        Low, Medium, High
+    }
+
+    public List<Integer> getPossiblePressures(){
+        List<Integer> list = new LinkedList<>();
+        list.add(Pressures.Low.ordinal());
+        list.add(Pressures.Medium.ordinal());
+        list.add(Pressures.High.ordinal());
+
+        return list;
+    }
+
+    public enum Attitudes {
+        Defensive, Balanced, Offensive
+    }
+
+    public List<Integer> getPossibleAttitudes(){
+        List<Integer> list = new LinkedList<>();
+        list.add(Attitudes.Defensive.ordinal());
+        list.add(Attitudes.Balanced.ordinal());
+        list.add(Attitudes.Offensive.ordinal());
+
+        return list;
     }
 
     //Solo sirve para 442 por ahora

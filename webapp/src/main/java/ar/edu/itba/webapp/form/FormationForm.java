@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class FormationForm {
     private long goalkeeper;
-    private long leftBack, leftCenterBack, rightCenterBack, rightBack;
-    private long leftMid, leftCenterMid, rightCenterMid, rightMid;
-    private long leftForward, rightForward;
+    private long leftBack, leftCenterBack, centerBack, rightCenterBack, rightBack;
+    private long leftMid, leftCenterMid, centerDefensiveMid, centerAttackingMid, rightCenterMid, rightMid;
+    private long leftWing, leftForward, striker, rightForward, rightWing;
     private long substitute1, substitute2, substitute3, substitute4, substitute5, substitute6, substitute7;
     private long captain, freeKickTaker, penaltyTaker;
     private int formation, pressure, attitude;
@@ -103,6 +103,54 @@ public class FormationForm {
 
     public void setRightForward(long rightForward) {
         this.rightForward = rightForward;
+    }
+
+    public long getCenterBack() {
+        return centerBack;
+    }
+
+    public void setCenterBack(long centerBack) {
+        this.centerBack = centerBack;
+    }
+
+    public long getCenterDefensiveMid() {
+        return centerDefensiveMid;
+    }
+
+    public void setCenterDefensiveMid(long centerDefensiveMid) {
+        this.centerDefensiveMid = centerDefensiveMid;
+    }
+
+    public long getCenterAttackingMid() {
+        return centerAttackingMid;
+    }
+
+    public void setCenterAttackingMid(long centerAttackingMid) {
+        this.centerAttackingMid = centerAttackingMid;
+    }
+
+    public long getLeftWing() {
+        return leftWing;
+    }
+
+    public void setLeftWing(long leftWing) {
+        this.leftWing = leftWing;
+    }
+
+    public long getStriker() {
+        return striker;
+    }
+
+    public void setStriker(long striker) {
+        this.striker = striker;
+    }
+
+    public long getRightWing() {
+        return rightWing;
+    }
+
+    public void setRightWing(long rightWing) {
+        this.rightWing = rightWing;
     }
 
     public long getSubstitute1() {
