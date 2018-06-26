@@ -41,6 +41,12 @@ public class FormationServiceImpl implements FormationService {
             return false;
         if(formation.getSubstitutes().size() != 7)
             return false;
+        for(Map.Entry<Player, Point> entry : formation.getStarters().entrySet()){
+            for(Player player : formation.getSubstitutes()){
+                if(player.equals(entry.getKey()))
+                    return false;
+            }
+        }
         return formation.getCaptain() != null && formation.getFreeKickTaker() != null && formation.getPenaltyTaker() != null;
     }
 }
