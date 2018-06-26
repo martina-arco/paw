@@ -3,6 +3,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@attribute name="styles" fragment="true" %>
 <%@attribute name="scripts" fragment="true" %>
+<%@attribute name="active"%>
 
 <t:genericpage>
     <jsp:attribute name="styles">
@@ -14,7 +15,7 @@
         <jsp:invoke fragment="scripts"/>
     </jsp:attribute>
   <jsp:body>
-    <jsp:include page="navBar.jsp"/>
+    <t:navBar active="${active}"/>
     <jsp:doBody/>
   </jsp:body>
 </t:genericpage>

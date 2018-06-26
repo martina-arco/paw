@@ -1,5 +1,6 @@
 package ar.edu.itba.webapp.form;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -11,7 +12,7 @@ public class UserForm {
     @Size(min = 6, max = 100)
     private String password;
 
-    @Size(min = 6, max = 100)
+    @NotNull
     private String repeatPassword;
 
     public String getUsername() {
@@ -28,6 +29,7 @@ public class UserForm {
 
     public void setPassword(String password) {
         this.password = password;
+        checkPassword();
     }
 
     public String getRepeatPassword() {
@@ -37,5 +39,14 @@ public class UserForm {
     public void setRepeatPassword(String repeatPassword)
     {
         this.repeatPassword = repeatPassword;
+        checkPassword();
+    }
+
+    private void checkPassword() {
+        if(this.password == null || this.repeatPassword == null){
+            return;
+        }else if(!this.password.equals(repeatPassword)){
+            this.repeatPassword = null;
+        }
     }
 }

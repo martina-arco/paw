@@ -3,12 +3,32 @@
 <%@attribute name="styles" fragment="true" %>
 <%@attribute name="scripts" fragment="true" %>
 
-<html>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Football Manager</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="<c:url value="/assets/css/style.css"/>"/>
+    <meta name="description" content="Football Manager">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="<c:url value="/assets/apple-icon.png"/>">
+    <link rel="shortcut icon" href="<c:url value="/assets/favicon.ico"/>">
+
+    <link rel="stylesheet" href="<c:url value="/assets/css/normalize.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/font-awesome.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/themify-icons.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/flag-icon.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/cs-skin-elastic.css"/>">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="<c:url value="/assets/css/style.css"/>">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
     <jsp:invoke fragment="styles"/>
 
 </head>
@@ -16,15 +36,10 @@
 
 <jsp:doBody/>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
+<script src="<c:url value="/assets/js/vendor/jquery-2.1.4.min.js"/>"></script>
+<script src="<c:url value="/assets/js/popper.min.js"/>"></script>
+<script src="<c:url value="/assets/js/plugins.js"/>"></script>
+<script src="<c:url value="/assets/js/main.js"/>"></script>
 <jsp:invoke fragment="scripts"/>
 
 </body>
