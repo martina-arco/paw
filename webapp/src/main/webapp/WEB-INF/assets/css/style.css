@@ -1072,6 +1072,7 @@ body.open .navbar .navbar-brand.hidden {
 
 /* Right panel */
 .right-panel {
+  background-color: rgba(10, 10, 10, 0.8);
   display: table-cell;
   padding-left: 0 !important;
   -webkit-transition: all .35s ease;

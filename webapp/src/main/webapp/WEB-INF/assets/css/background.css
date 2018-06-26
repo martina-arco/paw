@@ -1,9 +1,10 @@
 body {
     height: 100vh;
-    background: url("../img/background.jpg") no-repeat;
+    background: #333333 url("../img/background.jpg") no-repeat;
     background-size: 100% 100%;
 }
 
+/*
 .contain {
     margin: 0.5%;
     padding-left: 2%;
@@ -29,4 +30,4 @@ body {
 .content {
     position: relative;
     width:100%;
-}
+}*/

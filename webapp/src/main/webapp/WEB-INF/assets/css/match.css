@@ -27,7 +27,37 @@ th, td {
 
 .header-fixed > tbody {
     overflow-y: auto;
-    height: 450px;
+    height: calc(100% - 35px);
+}
+
+.match-stadium {
+    width: 30%;
+    float: left;
+}
+
+.match-home {
+    width: 35%;
+    float: left;
+}
+
+.match-away {
+    width: 35%;
+    float: left;
+}
+
+.match-position {
+    width: 20%;
+    float: left;
+}
+
+.match-team {
+    width: 60%;
+    float: left;
+}
+
+.match-points {
+    width: 20%;
+    float: left;
 }
 
 .header-fixed > tbody > tr > td.width10 {
