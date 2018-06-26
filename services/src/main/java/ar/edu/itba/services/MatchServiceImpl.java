@@ -114,7 +114,19 @@ public class MatchServiceImpl implements MatchService {
         Team home = match.getHome();
         Stadium stadium = home.getStadium();
         float factor = home.getFanTrust()/100;
-        int income = (int) (stadium.calculateMatchEarnings()*factor);
+        int attendance = (int) (home.getFanCount()*factor);
+        Random random = new Random(System.nanoTime());
+        double randFactor = random.nextDouble()*0.3 + 0.7;
+        attendance = (int) (attendance*(randFactor));
+        int total = stadium.getHighClass() + stadium.getMediumClass() + stadium.getLowClass();
+        double lowProp = (double) stadium.getLowClass()/total, midProp = (double) stadium.getMediumClass()/total, highProp = (double) stadium.getHighClass()/total;
+        int lowAttendance = (int) (lowProp*attendance/2);
+        int midAttendance = (int) (midProp*attendance*3/8);
+        int highAttendance = (int) (highProp*attendance/8);
+        int income = 0;
+        income += Math.min(lowAttendance,stadium.getLowClass())*stadium.getLowClassPrice();
+        income += Math.min(midAttendance,stadium.getMediumClass())*stadium.getMediumClassPrice();
+        income += Math.min(highAttendance,stadium.getHighClass())*stadium.getHighClassPrice();
         economyService.submitReceipt(home, Receipt.Type.MATCHINCOME, income);
     }
 

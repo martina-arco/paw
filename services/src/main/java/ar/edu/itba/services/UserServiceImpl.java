@@ -5,24 +5,27 @@ import ar.edu.itba.interfaces.service.EconomyService;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
-import ar.edu.itba.model.*;
+import ar.edu.itba.model.League;
+import ar.edu.itba.model.Receipt;
+import ar.edu.itba.model.Team;
+import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.Calendar.MONTH;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    private static final int WEEKSINYEAR = 52;
 
     @Autowired
     private UserDao userDao;
@@ -88,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
         if(leagueService.isLastMatch(league, user)){
             leagueService.finish(league, user);
-            user.setCurrentDay(advanceWeeks(user.getCurrentDay(), 54 - 38));
+            user.setCurrentDay(advanceWeeks(user.getCurrentDay(), WEEKSINYEAR - league.getFixture().size()));
             leagueService.generateFixture(user, league);
         } else {
             user.setCurrentDay(advanceWeeks(user.getCurrentDay(), 1));

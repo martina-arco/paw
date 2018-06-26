@@ -3,7 +3,10 @@ package ar.edu.itba.services;
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
-import ar.edu.itba.interfaces.service.*;
+import ar.edu.itba.interfaces.service.EconomyService;
+import ar.edu.itba.interfaces.service.FixtureService;
+import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,8 +81,6 @@ public class LeagueServiceImpl implements LeagueService {
 
         matchService.setTeams(matches);
 
-
-
         for (Team team : teamDao.findAllByLeagueId(league.getId())) {
             map.put(team, 0);
         }
@@ -113,7 +114,7 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public Map<String, Integer> getTeamPointsName(League league, Date currentDate) {
+    public List<Map.Entry<String, Integer>> getTeamPointsName(League league, Date currentDate) {
 
         Map<String, Integer> map = new HashMap<>();
 
@@ -134,8 +135,8 @@ public class LeagueServiceImpl implements LeagueService {
                 Team home = match.getHome();
                 Team away = match.getAway();
 
-                Integer homePoints = map.get(home);
-                Integer awayPoints = map.get(away);
+                Integer homePoints = map.get(home.getName());
+                Integer awayPoints = map.get(away.getName());
 
                 if(homePoints == null)
                     homePoints = 0;
@@ -152,7 +153,11 @@ public class LeagueServiceImpl implements LeagueService {
 
         }
 
-        return map;
+        List<Map.Entry<String,Integer>> ret = new ArrayList<>(map.entrySet());
+
+        ret.sort((o1, o2) -> o2.getValue() - o1.getValue());
+
+        return ret;
     }
 
     @Override

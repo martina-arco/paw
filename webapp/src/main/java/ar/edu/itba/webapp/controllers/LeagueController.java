@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +35,8 @@ public class LeagueController extends Controller {
         League league = leagueService.findByUser(loggedUser()).get(0);
 
         List<Match> upcomingMatches = matchService.getUpcomingMatches(team, user.getCurrentDay());
-        Map<String, Integer> teams = leagueService.getTeamPointsName(league, user.getCurrentDay());
+        List<Map.Entry<String,Integer>> teams = leagueService.getTeamPointsName(league, user.getCurrentDay());
+
 
         mav.addObject("upcomingMatches", upcomingMatches);
         mav.addObject("teams", teams);

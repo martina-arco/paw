@@ -58,7 +58,7 @@ function updateEvents(currentMinute, eventContainer, event, homeScoreContainer, 
             break;
         case "AWAYSCORE":
             type.innerHTML = event.player1 + " - " + document.getElementById("goalScored").innerHTML + " ( " + event.minute + "' )";
-            awayScoreContainer.innerHTML = parseInt(homeScoreContainer.innerHTML) + 1;
+            awayScoreContainer.innerHTML = parseInt(awayScoreContainer.innerHTML) + 1;
             break;
         case "YELLOW CARD":
             type.innerHTML = event.player1 + " - " + document.getElementById("yellowCard").innerHTML + " ( " + event.minute + " )";

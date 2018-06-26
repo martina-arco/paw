@@ -285,4 +285,9 @@ public class Team {
         Team o = (Team) obj;
         return o.getId() == id;
     }
+
+    @Override
+    public int hashCode() {
+        return (int) id;
+    }
 }
