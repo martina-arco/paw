@@ -2,6 +2,10 @@ th, td {
     text-align: center;
 }
 
+td {
+    font-size: 14px;
+}
+
 .header-fixed {
     width: 100%;
     padding:0;
@@ -60,6 +64,12 @@ th, td {
     float: left;
 }
 
+
+.header-fixed > tbody > tr > td.width5 {
+    width: 5%;
+    float: left;
+}
+
 .header-fixed > tbody > tr > td.width10 {
     width: 10%;
     float: left;
@@ -70,8 +80,18 @@ th, td {
     float: left;
 }
 
+.header-fixed > tbody > tr > td.width20 {
+    width: 20%;
+    float: left;
+}
+
 .header-fixed > tbody > tr > td.width35 {
     width: 35%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width40 {
+    width: 40%;
     float: left;
 }
 
@@ -80,8 +100,8 @@ th, td {
     float: left;
 }
 
-.header-fixed > tbody > tr > td.width40 {
-    width: 40%;
+.header-fixed > thead > tr > th.width10{
+    width: 10%;
     float: left;
 }
 

@@ -23,10 +23,10 @@
           <a href="<c:url value="/league"/>"> <i class="menu-icon ti-cup"></i>League </a>
         </li>
         <li class="<c:if test="${active == 'tactics'}">active</c:if>">
-          <a href="<c:url value="/formation"/>"> <i class="menu-icon ti-blackboard"></i>Tactics </a>
+          <a href="<c:url value="/formation"/>"> <i class="menu-icon ti-clipboard"></i>Tactics </a>
         </li>
         <li class="<c:if test="${active == 'finance'}">active</c:if>">
-          <a href="<c:url value="/finance"/>"> <i class="menu-icon ti-wallet"></i>Economy </a>
+          <a href="<c:url value="/finance"/>"> <i class="menu-icon fa fa-money"></i>Economy </a>
         </li>
         <li class="<c:if test="${active == 'passes'}">active</c:if>">
           <a href="<c:url value="/transfers"/>"> <i class="menu-icon ti-exchange-vertical"></i>Passes </a>
