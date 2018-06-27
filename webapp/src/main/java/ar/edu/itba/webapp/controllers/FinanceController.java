@@ -28,7 +28,7 @@ public class FinanceController extends Controller {
         mav.addObject("money", team.getMoney());
         mav.addObject("salaries", salaries);
         mav.addObject("ticketsSold", ticketsSold);
-        mav.addObject("lastReceipts", receipts.subList(0, Math.min(10, receipts.size())));
+        mav.addObject("lastReceipts", receipts.subList(0, Math.min(9, receipts.size())));
 
         return mav;
     }

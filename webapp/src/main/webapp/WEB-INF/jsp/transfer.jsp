@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:masterpage>
+<t:masterpage active="passes">
     <jsp:attribute name="scripts">
         <script src="<c:url value="/assets/js/transfer.js"/>"></script>
     </jsp:attribute>
