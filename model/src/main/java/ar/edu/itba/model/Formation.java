@@ -276,7 +276,7 @@ public class Formation {
 
     public Player getRw(){
         for (Map.Entry<Player, Point> e : starters.entrySet()) {
-            if(e.getValue().getX() == 4 && e.getValue().getY() == 1)
+            if(e.getValue().getX() == 7 && e.getValue().getY() == 1)
                 return e.getKey();
         }
         return null;

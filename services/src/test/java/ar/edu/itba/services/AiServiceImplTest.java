@@ -50,8 +50,8 @@ public class AiServiceImplTest {
     @Test
     public void getFormation() {
         Formation formation = formationService.getFormation(players);
-        assertTrue(formation.getCaptain().getId() == 0);
-        assertTrue( formation.getFreeKickTaker().getId() == 8);
-        assertTrue(formation.getPenaltyTaker().getId() == 10);
+        assertEquals(formation.getCaptain().getId(),0);
+        assertEquals( formation.getFreeKickTaker().getId(), 8);
+        assertEquals(formation.getPenaltyTaker().getId(),10);
     }
 }

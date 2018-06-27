@@ -15,8 +15,8 @@
     <meta name="description" content="Football Manager">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="<c:url value="/assets/apple-icon.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/favicon.ico"/>">
+    <link rel="apple-touch-icon" href="<c:url value="/assets/favicon.ico"/>">
 
     <link rel="stylesheet" href="<c:url value="/assets/css/normalize.css"/>">
     <link rel="stylesheet" href="<c:url value="/assets/css/bootstrap.min.css"/>">

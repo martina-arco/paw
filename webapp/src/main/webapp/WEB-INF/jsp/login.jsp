@@ -10,30 +10,6 @@
   <jsp:body>
     <c:url value="/login" var="loginUrl"/>
 
-    <%--<div class="contain">
-      <div class="translucent"></div>
-      <div class="content">
-
-        <h2>Login</h2>
-
-        <div class="container-fluid">
-          <form action="${loginUrl}" method="post" enctype="application/x-www-form-urlencoded">
-
-
-            <div class="form-group">
-              <label><input name="j_rememberme" type="checkbox"/> <spring:message code="remember_me"/></label>
-            </div>
-
-            <input type="submit" value="Login!" class="btn btn-light"/>
-          </form>
-
-          Don't have an account?
-          <a href="<c:url value="/register"/>"><input type="button" value="Create one!" class="btn btn-light"/></a>
-
-        </div>
-      </div>
-    </div>--%>
-
     <div class="sufee-login d-flex align-content-center flex-wrap">
       <div class="container">
         <div class="login-content">

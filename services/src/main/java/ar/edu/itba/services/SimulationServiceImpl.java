@@ -149,7 +149,7 @@ public class SimulationServiceImpl implements SimulationService{
         }
     }
 
-    private SimulationNode dispute(SimulationNode sNode, MatchStatus matchStatus) {
+    public SimulationNode dispute(SimulationNode sNode, MatchStatus matchStatus) {
         GridNode node = sNode.getNode();
         MyTeam possession = sNode.getPossession();
         int opponentDef = node.getAtt(otherTeam(possession), NodeAtt.DEF);
@@ -161,13 +161,13 @@ public class SimulationServiceImpl implements SimulationService{
         boolean taken = sNode.getGrid().getRand().nextDouble() < nMyPoss;
 
         if (taken) {
-            matchStatus.getEvents().add(new Event(0, node.getSNode(otherTeam(possession)).whoDidIt(), Event.Type.TACKLE, matchStatus.getMinute()));
+            matchStatus.getEvents().add(eventDao.create(sNode.getGrid().getMatch(), node.getSNode(otherTeam(possession)).whoDidIt(), null,  Event.Type.TACKLE, matchStatus.getMinute()));
         }
 
         return node.getSNode(taken ? otherTeam(possession) : possession);
     }
 
-    private SimulationNode shot(SimulationNode sNode, MatchStatus matchStatus) {
+    public SimulationNode shot(SimulationNode sNode, MatchStatus matchStatus) {
         Grid grid = sNode.getGrid();
         GridNode node = sNode.getNode();
         MyTeam possession = sNode.getPossession();

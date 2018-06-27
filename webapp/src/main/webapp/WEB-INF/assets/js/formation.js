@@ -251,7 +251,6 @@ function update(position, player) {
     if(playerIndex !== -1) {
             for (i = 0; i < players.length; i++) {
                 if (i !== playerIndex && players[i] === player) {//Cambio titular por titular
-                    console.log("Entro a TxT con Player:" + player.toString() + " PlayerViejo:" + players[playerIndex].toString());
                     document.getElementById(positions[i]).value = players[playerIndex];
                     players[i] = players[playerIndex];
                     players[playerIndex] = player;
@@ -261,7 +260,6 @@ function update(position, player) {
             if (i >= players.length) {//Cambio titular por suplente
                 for (i = 0; i < substitutes.length; i++) {
                     if (substitutes[i] === player) {
-                        console.log("Entro a TxS con Player:" + player.toString() + " PlayerViejo:" + players[playerIndex].toString());
                         document.getElementById(subPos[i]).value = players[playerIndex];
                         if (players[playerIndex] === document.getElementById("cap").value) {
                             document.getElementById("cap").value = player;
@@ -278,7 +276,6 @@ function update(position, player) {
                     }
                 }
                 if (i >= substitutes.length) {//Cambio titular por reserva
-                    console.log("Entro a TxR con Player:" + player.toString() + " PlayerViejo:" + players[playerIndex].toString());
                     if (players[playerIndex] === document.getElementById("cap").value) {
                         document.getElementById("cap").value = player;
                     }
@@ -296,7 +293,6 @@ function update(position, player) {
         playerIndex = subPos.indexOf(position);
             for (i = 0; i < substitutes.length; i++) {
                 if (substitutes[i] === player) {
-                    console.log("Entro a SxS con Player:" + player.toString() + " PlayerViejo:" + substitutes[playerIndex].toString());
                     document.getElementById(subPos[i]).value = substitutes[playerIndex];
                     substitutes[i] = substitutes[playerIndex];
                     substitutes[playerIndex] = player;
@@ -304,7 +300,6 @@ function update(position, player) {
                 }
             }
             if (i >= substitutes.length) {//Cambio suplente por reserva
-                console.log("Entro a SxR con Player:" + player.toString() + " PlayerViejo:" + substitutes[playerIndex].toString());
                 substitutes[playerIndex] = player;
             }
 
@@ -318,8 +313,9 @@ function changeFormation(formation) {
     var freekickTaker = document.getElementById("fk");
     var penaltyTaker = document.getElementById("pen");
     var capFound, fkFound, penFound, i;
-    for(i=0; i<positions.size && !capFound && !fkFound && !penFound; i++){
-        var p = document.getElementById(positions[i]).value;
+
+    for(i=0; i<players.length; i++){
+        var p = players[i];
         if(p === captain.value)
             capFound = true;
         if(p === freekickTaker.value)
@@ -333,32 +329,4 @@ function changeFormation(formation) {
         freekickTaker.value = 0;
     if(!penFound)
         penaltyTaker.value = 0;
-}
-
-function saveBtn() {
-    var formation = document.getElementById("formation");
-    if(formation.toString() === "343"){
-        f343();
-    }
-    else if(formation.toString() === "352"){
-        f352();
-    }
-    else if(formation.toString() === "433"){
-        f433();
-    }
-    else if(formation.toString() === "442") {
-        f442();
-    }
-    else if(formation.toString() === "451"){
-        f451();
-    }
-    else if(formation.toString() === "532"){
-        f532();
-    }
-    else if(formation.toString() === "523"){
-        f523();
-    }
-    else if(formation.toString() === "541"){
-        f541();
-    }
 }

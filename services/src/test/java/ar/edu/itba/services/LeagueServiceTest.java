@@ -19,11 +19,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
-import java.util.Date;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -129,9 +128,9 @@ public class LeagueServiceTest {
     public void getPoints() {
         Map<Team, Integer> points = leagueService.getTeamPoints(league, date);
 
-        assertTrue(points.get(t1) == 1);
-        assertTrue(points.get(t2) == 7);
-        assertTrue(points.size() == 2);
+        assertEquals(Optional.ofNullable(points.get(t1)),1);
+        assertEquals(Optional.ofNullable(points.get(t2)), 7);
+        assertEquals(points.size(), 2);
     }
 
     @Test
@@ -141,7 +140,7 @@ public class LeagueServiceTest {
         assertTrue(league.getFixture().get(date).contains(m1));
         assertTrue(league.getFixture().get(date).contains(m2));
         assertTrue(league.getFixture().get(date).contains(m3));
-        assertTrue(league.getFixture().get(date).size() == 3);
+        assertEquals(league.getFixture().get(date).size(),3);
     }
 
 }

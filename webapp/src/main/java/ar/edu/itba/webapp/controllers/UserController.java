@@ -3,29 +3,22 @@ package ar.edu.itba.webapp.controllers;
 import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.interfaces.service.UserService;
-import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
-import ar.edu.itba.webapp.form.ChooseTeamForm;
 import ar.edu.itba.webapp.form.UserForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ParseException;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
 
 @org.springframework.stereotype.Controller
-public class HelloWorldController extends Controller{
+public class UserController extends Controller{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService us;
