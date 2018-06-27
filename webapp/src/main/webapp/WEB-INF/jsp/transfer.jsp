@@ -23,6 +23,8 @@
     <script src="<c:url value="/assets/js/transfer.js"/>"></script>
   </jsp:attribute>
   <jsp:body>
+    <span id="filterURL" hidden><c:url value="/transferFilter"/></span>
+    <span id="transferURL" hidden><c:url value="/transferPlayer"/></span>
     <span id="failMessage" hidden><spring:message code="transferFailed"/></span>
     <span id="retry" hidden><spring:message code="retry"/></span>
     <span id="successMessage" hidden><spring:message code="transferSuccess"/></span>

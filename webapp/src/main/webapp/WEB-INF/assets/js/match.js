@@ -5,14 +5,15 @@ jQuery(document).ready(function(){
 });
 
 function fetchData() {
-    jQuery.getJSON('/matchData', function(json) {
+
+    jQuery.getJSON(document.getElementById("dataURL").innerHTML, function(json) {
         iterate(json);
     });
 }
 
 function iterate(json){
 
-    if(minute === 91){
+    if(minute > 90){
         window.location.href = "../matchEnd";
         return;
     }
@@ -36,7 +37,7 @@ function iterate(json){
     document.getElementById("time").innerHTML = minute + "'";
 
     minute++;
-    setTimeout(iterate,100,json);
+    setTimeout(iterate,150,json);
 }
 
 function updateEvents(currentMinute, eventContainer, event, homeScoreContainer, awayScoreContainer){

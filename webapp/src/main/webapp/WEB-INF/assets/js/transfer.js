@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
             myNode.removeChild(myNode.firstChild);
         }
 
-        var url = "/transferFilter";
+        var url = document.getElementById("filterURL").innerHTML;
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -49,7 +49,7 @@ function manageData(json){
         buy.onclick = function (e) {
             jQuery.ajax({
                 type: "POST",
-                url: '/transferPlayer',
+                url: document.getElementById("transferURL").innerHTML,
                 data: e.srcElement.id,
                 success: function(result){
                     var popup = jQuery('#staticModal');

@@ -25,6 +25,8 @@
     <script src="<c:url value="/assets/js/match.js"/>"></script>
   </jsp:attribute>
   <jsp:body>
+    <span hidden id="dataURL"><c:url value="/matchData"/></span>
+    <span hidden id="matchEndURL"><c:url value="/matchEnd"/></span>
     <div class="p-5">
       <div class="row">
         <div class="col-12">
