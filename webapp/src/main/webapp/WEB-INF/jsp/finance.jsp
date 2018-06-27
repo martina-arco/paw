@@ -53,7 +53,7 @@
             <div class="card-body">
               <div class="clearfix">
                 <i class="ti-stats-down bg-danger p-3 font-2xl mr-3 float-left text-light"></i>
-                <div class="h5 text-danger mb-0 mt-1"><spring:message code="currency" arguments="${-expenses}"/></div>
+                <div class="h5 text-danger mb-0 mt-1"><spring:message code="currency" arguments="${expenses}"/></div>
                 <div class="text-muted text-uppercase font-weight-bold font-xs small"><spring:message
                     code="expenses"/></div>
               </div>
@@ -61,15 +61,15 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <spring:message code="playersBought"/>
-                  <span class="pull-right"><spring:message code="currency" arguments="${-playersBought}"/></span>
+                  <span class="pull-right"><spring:message code="currency" arguments="${playersBought}"/></span>
                 </li>
                 <li class="list-group-item">
                   <spring:message code="salaries"/>
-                  <span class="pull-right"><spring:message code="currency" arguments="${-salaries}"/></span>
+                  <span class="pull-right"><spring:message code="currency" arguments="${salaries}"/></span>
                 </li>
                 <li class="list-group-item">
                   <spring:message code="stadiumExpansion"/>
-                  <span class="pull-right"><spring:message code="currency" arguments="${-stadiumExpansion}"/></span>
+                  <span class="pull-right"><spring:message code="currency" arguments="${stadiumExpansion}"/></span>
                 </li>
                   <%--<li class="list-group-item">
                     <spring:message code="bankLoan"/>

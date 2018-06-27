@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -53,19 +55,22 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public int getTicketsSold(Team team) {
+    public Map<Receipt.Type, Integer> getFinanceSummary(Team team) {
 
-        int ticketsSold = 0;
+        Map<Receipt.Type, Integer> summary = new HashMap<>();
+
+        for(Receipt.Type type : Receipt.Type.values()) {
+            summary.put(type, 0);
+        }
 
         if(team.getFinance() != null) {
             for (Receipt receipt : team.getFinance()) {
-
-                if (receipt.getType() == Receipt.Type.MATCHINCOME)
-                    ticketsSold += receipt.getAmount();
+                int value = summary.get(receipt.getType());
+                summary.put(receipt.getType(), value + receipt.getAmount());
             }
         }
 
-        return ticketsSold;
+        return summary;
     }
 
     @Override

@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -107,17 +107,14 @@ public class TeamServiceTest {
     }
 
     @Test
-    public void ticketsSold() {
-        int amount = teamService.getTicketsSold(team);
-
-        assertTrue(amount == 20);
+    public void financeSummary() {
+        //TODO
     }
 
     @Test
     public void salaries() {
         int amount = teamService.getSalaries(team);
-
-        assertTrue(amount == 60);
+        assertEquals(60, amount);
     }
 
 }

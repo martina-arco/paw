@@ -3,6 +3,7 @@ package ar.edu.itba.interfaces.service;
 import ar.edu.itba.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TeamService {
 
@@ -16,7 +17,7 @@ public interface TeamService {
 
     int getSalaries(Team team);
 
-    int getTicketsSold(Team team);
+    Map<Receipt.Type, Integer> getFinanceSummary(Team team);
 
     Team findByUserId(long id);
 
