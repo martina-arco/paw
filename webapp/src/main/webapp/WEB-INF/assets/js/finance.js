@@ -22,6 +22,20 @@ jQuery(document).ready(function(){
 
 
     totalContainer = document.getElementById("total");
+
+    jQuery("#sForm").submit(function(e){
+        var url = "/upgradeStadium";
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: jQuery("#sForm").serialize(),
+            dataType: "json",
+            success: function(result){
+                console.log(result);
+            }
+        });
+        e.preventDefault();
+    });
 });
 
 function updateInput(ev){

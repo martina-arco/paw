@@ -107,7 +107,7 @@
               <strong class="card-title"><spring:message code="stadium"/></strong>
             </div>
             <div class="card-body">
-              <form:form modelAttribute="stadiumForm" action="${upgradeStadium}" method="post">
+              <form:form id="sForm" modelAttribute="stadiumForm" action="${upgradeStadium}" method="post">
                 <div class="flex-row">
                   <div class="col-4"><spring:message code="lowSeats"/></div>
                   <form:input id="lowInput" path="lowClass" type="number" min="${stadium.lowClass}" max="100000" value="${stadium.lowClass}"/>
@@ -125,6 +125,8 @@
                 </div>
                 <div class="flex-row">
                   <div class="col-5" id="total"/>
+                </div>
+                <div class="flex-row">
                   <div class="col-5"><input type="submit" value="<spring:message code="upgradeStadium"/>" class="btn btn-light"></div>
                 </div>
               </form:form>

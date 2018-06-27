@@ -32,7 +32,7 @@ public class StadiumController extends Controller{
         return mav;
     }
 
-    @RequestMapping(value = "/upgradingStadium", method = RequestMethod.POST)
+    @RequestMapping(value = "/upgradeStadium", method = RequestMethod.POST)
     @ResponseBody
     public Object processSurvey(@ModelAttribute("StadiumForm") StadiumForm form){
         User user = loggedUser();
