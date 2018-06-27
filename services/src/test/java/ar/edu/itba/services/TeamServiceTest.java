@@ -1,5 +1,7 @@
 package ar.edu.itba.services;
 
+import ar.edu.itba.interfaces.service.AiService;
+import ar.edu.itba.interfaces.service.FormationService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Receipt;
@@ -21,7 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(classes = {DaoConfiguration.class, TeamServiceTest.TeamServiceConfig.class})
 public class TeamServiceTest {
 
     @Configuration
@@ -32,6 +34,15 @@ public class TeamServiceTest {
             return new TeamServiceImpl();
         }
 
+        @Bean
+        public AiService aiService(){
+            return new AiServiceImpl();
+        }
+
+        @Bean
+        public FormationService formationService(){
+            return new FormationServiceImpl();
+        }
     }
 
     @Autowired
@@ -76,11 +87,6 @@ public class TeamServiceTest {
         when(team.getPlayers()).thenReturn(players);
         when(team.getFinance()).thenReturn(receipts);
 
-    }
-
-    @Test
-    public void financeSummary() {
-        //TODO
     }
 
     @Test

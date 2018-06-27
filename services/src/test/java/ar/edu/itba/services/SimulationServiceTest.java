@@ -1,6 +1,5 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.dao.EventDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.MatchStateDao;
 import ar.edu.itba.interfaces.service.MatchService;
@@ -26,14 +25,11 @@ import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
 import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(classes = {DaoConfiguration.class, SimulationServiceTest.SimulationServiceConfig.class})
 public class SimulationServiceTest {
 
     @Configuration
@@ -51,24 +47,6 @@ public class SimulationServiceTest {
         @Bean
         public MatchDao matchDao(){
             return mock(MatchDao.class);
-        }
-
-        @Bean
-        public EventDao eventDao(){
-            EventDao eventDao = mock(EventDao.class);
-            Event tackle = mock(Event.class);
-            Event homeScore = mock(Event.class);
-            Event awayScore = mock(Event.class);
-            Event save = mock(Event.class);
-            when(tackle.getType()).thenReturn(Event.Type.TACKLE);
-            when(homeScore.getType()).thenReturn(Event.Type.HOMESCORE);
-            when(awayScore.getType()).thenReturn(Event.Type.AWAYSCORE);
-            when(save.getType()).thenReturn(Event.Type.SAVE);
-            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.TACKLE), anyInt())).thenReturn(tackle);
-            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.HOMESCORE), anyInt())).thenReturn(homeScore);
-            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.AWAYSCORE), anyInt())).thenReturn(awayScore);
-            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.SAVE), anyInt())).thenReturn(save);
-            return eventDao;
         }
 
         @Bean
