@@ -168,8 +168,13 @@ public class FormationController extends Controller{
         formation.setPenaltyTaker(playerService.findById(form.getPenaltyTaker()));
         formation.setPressure(form.getPressure());
         formation.setAttitude(form.getAttitude());
-        team.setFormation(formation);
-        formationService.save(formation);
+        if(formationService.isValid(formation)) {
+            team.setFormation(formation);
+            formationService.save(formation);
+        }
+        else {
+            return formation(form);
+        }
 
         return new ModelAndView("redirect:/");
     }

@@ -15,9 +15,6 @@
     <jsp:body>
         <c:url value="/formation" var="formationUrl" />
         <c:url value="/processFormationForm" var="postPath" />
-        <script>
-            loadData();
-        </script>
         <div class="contain">
             <div class = "translucent"></div>
             <div class = "content">
@@ -70,7 +67,6 @@
                                     </div>
 
                                     <%-- Volantes --%>
-
                                     <div class="row">
                                         <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
                                             <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
@@ -175,7 +171,7 @@
                                         <form:select path="goalkeeper" id="gk" onchange="update(this.id, value)">
                                             <form:option value="${gk.id}"><c:out value="${gk.name}"/></form:option>
                                             <c:forEach items="${players}" var="player">
-                                                <c:if test="${player != lf && player.getPosition() == 0}">
+                                                <c:if test="${player != gk && player.getPosition() == 0}">
                                                     <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                                                 </c:if>
                                             </c:forEach>
@@ -254,7 +250,7 @@
                                             <h6><spring:message code="captain"/></h6>
                                             <form:select path="captain"  id="cap">
                                                 <form:option value="${captain.id}"><c:out value="${captain.name}"/></form:option>
-                                                <c:forEach items="${starters}" var="player">
+                                                <c:forEach items="${players}" var="player">
                                                     <c:if test="${player != captain}">
                                                         <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                                                     </c:if>
@@ -266,7 +262,7 @@
                                             <h6><spring:message code="freekickTaker"/></h6>
                                             <form:select path="freeKickTaker" id="fk">
                                                 <form:option value="${fk.id}"><c:out value="${fk.name}"/></form:option>
-                                                <c:forEach items="${starters}" var="player">
+                                                <c:forEach items="${players}" var="player">
                                                     <c:if test="${player != fk}">
                                                         <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                                                     </c:if>
@@ -278,7 +274,7 @@
                                             <h6><spring:message code="penaltyTaker"/></h6>
                                             <form:select path="penaltyTaker" id="pen">
                                                 <form:option value="${pen.id}"><c:out value="${pen.name}"/></form:option>
-                                                <c:forEach items="${starters}" var="player">
+                                                <c:forEach items="${players}" var="player">
                                                     <c:if test="${player != pen}">
                                                         <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                                                     </c:if>

@@ -11,14 +11,24 @@ jQuery(document).ready(function(){
 });
 
 function load() {
+    var i;
     getInitialValues();
+
+    for(i=0; i<positions.size; i++){
+        var select = document.getElementById(positions[i]);
+        select.value = select.options[0].value;
+    }
+
+    for(i=0; i<substitutes.size; i++){
+        var select = document.getElementById(substitutes[i]);
+        select.value = select.options[0].value;
+    }
 
     document.getElementById("pressure").value = document.getElementById("pressure").options[0].value;
     document.getElementById("attitude").value = document.getElementById("attitude").options[0].value;
+    document.getElementById("formation").value = document.getElementById("formation").options[0].value;
 
     showCurrentFormation(document.getElementById("formation").value);
-
-
 }
 
 function getInitialValues() {
@@ -164,8 +174,9 @@ function f451() {
     document.getElementById("lf").style.display = "none";
     document.getElementById("lf").value = 0;
     document.getElementById("rw").style.display = "none";
-    document.getElementById("rf").value = 0;
+    document.getElementById("rw").value = 0;
     document.getElementById("rf").style.display = "none";
+    document.getElementById("rf").value = 0;
 }
 
 function f532() {
@@ -176,12 +187,12 @@ function f532() {
     document.getElementById("lf").style.display = "";
     document.getElementById("rf").style.display = "";
 
-    document.getElementById("cam").style.display = "none";
-    document.getElementById("cam").value = 0;
+    document.getElementById("cdm").style.display = "none";
+    document.getElementById("cdm").value = 0;
     document.getElementById("lm").style.display = "none";
     document.getElementById("lm").value = 0;
-    document.getElementById("lm").style.display = "none";
-    document.getElementById("lm").value = 0;
+    document.getElementById("rm").style.display = "none";
+    document.getElementById("rm").value = 0;
     document.getElementById("lw").style.display = "none";
     document.getElementById("lw").value = 0;
     document.getElementById("st").style.display = "none";
@@ -238,9 +249,9 @@ function update(position, player) {
     var playerIndex = positions.indexOf(position);
     var i;
     if(playerIndex !== -1) {
-
             for (i = 0; i < players.length; i++) {
                 if (i !== playerIndex && players[i] === player) {//Cambio titular por titular
+                    console.log("Entro a TxT con Player:" + player.toString() + " PlayerViejo:" + players[playerIndex].toString());
                     document.getElementById(positions[i]).value = players[playerIndex];
                     players[i] = players[playerIndex];
                     players[playerIndex] = player;
@@ -250,6 +261,7 @@ function update(position, player) {
             if (i >= players.length) {//Cambio titular por suplente
                 for (i = 0; i < substitutes.length; i++) {
                     if (substitutes[i] === player) {
+                        console.log("Entro a TxS con Player:" + player.toString() + " PlayerViejo:" + players[playerIndex].toString());
                         document.getElementById(subPos[i]).value = players[playerIndex];
                         if (players[playerIndex] === document.getElementById("cap").value) {
                             document.getElementById("cap").value = player;
@@ -266,6 +278,7 @@ function update(position, player) {
                     }
                 }
                 if (i >= substitutes.length) {//Cambio titular por reserva
+                    console.log("Entro a TxR con Player:" + player.toString() + " PlayerViejo:" + players[playerIndex].toString());
                     if (players[playerIndex] === document.getElementById("cap").value) {
                         document.getElementById("cap").value = player;
                     }
@@ -283,6 +296,7 @@ function update(position, player) {
         playerIndex = subPos.indexOf(position);
             for (i = 0; i < substitutes.length; i++) {
                 if (substitutes[i] === player) {
+                    console.log("Entro a SxS con Player:" + player.toString() + " PlayerViejo:" + substitutes[playerIndex].toString());
                     document.getElementById(subPos[i]).value = substitutes[playerIndex];
                     substitutes[i] = substitutes[playerIndex];
                     substitutes[playerIndex] = player;
@@ -290,6 +304,7 @@ function update(position, player) {
                 }
             }
             if (i >= substitutes.length) {//Cambio suplente por reserva
+                console.log("Entro a SxR con Player:" + player.toString() + " PlayerViejo:" + substitutes[playerIndex].toString());
                 substitutes[playerIndex] = player;
             }
 
@@ -299,6 +314,25 @@ function update(position, player) {
 function changeFormation(formation) {
     showCurrentFormation(formation);
     getInitialValues();
+    var captain = document.getElementById("cap");
+    var freekickTaker = document.getElementById("fk");
+    var penaltyTaker = document.getElementById("pen");
+    var capFound, fkFound, penFound, i;
+    for(i=0; i<positions.size && !capFound && !fkFound && !penFound; i++){
+        var p = document.getElementById(positions[i]).value;
+        if(p === captain.value)
+            capFound = true;
+        if(p === freekickTaker.value)
+            fkFound = true;
+        if(p === penaltyTaker.value)
+            fkFound = true;
+    }
+    if(!capFound)
+        captain.value = 0;
+    if(!fkFound)
+        freekickTaker.value = 0;
+    if(!penFound)
+        penaltyTaker.value = 0;
 }
 
 function saveBtn() {

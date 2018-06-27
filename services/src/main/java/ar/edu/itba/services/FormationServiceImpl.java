@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -47,6 +48,14 @@ public class FormationServiceImpl implements FormationService {
                     return false;
             }
         }
+        Set<Player> starters = formation.getStarters().keySet();
+        if(!starters.contains(formation.getCaptain()))
+            return false;
+        if(!starters.contains(formation.getFreeKickTaker()))
+            return false;
+        if(!starters.contains(formation.getPenaltyTaker()))
+            return false;
+
         return formation.getCaptain() != null && formation.getFreeKickTaker() != null && formation.getPenaltyTaker() != null;
     }
 }
