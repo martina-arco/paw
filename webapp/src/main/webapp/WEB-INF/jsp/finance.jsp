@@ -5,6 +5,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:masterpage active="finance">
+  <jsp:attribute name="styles">
+    <link rel="stylesheet" href="<c:url value="/assets/css/finance.css"/>"/>
+  </jsp:attribute>
     <jsp:attribute name="scripts">
         <script src="<c:url value="/assets/js/finance.js"/>"></script>
     </jsp:attribute>
@@ -137,15 +140,15 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
                     <spring:message code="lowSeats"/>
-                    <form:input id="lowInput" cssClass="pull-right" path="lowClass" type="number" min="${stadium.lowClass}" max="100000" value="${stadium.lowClass}"/>
+                    <form:input id="lowInput" cssClass="input-field pull-right" path="lowClass" type="number" min="${stadium.lowClass}" max="100000" value="${stadium.lowClass}"/>
                   </li>
                   <li class="list-group-item">
                     <spring:message code="mediumSeats"/>
-                    <form:input id="mediumInput" cssClass="pull-right" path="mediumClass" type="number" min="${stadium.mediumClass}" max="100000" value="${stadium.mediumClass}"/>
+                    <form:input id="mediumInput" cssClass="input-field pull-right" path="mediumClass" type="number" min="${stadium.mediumClass}" max="100000" value="${stadium.mediumClass}"/>
                   </li>
                   <li class="list-group-item">
                     <spring:message code="highSeats"/>
-                    <form:input id="highInput" cssClass="pull-right" path="highClass" type="number" min="${stadium.highClass}" max="100000" value="${stadium.highClass}"/>
+                    <form:input id="highInput" cssClass="input-field pull-right" path="highClass" type="number" min="${stadium.highClass}" max="100000" value="${stadium.highClass}"/>
                   </li>
                   <li class="list-group-item">
                     <spring:message code="total"/>
