@@ -362,7 +362,7 @@
 
                 <li class="list-group-item">
                    <span class="pull-right">
-                     <input type="submit" value="<spring:message code="save"/>" class="btn btn-light" id="submit"/>
+                     <input type="submit" value="<spring:message code="save"/>" class="btn btn-success" id="submit"/>
                    </span>
                 </li>
                 </ul>
