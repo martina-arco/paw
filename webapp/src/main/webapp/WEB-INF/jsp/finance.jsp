@@ -135,7 +135,7 @@
             <div class="card-header">
               <strong class="card-title"><spring:message code="stadium"/></strong>
             </div>
-            <div class="card-body">
+            <div class="card-body pt-0">
               <form:form id="sForm" modelAttribute="stadiumForm" action="${upgradeStadium}" method="post">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
