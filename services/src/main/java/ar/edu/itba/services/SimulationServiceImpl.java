@@ -206,7 +206,7 @@ public class SimulationServiceImpl implements SimulationService{
 
         double random = sNode.getGrid().getRand().nextDouble();
         double accum = 0;
-        SimulationNode last = null;
+        SimulationNode last = sNode;
         for (SimulationArc arc : sNode.getNeighbors()) {
             accum += arc.getWeight();
             if (random < accum)
