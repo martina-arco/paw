@@ -72,10 +72,10 @@
 
                     <%-- Volantes --%>
                     <div class="row topMid d-flex justify-content-center">
-                      <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
-                        <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
+                      <form:select path="centerAttackingMid" id="cam" onchange="update(this.id, value)">
+                        <form:option value="${cam.id}"><c:out value="${cam.name}"/></form:option>
                         <c:forEach items="${players}" var="player">
-                          <c:if test="${player != cdm && player.getPosition() == 2}">
+                          <c:if test="${player != cam && player.getPosition() == 2}">
                             <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                           </c:if>
                         </c:forEach>
@@ -116,10 +116,10 @@
                       </form:select>
                     </div>
                     <div class="row lowMid d-flex justify-content-center">
-                      <form:select path="centerAttackingMid" id="cam" onchange="update(this.id, value)">
-                        <form:option value="${cam.id}"><c:out value="${cam.name}"/></form:option>
+                      <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
+                        <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
                         <c:forEach items="${players}" var="player">
-                          <c:if test="${player != cam && player.getPosition() == 2}">
+                          <c:if test="${player != cdm && player.getPosition() == 2}">
                             <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
                           </c:if>
                         </c:forEach>
