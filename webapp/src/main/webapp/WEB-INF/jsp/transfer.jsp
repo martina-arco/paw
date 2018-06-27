@@ -59,7 +59,7 @@
                     <div class="row ml-0 pb-2">
                   </c:if>
                   <div class="col-1 filter-label p-0">
-                      ${criteria}
+                    <spring:message code="criteria.${criteria}"/>
                   </div>
                   <div class="col-3 pl-1">
                     <select class="filter-field" name="${criteria}">
