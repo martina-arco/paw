@@ -14,6 +14,93 @@
     border-radius: 5px;
 }
 
+.formationImage{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.formationContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 570px;
+}
+
+.forwards {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 20%;
+}
+
+select {
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+.forwards select {
+    width: 125px;
+}
+
+.topMid {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 25%;
+}
+
+.topMid select{
+    width: 130px;
+}
+
+.mid {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 5%;
+}
+
+.mid select{
+    width: 23%;
+}
+
+.lowMid {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 5%;
+}
+
+.lowMid select{
+    width: 130px;
+}
+
+.backs {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 25%;
+}
+
+.backs select {
+    width: 30%;
+}
+
+.backsCenter select {
+    margin-left: 0px;
+    width: 30%;
+}
+
+.backsCenter {
+    margin-top: 5%;
+}
+
+.goalKeeper {
+    position: absolute;
+    margin-top: 500px;
+    width: 100%;
+    margin-left: 0;
+    top: 0;
+    left: 0;
+}
+
 .button:hover {
     background-color: #037c1e;
     color: black;

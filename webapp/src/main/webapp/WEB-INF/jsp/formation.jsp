@@ -20,162 +20,170 @@
         <div class="col-6">
           <div class="card">
             <div class="card-body">
+                <div style="position: relative; left: 0; top: 0;">
+                <img src="../assets/img/soccerField.jpg"  class="formationImage"/>
 
-              <form:form modelAttribute="formationForm" action="${postPath}" method="post">
-                <%-- Delanteros --%>
-                <div class="row">
-                  <form:select path="leftWing" id="lw" onchange="update(this.id, value)">
-                    <form:option value="${lw.id}"><c:out value="${lw.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != lw && player.getPosition() == 3}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="leftForward" id="lf" onchange="update(this.id, value)">
-                    <form:option value="${lf.id}"><c:out value="${lf.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != lf && player.getPosition() == 3}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="striker" id="st" onchange="update(this.id, value)">
-                    <form:option value="${st.id}"><c:out value="${st.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != st && player.getPosition() == 3}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="rightForward" id="rf" onchange="update(this.id, value)">
-                    <form:option value="${rf.id}"><c:out value="${rf.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != rf && player.getPosition() == 3}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="rightWing" id="rw" onchange="update(this.id, value)">
-                    <form:option value="${rw.id}"><c:out value="${rw.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != rw && player.getPosition() == 3}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                </div>
+                    <form:form modelAttribute="formationForm" action="${postPath}" method="post">
 
-                <%-- Volantes --%>
-                <div class="row">
-                  <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
-                    <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != cdm && player.getPosition() == 2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                </div>
-                <div class="row">
-                  <form:select path="leftMid" id="lm" onchange="update(this.id, value)">
-                    <form:option value="${lm.id}"><c:out value="${lm.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != lm && player.getPosition() == 2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="leftCenterMid" id="lcm" onchange="update(this.id, value)">
-                    <form:option value="${lcm.id}"><c:out value="${lcm.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != lcm && player.getPosition() == 2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="rightCenterMid" id="rcm" onchange="update(this.id, value)">
-                    <form:option value="${rcm.id}"><c:out value="${rcm.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != rcm && player.getPosition() == 2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="rightMid" id="rm" onchange="update(this.id, value)">
-                    <form:option value="${rm.id}"><c:out value="${rm.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != rm && player.getPosition() == 2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                </div>
-                <div class="row">
-                  <form:select path="centerAttackingMid" id="cam" onchange="update(this.id, value)">
-                    <form:option value="${cam.id}"><c:out value="${cam.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != cam && player.getPosition() == 2}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                </div>
+                    <div class="formationContent">
+                    <%-- Delanteros --%>
+                    <div class="row forwards d-flex justify-content-center">
+                      <form:select path="leftWing" id="lw" onchange="update(this.id, value)">
+                        <form:option value="${lw.id}"><c:out value="${lw.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != lw && player.getPosition() == 3}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="leftForward" id="lf" onchange="update(this.id, value)">
+                        <form:option value="${lf.id}"><c:out value="${lf.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != lf && player.getPosition() == 3}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="striker" id="st" onchange="update(this.id, value)">
+                        <form:option value="${st.id}"><c:out value="${st.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != st && player.getPosition() == 3}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="rightForward" id="rf" onchange="update(this.id, value)">
+                        <form:option value="${rf.id}"><c:out value="${rf.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != rf && player.getPosition() == 3}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="rightWing" id="rw" onchange="update(this.id, value)">
+                        <form:option value="${rw.id}"><c:out value="${rw.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != rw && player.getPosition() == 3}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </div>
 
-                <%-- Defensores --%>
-                <div class="row">
-                  <form:select path="leftBack" id="lb" onchange="update(this.id, value)">
-                    <form:option value="${lb.id}"><c:out value="${lb.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != lb && player.getPosition() == 1}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="leftCenterBack" id="lcb" onchange="update(this.id, value)">
-                    <form:option value="${lcb.id}"><c:out value="${lcb.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != lcb && player.getPosition() == 1}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="centerBack" id="cb" onchange="update(this.id, value)">
-                    <form:option value="${cb.id}"><c:out value="${cb.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != cb && player.getPosition() == 1}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="rightCenterBack" id="rcb" onchange="update(this.id, value)">
-                    <form:option value="${rcb.id}"><c:out value="${rcb.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != rcb && player.getPosition() == 1}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                  <form:select path="rightBack" id="rb" onchange="update(this.id, value)">
-                    <form:option value="${rb.id}"><c:out value="${rb.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != rb && player.getPosition() == 1}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
-                </div>
+                    <%-- Volantes --%>
+                    <div class="row topMid d-flex justify-content-center">
+                      <form:select path="centerDefensiveMid" id="cdm" onchange="update(this.id, value)">
+                        <form:option value="${cdm.id}"><c:out value="${cdm.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != cdm && player.getPosition() == 2}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </div>
+                    <div class="row mid d-flex justify-content-center">
+                      <form:select path="leftMid" id="lm" onchange="update(this.id, value)">
+                        <form:option value="${lm.id}"><c:out value="${lm.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != lm && player.getPosition() == 2}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="leftCenterMid" id="lcm" onchange="update(this.id, value)">
+                        <form:option value="${lcm.id}"><c:out value="${lcm.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != lcm && player.getPosition() == 2}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="rightCenterMid" id="rcm" onchange="update(this.id, value)">
+                        <form:option value="${rcm.id}"><c:out value="${rcm.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != rcm && player.getPosition() == 2}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="rightMid" id="rm" onchange="update(this.id, value)">
+                        <form:option value="${rm.id}"><c:out value="${rm.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != rm && player.getPosition() == 2}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </div>
+                    <div class="row lowMid d-flex justify-content-center">
+                      <form:select path="centerAttackingMid" id="cam" onchange="update(this.id, value)">
+                        <form:option value="${cam.id}"><c:out value="${cam.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != cam && player.getPosition() == 2}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </div>
 
-                <%-- Arquero --%>
-                <div class="row">
-                  <form:select path="goalkeeper" id="gk" onchange="update(this.id, value)">
-                    <form:option value="${gk.id}"><c:out value="${gk.name}"/></form:option>
-                    <c:forEach items="${players}" var="player">
-                      <c:if test="${player != gk && player.getPosition() == 0}">
-                        <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
-                      </c:if>
-                    </c:forEach>
-                  </form:select>
+                    <%-- Defensores --%>
+                    <div class="row backs d-flex justify-content-between">
+                      <form:select path="leftBack" id="lb" onchange="update(this.id, value)">
+                        <form:option value="${lb.id}"><c:out value="${lb.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != lb && player.getPosition() == 1}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                        <form:select path="rightBack" id="rb" onchange="update(this.id, value)">
+                            <form:option value="${rb.id}"><c:out value="${rb.name}"/></form:option>
+                            <c:forEach items="${players}" var="player">
+                                <c:if test="${player != rb && player.getPosition() == 1}">
+                                    <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                                </c:if>
+                            </c:forEach>
+                        </form:select>
+                    </div>
+                      <div class="row backsCenter d-flex justify-content-center">
+                      <form:select path="leftCenterBack" id="lcb" onchange="update(this.id, value)">
+                        <form:option value="${lcb.id}"><c:out value="${lcb.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != lcb && player.getPosition() == 1}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="centerBack" id="cb" onchange="update(this.id, value)">
+                        <form:option value="${cb.id}"><c:out value="${cb.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != cb && player.getPosition() == 1}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                      <form:select path="rightCenterBack" id="rcb" onchange="update(this.id, value)">
+                        <form:option value="${rcb.id}"><c:out value="${rcb.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != rcb && player.getPosition() == 1}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </div>
+
+                    <%-- Arquero --%>
+                    <div class="row goalKeeper d-flex justify-content-center">
+                      <form:select path="goalkeeper" id="gk" onchange="update(this.id, value)">
+                        <form:option value="${gk.id}"><c:out value="${gk.name}"/></form:option>
+                        <c:forEach items="${players}" var="player">
+                          <c:if test="${player != gk && player.getPosition() == 0}">
+                            <form:option value="${player.id}"><c:out value="${player.name}"/></form:option>
+                          </c:if>
+                        </c:forEach>
+                      </form:select>
+                    </div>
+
                 </div>
 
                 <%-- Suplentes --%>
@@ -242,7 +250,6 @@
                       </c:if>
                     </c:forEach>
                   </form:select>
-
                 </div>
 
                 <div class="row">
@@ -321,8 +328,9 @@
                 </div>
                 <input type="submit" value="<spring:message code="save"/>" class="btn btn-light"/>
               </form:form>
-            </div>
           </div>
+        </div>
+        </div>
         </div>
 
         <div class="col-6">
