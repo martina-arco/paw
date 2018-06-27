@@ -70,7 +70,7 @@ public class AiServiceImpl implements AiService {
 
         players.sort((player, t1) -> t1.getFitness() - player.getFitness());
 
-        return formationService.create(starters, players.subList(0, 7),50,50, captain,fkTaker,penaltyTaker);
+        return formationService.create(starters, players.subList(0, 7),0,0, captain,fkTaker,penaltyTaker);
     }
 
     private Player useLast(List<Player> list, boolean remove){

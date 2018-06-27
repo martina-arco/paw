@@ -46,6 +46,15 @@ public class FormationServiceImpl implements FormationService {
                     return false;
             }
         }
+        for(Player s : formation.getSubstitutes()){
+            int found = 0;
+            for(Player aux : formation.getSubstitutes()){
+                if(s.equals(aux))
+                    found++;
+                if(found > 1)
+                    return false;
+            }
+        }
         Set<Player> starters = formation.getStarters().keySet();
         if(!starters.contains(formation.getCaptain()))
             return false;
