@@ -167,6 +167,16 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
+    public int matchesPlayed(User user, League league) {
+        return matchService.findByLeagueIdAndBeforeDate(league.getId(), user.getCurrentDay()).size();
+    }
+
+    @Override
+    public int matchesToPlay(User user, League league) {
+        return matchService.findByTeamIdFromDate(league.getId(), user.getCurrentDay()).size();
+    }
+
+    @Override
     public List<Match> findMatchesForDate(League league, Date date) {
         if(league != null) {
             List<Match> matches =  matchDao.findByLeagueIdAndDate(league.getId(), date);

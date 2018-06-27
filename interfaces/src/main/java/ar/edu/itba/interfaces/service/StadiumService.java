@@ -11,4 +11,5 @@ public interface StadiumService {
     Stadium findByTeam(Team team);
     void setStadium(Set<Team> teams);
     void setStadium(List<Match> mathes);
+    boolean upgradeStadium(Team team, int lowClass, int mediumClass, int highClass);
 }

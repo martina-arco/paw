@@ -251,7 +251,7 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <h6>Captain</h6>
+                                            <h6><spring:message code="captain"/></h6>
                                             <form:select path="captain"  id="cap">
                                                 <form:option value="${captain.id}"><c:out value="${captain.name}"/></form:option>
                                                 <c:forEach items="${starters}" var="player">
@@ -263,7 +263,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <h6>Freekick Taker</h6>
+                                            <h6><spring:message code="freekickTaker"/></h6>
                                             <form:select path="freeKickTaker" id="fk">
                                                 <form:option value="${fk.id}"><c:out value="${fk.name}"/></form:option>
                                                 <c:forEach items="${starters}" var="player">
@@ -275,7 +275,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <h6>Penalty Taker</h6>
+                                            <h6><spring:message code="penaltyTaker"/></h6>
                                             <form:select path="penaltyTaker" id="pen">
                                                 <form:option value="${pen.id}"><c:out value="${pen.name}"/></form:option>
                                                 <c:forEach items="${starters}" var="player">
@@ -290,7 +290,7 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <h6>Pressure</h6>
+                                            <h6><spring:message code="pressure"/></h6>
                                             <form:select path="pressure" id="pressure">
                                                 <form:option value="${pressure}"><c:out value="${pressure}"/></form:option>
                                                 <c:forEach items="${pressures}" var="pres">
@@ -301,7 +301,7 @@
                                             </form:select>
                                         </div>
                                         <div class="col">
-                                            <h6>Attitude</h6>
+                                            <h6><spring:message code="attitude"/></h6>
                                             <form:select path="attitude" id="attitude">
                                                 <form:option value="${attitude}"><c:out value="${attitude}"/></form:option>
                                                 <c:forEach items="${attitudes}" var="att">
@@ -312,7 +312,7 @@
                                             </form:select>
                                         </div>
                                         <div class="col">
-                                            <h6>Formation</h6>
+                                            <h6><spring:message code="formation"/></h6>
                                             <form:select path="formation" onchange="changeFormation(value)">
                                                 <form:option value="${formation}"><c:out value="${formation}"/></form:option>
                                                 <c:forEach items="${formations}" var="formi">
@@ -323,7 +323,7 @@
                                             </form:select>
                                         </div>
                                     </div>
-                            <input type="submit" value="Save" class="btn btn-light"/>
+                            <input type="submit" value="<spring:message code="save"/>" class="btn btn-light"/>
                         </form:form>
                     </div>
 

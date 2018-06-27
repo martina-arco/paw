@@ -14,10 +14,12 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-header">
-              <strong class="card-title">asd</strong>
+              <strong class="card-title"><spring:message code="leagueInfo"/></strong>
             </div>
             <div class="card-body">
-
+              <div class="col-lg-2"><div class="stat-text"><c:out value="${league.name}"/></div></div>
+              <div class="col-lg-2"><div class="stat-text"><spring:message code="matchesPlayed"/> <c:out value="${matchesPlayed}"/></div></div>
+              <div class="col-lg-2"><div class="stat-text"><spring:message code="matchesToPlay"/> <c:out value="${matchesToPlay}"/></div></div>
             </div>
           </div>
           <div class="card">

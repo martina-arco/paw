@@ -90,6 +90,9 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public List<Match> getUpcomingMatches(Team team, Date currentDate) {
         List<Match> matches = matchDao.findByTeamIdFromDate(team.getId(), currentDate);
+        for (int i = 5; i < matches.size(); i++) {
+            matches.remove(i);
+        }
         setTeams(matches);
 
         Collections.sort(matches, new Comparator<Match>() {
