@@ -14,6 +14,7 @@
   <jsp:body>
     <c:url value="/upgradeStadium" var="upgradeStadium" />
     <span id="lowCost" hidden>${lowCost}</span>
+    <span id="upgradeURL" hidden><c:url value="/upgradeStadium"/> </span>
     <span id="mediumCost" hidden>${mediumCost}</span>
     <span id="highCost" hidden>${highCost}</span>
     <span id="failMessage" hidden><spring:message code="upgradeFailed"/></span>

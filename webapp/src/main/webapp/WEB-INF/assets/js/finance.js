@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
     totalContainer = document.getElementById("total");
 
     jQuery("#sForm").submit(function(e){
-        var url = "/upgradeStadium";
+        var url = document.getElementById("upgradeURL").innerHTML;
         jQuery.ajax({
             type: "POST",
             url: url,
