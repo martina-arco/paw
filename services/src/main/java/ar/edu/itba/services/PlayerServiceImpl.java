@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class PlayerServiceImpl implements PlayerService {
 
     @Autowired
@@ -33,7 +34,6 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    @Transactional
     public Player create(String name, Team team, int age, int value, int potential, int skillLevel, int goalkeeping,
                          int finish, int defending, int passing, int fitness, int salary, Date contractExpiration, boolean youth) {
         return playerDao.create(name, team, age, value, potential, skillLevel, goalkeeping, finish, defending, passing,
