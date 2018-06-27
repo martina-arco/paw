@@ -1,5 +1,5 @@
 .formation {
-    content:url("../assets/img/formation.jpg");
+    /*content:url("../assets/img/formation.jpg");*/
     height: 70%;
     width: 100%;
     margin-top: 10px;
@@ -19,7 +19,7 @@
 
 .button {
     width: 100%;
-    background-color: #7ebc83;
+    background-color: #4dbd74;
     padding: 10px;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -120,6 +120,6 @@ select {
 }
 
 thead th {
-    background-color: #7ebc83;
+    background-color: #4dbd74;
 }
 
