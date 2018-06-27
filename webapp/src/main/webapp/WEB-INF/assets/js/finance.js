@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
                     content.html(jQuery('#successMessage').html());
                     button.html(jQuery('#confirm').html());
                     button.click(function () {
-                        window.location.href = "../finance";
+                        window.location.href = document.getElementById("financeURL").innerHTML;
                     });
                 }
                 popup.modal('show');

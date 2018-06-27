@@ -14,7 +14,7 @@ function fetchData() {
 function iterate(json){
 
     if(minute > 90){
-        window.location.href = "../matchEnd";
+        window.location.href = document.getElementById("matchEndURL").innerHTML;
         return;
     }
 

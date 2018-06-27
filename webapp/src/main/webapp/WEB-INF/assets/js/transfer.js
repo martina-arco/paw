@@ -65,7 +65,7 @@ function manageData(json){
                         content.html(jQuery('#successMessage').html());
                         button.html(jQuery('#confirm').html());
                         button.click(function () {
-                            window.location.href = "../";
+                            window.location.href = document.getElementById("homeURL").innerHTML;
                         });
                     }
                     popup.modal('show');
