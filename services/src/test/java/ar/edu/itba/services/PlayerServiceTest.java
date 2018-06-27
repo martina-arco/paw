@@ -1,10 +1,8 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.dao.*;
-import ar.edu.itba.interfaces.service.FormationService;
-import ar.edu.itba.interfaces.service.LeagueService;
+import ar.edu.itba.interfaces.dao.PlayerDao;
+import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.PlayerService;
-import ar.edu.itba.model.League;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import org.junit.Before;
@@ -19,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -82,7 +81,7 @@ public class PlayerServiceTest {
     public void retire() {
         playerService.retire(player1);
 
-        assertTrue(team.getPlayers().size() == 2);
+        assertEquals(team.getPlayers().size(), 2);
         assertTrue(!team.getPlayers().contains(player1));
     }
 }
