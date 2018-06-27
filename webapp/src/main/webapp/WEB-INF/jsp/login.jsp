@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="<c:url value="/assets/css/background.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/assets/css/register.css"/>"/>
   </jsp:attribute>
+  <jsp:attribute name="scripts">
+    <script src="<c:url value="/assets/js/login.js"/>"></script>
+  </jsp:attribute>
   <jsp:body>
     <c:url value="/login" var="loginUrl"/>
 
@@ -32,6 +35,11 @@
                   <input name="j_rememberme" type="checkbox"/> <spring:message code="remember_me"/>
                 </label>
               </div>
+
+              <div class="alert alert-danger" role="alert" id="error">
+                <spring:message code="errorLogIn"/>
+              </div>
+
               <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30"><spring:message code="signIn"/></button>
 
               <div class="register-link m-t-15 text-center">
