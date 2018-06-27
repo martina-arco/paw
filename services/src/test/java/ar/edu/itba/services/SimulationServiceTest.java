@@ -1,27 +1,102 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.service.SimulationService;
+import ar.edu.itba.interfaces.dao.EventDao;
+import ar.edu.itba.interfaces.dao.MatchDao;
+import ar.edu.itba.interfaces.dao.MatchStateDao;
+import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.*;
+import ar.edu.itba.model.utils.MatchStatus;
 import ar.edu.itba.model.utils.Point;
+import ar.edu.itba.model.utils.simulation.Grid;
+import ar.edu.itba.model.utils.simulation.GridNode;
+import ar.edu.itba.model.utils.simulation.NodeAtt;
+import ar.edu.itba.model.utils.simulation.SimulationNode;
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
+import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration
 public class SimulationServiceTest {
 
-    List<Player> players = new ArrayList<>();
-    Formation f1,f2;
-    Team t1,t2;
+    @Configuration
+    static class SimulationServiceConfig {
+        @Bean
+        public SimulationServiceImpl simulationServiceImpl(){
+            return new SimulationServiceImpl();
+        }
 
-    public Player dummy(){
+        @Bean
+        public MatchStateDao matchStateDao(){
+            return mock(MatchStateDao.class);
+        }
+
+        @Bean
+        public MatchDao matchDao(){
+            return mock(MatchDao.class);
+        }
+
+        @Bean
+        public EventDao eventDao(){
+            EventDao eventDao = mock(EventDao.class);
+            Event tackle = mock(Event.class);
+            Event homeScore = mock(Event.class);
+            Event awayScore = mock(Event.class);
+            Event save = mock(Event.class);
+            when(tackle.getType()).thenReturn(Event.Type.TACKLE);
+            when(homeScore.getType()).thenReturn(Event.Type.HOMESCORE);
+            when(awayScore.getType()).thenReturn(Event.Type.AWAYSCORE);
+            when(save.getType()).thenReturn(Event.Type.SAVE);
+            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.TACKLE), anyInt())).thenReturn(tackle);
+            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.HOMESCORE), anyInt())).thenReturn(homeScore);
+            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.AWAYSCORE), anyInt())).thenReturn(awayScore);
+            when(eventDao.create(any(Match.class), any(Player.class), any(Player.class), eq(Event.Type.SAVE), anyInt())).thenReturn(save);
+            return eventDao;
+        }
+
+        @Bean
+        public MatchService matchService(){
+            return mock(MatchService.class);
+        }
+    }
+
+    @Autowired
+    private SimulationServiceImpl simulationService;
+
+    private List<Player> players;
+    private Formation f1,f2;
+    private Team t1,t2;
+    private List<Event> events;
+    private Grid grid;
+    private GridNode gridNode;
+    private SimulationNode sNode1, sNode2;
+    private MatchStatus matchStatus;
+
+    private Player dummy(){
         return new Player(0,0,"pepe",20,10,80,80,70,70,70,70,100,10,new Date(),false);
     }
 
-    public SimulationServiceTest(){
+    @Before
+    public void setUp(){
+        events = new ArrayList<>();
+        players = new ArrayList<>();
         Map<Player,Point> map1 = new HashMap<>(), map2 = new HashMap<>();
         List<Player> sub1 = new ArrayList<>(), sub2 = new ArrayList<>();
 
@@ -60,32 +135,74 @@ public class SimulationServiceTest {
 
         t1 = new Team(0,"River",mock(League.class), mock(Stadium.class),f1,new ArrayList<Player>(), new ArrayList<Player>(),100,100,100,new ArrayList<Receipt>(),new ArrayList<BankLoan>(),100);
         t2 = new Team(1,"Boca",mock(League.class), mock(Stadium.class),f2,new ArrayList<Player>(), new ArrayList<Player>(),100,100,100,new ArrayList<Receipt>(),new ArrayList<BankLoan>(),100);
+
+
+        grid = mock(Grid.class);
+        gridNode = mock(GridNode.class);
+        when(gridNode.getAtt(AWAY, NodeAtt.DEF)).thenReturn(95);
+        when(gridNode.getAtt(HOME, NodeAtt.DEF)).thenReturn(95);
+        when(gridNode.getAtt(HOME, NodeAtt.POSS)).thenReturn(80);
+        when(gridNode.getAtt(AWAY, NodeAtt.POSS)).thenReturn(80);
+
+        sNode1 = mock(SimulationNode.class);
+        sNode2 = mock(SimulationNode.class);
+        when(sNode1.getPossession()).thenReturn(HOME);
+        when(sNode2.getPossession()).thenReturn(AWAY);
+        matchStatus = mock(MatchStatus.class);
+        when(matchStatus.getEvents()).thenReturn(events);
+        when(matchStatus.getMinute()).thenReturn(7);
+        when(sNode1.getNode()).thenReturn(gridNode);
+        when(sNode2.getNode()).thenReturn(gridNode);
+
+        when(grid.getMatch()).thenReturn(mock(Match.class));
+
+        when(sNode1.getGrid()).thenReturn(grid);
+        when(sNode2.getGrid()).thenReturn(grid);
+
+        when(sNode1.getGrid().getRand()).thenReturn(new Random());
+        when(sNode2.getGrid().getRand()).thenReturn(new Random());
+
+        when(sNode1.whoDidIt()).thenReturn(dummy());
+        when(sNode2.whoDidIt()).thenReturn(dummy());
+
+        when(gridNode.getSNode(HOME)).thenReturn(sNode1);
+        when(gridNode.getSNode(AWAY)).thenReturn(sNode2);
     }
 
 
     @Test
-    public void influenceTest(){
-        SimulationServiceImpl ss = new SimulationServiceImpl();
-        List<Match> list = new ArrayList<>();
-        int cases = 100;
-
-        for (int i = 0; i < cases; i++) {
-            list.add(new Match(0,t1,t2,mock(League.class),new Date(),0,0,0,0,null,false,new ArrayList<Event>()));
+    public void disputeTest(){
+        SimulationNode ret = simulationService.dispute(sNode1, matchStatus);
+        assertEquals(matchStatus.getEvents(), events);
+        assertTrue(matchStatus.getEvents().size() == 0 || matchStatus.getEvents().size() == 1);
+        if(matchStatus.getEvents().size() == 1){
+            assertEquals(matchStatus.getEvents().get(0).getType(), Event.Type.TACKLE);
         }
+        assertTrue(ret.equals(sNode1) || ret.equals(sNode2));
+    }
 
-        ss.simulateFixture(1L,list);
+    @Test
+    public void shotTest(){
+        when(grid.kickOff(HOME)).thenReturn(sNode1);
+        when(grid.kickOff(AWAY)).thenReturn(sNode1);
+        when(grid.goalKick(AWAY)).thenReturn(sNode2);
+        when(grid.goalKick(AWAY)).thenReturn(sNode2);
+        when(sNode1.distanceToGoal()).thenReturn(1);
+        when(sNode2.distanceToGoal()).thenReturn(1);
+        when(sNode1.getOpGK()).thenReturn(dummy());
+        when(sNode2.getOpGK()).thenReturn(dummy());
+        when(gridNode.getAtt(HOME, NodeAtt.FIN)).thenReturn(90);
+        when(gridNode.getAtt(AWAY, NodeAtt.FIN)).thenReturn(90);
 
-        float homePoints = 0, awayPoints = 0, homeGoals = 0, awayGoals = 0;
-        for(Match m : list){
-            homeGoals += m.getHomeScore();
-            awayGoals += m.getAwayScore();
-            homePoints += m.getHomePoints();
-            awayPoints += m.getAwayPoints();
+        SimulationNode ret = simulationService.shot(sNode1, matchStatus);
+
+        assertEquals(matchStatus.getEvents().size(), 1);
+        assertEquals(matchStatus.getEvents(), events);
+        if(events.get(0).getType() == Event.Type.SAVE){
+            assertEquals(ret, sNode2);
+        } else {
+            assertEquals(ret, sNode1);
         }
-
-        System.out.println("Home pts avg= " + homePoints/cases);
-        System.out.println("Away pts avg= " + awayPoints/cases);
-
     }
 
 
