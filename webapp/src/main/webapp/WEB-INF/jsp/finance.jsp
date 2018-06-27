@@ -2,9 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:masterpage active="finance">
+    <jsp:attribute name="scripts">
+        <script src="<c:url value="/assets/js/finance.js"/>"></script>
+    </jsp:attribute>
   <jsp:body>
+    <c:url value="/upgradeStadium" var="upgradeStadium" />
+    <span id="lowCost" hidden>${lowCost}</span>
+    <span id="mediumCost" hidden>${mediumCost}</span>
+    <span id="highCost" hidden>${highCost}</span>
     <div class="animated fadeIn p-5">
       <div class="row">
         <div class="col-lg-4 col-md-6">
@@ -99,6 +107,27 @@
               <strong class="card-title"><spring:message code="stadium"/></strong>
             </div>
             <div class="card-body">
+              <form:form modelAttribute="stadiumForm" action="${upgradeStadium}" method="post">
+                <div class="flex-row">
+                  <div class="col-4"><spring:message code="lowSeats"/></div>
+                  <form:input id="lowInput" path="lowClass" type="number" min="${stadium.lowClass}" max="100000" value="${stadium.lowClass}"/>
+                  <div class="col-4" id="lowTemp"/>
+                </div>
+                <div class="flex-row">
+                  <div class="col-4"><spring:message code="mediumSeats"/></div>
+                  <form:input id="mediumInput" path="mediumClass" type="number" min="${stadium.mediumClass}" max="100000" value="${stadium.mediumClass}"/>
+                  <div class="col-4" id="mediumTemp"/>
+                </div>
+                <div class="flex-row">
+                  <div class="col-4"><spring:message code="highSeats"/></div>
+                  <form:input id="highInput" path="highClass" type="number" min="${stadium.highClass}" max="100000" value="${stadium.highClass}"/>
+                  <div class="col-4" id="highTemp"/>
+                </div>
+                <div class="flex-row">
+                  <div class="col-5" id="total"/>
+                  <div class="col-5"><input type="submit" value="<spring:message code="upgradeStadium"/>" class="btn btn-light"></div>
+                </div>
+              </form:form>
             </div>
           </div>
         </div>
