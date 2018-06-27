@@ -183,7 +183,6 @@
                         </c:forEach>
                       </form:select>
                     </div>
-
                 </div>
 
                 <%-- Suplentes --%>
@@ -295,10 +294,10 @@
                   <div class="col">
                     <h6><spring:message code="pressure"/></h6>
                     <form:select path="pressure" id="pressure">
-                      <form:option value="${pressure}"><c:out value="${pressure}"/></form:option>
+                      <form:option value="${pressure}"><spring:message code="pressure.${pressure}"/></form:option>
                       <c:forEach items="${pressures}" var="pres">
                         <c:if test="${pres != pressure}">
-                          <form:option value="${pres}"><c:out value="${pres}"/></form:option>
+                          <form:option value="${pres}"><spring:message code="pressure.${pres}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
@@ -306,10 +305,10 @@
                   <div class="col">
                     <h6><spring:message code="attitude"/></h6>
                     <form:select path="attitude" id="attitude">
-                      <form:option value="${attitude}"><c:out value="${attitude}"/></form:option>
+                      <form:option value="${attitude}"><spring:message code="attitude.${attitude}"/></form:option>
                       <c:forEach items="${attitudes}" var="att">
                         <c:if test="${att != attitude}">
-                          <form:option value="${att}"><c:out value="${att}"/></form:option>
+                          <form:option value="${att}"><spring:message code="attitude.${att}"/></form:option>
                         </c:if>
                       </c:forEach>
                     </form:select>
