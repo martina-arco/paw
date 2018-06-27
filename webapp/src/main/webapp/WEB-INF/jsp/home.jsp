@@ -29,7 +29,7 @@
                   <spring:message code="boardTrust"/>
                 </div>
                 <div class="col-5 p-0 progress mt-3">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuemin="0"
+                  <div class="progress-bar bg-info" role="progressbar" style="width: ${team.boardTrust}%" aria-valuemin="0"
                        aria-valuemax="100"></div>
                 </div>
               </div>
@@ -38,8 +38,8 @@
                   <spring:message code="fanTrust"/>
                 </div>
                 <div class="col-5 p-0 progress mt-3">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                       aria-valuenow="<c:out value="${team.fanTrust}"/>" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-info" role="progressbar" style="width: ${team.fanTrust}%"
+                       aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
             </div>
