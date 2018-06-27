@@ -31,7 +31,23 @@ jQuery(document).ready(function(){
             data: jQuery("#sForm").serialize(),
             dataType: "json",
             success: function(result){
-                console.log(result);
+                var popup = jQuery('#staticModal');
+                var button = jQuery('#returnButton');
+                var content = jQuery('#modalContent');
+                if(!result){
+                    content.html(jQuery('#failMessage').html());
+                    button.html(jQuery('#retry').html());
+                    button.click(function () {
+                        popup.modal('show');
+                    });
+                } else {
+                    content.html(jQuery('#successMessage').html());
+                    button.html(jQuery('#confirm').html());
+                    button.click(function () {
+                        window.location.href = "../";
+                    });
+                }
+                popup.modal('show');
             }
         });
         e.preventDefault();

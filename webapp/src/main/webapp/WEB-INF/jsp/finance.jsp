@@ -13,6 +13,32 @@
     <span id="lowCost" hidden>${lowCost}</span>
     <span id="mediumCost" hidden>${mediumCost}</span>
     <span id="highCost" hidden>${highCost}</span>
+    <span id="failMessage" hidden><spring:message code="upgradeFailed"/></span>
+    <span id="retry" hidden><spring:message code="retry"/></span>
+    <span id="successMessage" hidden><spring:message code="upgradeSuccess"/></span>
+    <span id="confirm" hidden><spring:message code="confirm"/></span>
+    <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+         aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticModalLabel"><spring:message code="operationStatus"/></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modalContent">
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="animated fadeIn p-5">
       <div class="row">
         <div class="col-lg-4 col-md-6">
@@ -124,6 +150,7 @@
                   <div class="col-4" id="highTemp"/>
                 </div>
                 <div class="flex-row">
+                  <div class="col-4"><spring:message code="total"/></div>
                   <div class="col-5" id="total"/>
                 </div>
                 <div class="flex-row">
