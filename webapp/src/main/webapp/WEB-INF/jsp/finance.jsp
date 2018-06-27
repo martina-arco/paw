@@ -134,28 +134,25 @@
             </div>
             <div class="card-body">
               <form:form id="sForm" modelAttribute="stadiumForm" action="${upgradeStadium}" method="post">
-                <div class="flex-row">
-                  <div class="col-4"><spring:message code="lowSeats"/></div>
-                  <form:input id="lowInput" path="lowClass" type="number" min="${stadium.lowClass}" max="100000" value="${stadium.lowClass}"/>
-                  <div class="col-4" id="lowTemp"/>
-                </div>
-                <div class="flex-row">
-                  <div class="col-4"><spring:message code="mediumSeats"/></div>
-                  <form:input id="mediumInput" path="mediumClass" type="number" min="${stadium.mediumClass}" max="100000" value="${stadium.mediumClass}"/>
-                  <div class="col-4" id="mediumTemp"/>
-                </div>
-                <div class="flex-row">
-                  <div class="col-4"><spring:message code="highSeats"/></div>
-                  <form:input id="highInput" path="highClass" type="number" min="${stadium.highClass}" max="100000" value="${stadium.highClass}"/>
-                  <div class="col-4" id="highTemp"/>
-                </div>
-                <div class="flex-row">
-                  <div class="col-4"><spring:message code="total"/></div>
-                  <div class="col-5" id="total"/>
-                </div>
-                <div class="flex-row">
-                  <div class="col-5"><input type="submit" value="<spring:message code="upgradeStadium"/>" class="btn btn-light"></div>
-                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <spring:message code="lowSeats"/>
+                    <form:input id="lowInput" cssClass="pull-right" path="lowClass" type="number" min="${stadium.lowClass}" max="100000" value="${stadium.lowClass}"/>
+                  </li>
+                  <li class="list-group-item">
+                    <spring:message code="mediumSeats"/>
+                    <form:input id="mediumInput" cssClass="pull-right" path="mediumClass" type="number" min="${stadium.mediumClass}" max="100000" value="${stadium.mediumClass}"/>
+                  </li>
+                  <li class="list-group-item">
+                    <spring:message code="highSeats"/>
+                    <form:input id="highInput" cssClass="pull-right" path="highClass" type="number" min="${stadium.highClass}" max="100000" value="${stadium.highClass}"/>
+                  </li>
+                  <li class="list-group-item">
+                    <spring:message code="total"/>
+                    <span class="pull-right" id="total">$ 0</span>
+                  </li>
+                </ul>
+                <input type="submit" class="btn btn-info pull-right mt-3" value="<spring:message code="upgradeStadium"/>">
               </form:form>
             </div>
           </div>
