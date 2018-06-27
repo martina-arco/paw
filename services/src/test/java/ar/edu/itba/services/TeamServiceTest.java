@@ -1,11 +1,5 @@
 package ar.edu.itba.services;
 
-import ar.edu.itba.interfaces.dao.PlayerDao;
-import ar.edu.itba.interfaces.dao.ReceiptDao;
-import ar.edu.itba.interfaces.dao.TeamDao;
-import ar.edu.itba.interfaces.service.AiService;
-import ar.edu.itba.interfaces.service.FormationService;
-import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Receipt;
@@ -22,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,32 +32,10 @@ public class TeamServiceTest {
             return new TeamServiceImpl();
         }
 
-        @Bean
-        public AiService formationService() {
-            return new AiServiceImpl();
-        }
-
-        @Bean
-        public TeamDao teamDao() {
-            return mock(TeamDao.class);
-        }
-
-        @Bean
-        public PlayerDao playerDao() {
-            return mock(PlayerDao.class);
-        }
-
-        @Bean
-        public ReceiptDao receiptDao() {
-            return mock(ReceiptDao.class);
-        }
     }
 
     @Autowired
     private TeamService teamService;
-
-    @Autowired
-    private TeamDao teamDao;
 
     private Player player1, player2, player3;
     private Team team;
