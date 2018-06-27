@@ -55,19 +55,18 @@ function manageData(json){
                     var popup = jQuery('#staticModal');
                     var button = jQuery('#returnButton');
                     var content = jQuery('#modalContent');
-                    console.log(content);
                     if(!result){
-                        content.html("Transfer failed. Insufficient funds.");
-                        button.html("Retry");
-                        button.onclick = function () {
+                        content.html(jQuery('#failMessage').html());
+                        button.html(jQuery('#retry').html());
+                        button.click(function () {
                             popup.modal('show');
-                        }
+                        });
                     } else {
-                        content.html("Transfer successful!");
-                        button.html("Return to Home");
-                        button.onclick = function () {
-                            window.location.href = "../home";
-                        }
+                        content.html(jQuery('#successMessage').html());
+                        button.html(jQuery('#confirm').html());
+                        button.click(function () {
+                            window.location.href = "../";
+                        });
                     }
                     popup.modal('show');
                 }

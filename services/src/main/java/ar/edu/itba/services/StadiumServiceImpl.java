@@ -47,6 +47,9 @@ public class StadiumServiceImpl implements StadiumService {
         if(expense > team.getMoney())
             return false;
 
+        if(deltaLow + deltaMid + deltaHigh == 0)
+            return true;
+
         stadium.addSeats(Stadium.SeatType.LOW, deltaLow);
         stadium.addSeats(Stadium.SeatType.MEDIUM, deltaMid);
         stadium.addSeats(Stadium.SeatType.HIGH, deltaHigh);

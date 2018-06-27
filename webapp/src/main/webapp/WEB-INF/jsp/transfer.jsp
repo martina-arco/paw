@@ -23,12 +23,16 @@
     <script src="<c:url value="/assets/js/transfer.js"/>"></script>
   </jsp:attribute>
   <jsp:body>
+    <span id="failMessage" hidden><spring:message code="transferFailed"/></span>
+    <span id="retry" hidden><spring:message code="retry"/></span>
+    <span id="successMessage" hidden><spring:message code="transferSuccess"/></span>
+    <span id="confirm" hidden><spring:message code="confirm"/></span>
     <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
          aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticModalLabel">Transfer status</h5>
+            <h5 class="modal-title" id="staticModalLabel"><spring:message code="operationStatus"/></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -53,33 +57,33 @@
               <c:forEach items="${criterias}" var="criteria">
                 ${criteria}
                 <select name="${criteria}">
-                  <option selected>Any</option>
-                  <option value="${criteria};LESSTHAN">Less than</option>
-                  <option value="${criteria};MORETHAN">Greater than</option>
-                  <option value="${criteria};EQUALS">Equals</option>
+                  <option selected><spring:message code="any"/></option>
+                  <option value="${criteria};LESSTHAN"><spring:message code="lessThan"/></option>
+                  <option value="${criteria};MORETHAN"><spring:message code="greaterThan"/></option>
+                  <option value="${criteria};EQUALS"><spring:message code="equals"/></option>
                 </select>
                 <input name="${criteria}" type="number">
               </c:forEach>
-              <input type="submit" value="Search">
+              <input type="submit" value="<spring:message code="filter"/>">
             </form>
           </div>
           <div class="card-body">
             <table id="players-data-table" class="table table-striped table-bordered">
               <thead>
               <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
-                <th>Salary</th>
+                <th><spring:message code="name"/></th>
+                <th><spring:message code="team"/></th>
+                <th><spring:message code="player.goalKeeping"/></th>
+                <th><spring:message code="defending"/></th>
+                <th><spring:message code="passing"/></th>
+                <th><spring:message code="finishing"/></th>
+                <th><spring:message code="skillLevel"/></th>
+                <th><spring:message code="value"/></th>
+                <th><spring:message code="salary"/></th>
+                <th><spring:message code="fitness"/></th>
+                <th><spring:message code="age"/></th>
+                <th><spring:message code="potential"/></th>
+                <th><spring:message code="action"/></th>
               </tr>
               </thead>
               <tbody id="players" data-lang="<spring:message code="lang"/>">

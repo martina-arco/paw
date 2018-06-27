@@ -1,9 +1,13 @@
 package ar.edu.itba.webapp.controllers;
 
+import ar.edu.itba.interfaces.service.StadiumService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.Receipt;
+import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;
+import ar.edu.itba.webapp.form.StadiumForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,13 +20,17 @@ import java.util.Map;
 public class FinanceController extends Controller {
 
     @Autowired
-    TeamService teamService;
+    private TeamService teamService;
+
+    @Autowired
+    private StadiumService stadiumService;
 
     @RequestMapping("/finance")
-    public ModelAndView finance() {
+    public ModelAndView finance(@ModelAttribute("stadiumForm") final StadiumForm form) {
         ModelAndView mav = new ModelAndView("finance");
 
         Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId());
+        Stadium stadium = stadiumService.findByTeam(team);
 
         Map<Receipt.Type, Integer> summary = teamService.getFinanceSummary(team);
         List<Receipt> receipts = team.getFinance();
@@ -38,6 +46,10 @@ public class FinanceController extends Controller {
         List<Receipt> sortedReceipts = new LinkedList<>(receipts);
         sortedReceipts.sort((Receipt r1, Receipt r2)-> (int)(r2.getId() - r1.getId()));
 
+        mav.addObject("lowCost", Stadium.getLowCost());
+        mav.addObject("mediumCost", Stadium.getMediumCost());
+        mav.addObject("highCost", Stadium.getHighCost());
+        mav.addObject("stadium", stadium);
         mav.addObject("money", team.getMoney());
         mav.addObject("income", income);
         mav.addObject("playersSold", playersSold);
