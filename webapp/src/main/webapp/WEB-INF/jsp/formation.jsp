@@ -37,7 +37,7 @@
           <div class="card">
             <div class="card-body">
                 <div style="position: relative; left: 0; top: 0;">
-                <img src="../assets/img/soccerField.jpg"  class="formationImage"/>
+                <img src="<c:url value="/assets/img/soccerField.jpg"/>"  class="formationImage"/>
 
                     <form:form modelAttribute="formationForm" action="${postPath}" method="post"
                                data-error="${error}" id="form">
