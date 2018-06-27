@@ -10,8 +10,15 @@
   </jsp:attribute>
 
     <jsp:body>
-        <c:url value="/404" var="404Url"/>
-        <h1><spring:message code="404"/></h1>
+      <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+          <div class="login-content" style="margin-top: 35vh;">
+            <div class="login-form" style="text-align: center;">
+              <h1><spring:message code="404"/></h1>
+            </div>
+          </div>
+        </div>
+      </div>
     </jsp:body>
 
 </t:genericpage>

@@ -6,10 +6,12 @@ import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,6 +81,11 @@ public class HomeController extends Controller {
         mav.addObject("player", toDisplay);
 
         return mav;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+        return new ModelAndView("404");
     }
 
 //    @RequestMapping("/retirePlayer")
