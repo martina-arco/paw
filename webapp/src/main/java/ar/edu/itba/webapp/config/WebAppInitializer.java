@@ -21,11 +21,15 @@ public class WebAppInitializer implements WebApplicationInitializer {
         FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
         filterRegistration.addMappingForUrlPatterns(null, true, "/*");
 
-        servletContext.addListener(new ContextLoaderListener(appContext));
+        DispatcherServlet jerseyServlet = new DispatcherServlet(new AnnotationConfigWebApplicationContext());
+        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", jerseyServlet);
 
-        DispatcherServlet servlet = new DispatcherServlet(new AnnotationConfigWebApplicationContext());
-        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", servlet);
+        servletRegistration.setInitParameter("jersey.config.server.provider.packages", "ar.edu.itba.paw.webapp.controller");
         servletRegistration.setLoadOnStartup(1);
         servletRegistration.addMapping("/");
+
+        servletContext.setInitParameter("contextConfigLocation", "<NONE>");
+        servletContext.addListener(new ContextLoaderListener(appContext));
     }
+
 }
