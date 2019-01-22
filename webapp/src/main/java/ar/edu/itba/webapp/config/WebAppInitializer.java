@@ -1,5 +1,7 @@
 package ar.edu.itba.webapp.config;
 
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -21,15 +23,15 @@ public class WebAppInitializer implements WebApplicationInitializer {
         FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
         filterRegistration.addMappingForUrlPatterns(null, true, "/*");
 
-        DispatcherServlet jerseyServlet = new DispatcherServlet(new AnnotationConfigWebApplicationContext());
-        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", jerseyServlet);
-
-        servletRegistration.setInitParameter("jersey.config.server.provider.packages", "ar.edu.itba.paw.webapp.controller");
-        servletRegistration.setLoadOnStartup(1);
-        servletRegistration.addMapping("/");
-
         servletContext.setInitParameter("contextConfigLocation", "<NONE>");
         servletContext.addListener(new ContextLoaderListener(appContext));
+
+        ServletContainer jerseyServlet = new ServletContainer();
+        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("jersey-servlet", jerseyServlet);
+
+        servletRegistration.setInitParameter("jersey.config.server.provider.packages", "ar.edu.itba.webapp.controllers");
+        servletRegistration.setLoadOnStartup(1);
+        servletRegistration.addMapping("/*");
     }
 
 }

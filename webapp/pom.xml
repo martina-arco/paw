@@ -108,45 +108,38 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
         </dependency>
+        <!-- JERSEY -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-spring4</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
             <exclusions>
-                <!-- Otherwise, Webapp doesn't start up -->
                 <exclusion>
-                    <groupId>org.glassfish.jersey.containers</groupId>
-                    <artifactId>jersey-container-grizzly2-http</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jersey.ext</groupId>
-                    <artifactId>jersey-spring3</artifactId>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- JERSEY JSON -->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-jaxb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.bundles</groupId>
-            <artifactId>jaxrs-ri</artifactId>
-            <version>2.13</version>
+            <version>${jersey.version}</version>
         </dependency>
     </dependencies>
 
