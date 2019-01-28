@@ -2,3 +2,49 @@
 target
 *.iml
 .sass-cache
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+UI/dist
+UI/tmp
+UI/out-tsc
+
+# dependencies
+UI/node_modules
+
+# profiling files
+UI/chrome-profiler-events.json
+UI/speed-measure-plugin.json
+
+# IDEs and editors
+UI/.idea
+UI/.project
+UI/.classpath
+UI/.c9/
+UI/*.launch
+UI/.settings/
+UI/*.sublime-workspace
+
+# IDE - VSCode
+UI/.vscode/*
+!UI/.vscode/settings.json
+!UI/.vscode/tasks.json
+!UI/.vscode/launch.json
+!UI/.vscode/extensions.json
+UI/.history/*
+
+# misc
+UI/.sass-cache
+UI/connect.lock
+UI/coverage
+UI/libpeerconnection.log
+UI/npm-debug.log
+UI/yarn-error.log
+UI/testem.log
+UI/typings
+
+# System Files
+.DS_Store
+Thumbs.db
