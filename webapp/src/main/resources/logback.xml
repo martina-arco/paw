@@ -25,4 +25,6 @@
     <logger name="ar.edu.itba" level="DEBUG" additivity="false">
         <appender-ref ref="paw-appender"/>
     </logger>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
 </configuration>
