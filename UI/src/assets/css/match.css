@@ -1,0 +1,133 @@
+th, td {
+    text-align: center;
+}
+
+td {
+    font-size: 14px;
+}
+
+.header-fixed {
+    width: 100%;
+    padding:0;
+    margin:0;
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: calc(100% - 35px);
+}
+
+.match-stadium {
+    width: 30%;
+    float: left;
+}
+
+.match-home {
+    width: 35%;
+    float: left;
+}
+
+.match-away {
+    width: 35%;
+    float: left;
+}
+
+.match-position {
+    width: 20%;
+    float: left;
+}
+
+.match-team {
+    width: 60%;
+    float: left;
+}
+
+.match-points {
+    width: 20%;
+    float: left;
+}
+
+
+.header-fixed > tbody > tr > td.width5 {
+    width: 5%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width10 {
+    width: 10%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width15 {
+    width: 15%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width20 {
+    width: 20%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width35 {
+    width: 35%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width40 {
+    width: 40%;
+    float: left;
+}
+
+.header-fixed > tbody > tr > td.width60 {
+    width: 60%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width10{
+    width: 10%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width15{
+    width: 15%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width20{
+    width: 20%;
+    float: left;
+}
+
+.header-fixed > thead > tr > th.width35{
+    width: 35%;
+    float: left;
+}
+
+
+.header-fixed > thead > tr > th.width60{
+    width: 60%;
+    float: left;
+}
+
+
+.header-fixed > thead > tr > th.width40{
+    width: 40%;
+    float: left;
+}

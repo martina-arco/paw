@@ -1,14 +1,52 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>UI</title>
-  <base href="/">
+<html>
+  <head>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+    <meta charset="utf-8">
+    <title>footballManager</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="assets/css/background.css"/>
+    <link rel="stylesheet" href="assets/css/register.css"/>
+
+  </head>
+
+  <body ng-controller="IndexCtl">
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+      <div class="container">
+        <div class="login-content">
+          <div class="login-logo">
+            <!--<img class="align-content" src="images/logo.png" alt="">-->
+            <span class="align-content">{{appName}}</span>
+          </div>
+          <div class="login-form">
+            <form action="{{postPath}}" method="post">
+              <div class="form-group">
+                <p>{{username}}</p>
+                <input type="text" ng-model="username" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <p>{{password}}</p>
+                <input type="password" ng-model="password" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <p >{{reapeatPassword}}</p>
+                <input type="password" ng-model="repeatPassword" class="form-control"/>
+              </div>
+              <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">{{signUpButton}}</button>
+              <div class="register-link m-t-15 text-center">
+                <p>{{alreadyHaveAccount}}<a href="views/login.jsp">{{signIn}}</a></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/require.js" data-main="scripts/build.js"></script>
+    <script src="scripts/commonUtils.js"></script>
+  </body>
+
 </html>
