@@ -21,7 +21,7 @@ define([
             footballManager.factory = $provide.factory;
             footballManager.service = $provide.service;
 
-            // if (config.routes !== undefined) {
+            if (config.routes !== undefined) {
               angular.forEach(config.routes, function(route, path) {
                 $routeProvider.when(path, {
                   templateUrl: route.templateUrl,
@@ -30,10 +30,10 @@ define([
                   gaPageTitle: route.gaPageTitle
                 });
               });
-            // }
-            // if (config.defaultRoutePath !== undefined) {
+            }
+            if (config.defaultRoutePath !== undefined) {
               $routeProvider.otherwise({redirectTo: config.defaultRoutePath});
-            // }
+            }
           }]);
     return footballManager;
   }

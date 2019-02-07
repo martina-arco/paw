@@ -2,24 +2,26 @@ requirejs.config({
   baseUrl: 'scripts',
   // paths: maps ids with paths (no extension)
   paths: {
-    'angular': 'angular.min',
+    angular: 'angular.min',
     'angular-route': 'angular-route.min',
-    'jquery': 'jquery.min'
+    jquery: 'jquery.min',
+    requirejs: 'require'
   },
   // shim: makes external libraries reachable
   shim: {
     angular: {
-      exports : 'angular',
+      exports: 'angular',
       deps: [
         'jquery'
       ]
+    },
+    'angular-route': {
+      deps: [
+        'angular'
+      ]
     }
   },
-  'angular-route': {
-    deps: [
-      'angular'
-    ]
-  },
+
   packages: [  ]
 });
 
