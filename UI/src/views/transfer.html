@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="../assets/css/transfer.css"/>
+
+<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+     aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticModalLabel"><spring:message code="operationStatus"/></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="modalContent">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="animated fadeIn p-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <form id="filterForm" method="post">
+            <div ng-repeat="criteria in criterias">
+              <div ng-if="$index % 3 == 0}">
+                <div class="row ml-0 pb-2">
+              </div>
+              <div class="col-1 filter-label p-0">
+                <spring:message code="criteria.{{criteria}}"/>
+              </div>
+              <div class="col-3 pl-1">
+                <select class="filter-field" ng-model="criteria">
+                  <option selected><spring:message code="any"/></option>
+                  <option value="{{criteria}};LESSTHAN"><spring:message code="lessThan"/></option>
+                  <option value="{{criteria}};MORETHAN"><spring:message code="greaterThan"/></option>
+                  <option value="{{criteria}};EQUALS"><spring:message code="equals"/></option>
+                </select>
+                <input class="filter-field" ng-model="criteria" type="number">
+              </div>
+              <div ng-if="$last || $index % 3 == 2">
+                </div>
+              </div>
+            </div>
+            <div class="col pt-2">
+              <input class="btn btn-success pull-right" type="submit" value="<spring:message code="filter"/>">
+            </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <table id="players-data-table" class="table table-striped table-bordered">
+            <thead>
+            <tr>
+              <th><spring:message code="name"/></th>
+              <th><spring:message code="team"/></th>
+              <th><spring:message code="player.goalKeeping"/></th>
+              <th><spring:message code="defending"/></th>
+              <th><spring:message code="passing"/></th>
+              <th><spring:message code="finishing"/></th>
+              <th><spring:message code="skillLevel"/></th>
+              <th><spring:message code="value"/></th>
+              <th><spring:message code="salary"/></th>
+              <th><spring:message code="fitness"/></th>
+              <th><spring:message code="age"/></th>
+              <th><spring:message code="potential"/></th>
+              <th><spring:message code="action"/></th>
+            </tr>
+            </thead>
+            <tbody id="players" data-lang="<spring:message code="lang"/>">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

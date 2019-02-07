@@ -1,0 +1,421 @@
+
+    <link rel="stylesheet" href="<c:url value="/assets/css/formation.css"/>"/>
+
+<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+     aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticModalLabel"><spring:message code="formationChange"/></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="animated fadeIn p-5">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+            <div style="position: relative; left: 0; top: 0;">
+            <img src="../assets/img/soccerField.jpg"  class="formationImage"/>
+
+                <form modelAttribute="formationForm" action="{{postPath}}" method="post"
+                           data-error="{{error}}" id="form">
+
+                <div class="formationContent">
+                <%-- Delanteros --%>
+                <div class="row forwards d-flex justify-content-center">
+
+                  <select ng-model="lw" id="lw" onchange="update(this.id, value)">
+                    <option value="{{lw.id}}">{{lw.name}}</option>
+                      <option ng-repeat="player in players"
+                              value="{{player.id}}"
+                              ng-selected="{{player.id != lw.id && player.position == 3}}">
+                        {{player.name}}
+                      </option>
+                  </select>
+
+                  <select ng-model="lf" id="lf" onchange="update(this.id, value)">
+                    <option value="{{lf.id}}">{{lf.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != lf.id && player.position == 3}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="st" id="st" onchange="update(this.id, value)">
+                    <option value="{{st.id}}">{{st.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != st.id && player.position == 3}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="rf" id="rf" onchange="update(this.id, value)">
+                    <option value="{{rf.id}}">{{lf.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != rf.id && player.position == 3}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="rw" id="rw" onchange="update(this.id, value)">
+                    <option value="{{rw.id}}">{{rw.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != rw.id && player.position == 3}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                </div>
+
+                <%-- Volantes --%>
+                <div class="row topMid d-flex justify-content-center">
+
+                  <select ng-model="cam" id="cam" onchange="update(this.id, value)">
+                    <option value="{{cam.id}}">{{cam.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != cam.id && player.position == 2}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                </div>
+                <div class="row mid d-flex justify-content-center">
+                  <select ng-model="lm" id="lm" onchange="update(this.id, value)">
+                    <option value="{{lm.id}}">{{cam.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != lm.id && player.position == 2}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="lcm" id="lcm" onchange="update(this.id, value)">
+                    <option value="{{lcm.id}}">{{lcm.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != lcm.id && player.position == 2}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="rcm" id="rcm" onchange="update(this.id, value)">
+                    <option value="{{rcm.id}}">{{rcm.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != rcm.id && player.position == 2}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="rm" id="rm" onchange="update(this.id, value)">
+                    <option value="{{rm.id}}">{{rm.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != rm.id && player.position == 2}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                </div>
+                <div class="row lowMid d-flex justify-content-center">
+
+                  <select ng-model="cdm" id="cdm" onchange="update(this.id, value)">
+                    <option value="{{cdm.id}}">{{cdm.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != cdm.id && player.position == 2}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                </div>
+
+                <%-- Defensores --%>
+                <div class="row backs d-flex justify-content-between">
+
+                  <select ng-model="lb" id="lb" onchange="update(this.id, value)">
+                    <option value="{{lb.id}}">{{lb.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != lb.id && player.position == 1}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                  <select ng-model="rb" id="rb" onchange="update(this.id, value)">
+                    <option value="{{rb.id}}">{{rb.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != rb.id && player.position == 1}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                </div>
+                  <div class="row backsCenter d-flex justify-content-center">
+
+                    <select ng-model="lcb" id="lcb" onchange="update(this.id, value)">
+                      <option value="{{lcb.id}}">{{lcb.name}}</option>
+                      <option ng-repeat="player in players"
+                              value="{{player.id}}"
+                              ng-selected="{{player.id != lcb.id && player.position == 1}}">
+                        {{player.name}}
+                      </option>
+                    </select>
+
+                    <select ng-model="cb" id="cb" onchange="update(this.id, value)">
+                      <option value="{{cb.id}}">{{cb.name}}</option>
+                      <option ng-repeat="player in players"
+                              value="{{player.id}}"
+                              ng-selected="{{player.id != cb.id && player.position == 1}}">
+                        {{player.name}}
+                      </option>
+                    </select>
+
+                    <select ng-model="rcb" id="rcb" onchange="update(this.id, value)">
+                      <option value="{{rcb.id}}">{{rcb.name}}</option>
+                      <option ng-repeat="player in players"
+                              value="{{player.id}}"
+                              ng-selected="{{player.id != rcb.id && player.position == 1}}">
+                        {{player.name}}
+                      </option>
+                    </select>
+                </div>
+
+                <%-- Arquero --%>
+                <div class="row goalKeeper d-flex justify-content-center">
+
+                  <select ng-model="gk" id="gk" onchange="update(this.id, value)">
+                    <option value="{{gk.id}}">{{gk.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != gk.id && player.position == 0}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+
+                </div>
+            </div>
+
+            <br>
+
+            <div class="alert alert-danger" role="alert" id="error">
+              <spring:message code="errorFormation"/>
+            </div>
+
+            <ul class="list-group list-group-flush">
+
+              <li class="list-group-item">
+                <spring:message code="substitutes"/> <p></p>
+
+              <%-- Suplentes --%>
+                <select ng-model="sub1" id="sub1" onchange="update(this.id, value)">
+                  <option value="{{sub1.id}}">{{sub1.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub1.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+                <select ng-model="sub2" id="sub2" onchange="update(this.id, value)">
+                  <option value="{{sub2.id}}">{{sub2.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub2.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+                <select ng-model="sub3" id="sub3" onchange="update(this.id, value)">
+                  <option value="{{sub3.id}}">{{sub3.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub3.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+                <select ng-model="sub4" id="sub4" onchange="update(this.id, value)">
+                  <option value="{{sub4.id}}">{{sub4.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub4.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+                <select ng-model="sub5" id="sub5" onchange="update(this.id, value)">
+                  <option value="{{sub5.id}}">{{sub5.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub5.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+                <select ng-model="sub6" id="sub6" onchange="update(this.id, value)">
+                  <option value="{{sub6.id}}">{{sub6.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub6.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+                <select ng-model="sub7" id="sub7" onchange="update(this.id, value)">
+                  <option value="{{sub7.id}}">{{sub7.name}}</option>
+                  <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != sub7.id}}">
+                    {{player.name}}
+                  </option>
+                </select>
+
+              </li>
+
+              <li class="list-group-item">
+                <spring:message code="captain"/>
+                <span class="pull-right">
+                  <select ng-model="cap" id="cap" onchange="update(this.id, value)">
+                    <option value="{{cap.id}}">{{cap.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != cap.id}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+                </span>
+              </li>
+
+              <li class="list-group-item">
+                <spring:message code="freekickTaker"/>
+                <span class="pull-right">
+                  <select ng-model="fk" id="fk" onchange="update(this.id, value)">
+                    <option value="{{fk.id}}">{{fk.name}}</option>
+                    <option ng-repeat="player in players"
+                          value="{{player.id}}"
+                          ng-selected="{{player.id != fk.id}}">
+                    {{player.name}}
+                    </option>
+                  </select>
+                </span>
+              </li>
+
+              <li class="list-group-item">
+                <spring:message code="penaltyTaker"/>
+                <span class="pull-right">
+                  <select ng-model="pen" id="pen" onchange="update(this.id, value)">
+                    <option value="{{pen.id}}">{{pen.name}}</option>
+                    <option ng-repeat="player in players"
+                            value="{{player.id}}"
+                            ng-selected="{{player.id != pen.id}}">
+                      {{player.name}}
+                    </option>
+                  </select>
+                </span>
+              </li>
+
+            <li class="list-group-item">
+              <spring:message code="pressure"/>
+              <span class="pull-right">
+
+                <select ng-model="pressureSelected" id="pressure" onchange="update(this.id, value)">
+                  <option value="{{pressureSelected}}"><spring:message code="pressure.{{pressureSelected}}"/></option>
+                  <option ng-repeat="pressure in pressures"
+                          value="{{pressure}}"
+                          ng-selected="{{pressureSelected != pressure}}">
+                    <spring:message code="pressure.{{pres}}"/>
+                  </option>
+                </select>
+
+              </span>
+            </li>
+              <li class="list-group-item">
+                <spring:message code="attitude"/>
+                <span class="pull-right">
+
+                  <select ng-model="attitudeSelected" id="attitude" onchange="update(this.id, value)">
+                    <option value="{{attitudeSelected}}"><spring:message code="attitude.{{attitudeSelected}}"/></option>
+                    <option ng-repeat="attitude in attitudes"
+                            value="{{attitude}}"
+                            ng-selected="{{attitudeSelected != attitude}}">
+                      <spring:message code="attitude.{{pres}}"/>
+                    </option>
+                  </select>
+
+                </span>
+              </li>
+              <li class="list-group-item">
+                <spring:message code="formation"/>
+                <span class="pull-right">
+
+                  <select ng-model="formationSelected" id="formation" onchange="update(this.id, value)">
+                    <option value="{{formationSelected}}"><spring:message code="formation.{{formationSelected}}"/></option>
+                    <option ng-repeat="formation in formations"
+                            value="{{formation}}"
+                            ng-selected="{{formationSelected != formation}}">
+                      <spring:message code="formation.{{pres}}"/>
+                    </option>
+                  </select>
+
+                </span>
+            </li>
+
+            <li class="list-group-item">
+               <span class="pull-right">
+                 <input type="submit" value="<spring:message code="save"/>" class="btn btn-success" id="submit"/>
+               </span>
+            </li>
+            </ul>
+          </form>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-hover bg-white small table-sm">
+            <thead>
+            <tr>
+              <th scope="col"><spring:message code="name"/></th>
+              <th scope="col"><spring:message code="fitness"/></th>
+              <th scope="col"><spring:message code="skillLevel"/></th>
+              <th scope="col"><spring:message code="goalKeeping"/></th>
+              <th scope="col"><spring:message code="finishing"/></th>
+              <th scope="col"><spring:message code="defending"/></th>
+              <th scope="col"><spring:message code="passing"/></th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="player in players">
+                <td>{{player.name}}</td>
+                <td>{{player.fitness}}</td>
+                <td>{{player.skillLevel}}</td>
+                <td>{{player.goalKeeping}}</td>
+                <td>{{player.finishing}}</td>
+                <td>{{player.defending}}</td>
+                <td>{{player.passing}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

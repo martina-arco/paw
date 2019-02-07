@@ -1,49 +1,51 @@
-define(['./app'],function(app) {
-  return app.config(['$routeProvider'], function config($routeProvider) {
-    $routeProvider.when("/", {
-        redirectTo: "index.html",
-        controller: "IndexCtl"
-      });
-    $routeProvider.when("/home/:playerId", {
+define([], function() {
+  return {
+    defaultRoutePath: '/404',
+    routes: {
+      '/':{
         templateUrl: "./views/home.html",
         controller: "HomeCtl"
-      });
-    $routeProvider.when("/chooseTeam", {
+      },
+      '/home/:playerId': {
+        templateUrl: "./views/home.html",
+        controller: "HomeCtl"
+      },
+      '/chooseTeam': {
         templateUrl: "./views/chooseTeam.html",
         controller: "ChooseTeamCtl"
-      });
-    $routeProvider.when("/finance", {
+      },
+      '/finance': {
         templateUrl: "./views/finance.html",
         controller: "FinanceCtl"
-      });
-    $routeProvider.when("/formation", {
+      },
+      '/formation': {
         templateUrl: "./views/formation.html",
         controller: "FormationCtl"
-      });
-    $routeProvider.when("/league", {
+      },
+      '/league': {
         templateUrl: "./views/league.html",
         controller: "LeagueCtl"
-      });
-    $routeProvider.when("/login", {
+      },
+      '/login': {
         templateUrl: "./views/login.html",
         controller: "LoginCtl"
-      });
-    $routeProvider.when("/match", {
+      },
+      '/match': {
         templateUrl: "./views/match.html",
         controller: "MatchCtl"
-      });
-    $routeProvider.when("/matchEnd", {
+      },
+      '/matchEnd': {
         templateUrl: "./views/matchEnd.html",
         controller: "MatchEndCtl"
-      });
-    $routeProvider.when("/stadium", {
+      },
+      '/stadium': {
         templateUrl: "./views/stadium.html",
         controller: "StadiumCtl"
-      });
-    $routeProvider.when("/transfer", {
+      },
+      '/transfer': {
         templateUrl: "./views/transfer.html",
         controller: "TransferCtl"
-      });
-    $routeProvider.otherwise({redirectTo: './views/404.html'});
-  });
+      }
+    }
+  }
 });

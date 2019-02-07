@@ -2,8 +2,8 @@ requirejs.config({
   baseUrl: 'scripts',
   // paths: maps ids with paths (no extension)
   paths: {
-    'angular':
-      ['https://code.angularjs.org/1.3.5/angular']
+    'angular': 'angular.min',
+    'angular-route': 'angular-route.min'
   },
   // shim: makes external libraries reachable
   shim: {
@@ -11,5 +11,20 @@ requirejs.config({
       exports : 'angular'
     }
   },
-  deps: ['./bootstrap']
+  'angular-route': {
+    deps: [
+      'angular'
+    ]
+  },
+  packages: [  ]
 });
+
+require([
+    'angular',
+    'footballManager',
+    'controllers/IndexCtl'
+  ],
+  function(angular) {
+    angular.bootstrap(document, ['footballManager']);
+  }
+);

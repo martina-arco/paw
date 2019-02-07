@@ -1,0 +1,36 @@
+<div class="contain">
+  <div class="translucent"></div>
+  <div class="content">
+
+    <div class="row big-height">
+      <div class="col">
+        <h3 class="indent"><spring:message code="currentSeats"/></h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <table class="table width35 table-borderless table-center">
+        <tbody>
+
+        <tr>
+          <td class="width60"><spring:message code="lowSeats"/></td>
+           
+          <td>{{stadium.lowClass}}</td>
+           
+        </tr>
+        <tr>
+          <td class="width60"><spring:message code="mediumSeats"/></td>
+          <td>{stadium.mediumClass}}</td>
+           
+        </tr>
+        <tr>
+          <td class="width60"><spring:message code="highSeats"/></td>
+          <td>{{stadium.highClass}}</td>
+           
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
