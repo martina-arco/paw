@@ -1,11 +1,14 @@
 define(['footballManager'], function (footballManager) {
 
-  footballManager.controller("IndexCtl", function ($scope) {
+  footballManager.controller("IndexCtl", function ($scope, $location) {
     $scope.appName = "hello";
     $scope.username="marti";
     $scope.password="lalala";
-    $scope.alreadyHaveAccount = "already have account";
-    $scope.signIn = "sign in";
+    $scope.alreadyHaveAccount = "already have account. ";
+    $scope.signIn = "signIn";
+    $scope.logIn = function () {
+        $location.url("/logIn");
+    }
   });
 
 });
