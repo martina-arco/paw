@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    defaultRoutePath: '/404',
+    defaultRoutePath: '/login',
     routes: {
       '/':{
         templateUrl: "./views/home.html",

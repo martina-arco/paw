@@ -6,9 +6,7 @@ define(['footballManager'], function (footballManager) {
     $scope.password="lalala";
     $scope.alreadyHaveAccount = "already have account. ";
     $scope.signIn = "signIn";
-    $scope.logIn = function () {
-        $location.url("/logIn");
-    }
+    $scope.signUp = "signUp";
   });
 
 });

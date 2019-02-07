@@ -4,7 +4,7 @@ define([
     'angular',
     'angular-route'
     ],
-  function(config, dependencyResolverFor, angular) {
+  function(config, dependencyResolverFor) {
     var footballManager = angular.module('footballManager', ['ngRoute']);
     footballManager
       .config(
