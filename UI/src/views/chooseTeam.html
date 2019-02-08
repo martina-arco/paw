@@ -1,23 +1,29 @@
 <link rel="stylesheet" href="../assets/css/register.css"/>
 
-<div class="contain">
-  <div class="translucent"></div>
-  <div class="content">
+<div class="sufee-login d-flex align-content-center flex-wrap">
+  <div class="container">
+    <div class="login-content">
 
-    <h2>{{chooseTeam}}</h2>
-
-    <form modelAttribute="chooseTeamForm">
-      <div class="form-group">
-          <input type="radio" ng-repeat="team in teams" required="true" value="{{team.id}}"/>
-          {{team.name}}
-          <br>
+      <div class="login-logo">
+        <span class="align-content">{{chooseTeam}}</span>
       </div>
 
-      <div class="right">
-        <button type="submit" class="btn btn-success" ng-click="submit()">{{start}} &nbsp; <i class="fa fa-play"></i>
-        </button>
+      <div class="login-form">
+        <form modelAttribute="chooseTeamForm">
+          <div class="form-group">
+              <input type="radio" ng-repeat="team in teams" required="true" value="{{team.id}}"/>
+              {{team.name}}
+              <br>
+          </div>
+
+          <div class="right">
+            <button type="submit" class="btn btn-success" ng-click="submit()">{{start}} &nbsp; <i class="fa fa-play"></i>
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+
+    </div>
   </div>
 </div>
 
