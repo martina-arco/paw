@@ -3,16 +3,33 @@
   <head>
 
     <meta charset="utf-8">
-    <title>footballManager</title>
-    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Football Manager</title>
+    <meta name="description" content="Football Manager">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shortcut icon" href="assets/favicon.ico"/>
+    <link rel="apple-touch-icon" href="assets/favicon.ico"/>
+
+    <link rel="stylesheet" href="assets/css/normalize.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/themify-icons.css"/>
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css"/>
+
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="assets/css/style.css"/>
+
+    <link rel="stylesheet" href="assets/css/navbar.css"/>
     <link rel="stylesheet" href="assets/css/background.css"/>
-    <link rel="stylesheet" href="assets/css/register.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
   </head>
 
   <body ng-controller="IndexCtl">
 
-    <div ng-view></div>
+    <div ng-view=""></div>
 
     <script src="scripts/require.js" data-main="scripts/build.js"></script>
     <script src="scripts/commonUtils.js"></script>
