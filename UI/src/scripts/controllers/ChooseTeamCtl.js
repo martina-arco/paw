@@ -4,6 +4,8 @@ define(['footballManager', 'services/TeamService'], function (footballManager) {
         TeamService.getTeams().then(function (response) {
             $scope.teams = response.data;
         });
+        
+        $scope.teamSelected = null;
 
         $scope.submit = function () {
             TeamService.chooseTeam($scope.teamSelected).then(

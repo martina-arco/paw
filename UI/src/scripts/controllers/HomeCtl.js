@@ -5,7 +5,7 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
             $scope.team = response.data;
         });
 
-        MatchService.getNextMatch().then(function (response) {
+        MatchService.getUpcomingMatch().then(function (response) {
             $scope.upcomingMatch = response.data;
         });
 

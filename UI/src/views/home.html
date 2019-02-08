@@ -1,6 +1,4 @@
-
 <link rel="stylesheet" href="../assets/css/home.css"/>
-
 
 <div class="animated fadeIn p-5">
   <div class="row">
@@ -16,7 +14,7 @@
           <div class="b-b-1 pt-3"></div>
           <div class="row ml-1 mr-1">
             <div class="col-6 trust-text">
-              {{boardTrust}}
+              {{BOARDTRUST}}
             </div>
             <div class="col-5 p-0 progress mt-3">
               <div class="progress-bar bg-info" role="progressbar" style="width: ${team.boardTrust}%" aria-valuemin="0"
@@ -25,7 +23,7 @@
           </div>
           <div class="row ml-1 mr-1">
             <div class="col-6 trust-text">
-              {{fanTrust}}
+              {{FANTRUST}}
             </div>
             <div class="col-5 p-0 progress mt-3">
               <div class="progress-bar bg-info" role="progressbar" style="width: {{team.fanTrust}}%"
@@ -37,31 +35,31 @@
 
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">{{nextMatch}}<span class="pull-right">{{date}}</span></strong>
+          <strong class="card-title">{{NEXTMATCH}}<span class="pull-right">{{date}}</span></strong>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
 
             <div ng-switch on="team.name">
               <div ng-switch-when="team1">
-                {{homeVersus}}
+                {{HOMEVERSUS}}
                 <span class="pull-right">{{upcomingMatch.team2}}</span>
               </div>
 
               <div ng-switch-default>
-                {{awayVersus}}
+                {{AWAYVERSUS}}
                 <span class="pull-right">{{upcomingMatch.team1}}</span>
               </div>
             </div>
 
           </li>
           <li class="list-group-item">
-            {{stadium}}
+            {{STADIUM}}
             <span class="pull-right">{{upcomingMatch.stadium}}</span>
           </li>
           <li class="list-group-item">
             <a href="match.html" class="pull-right">
-              <button class="btn btn-success" ng-click="playMatch()">{{playMatch}} &nbsp; <i class="fa fa-play"></i>
+              <button class="btn btn-success" ng-click="playMatch()">{{PLAYMATCH}} &nbsp; <i class="fa fa-play"></i>
               </button>
             </a>
           </li>
@@ -73,17 +71,17 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">{{players}}</strong>
+          <strong class="card-title">{{PLAYERS}}</strong>
         </div>
         <div class="card-body">
           <table class="table table-hover bg-white small table-sm">
             <thead>
             <tr>
-              <th scope="col">{{name}}</th>
-              <th scope="col">{{salary}}</th>
-              <th scope="col">{{value}}</th>
-              <th scope="col">{{fitness}}</th>
-              <th scope="col">{{age}}</th>
+              <th scope="col">{{NAME}}</th>
+              <th scope="col">{{SALARY}}</th>
+              <th scope="col">{{VALUE}}</th>
+              <th scope="col">{{FITNESS}}</th>
+              <th scope="col">{{AGE}}</th>
             </tr>
             </thead>
             <tbody>

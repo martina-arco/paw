@@ -1,21 +1,21 @@
-<link rel="stylesheet" href="<c:url value="/assets/css/finance.css"/>"/>
+<link rel="stylesheet" href="../assets/css/finance.css"/>
 
-<span id="lowCost" hidden>${lowCost}</span>
-<span id="upgradeURL" hidden><c:url value="/upgradeStadium"/> </span>
-<span id="financeURL" hidden><c:url value="/finance"/> </span>
-<span id="mediumCost" hidden>${mediumCost}</span>
-<span id="highCost" hidden>${highCost}</span>
-<span id="failMessage" hidden><spring:message code="upgradeFailed"/></span>
-<span id="retry" hidden><spring:message code="retry"/></span>
-<span id="successMessage" hidden><spring:message code="upgradeSuccess"/></span>
-<span id="confirm" hidden><spring:message code="confirm"/></span>
+<!--<span id="lowCost" hidden>${lowCost}</span>-->
+<!--<span id="upgradeURL" hidden><c:url value="/upgradeStadium"/> </span>-->
+<!--<span id="financeURL" hidden><c:url value="/finance"/> </span>-->
+<!--<span id="mediumCost" hidden>${mediumCost}</span>-->
+<!--<span id="highCost" hidden>${highCost}</span>-->
+<!--<span id="failMessage" hidden><spring:message code="upgradeFailed"/></span>-->
+<!--<span id="retry" hidden><spring:message code="retry"/></span>-->
+<!--<span id="successMessage" hidden><spring:message code="upgradeSuccess"/></span>-->
+<!--<span id="confirm" hidden><spring:message code="confirm"/></span>-->
 
 <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
      aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticModalLabel"><spring:message code="operationStatus"/></h5>
+        <h5 class="modal-title" id="staticModalLabel">{{OPERATIONSTATUS}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -25,7 +25,9 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary"><spring:message code="confirm"/></button>
+        <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary">
+          {{CONFIRM}}
+        </button>
       </div>
     </div>
   </div>
@@ -40,8 +42,8 @@
           <div class="stat-widget-one">
             <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
             <div class="stat-content dib">
-              <div class="stat-text"><spring:message code="money"/></div>
-              <div class="stat-digit"><spring:message code="currency" arguments="{{money}}"/></div>
+              <div class="stat-text">{{MONEY}}</div>
+              <div class="stat-digit">$ {{money}}</div>
             </div>
           </div>
         </div>
@@ -54,19 +56,18 @@
         <div class="card-body">
           <div class="clearfix">
             <i class="ti-stats-up bg-flat-color-5 p-3 font-2xl mr-3 float-left text-light"></i>
-            <div class="h5 text-success mb-0 mt-1"><spring:message code="currency" arguments="{{income}}"/></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs small"><spring:message
-                code="income"/></div>
+            <div class="h5 text-success mb-0 mt-1">$ {{income}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs small">{{INCOME}}</div>
           </div>
           <div class="b-b-1 pt-3"></div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <spring:message code="playersSold"/>
-              <span class="pull-right"><spring:message code="currency" arguments="{{playersSold}}"/></span>
+              {{PLAYERSSOLD}}
+              <span class="pull-right">$ {{playersSold}}</span>
             </li>
             <li class="list-group-item">
-              <spring:message code="ticketsSold"/>
-              <span class="pull-right"><spring:message code="currency" arguments="{{ticketsSold}}"/></span>
+              {{TICKETSSOLD}}
+              <span class="pull-right">$ {{ticketsSold}}</span>
             </li>
           </ul>
         </div>
@@ -76,23 +77,22 @@
         <div class="card-body">
           <div class="clearfix">
             <i class="ti-stats-down bg-danger p-3 font-2xl mr-3 float-left text-light"></i>
-            <div class="h5 text-danger mb-0 mt-1"><spring:message code="currency" arguments="{{expenses}}"/></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs small"><spring:message
-                code="expenses"/></div>
+            <div class="h5 text-danger mb-0 mt-1">$ {{expenses}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs small">{{EXPENSES}}</div>
           </div>
           <div class="b-b-1 pt-3"></div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <spring:message code="playersBought"/>
-              <span class="pull-right"><spring:message code="currency" arguments="{{playersBought}}"/></span>
+              {{PLAYERSBOUGHT}}
+              <span class="pull-right">$ {{playersBought}}</span>
             </li>
             <li class="list-group-item">
-              <spring:message code="salaries"/>
-              <span class="pull-right"><spring:message code="currency" arguments="{{salaries}}"/></span>
+              {{SALARIES}}
+              <span class="pull-right">$ {{salaries}}</span>
             </li>
             <li class="list-group-item">
-              <spring:message code="stadiumExpansion"/>
-              <span class="pull-right"><spring:message code="currency" arguments="{{stadiumExpansion}}"/></span>
+              {{STADIUMEXPANSION}}
+              <span class="pull-right">$ {{stadiumExpansion}}</span>
             </li>
         </div>
       </div>
@@ -100,12 +100,12 @@
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title"><spring:message code="lastReceipts"/></strong>
+          <strong class="card-title">{{LASTRECEIPTS}}</strong>
         </div>
         <ul class="list-group list-group-flush">
             <li ng-repeat="receipt in lastReceipts" class="list-group-item">
-              <spring:message code="receipt.{{receipt.type}}"/>
-              <span class="pull-right"><spring:message code="currency" arguments="{{receipt.amount}}"/></span>
+              {{RECEIPT{{receipt.type}}}}
+              <span class="pull-right">$ {{receipt.amount}}</span>
             </li>
         </ul>
       </div>
@@ -113,29 +113,31 @@
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title"><spring:message code="stadium"/></strong>
+          <strong class="card-title">{{STADIUM}}</strong>
         </div>
         <div class="card-body pt-0">
-          <form id="sForm" modelAttribute="stadiumForm" action="{{upgradeStadium}}" method="post">
+          <form id="sForm" modelAttribute="stadiumForm">
+
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <spring:message code="lowSeats"/>
+                {{LOWSEATS}}
                 <input id="lowInput" cssClass="input-field pull-right" type="number" min="{{stadium.lowClass}}" max="100000" ng-model="stadium.lowClass"/>
               </li>
               <li class="list-group-item">
-                <spring:message code="mediumSeats"/>
+                {{MEDIUMSEATS}}
                 <input id="mediumInput" cssClass="input-field pull-right" path="mediumClass" type="number" min="{{stadium.mediumClass}}" max="100000" ng-model="stadium.mediumClass"/>
               </li>
               <li class="list-group-item">
-                <spring:message code="highSeats"/>
+                {{HIGHSEATS}}
                 <input id="highInput" cssClass="input-field pull-right" path="highClass" type="number" min="{{stadium.highClass}}" max="100000" ng-model="stadium.highClass"/>
               </li>
               <li class="list-group-item">
-                <spring:message code="total"/>
-                <span class="pull-right" id="total">$ 0</span>
+                {{TOTAL}}
+                <span class="pull-right" id="total">{{total}}</span>
               </li>
             </ul>
-            <input type="submit" class="btn btn-info pull-right mt-3" value="<spring:message code="upgradeStadium"/>">
+            <input type="submit" class="btn btn-info pull-right mt-3" ng-click="submitStadium()">
+
           </form>
         </div>
       </div>
