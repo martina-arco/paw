@@ -1,6 +1,6 @@
 define(['footballManager', 'services/LeagueService'], function (footballManager) {
 
-    footballManager.controller("leagueCtl", function ($scope, LeagueService) {
+    footballManager.controller("LeagueCtl", function ($scope, LeagueService) {
         LeagueService.getTeams().then(function (response) {
           $scope.teams = response.data;
         });

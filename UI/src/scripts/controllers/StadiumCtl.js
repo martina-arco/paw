@@ -1,6 +1,6 @@
 define('footballManager', function (footballManager) {
 
-    footballManager.controller("stadiumCtl", function ($scope) {
+    footballManager.controller("StadiumCtl", function ($scope) {
         $scope.stadium = ''; //getStadium
     });
 

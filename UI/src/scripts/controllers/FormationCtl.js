@@ -1,6 +1,6 @@
 define('footballManager', function (footballManager) {
 
-    footballManager.controller("formationCtl", function ($scope) {
+    footballManager.controller("FormationCtl", function ($scope) {
         $scope.mainTeam = {
                 gk: {id: 0, name: ''},
                 lb: {id: 0, name: ''},

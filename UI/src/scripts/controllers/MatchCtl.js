@@ -1,6 +1,6 @@
-define(['../app', 'services/MatchService'], function (footballManager) {
+define(['footballManager', 'services/MatchService'], function (footballManager) {
 
-    footballManager.controller("matchCtl", function ($scope, MatchService) {
+    footballManager.controller("MatchCtl", function ($scope, MatchService) {
         $scope.matches = MatchService.getMatches();
     });
 

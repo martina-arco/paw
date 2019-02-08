@@ -1,4 +1,4 @@
-define(['../app'], function (footballManager) {
+define(['footballManager'], function (footballManager) {
 
     footballManager.controller("chooseTeamCtl", function ($scope) {
         $scope.teamList = "team"; //getTeamList {name, id}

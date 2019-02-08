@@ -1,6 +1,6 @@
 define('footballManager', function (footballManager) {
 
-    footballManager.controller("financeCtl", function ($scope) {
+    footballManager.controller("FinanceCtl", function ($scope) {
         $scope.summary = {
             playersSold: 0,
             ticketsSold: 0,
