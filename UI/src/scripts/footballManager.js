@@ -2,18 +2,22 @@ define([
     'routes',
     'services/dependencyResolverFor',
     'angular',
-    'angular-route'
+    'angular-route',
+    'angular-translate'
     ],
   function(config, dependencyResolverFor) {
-    var footballManager = angular.module('footballManager', ['ngRoute']);
-    footballManager
-      .config(
+    var footballManager = angular.module('footballManager', [
+      'ngRoute',
+      'pascalprecht.translate'
+    ]);
+    footballManager.config(
         ['$routeProvider',
           '$controllerProvider',
           '$compileProvider',
           '$filterProvider',
           '$provide',
-          function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
+          '$translateProvider',
+          function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $translateProvider) {
 
             footballManager.controller = $controllerProvider.register;
             footballManager.directive = $compileProvider.directive;

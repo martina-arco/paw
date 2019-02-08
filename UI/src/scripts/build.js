@@ -4,6 +4,7 @@ requirejs.config({
   paths: {
     angular: 'angular.min',
     'angular-route': 'angular-route.min',
+    'angular-translate': 'angular-translate/angular-translate',
     jquery: 'jquery.min',
     requirejs: 'require'
   },
@@ -19,7 +20,12 @@ requirejs.config({
       deps: [
         'angular'
       ]
-    }
+    },
+    'angular-translate': {
+      deps: [
+        'angular'
+      ]
+    },
   },
 
   packages: [  ]
