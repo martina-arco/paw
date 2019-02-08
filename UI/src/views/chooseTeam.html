@@ -10,14 +10,20 @@
 
       <div class="login-form">
         <form modelAttribute="chooseTeamForm">
+
           <div class="form-group">
-              <input type="radio" ng-repeat="team in teams" required="true" value="{{team.id}}"/>
-              {{team.name}}
-              <br>
+            <ul ng-repeat="team in teams">
+              <label>
+                <input type="radio" ng-model="teamSelected" name="choose-team-input"
+                       value="{{team.id}}" required>
+                {{team.name}}
+              </label>
+            </ul>
           </div>
 
           <div class="right">
-            <button type="submit" class="btn btn-success" ng-click="submit()">{{start}} &nbsp; <i class="fa fa-play"></i>
+            <button type="submit" class="btn btn-success" ng-click="submit()">{{start}} &nbsp;
+              <i class="fa fa-play"></i>
             </button>
           </div>
         </form>

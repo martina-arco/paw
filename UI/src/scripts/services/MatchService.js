@@ -1,4 +1,4 @@
-define("footballManager", function(footballManager) {
+define(['footballManager'], function(footballManager) {
 
    footballManager.service('MatchService', function($http) {
        this.url = "./api/matches/";
@@ -9,6 +9,10 @@ define("footballManager", function(footballManager) {
 
        this.getMatch = function () {
          return $http.get(this.url + 'match');
+       };
+
+       this.getNextMatch = function () {
+         return $http.get(this.url + 'nextMatch');
        };
    })
 });

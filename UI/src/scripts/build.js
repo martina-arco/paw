@@ -9,7 +9,8 @@ requirejs.config({
     requirejs: 'require',
     popper: '../assets/js/popper.min',
     plugins: '../assets/js/plugins.js',
-    main: '../assets/js/main.js'
+    main: '../assets/js/main.js',
+    json3: 'json3.min'
   },
   // shim: makes external libraries reachable
   shim: {

@@ -16,7 +16,7 @@
           <div class="b-b-1 pt-3"></div>
           <div class="row ml-1 mr-1">
             <div class="col-6 trust-text">
-              <spring:message code="boardTrust"/>
+              {{boardTrust}}
             </div>
             <div class="col-5 p-0 progress mt-3">
               <div class="progress-bar bg-info" role="progressbar" style="width: ${team.boardTrust}%" aria-valuemin="0"
@@ -25,7 +25,7 @@
           </div>
           <div class="row ml-1 mr-1">
             <div class="col-6 trust-text">
-              <spring:message code="fanTrust"/>
+              {{fanTrust}}
             </div>
             <div class="col-5 p-0 progress mt-3">
               <div class="progress-bar bg-info" role="progressbar" style="width: {{team.fanTrust}}%"
@@ -37,31 +37,31 @@
 
       <div class="card">
         <div class="card-header">
-          <strong class="card-title"><spring:message code="nextMatch"/><span class="pull-right">{{date}}</span></strong>
+          <strong class="card-title">{{nextMatch}}<span class="pull-right">{{date}}</span></strong>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
 
             <div ng-switch on="team.name">
               <div ng-switch-when="team1">
-                <spring:message code="homeVersus"/>
-                <span class="pull-right">{{team2}}</span>
+                {{homeVersus}}
+                <span class="pull-right">{{upcomingMatch.team2}}</span>
               </div>
 
               <div ng-switch-default>
-                <spring:message code="awayVersus"/>
-                <span class="pull-right">{{team1}}</span>
+                {{awayVersus}}
+                <span class="pull-right">{{upcomingMatch.team1}}</span>
               </div>
             </div>
 
           </li>
           <li class="list-group-item">
-            <spring:message code="stadium"/>
-            <span class="pull-right">{{stadium}}</span>
+            {{stadium}}
+            <span class="pull-right">{{upcomingMatch.stadium}}</span>
           </li>
           <li class="list-group-item">
             <a href="match.html" class="pull-right">
-              <button class="btn btn-success" ng-click="playMatch()"><spring:message code="playMatch"/> &nbsp; <i class="fa fa-play"></i>
+              <button class="btn btn-success" ng-click="playMatch()">{{playMatch}} &nbsp; <i class="fa fa-play"></i>
               </button>
             </a>
           </li>
@@ -73,22 +73,24 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title"><spring:message code="players"/></strong>
+          <strong class="card-title">{{players}}</strong>
         </div>
         <div class="card-body">
           <table class="table table-hover bg-white small table-sm">
             <thead>
             <tr>
-              <th scope="col"><spring:message code="name"/></th>
-              <th scope="col"><spring:message code="salary"/></th>
-              <th scope="col"><spring:message code="value"/></th>
-              <th scope="col"><spring:message code="fitness"/></th>
-              <th scope="col"><spring:message code="age"/></th>
+              <th scope="col">{{name}}</th>
+              <th scope="col">{{salary}}</th>
+              <th scope="col">{{value}}</th>
+              <th scope="col">{{fitness}}</th>
+              <th scope="col">{{age}}</th>
             </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="player in players">
-                <th scope="row"><a href="/{{player.id}}}">{{player.name}}</a></th>
+              <tr ng-repeat="player in playersList">
+                <th scope="row">
+                  <a href="/{{player.id}}}">{{player.name}}</a>
+                </th>
                 <td>{{player.salary}}</td>
                 <td>{{player.value}}</td>
                 <td>{{player.fitness}}</td>
@@ -101,3 +103,6 @@
     </div>
   </div>
 </div>
+
+<script src="../assets/js/lib/chart-js/Chart.bundle.js"></script>
+<script src="../assets/js/playerInfo.js"></script>
