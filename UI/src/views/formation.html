@@ -1,12 +1,11 @@
-
-    <link rel="stylesheet" href="<c:url value="/assets/css/formation.css"/>"/>
+<link rel="stylesheet" href="../assets/css/formation.css"/>
 
 <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
      aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticModalLabel"><spring:message code="formationChange"/></h5>
+        <h5 class="modal-title" id="staticModalLabel">{{FORMATIONCHANGE}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -24,8 +23,7 @@
             <div style="position: relative; left: 0; top: 0;">
             <img src="../assets/img/soccerField.jpg"  class="formationImage"/>
 
-                <form modelAttribute="formationForm" action="{{postPath}}" method="post"
-                           data-error="{{error}}" id="form">
+                <form modelAttribute="formationForm" id="form">
 
                 <div class="formationContent">
                 <%-- Delanteros --%>
@@ -212,13 +210,13 @@
             <br>
 
             <div class="alert alert-danger" role="alert" id="error">
-              <spring:message code="errorFormation"/>
+              {{ERRORFORMATION}}
             </div>
 
             <ul class="list-group list-group-flush">
 
               <li class="list-group-item">
-                <spring:message code="substitutes"/> <p></p>
+                {{SUBSTITUTES}} <p></p>
 
               <%-- Suplentes --%>
                 <select ng-model="sub1" id="sub1" onchange="update(this.id, value)">
@@ -287,7 +285,7 @@
               </li>
 
               <li class="list-group-item">
-                <spring:message code="captain"/>
+                {{CAPTAIN}}
                 <span class="pull-right">
                   <select ng-model="cap" id="cap" onchange="update(this.id, value)">
                     <option value="{{cap.id}}">{{cap.name}}</option>
@@ -301,7 +299,7 @@
               </li>
 
               <li class="list-group-item">
-                <spring:message code="freekickTaker"/>
+                {{FREEKICKTAKER}}
                 <span class="pull-right">
                   <select ng-model="fk" id="fk" onchange="update(this.id, value)">
                     <option value="{{fk.id}}">{{fk.name}}</option>
@@ -315,7 +313,7 @@
               </li>
 
               <li class="list-group-item">
-                <spring:message code="penaltyTaker"/>
+                {{PENALTYTAKER}}
                 <span class="pull-right">
                   <select ng-model="pen" id="pen" onchange="update(this.id, value)">
                     <option value="{{pen.id}}">{{pen.name}}</option>
@@ -329,22 +327,22 @@
               </li>
 
             <li class="list-group-item">
-              <spring:message code="pressure"/>
+              {{PRESSURE}}
               <span class="pull-right">
 
                 <select ng-model="pressureSelected" id="pressure" onchange="update(this.id, value)">
-                  <option value="{{pressureSelected}}"><spring:message code="pressure.{{pressureSelected}}"/></option>
+                  <option value="{{pressureSelected}}">{{PRESSURE{{pressureSelected}}}}</option>
                   <option ng-repeat="pressure in pressures"
                           value="{{pressure}}"
                           ng-selected="{{pressureSelected != pressure}}">
-                    <spring:message code="pressure.{{pres}}"/>
+                    {{PRESSURE{{pres}}}}
                   </option>
                 </select>
 
               </span>
             </li>
               <li class="list-group-item">
-                <spring:message code="attitude"/>
+                {{ATTITUDE}}
                 <span class="pull-right">
 
                   <select ng-model="attitudeSelected" id="attitude" onchange="update(this.id, value)">

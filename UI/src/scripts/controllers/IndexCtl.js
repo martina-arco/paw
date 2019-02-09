@@ -2,13 +2,19 @@
 var translation_en = {
 
   lang: 'en',
+
   Size: 'Username must be between {2} and {1} characters long',
   PatternUserFormusername: 'Username can only contain letters and numbers',
   userid: '{0} your current id is! - Master Yoda',
   usergreeting: 'Hello {0}!',
   remember_me: 'Remember me',
+
   boardTrust: 'Board trust',
   fanTrust: 'Fan trust',
+
+  //PLAYERS
+  name: 'Name',
+  age: 'Age',
   playerfinishing: 'Finishing',
   playerdefending: 'Defending',
   playerpassing: 'Passing',
@@ -17,23 +23,27 @@ var translation_en = {
   playersalary: 'Salary',
   playervalue: 'Value',
   retire: 'Retire',
+  hire: 'Hire',
+
+  //FORMATION
   formation: 'Formation',
-  name: 'Name',
-  age: 'Age',
-  finance: 'Finance',
   attributes: 'Attributes',
   stadium: 'Stadium',
+
+  //MATCH
   league: 'League',
   away: 'Away',
   score: 'Score',
   awayVersus: 'Away against',
   homeVersus: 'Home against',
+  playMatch: 'Play match',
   home: 'Home',
   events: 'Events',
-  playMatch: 'Play match',
-  hire: 'Hire',
   remove: 'Remove',
   goals: 'Goals',
+
+  //FINANCE
+  finance: 'Finance',
   money: 'Money',
   income: 'Income',
   ticketsSold: 'Tickets sold',
@@ -47,6 +57,10 @@ var translation_en = {
   lowSeats: 'Low seats',
   mediumSeats: 'Medium seats',
   highSeats: 'High seats',
+  lowSeatsCost: 'Low seats cost $',
+  mediumSeatsCost: 'Medium seats cost $',
+  highSeatsCost: 'High seats cost $',
+
   save: 'Save',
   playerNameAndAge: '{0} (Age:{1})',
   currency: '$ {0}',
@@ -218,6 +232,9 @@ var translation_es = {
   lowSeats: 'Asientos bajos',
   mediumSeats: 'Asientos medios',
   highSeats: 'Asientos altos',
+  lowSeatsCost: 'Asientos bajos cuestan $',
+  mediumSeatsCost: 'Asientos medios cuestan $',
+  highSeatsCost: 'Asientos altos cuestan $',
   save: 'Guardar',
   playerNameAndAge: '{0} (Edad:{1})',
   currency: '$ {0}',
@@ -490,6 +507,9 @@ define(['footballManager'], function (footballManager) {
     $scope.CHOOSETEAM = translations["chooseTeam"];
     $scope.ERRORLOGIN = translations["errorLogIn"];
     $scope.ERROR404 = translations["404"];
+    $scope.LOWSEATSCOST = translations["lowSeatsCost"];
+    $scope.MEDIUMSEATSCOST = translations["mediumSeatsCost"];
+    $scope.HIGHSEATSCOST = translations["highSeatsCost"];
 
   });
 

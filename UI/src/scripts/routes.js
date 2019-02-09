@@ -1,8 +1,8 @@
 define([], function() {
   return {
-    defaultRoutePath: '/login',
+    defaultRoutePath: '/home',
     routes: {
-      '/home/:playerId': {
+      '/home': {
         templateUrl: 'views/home.html',
         controller: 'HomeCtl'
       },
