@@ -2,6 +2,7 @@
 
 <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
      aria-hidden="true" data-backdrop="static">
+
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,6 +13,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 
@@ -26,184 +28,98 @@
                 <form modelAttribute="formationForm" id="form">
 
                 <div class="formationContent">
-                <%-- Delanteros --%>
+                <!--Delanteros-->
                 <div class="row forwards d-flex justify-content-center">
 
-                  <select ng-model="lw" id="lw" onchange="update(this.id, value)">
-                    <option value="{{lw.id}}">{{lw.name}}</option>
-                      <option ng-repeat="player in players"
-                              value="{{player.id}}"
-                              ng-selected="{{player.id != lw.id && player.position == 3}}">
-                        {{player.name}}
-                      </option>
+                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                          ng-model="formation.lw">
                   </select>
 
-                  <select ng-model="lf" id="lf" onchange="update(this.id, value)">
-                    <option value="{{lf.id}}">{{lf.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != lf.id && player.position == 3}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                          ng-model="formation.lf">
                   </select>
 
-                  <select ng-model="st" id="st" onchange="update(this.id, value)">
-                    <option value="{{st.id}}">{{st.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != st.id && player.position == 3}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                          ng-model="formation.st">
                   </select>
 
-                  <select ng-model="rf" id="rf" onchange="update(this.id, value)">
-                    <option value="{{rf.id}}">{{lf.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != rf.id && player.position == 3}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                          ng-model="formation.rf">
                   </select>
 
-                  <select ng-model="rw" id="rw" onchange="update(this.id, value)">
-                    <option value="{{rw.id}}">{{rw.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != rw.id && player.position == 3}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                          ng-model="formation.rw">
                   </select>
 
                 </div>
 
-                <%-- Volantes --%>
+                <!--Volantes -->
                 <div class="row topMid d-flex justify-content-center">
 
-                  <select ng-model="cam" id="cam" onchange="update(this.id, value)">
-                    <option value="{{cam.id}}">{{cam.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != cam.id && player.position == 2}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                          ng-model="formation.cam">
                   </select>
 
                 </div>
                 <div class="row mid d-flex justify-content-center">
-                  <select ng-model="lm" id="lm" onchange="update(this.id, value)">
-                    <option value="{{lm.id}}">{{cam.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != lm.id && player.position == 2}}">
-                      {{player.name}}
-                    </option>
+
+                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                          ng-model="formation.lm">
                   </select>
 
-                  <select ng-model="lcm" id="lcm" onchange="update(this.id, value)">
-                    <option value="{{lcm.id}}">{{lcm.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != lcm.id && player.position == 2}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                          ng-model="formation.lcm">
                   </select>
 
-                  <select ng-model="rcm" id="rcm" onchange="update(this.id, value)">
-                    <option value="{{rcm.id}}">{{rcm.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != rcm.id && player.position == 2}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                          ng-model="formation.rcm">
                   </select>
 
-                  <select ng-model="rm" id="rm" onchange="update(this.id, value)">
-                    <option value="{{rm.id}}">{{rm.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != rm.id && player.position == 2}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                          ng-model="formation.rm">
                   </select>
 
                 </div>
                 <div class="row lowMid d-flex justify-content-center">
 
-                  <select ng-model="cdm" id="cdm" onchange="update(this.id, value)">
-                    <option value="{{cdm.id}}">{{cdm.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != cdm.id && player.position == 2}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                          ng-model="formation.cdm">
                   </select>
 
                 </div>
 
-                <%-- Defensores --%>
+                <!--Defensores-->
                 <div class="row backs d-flex justify-content-between">
 
-                  <select ng-model="lb" id="lb" onchange="update(this.id, value)">
-                    <option value="{{lb.id}}">{{lb.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != lb.id && player.position == 1}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                          ng-model="formation.lb">
                   </select>
 
-                  <select ng-model="rb" id="rb" onchange="update(this.id, value)">
-                    <option value="{{rb.id}}">{{rb.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != rb.id && player.position == 1}}">
-                      {{player.name}}
-                    </option>
+                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                          ng-model="formation.rb">
                   </select>
 
                 </div>
                   <div class="row backsCenter d-flex justify-content-center">
 
-                    <select ng-model="lcb" id="lcb" onchange="update(this.id, value)">
-                      <option value="{{lcb.id}}">{{lcb.name}}</option>
-                      <option ng-repeat="player in players"
-                              value="{{player.id}}"
-                              ng-selected="{{player.id != lcb.id && player.position == 1}}">
-                        {{player.name}}
-                      </option>
+                    <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                            ng-model="formation.lcb">
                     </select>
 
-                    <select ng-model="cb" id="cb" onchange="update(this.id, value)">
-                      <option value="{{cb.id}}">{{cb.name}}</option>
-                      <option ng-repeat="player in players"
-                              value="{{player.id}}"
-                              ng-selected="{{player.id != cb.id && player.position == 1}}">
-                        {{player.name}}
-                      </option>
+                    <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                            ng-model="formation.cb">
                     </select>
 
-                    <select ng-model="rcb" id="rcb" onchange="update(this.id, value)">
-                      <option value="{{rcb.id}}">{{rcb.name}}</option>
-                      <option ng-repeat="player in players"
-                              value="{{player.id}}"
-                              ng-selected="{{player.id != rcb.id && player.position == 1}}">
-                        {{player.name}}
-                      </option>
+                    <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                            ng-model="formation.rcb">
                     </select>
                 </div>
 
-                <%-- Arquero --%>
+                <!--Arquero-->
                 <div class="row goalKeeper d-flex justify-content-center">
-
-                  <select ng-model="gk" id="gk" onchange="update(this.id, value)">
-                    <option value="{{gk.id}}">{{gk.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != gk.id && player.position == 0}}">
-                      {{player.name}}
-                    </option>
-                  </select>
-
+                    <select ng-options="player.id as player.name for player in goalKeepers track by player.id"
+                            ng-model="formation.gk">
+                    </select>
                 </div>
             </div>
 
@@ -218,68 +134,33 @@
               <li class="list-group-item">
                 {{SUBSTITUTES}} <p></p>
 
-              <%-- Suplentes --%>
-                <select ng-model="sub1" id="sub1" onchange="update(this.id, value)">
-                  <option value="{{sub1.id}}">{{sub1.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub1.id}}">
-                    {{player.name}}
-                  </option>
+              <!--Suplentes-->
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub1">
                 </select>
 
-                <select ng-model="sub2" id="sub2" onchange="update(this.id, value)">
-                  <option value="{{sub2.id}}">{{sub2.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub2.id}}">
-                    {{player.name}}
-                  </option>
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub2">
                 </select>
 
-                <select ng-model="sub3" id="sub3" onchange="update(this.id, value)">
-                  <option value="{{sub3.id}}">{{sub3.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub3.id}}">
-                    {{player.name}}
-                  </option>
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub3">
                 </select>
 
-                <select ng-model="sub4" id="sub4" onchange="update(this.id, value)">
-                  <option value="{{sub4.id}}">{{sub4.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub4.id}}">
-                    {{player.name}}
-                  </option>
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub4">
                 </select>
 
-                <select ng-model="sub5" id="sub5" onchange="update(this.id, value)">
-                  <option value="{{sub5.id}}">{{sub5.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub5.id}}">
-                    {{player.name}}
-                  </option>
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub5">
                 </select>
 
-                <select ng-model="sub6" id="sub6" onchange="update(this.id, value)">
-                  <option value="{{sub6.id}}">{{sub6.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub6.id}}">
-                    {{player.name}}
-                  </option>
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub6">
                 </select>
 
-                <select ng-model="sub7" id="sub7" onchange="update(this.id, value)">
-                  <option value="{{sub7.id}}">{{sub7.name}}</option>
-                  <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != sub7.id}}">
-                    {{player.name}}
-                  </option>
+                <select ng-options="player.id as player.name for player in substitutes track by player.id"
+                        ng-model="formation.sub7">
                 </select>
 
               </li>
@@ -287,42 +168,33 @@
               <li class="list-group-item">
                 {{CAPTAIN}}
                 <span class="pull-right">
-                  <select ng-model="cap" id="cap" onchange="update(this.id, value)">
-                    <option value="{{cap.id}}">{{cap.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != cap.id}}">
-                      {{player.name}}
-                    </option>
+
+                  <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
+                          ng-model="formation.cap">
                   </select>
+
                 </span>
               </li>
 
               <li class="list-group-item">
                 {{FREEKICKTAKER}}
                 <span class="pull-right">
-                  <select ng-model="fk" id="fk" onchange="update(this.id, value)">
-                    <option value="{{fk.id}}">{{fk.name}}</option>
-                    <option ng-repeat="player in players"
-                          value="{{player.id}}"
-                          ng-selected="{{player.id != fk.id}}">
-                    {{player.name}}
-                    </option>
+
+                  <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
+                          ng-model="formation.fk">
                   </select>
+
                 </span>
               </li>
 
               <li class="list-group-item">
                 {{PENALTYTAKER}}
                 <span class="pull-right">
-                  <select ng-model="pen" id="pen" onchange="update(this.id, value)">
-                    <option value="{{pen.id}}">{{pen.name}}</option>
-                    <option ng-repeat="player in players"
-                            value="{{player.id}}"
-                            ng-selected="{{player.id != pen.id}}">
-                      {{player.name}}
-                    </option>
+
+                  <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
+                          ng-model="formation.pen">
                   </select>
+
                 </span>
               </li>
 
@@ -330,13 +202,8 @@
               {{PRESSURE}}
               <span class="pull-right">
 
-                <select ng-model="pressureSelected" id="pressure" onchange="update(this.id, value)">
-                  <option value="{{pressureSelected}}">{{PRESSURE{{pressureSelected}}}}</option>
-                  <option ng-repeat="pressure in pressures"
-                          value="{{pressure}}"
-                          ng-selected="{{pressureSelected != pressure}}">
-                    {{PRESSURE{{pres}}}}
-                  </option>
+                <select ng-options="pressure for pressure in pressures"
+                        ng-model="formation.pressure">
                 </select>
 
               </span>
@@ -345,28 +212,18 @@
                 {{ATTITUDE}}
                 <span class="pull-right">
 
-                  <select ng-model="attitudeSelected" id="attitude" onchange="update(this.id, value)">
-                    <option value="{{attitudeSelected}}"><spring:message code="attitude.{{attitudeSelected}}"/></option>
-                    <option ng-repeat="attitude in attitudes"
-                            value="{{attitude}}"
-                            ng-selected="{{attitudeSelected != attitude}}">
-                      <spring:message code="attitude.{{pres}}"/>
-                    </option>
+                  <select ng-options="attitude for attitude in attitudes"
+                          ng-model="formation.attitude">
                   </select>
 
                 </span>
               </li>
               <li class="list-group-item">
-                <spring:message code="formation"/>
+                {{FORMATION}}
                 <span class="pull-right">
 
-                  <select ng-model="formationSelected" id="formation" onchange="update(this.id, value)">
-                    <option value="{{formationSelected}}"><spring:message code="formation.{{formationSelected}}"/></option>
-                    <option ng-repeat="formation in formations"
-                            value="{{formation}}"
-                            ng-selected="{{formationSelected != formation}}">
-                      <spring:message code="formation.{{pres}}"/>
-                    </option>
+                  <select ng-options="formation for formation in formations"
+                          ng-model="formation.formation">
                   </select>
 
                 </span>
@@ -374,7 +231,7 @@
 
             <li class="list-group-item">
                <span class="pull-right">
-                 <input type="submit" value="<spring:message code="save"/>" class="btn btn-success" id="submit"/>
+                 <input type="submit" value="{{SAVE}}" class="btn btn-success" id="submit"/>
                </span>
             </li>
             </ul>
@@ -390,13 +247,13 @@
           <table class="table table-hover bg-white small table-sm">
             <thead>
             <tr>
-              <th scope="col"><spring:message code="name"/></th>
-              <th scope="col"><spring:message code="fitness"/></th>
-              <th scope="col"><spring:message code="skillLevel"/></th>
-              <th scope="col"><spring:message code="goalKeeping"/></th>
-              <th scope="col"><spring:message code="finishing"/></th>
-              <th scope="col"><spring:message code="defending"/></th>
-              <th scope="col"><spring:message code="passing"/></th>
+              <th scope="col">{{NAME}}</th>
+              <th scope="col">{{FITNESS}}</th>
+              <th scope="col">{{SKILLLEVEL}}</th>
+              <th scope="col">{{GOALKEEPING}}</th>
+              <th scope="col">{{FINISHING}}</th>
+              <th scope="col">{{DEFENDING}}</th>
+              <th scope="col">{{PASSING}}</th>
             </tr>
             </thead>
             <tbody>
@@ -416,4 +273,5 @@
     </div>
   </div>
 </div>
-</div>
+
+<script src="../assets/js/formation.js"></script>

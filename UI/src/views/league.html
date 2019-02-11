@@ -1,7 +1,7 @@
 
-<link rel="stylesheet" href="/assets/css/home.css"/>
-<link rel="stylesheet" href="/assets/css/match.css">
-<link rel="stylesheet" href="/assets/css/league.css"/>
+<link rel="stylesheet" href="../assets/css/home.css"/>
+<link rel="stylesheet" href="../assets/css/match.css">
+<link rel="stylesheet" href="../assets/css/league.css"/>
 
 <div class="animated fadeIn p-5">
   <div class="row">
@@ -20,11 +20,11 @@
             <ul class="m-0">
               <li>
                 <h5>{{matchesPlayed}}</h5>
-                <spring:message code="matchesPlayed"/>
+                {{MATCHESPLAYED}}
               </li>
               <li>
                 <h5>{{matchesToPlay}}</h5>
-                <spring:message code="matchesToPlay"/>
+                {{MATCHESTOPLAY}}
               </li>
             </ul>
           </div>
@@ -32,15 +32,15 @@
       </div>
       <div class="card">
         <div class="card-header">
-          <strong class="card-title"><spring:message code="upcomingMatches"/></strong>
+          <strong class="card-title">{{UPCOMINGMATCHES}}</strong>
         </div>
         <div class="card-body">
           <table class="table bg-white small center header-fixed">
             <thead>
             <tr>
-              <th scope="col" class="match-stadium"><spring:message code="stadium"/></th>
-              <th scope="col" class="match-home"><spring:message code="home"/></th>
-              <th scope="col" class="match-away"><spring:message code="away"/></th>
+              <th scope="col" class="match-stadium">{{STADIUM}}</th>
+              <th scope="col" class="match-home">{{HOME}}</th>
+              <th scope="col" class="match-away">{{AWAY}}</th>
             </tr>
             </thead>
 
@@ -59,15 +59,15 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title"><spring:message code="positionTable"/></strong>
+          <strong class="card-title">{{POSITIONTABLE}}</strong>
         </div>
         <div class="card-body">
           <table class="table bg-white small center header-fixed">
             <thead>
             <tr>
-              <th scope="col" class="match-position"><spring:message code="position"/></th>
-              <th scope="col" class="match-team"><spring:message code="team"/></th>
-              <th scope="col" class="match-points"><spring:message code="points"/></th>
+              <th scope="col" class="match-position">{{POSITION}}</th>
+              <th scope="col" class="match-team">{{TEAM}}</th>
+              <th scope="col" class="match-points">{{POINTS}}</th>
             </tr>
             </thead>
 

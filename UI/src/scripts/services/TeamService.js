@@ -1,7 +1,7 @@
 define(['footballManager'], function(footballManager) {
 
   footballManager.service('TeamService', function($http, $q) {
-      this.url = './api/v1/teams/';
+      this.url = './api/v1/';
 
       this.getTeams = function () {
         return $http.get(this.url + 'teams');

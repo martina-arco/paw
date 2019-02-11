@@ -1,11 +1,11 @@
-define(['footballManager', 'services/LeagueService', 'services/TeamService'], function (footballManager) {
+define(['footballManager', 'services/LeagueService', 'services/TeamService', 'services/MatchService'], function (footballManager) {
 
-    footballManager.controller("LeagueCtl", function ($scope, LeagueService, TeamService) {
+    footballManager.controller('LeagueCtl', function ($scope, LeagueService, TeamService, MatchService) {
         TeamService.getTeams().then(function (response) {
           $scope.teams = response.data;
         });
 
-        LeagueService.getUpcomingMatches().then(function (response) {
+        MatchService.getUpcomingMatches().then(function (response) {
           $scope.upcomingMatches = response.data;
         });
 
