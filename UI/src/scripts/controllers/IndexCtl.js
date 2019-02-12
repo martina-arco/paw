@@ -60,6 +60,8 @@ var translation_en = {
   lowSeatsCost: 'Low seats cost $',
   mediumSeatsCost: 'Medium seats cost $',
   highSeatsCost: 'High seats cost $',
+  buy: 'Buy',
+  sell: 'Sell',
 
   save: 'Save',
   playerNameAndAge: '{0} (Age:{1})',
@@ -235,6 +237,8 @@ var translation_es = {
   lowSeatsCost: 'Asientos bajos cuestan $',
   mediumSeatsCost: 'Asientos medios cuestan $',
   highSeatsCost: 'Asientos altos cuestan $',
+  buy: 'Comprar',
+  sell: 'Vender',
   save: 'Guardar',
   playerNameAndAge: '{0} (Edad:{1})',
   currency: '$ {0}',
@@ -352,6 +356,12 @@ define(['footballManager'], function (footballManager) {
   }]);
 
   footballManager.controller("IndexCtl", function ($scope, $translate, $location) {
+
+    $scope.currentPath = $location.path();
+
+    $scope.isActive = function (viewLocation) {
+      return viewLocation === $location.path();
+    };
 
     var translations = translation_en;
     if (getBrowserLanguage() == "es") {
@@ -510,6 +520,8 @@ define(['footballManager'], function (footballManager) {
     $scope.LOWSEATSCOST = translations["lowSeatsCost"];
     $scope.MEDIUMSEATSCOST = translations["mediumSeatsCost"];
     $scope.HIGHSEATSCOST = translations["highSeatsCost"];
+    $scope.BUY = translations["buy"];
+    $scope.SELL = translations["sell"];
 
   });
 

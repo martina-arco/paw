@@ -1,8 +1,13 @@
-define(['footballManager', 'services/MatchEndService'], function (footballManager) {
+define(['footballManager', 'services/MatchService'], function (footballManager) {
 
-    footballManager.controller("MatchEndCtl", function ($scope, MatchEndService) {
-        $scope.matches = MatchEndService.getMatches();
-        $scope.match = MatchEndService.getMatch();
+    footballManager.controller("MatchEndCtl", function ($scope, MatchService) {
+        MatchService.getMatches().then(function (response) {
+            $scope.matches = response.data;
+        });
+
+        MatchService.getMatch().then(function (response) {
+            $scope.match = response.data;
+        });
     });
 
 });

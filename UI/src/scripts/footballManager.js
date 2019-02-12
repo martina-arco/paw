@@ -17,7 +17,8 @@ define([
           '$filterProvider',
           '$provide',
           '$translateProvider',
-          function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $translateProvider) {
+          function($routeProvider, $controllerProvider, $compileProvider, $filterProvider,
+                   $provide, $translateProvider) {
 
             footballManager.controller = $controllerProvider.register;
             footballManager.directive = $compileProvider.directive;

@@ -1,19 +1,20 @@
-<link rel="stylesheet" href="/assets/css/match.css" xmlns:spring="http://www.springframework.org/tags"/>
+<link rel="stylesheet" href="../assets/css/match.css"/>
 
 
 <div class="animated fadeIn p-5">
   <div class="row">
+
     <div class="col-6">
       <div class="card">
         <div class="card-body">
           <table class="table bg-white">
 
             <thead class="green">
-            <tr>
-              <th scope="col"><spring:message code="home"/></th>
-              <th scope="col" colspan="2"><spring:message code="score"/></th>
-              <th scope="col"><spring:message code="away"/></th>
-            </tr>
+              <tr>
+                <th scope="col">{{HOME}}</th>
+                <th scope="col" colspan="2">{{SCORE}}</th>
+                <th scope="col">{{AWAY}}</th>
+              </tr>
             </thead>
 
             <tbody>
@@ -42,7 +43,7 @@
               <h5>{{match.homeTeam.name}}</h5>
             </div>
             <div class="col">
-              <h5><spring:message code="homeAndAwayScore" arguments="{{match.homeScore}},{{match.awayScore}}"/></h5>
+              <h5>{{HOMEANDAWAYSCORE}} {{match.homeScore}}{{match.awayScore}}</h5>
             </div>
             <div class="col">
               <h5>{{match.awayTeam.name}}</h5>
@@ -53,7 +54,7 @@
             <h5>{{match.stadium}}</h5>
           </div>
 
-          <h6><spring:message code="goals"/></h6>
+          <h6>{{GOALS}}</h6>
 
           <table class="table width60 table-borderless table-center">
 
@@ -62,12 +63,12 @@
                 <tr ng-repeat="event in match.events">
                     <td>
                         <div ng-if="{event.p1.teamId == match.homeTeam.id}}">
-                            <spring:message code="{{event.type}}" arguments="{{event.minute}},{{event.p1.name}}"/>
+                            {{event.type}} {{event.minute}}{{event.p1.name}}
                         </div>
                     </td>
                     <td>
                         <div ng-if="{event.p1.teamId != match.homeTeam.id}}">
-                            <spring:message code="{{event.type}}" arguments="{{event.minute}},{{event.p1.name}}"/>
+                            {{event.type}} {{event.minute}}{{event.p1.name}}
                         </div>
                     </td>
                 </tr>

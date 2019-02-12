@@ -1,6 +1,6 @@
-define(['footballManager'], function (footballManager) {
+define(['footballManager', 'services/PlayerService'], function (footballManager) {
 
-  footballManager.controller("TransferCtl", function ($scope) {
+  footballManager.controller("TransferCtl", function ($scope, PlayerService) {
     $scope.players = [
       {name:'hola', id:1, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
       {name:'como', id:2, position:1, fitness: 0, skillLevel:2, goalKeeping:0, finishing:0, defending:2, passing:3},
@@ -9,18 +9,12 @@ define(['footballManager'], function (footballManager) {
       {name:'bien', id:5, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3}
     ];
 
-    $scope.criterias = {
-      AGE: "LESSTHAN",
-      VALUE: "LESSTHAN",
-      SALARY: "LESSTHAN",
-      GOALKEEPING: "LESSTHAN",
-      DEFENSE: "LESSTHAN",
-      PASS: "LESSTHAN",
-      FINISH:"LESSTHAN",
-      SKILL: "LESSTHAN",
-      POTENTIAL:"LESSTHAN"
-    };
-    $scope.criteriaTypes = ["AGE","VALUE", "SALARY","GOALKEEPING", "DEFENSE","PASS","FINISH","SKILL","POTENTIAL"];
+    PlayerService.getPlayers().then(function (response) {
+      $scope.players = response.data;
+    });
+
+
+    $scope.criteriaTypes = ["AGE","VALUE", "SALARY", "DEFENSE","GOALKEEPING","PASS","FINISH","SKILL","POTENTIAL"];
 
     $scope.criteriaNumberSelected = new Array($scope.criteriaTypes.length);
     $scope.criteriaTypeSelected = [];

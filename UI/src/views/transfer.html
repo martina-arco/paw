@@ -32,7 +32,28 @@
 
             <div ng-repeat="criteria in criteriaTypes">
 
-              <span ng-if="$index % 3 == 0 && $index != 0">
+              <span ng-if="$index % 3 != 2 ">
+
+                  <div class="col-1 filter-label p-0">
+                    {{criteria}}
+                  </div>
+
+                  <div class="col-3 pl-1">
+
+                    <select class="filter-field" ng-model="criteriaTypeSelected[$index]">
+                      <option value="ANY">{{ANY}}</option>
+                      <option value="LESSTHAN">{{LESSTHAN}}</option>
+                      <option value="MORETHAN">{{GREATERTHAN}}</option>
+                      <option value="EQUALS">{{EQUALS}}</option>
+                    </select>
+
+                    <input class="filter-field" type="number" ng-disabled="criteriaTypeSelected[$index] == 'ANY'" ng-model="criteriaNumberSelected[$index]">
+
+                  </div>
+
+              </span>
+
+              <span ng-if="$index % 3 == 2">
                 <div class="row ml-0 pb-2">
 
                   <div class="col-4 filter-label p-0">
@@ -53,27 +74,6 @@
                   </div>
 
                 </div>
-              </span>
-
-              <span ng-if="$index % 3 != 0">
-
-                  <div class="col-1 filter-label p-0">
-                    {{criteria}}
-                  </div>
-
-                  <div class="col-3 pl-1">
-
-                    <select class="filter-field" ng-model="criteriaTypeSelected[$index]">
-                      <option value="ANY">{{ANY}}</option>
-                      <option value="LESSTHAN">{{LESSTHAN}}</option>
-                      <option value="MORETHAN">{{GREATERTHAN}}</option>
-                      <option value="EQUALS">{{EQUALS}}</option>
-                    </select>
-
-                    <input class="filter-field" type="number" ng-disabled="criteriaTypeSelected[$index] == 'ANY'" ng-model="criteriaNumberSelected[$index]">
-
-                  </div>
-
               </span>
 
             </div>
@@ -118,7 +118,10 @@
                 <th>{{player.value}}</th>
                 <th>{{player.salary}}</th>
                 <th>{{player.potential}}</th>
-                <th>{{player.action}}</th>
+                <th>
+                  <button type="button" ng-click="buyPlayer(player.id)">{{BUY}}</button>
+                  <button type="button" ng-click="sellPlayer(player.id)">{{SELL}}</button>
+                </th>
               </tr>
             </tbody>
           </table>

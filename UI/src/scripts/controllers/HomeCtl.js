@@ -1,6 +1,6 @@
 define(['footballManager', 'services/PlayerService', 'services/MatchService', 'services/TeamService'], function (footballManager) {
 
-    footballManager.controller("HomeCtl", function ($scope, PlayerService, MatchService, TeamService) {
+    footballManager.controller("HomeCtl", function ($scope, $window, $location, PlayerService, MatchService, TeamService) {
         TeamService.getTeam().then(function (response) {
             $scope.team = response.data;
         });
@@ -13,9 +13,10 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
             $scope.playersList = response.data;
         });
 
-        PlayerService.getPlayerInfo().then(function (response) {
-            $scope.currentPlayer = response.data;
-        });
+        $scope.playMatch = function () {
+          $location.url('/match');
+          // $location.replace();
+        }
     });
 
 });
