@@ -23,6 +23,11 @@ define(['footballManager'], function(footballManager) {
                   frontPlayers.push(player);
             }
         });
-    }
+    };
+
+    this.saveFormation = function (formation) {
+      const body = JSON.stringify({formation: formation});
+      return $http.post(this.url + 'formation', body);
+    };
   })
 });

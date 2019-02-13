@@ -38,13 +38,21 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
             $scope.players = response.data;
         });
 
+        // $scope.formation = {formation:"541"};
+
+        $scope.saveFormation = function () {
+            // $scope.error = FormationService.saveFormation($scope.formation);
+            $scope.error = true;
+        };
+
+        $scope.error = false;
         $scope.goalKeepers = [];
         $scope.backPlayers = [];
         $scope.wingPlayers = [];
         $scope.frontPlayers = [];
 
-        FormationService.fillPositionArrays($scope.players, $scope.goalKeepers, $scope.backPlayers,
-          $scope.wingPlayers, $scope.frontPlayers);
+        // FormationService.fillPositionArrays($scope.players, $scope.goalKeepers, $scope.backPlayers,
+        //   $scope.wingPlayers, $scope.frontPlayers);
 
     });
 
