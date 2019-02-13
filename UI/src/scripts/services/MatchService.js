@@ -15,8 +15,8 @@ define(['footballManager'], function(footballManager) {
          return $http.get(this.url + 'match/upcomingMatch');
        };
 
-     this.getUpcomingMatches = function () {
-       return $http.get(this.url + 'matches/upcomingMatches');
-     };
+       this.getUpcomingMatches = function () {
+         return $http.get(this.url + 'matches/upcomingMatches');
+       };
    })
 });

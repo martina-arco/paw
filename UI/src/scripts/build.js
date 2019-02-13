@@ -10,7 +10,9 @@ requirejs.config({
     popper: '../assets/js/popper.min',
     plugins: '../assets/js/plugins.js',
     main: '../assets/js/main.js',
-    json3: 'json3.min'
+    json3: 'json3.min',
+    'chart': 'Chart.min',
+    'angular-chart': 'angular-chart.min'
   },
   // shim: makes external libraries reachable
   shim: {
@@ -18,6 +20,12 @@ requirejs.config({
       exports: 'angular',
       deps: [
         'jquery'
+      ]
+    },
+    'angular-chart': {
+      deps: [
+        'angular',
+        'chart'
       ]
     },
     'angular-route': {
@@ -29,7 +37,7 @@ requirejs.config({
       deps: [
         'angular'
       ]
-    },
+    }
   },
 
   packages: [  ]

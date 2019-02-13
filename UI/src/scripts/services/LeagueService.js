@@ -6,5 +6,9 @@ define(['footballManager'], function(footballManager) {
         this.getLeagueInformation = function () {
             return $http.get(this.url + 'league');
         };
+
+        this.getPositionTable = function () {
+            return $http.get(this.url + 'league/positionTable');
+        }
     })
 });

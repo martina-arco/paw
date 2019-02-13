@@ -35,7 +35,12 @@ define(['footballManager'], function(footballManager) {
     };
 
     this.getStadiumFinance = function () {
-      return $http.get(this.url + 'stadiumFinance');
-    }
+      return $http.get(this.url + 'stadium');
+    };
+
+    this.postStadiumFinance = function (finance) {
+      var body = JSON.stringify(finance);
+      return $http.post(this.url + 'stadium', body);
+    };
   })
 });
