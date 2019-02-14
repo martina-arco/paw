@@ -17,7 +17,7 @@ define(['footballManager'], function(footballManager) {
     //   stadium: int
     // }
     this.getEconomy = function () {
-      return $http.get(this.url + 'economy');
+        return $http.get(this.url + 'economy');
     };
 
     // [
@@ -31,16 +31,16 @@ define(['footballManager'], function(footballManager) {
     //   }
     // ]
     this.getReceipts = function () {
-      return $http.get(this.url + 'receipts');
+        return $http.get(this.url + 'receipts');
     };
 
     this.getStadiumFinance = function () {
-      return $http.get(this.url + 'stadium');
+        return $http.get(this.url + 'stadium');
     };
 
     this.postStadiumFinance = function (finance) {
-      var body = JSON.stringify(finance);
-      return $http.post(this.url + 'stadium', body);
+        var body = JSON.stringify(finance);
+        return $http.post(this.url + 'stadium', body);
     };
   })
 });

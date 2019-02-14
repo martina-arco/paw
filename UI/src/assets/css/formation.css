@@ -120,6 +120,10 @@ select {
     color: black;
 }
 
+.bigger-card-body {
+    padding: 5px;
+}
+
 thead th {
     background-color: #4dbd74;
 }

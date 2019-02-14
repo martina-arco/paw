@@ -37,29 +37,18 @@
       <div class="card">
         <div class="card-body">
 
-          <div class="row green center big-height big-padding">
+          <table class="table bg-white">
 
-            <div class="col">
-              <h5>{{match.homeTeam.name}}</h5>
-            </div>
-            <div class="col">
-              <h5>{{HOMEANDAWAYSCORE}} {{match.homeScore}}{{match.awayScore}}</h5>
-            </div>
-            <div class="col">
-              <h5>{{match.awayTeam.name}}</h5>
-            </div>
-          </div>
-
-          <div class="container center">
-            <h5>{{match.stadium}}</h5>
-          </div>
-
-          <h6>{{GOALS}}</h6>
-
-          <table class="table width60 table-borderless table-center">
+            <thead>
+              <tr>
+                <th scope="col">{{match.homeTeam.name}}</th>
+                <th scope="col">{{match.homeScore}}x{{match.awayScore}}</th>
+                <th scope="col">{{match.awayTeam.name}}</th>
+                <th>{{match.stadium}}</th>
+              </tr>
+            </thead>
 
             <tbody>
-
                 <tr ng-repeat="event in match.events">
                     <td>
                         <div ng-if="{event.p1.teamId == match.homeTeam.id}}">

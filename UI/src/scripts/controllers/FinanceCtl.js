@@ -6,7 +6,6 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
         var initialMediumClass = 0;
         var initialHighClass = 0;
 
-
         FinanceService.getEconomy().then(function (response) {
             $scope.summary = response.data.summary;
             $scope.balance = response.data.balance;
@@ -24,6 +23,10 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
             initialMediumClass = $scope.stadium.mediumClass;
             initialHighClass = $scope.stadium.highClass;
         // });
+
+        $scope.submitStadiumUpgrade = function () {
+            FinanceService.postStadiumFinance($scope.stadium);
+        };
 
         $scope.lowClassSpent = 0;
         $scope.mediumClassSpent = 0;

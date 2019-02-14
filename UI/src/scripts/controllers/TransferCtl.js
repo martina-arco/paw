@@ -14,7 +14,9 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
     });
 
 
-    $scope.criteriaTypes = ["AGE","VALUE", "SALARY", "DEFENSE","GOALKEEPING","PASS","FINISH","SKILL","POTENTIAL"];
+    $scope.criteriaTypes = [["AGE","VALUE", "SALARY"], ["DEFENSE","GOALKEEPING","PASS"],["FINISH","SKILL","POTENTIAL"]];
+
+    $scope.isClosed = true;
 
     $scope.criteriaNumberSelected = new Array($scope.criteriaTypes.length);
     $scope.criteriaTypeSelected = [];

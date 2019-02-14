@@ -10,25 +10,50 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
         });
 
         PlayerService.getPlayers().then(function (response) {
-            $scope.playersList = response.data;
+            $scope.players = response.data;
         });
 
         $scope.player = {name:'marti', age: 18, salary: 1000, value: 10000,
           finishing:1, defending:2, passing:3, goalKeeping:0};
+
+        // $scope.player =
+
+        $scope.players = [
+          {name:'hola', id:1, age:20, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
+          {name:'como', id:2, age:18, position:1, fitness: 0, skillLevel:2, goalKeeping:0, finishing:0, defending:2, passing:3},
+          {name:'estas', id:3, age:23, position:2, fitness: 0, skillLevel:2, goalKeeping:0, finishing:0, defending:2, passing:3},
+          {name:'lala', id:4, age:24,position:3, fitness: 0, skillLevel:2, goalKeeping:0, finishing:0, defending:2, passing:3},
+          {name:'bien', id:5, age:22,position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3}
+        ];
 
         $scope.labels = [
           $scope.PLAYERFINISHING,
           $scope.PLAYERDEFENDING,
           $scope.PLAYERPASSING,
           $scope.PLAYERGOALKEEPING
-        ]
-        ;
+        ];
+
         $scope.data = [
           $scope.player.finishing,
           $scope.player.defending,
           $scope.player.passing,
           $scope.player.goalKeeping
         ];
+
+        $scope.changePlayer = function (id) {
+            $scope.players.forEach(function (player) {
+                if(player.id == id) {
+                  $scope.player = player;
+                }
+            });
+
+            $scope.data = [
+              $scope.player.finishing,
+              $scope.player.defending,
+              $scope.player.passing,
+              $scope.player.goalKeeping
+            ];
+        };
 
         $scope.playMatch = function () {
           $location.url('/match');

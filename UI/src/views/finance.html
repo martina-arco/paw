@@ -34,7 +34,7 @@
 </div>
 
 
-<div class="animated fadeIn p-5">
+<div class="animated fadeIn p-3">
   <div class="row">
     <div class="col-lg-4 col-md-6">
       <div class="card">
@@ -120,29 +120,66 @@
 
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                {{LOWSEATS}}
-                <input id="lowInput" cssClass="input-field pull-right" type="number" min="{{stadium.lowClass}}" max="100000"
-                       placeholder="{{stadium.lowClass}}" ng-model="stadium.lowClass" ng-click="refreshLowClass()"/> ${{lowClassSpent}}
-                <p><small>{{LOWSEATSCOST}}{{stadium.lowClassPrice}}</small></p>
+                <div class="row">
+                  <div class="col-5 without-padding">
+                    {{LOWSEATS}}
+                  </div>
+                  <div class="col-4 without-padding">
+                    <input id="lowInput" cssClass="input-field pull-right" type="number" min="{{stadium.lowClass}}" max="100000"
+                         placeholder="{{stadium.lowClass}}" ng-model="stadium.lowClass" ng-change="refreshLowClass()"/>
+                  </div>
+                  <div class="col-3 without-padding text-center">
+                    ${{lowClassSpent}}
+                  </div>
+                </div>
+                <div class="row">
+                  <p><small>{{LOWSEATSCOST}}{{stadium.lowClassPrice}}</small></p>
+                </div>
               </li>
               <li class="list-group-item">
-                {{MEDIUMSEATS}}
-                <input id="mediumInput" cssClass="input-field pull-right" path="mediumClass" type="number" min="{{stadium.mediumClass}}" max="100000"
-                       placeholder="{{stadium.mediumClass}}" ng-model="stadium.mediumClass" ng-click="refreshMediumClass()"/> ${{mediumClassSpent}}
-                <p><small>{{MEDIUMSEATSCOST}}{{stadium.mediumClassPrice}}</small></p>
+                <div class="row">
+                  <div class="col-5 without-padding">
+                    {{MEDIUMSEATS}}
+                  </div>
+                  <div class="col-4 without-padding">
+                    <input id="mediumInput" cssClass="input-field pull-right" type="number" min="{{stadium.mediumClass}}" max="100000"
+                       placeholder="{{stadium.mediumClass}}" ng-model="stadium.mediumClass" ng-change="refreshMediumClass()"/>
+                  </div>
+                  <div class="col-3 without-padding text-center">
+                    ${{mediumClassSpent}}
+                  </div>
+                </div>
+                <div class="row">
+                  <p><small>{{MEDIUMSEATSCOST}}{{stadium.mediumClassPrice}}</small></p>
+                </div>
               </li>
               <li class="list-group-item">
-                {{HIGHSEATS}}
-                <input id="highInput" cssClass="input-field pull-right" path="highClass" type="number" min="{{stadium.highClass}}" max="100000"
-                       placeholder="{{stadium.highClass}}" ng-model="stadium.highClass" ng-click="refreshHighClass()"/> ${{highClassSpent}}
-                <p><small>{{HIGHSEATSCOST}}{{stadium.highClassPrice}}</small></p>
+                <div class="row">
+                  <div class="col-5 without-padding">
+                    {{HIGHSEATS}}
+                  </div>
+                  <div class="col-4 without-padding">
+                    <input id="highInput" cssClass="input-field pull-right" type="number" min="{{stadium.highClass}}" max="100000"
+                       placeholder="{{stadium.highClass}}" ng-model="stadium.highClass" ng-change="refreshHighClass()"/>
+                    </div>
+                  <div class="col-3 without-padding text-center">
+                    ${{highClassSpent}}
+                  </div>
+                </div>
+                <div class="row">
+                  <p><small>{{HIGHSEATSCOST}}{{stadium.highClassPrice}}</small></p>
+                </div>
               </li>
-              <li class="list-group-item">
-                {{TOTAL}}
-                <span class="pull-right" id="total">$ {{lowClassSpent + mediumClassSpent + highClassSpent}}</span>
+              <li class="list-group-item row">
+                <div class="col-9 without-padding">
+                  {{TOTAL}}
+                </div>
+                <div class="col-3 without-padding text-center">
+                  <span id="total">$ {{lowClassSpent + mediumClassSpent + highClassSpent}}</span>
+                </div>
               </li>
             </ul>
-            <input type="submit" class="btn btn-info pull-right mt-3" ng-click="submitStadium()">
+            <input type="submit" class="btn btn-info pull-right mt-3" ng-click="submitStadiumUpgrade()">
 
           </form>
         </div>
@@ -150,5 +187,3 @@
     </div>
   </div>
 </div>
-
-<script src="../assets/js/finance.js"></script>

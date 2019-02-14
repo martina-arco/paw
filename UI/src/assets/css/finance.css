@@ -2,3 +2,7 @@
     text-align: right;
     height: 24px;
 }
+
+.without-padding {
+    padding: 0px;
+}

@@ -2,17 +2,19 @@ requirejs.config({
   baseUrl: 'scripts',
   // paths: maps ids with paths (no extension)
   paths: {
-    angular: 'angular.min',
-    'angular-route': 'angular-route.min',
+    angular: '../assets/js/angular.min',
+    'angular-route': '../assets/js/angular-route.min',
     'angular-translate': 'angular-translate/angular-translate',
-    jquery: 'jquery.min',
+    jquery: '../assets/js/jquery',
     requirejs: 'require',
     popper: '../assets/js/popper.min',
+    bootstrap: '../assets/js/bootstrap.bundle',
+    collapse: '../assets/js/collapse',
     plugins: '../assets/js/plugins.js',
     main: '../assets/js/main.js',
-    json3: 'json3.min',
-    'chart': 'Chart.min',
-    'angular-chart': 'angular-chart.min'
+    json3: '../assets/js/json3',
+    'chart': '../assets/js/Chart.min',
+    'angular-chart': '../assets/js/angular-chart'
   },
   // shim: makes external libraries reachable
   shim: {
@@ -33,6 +35,18 @@ requirejs.config({
         'angular'
       ]
     },
+    bootstrap: {
+      deps: [
+        'jquery'
+      ]
+    },
+    collapse: {
+      deps: [
+        'angular',
+        'jquery',
+        'bootstrap'
+      ]
+    },
     'angular-translate': {
       deps: [
         'angular'
@@ -45,6 +59,8 @@ requirejs.config({
 
 require([
     'angular',
+    'jquery',
+    'bootstrap',
     'footballManager',
     'controllers/IndexCtl'
   ],

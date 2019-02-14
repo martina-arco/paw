@@ -59,10 +59,7 @@
             <span class="pull-right">{{upcomingMatch.stadium}}</span>
           </li>
           <li class="list-group-item">
-            <a href="match.html" class="pull-right">
-              <button class="btn btn-success" ng-click="playMatch()">{{PLAYMATCH}} &nbsp; <i class="fa fa-play"></i>
-              </button>
-            </a>
+              <a ng-href="#!match" class="pull-right">{{PLAYMATCH}} &nbsp; <i class="fa fa-play"></i></a>
           </li>
         </ul>
       </div>
@@ -110,23 +107,21 @@
         <div class="card-body">
           <table class="table table-hover bg-white small table-sm">
             <thead>
-            <tr>
-              <th scope="col">{{NAME}}</th>
-              <th scope="col">{{SALARY}}</th>
-              <th scope="col">{{VALUE}}</th>
-              <th scope="col">{{FITNESS}}</th>
-              <th scope="col">{{AGE}}</th>
-            </tr>
+              <tr>
+                <th scope="col" class="center">{{NAME}}</th>
+                <th scope="col" class="center">{{SALARY}}</th>
+                <th scope="col" class="center">{{VALUE}}</th>
+                <th scope="col" class="center">{{FITNESS}}</th>
+                <th scope="col" class="center">{{AGE}}</th>
+              </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="player in playersList">
-                <th scope="row">
-                  <a href="/{{player.id}}}">{{player.name}}</a>
-                </th>
-                <td>{{player.salary}}</td>
-                <td>{{player.value}}</td>
-                <td>{{player.fitness}}</td>
-                <td>{{player.age}}</td>
+              <tr ng-repeat="player in players" ng-click="changePlayer(player.id)">
+                <td class="center">{{player.name}}</td>
+                <td class="center">{{player.salary}}</td>
+                <td class="center">{{player.value}}</td>
+                <td class="center">{{player.fitness}}</td>
+                <td class="center">{{player.age}}</td>
               </tr>
             </tbody>
           </table>

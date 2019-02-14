@@ -20,8 +20,9 @@
     opacity: 1;
 }
 
-.btn-light {
-    width: 100px;
+
+.full-width {
+    width: 100%;
 }
 
 .team-name {
@@ -35,6 +36,10 @@
 
 .trust-text {
     margin-top: 12px;
+}
+
+.center {
+  align-content: center;
 }
 
 thead th {
