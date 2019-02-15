@@ -4,13 +4,15 @@ define([
     'angular',
     'angular-route',
     'angular-translate',
-    'angular-chart'
+    'angular-chart',
+    'ngDialog'
     ],
   function(config, dependencyResolverFor) {
     var footballManager = angular.module('footballManager', [
       'ngRoute',
       'pascalprecht.translate',
-      'chart.js'
+      'chart.js',
+      'ngDialog'
     ]);
     footballManager.config(
         ['$routeProvider',

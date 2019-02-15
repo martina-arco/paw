@@ -38,13 +38,13 @@ define([], function() {
         templateUrl: 'views/matchEnd.html',
         controller: 'MatchEndCtl'
       },
-      '/stadium': {
-        templateUrl: 'views/stadium.html',
-        controller: 'StadiumCtl'
-      },
       '/transfer': {
         templateUrl: 'views/transfer.html',
         controller: 'TransferCtl'
+      },
+      '/404': {
+        templateUrl: 'views/404.html',
+        controller: 'IndexCtl'
       }
     }
   }

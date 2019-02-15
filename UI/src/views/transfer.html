@@ -1,35 +1,50 @@
 <link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css"/>
 <link rel="stylesheet" href="../assets/css/transfer.css"/>
-
-<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
-     aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticModalLabel">{{OPERATIONSTATUS}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="modalContent">
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
+<link rel="stylesheet" href="../assets/css/home.css"/>
+<link rel="stylesheet" href="../assets/css/match.css">
+<link rel="stylesheet" href="../assets/css/league.css"/>
 
 <div class="animated fadeIn p-3">
+
+  <div class="row">
+    <div class="col-6">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="stat-widget-one">
+            <div class="stat-icon dib"><i class="ti-exchange-vertical text-danger border-danger"></i></div>
+            <div class="stat-content dib">
+              <div class="team-name">{{PASSES}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="weather-category twt-category m-0 p-0">
+            <ul class="m-0">
+              <li>
+                <h5>{{playerCount}}</h5>
+                Player count
+              </li>
+              <li>
+                <h5>{{playersAvailable}}</h5>
+                Players available
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
 
         <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#filters"
                 aria-expanded="false" aria-controls="filters" ng-click="isClosed = !isClosed">
-          Filter information <i ng-class="{'fa fa-angle-down': isClosed, 'fa fa-angle-up': !isClosed}"></i>
+          {{FILTERINFORMATION}} <i ng-class="{'fa fa-angle-down': isClosed, 'fa fa-angle-up': !isClosed}"></i>
         </button>
 
         <div class="collapse" id="filters">
@@ -38,24 +53,24 @@
 
             <form id="filterForm" method="post">
 
-              <div class="row" ng-repeat="criterias in criteriaTypes">
+              <div class="row" ng-repeat="(key, value) in criteriaTypes">
 
-                <div ng-repeat="criteria in criterias" class="col-4">
+                <div ng-repeat="criteria in value" class="col-4">
 
                   <div class="col-4 filter-label p-0">
                     {{criteria}}
                   </div>
 
                   <div class="col-8 pl-1">
-                    <select class="filter-field" ng-model="criteriaTypeSelected[$index]">
+                    <select class="filter-field" ng-model="criteriaTypeSelected[key][$index]">
                       <option value="ANY">{{ANY}}</option>
                       <option value="LESSTHAN">{{LESSTHAN}}</option>
                       <option value="MORETHAN">{{GREATERTHAN}}</option>
                       <option value="EQUALS">{{EQUALS}}</option>
                     </select>
 
-                    <input class="filter-field" type="number" ng-disabled="criteriaTypeSelected[$index] == 'ANY'"
-                           ng-model="criteriaNumberSelected[$index]">
+                    <input class="filter-field" type="number" ng-disabled="criteriaTypeSelected[key][$index] == 'ANY'"
+                           ng-model="criteriaNumberSelected[key][$index]">
                   </div>
 
                 </div>
@@ -64,7 +79,7 @@
 
               <div class="row">
                 <div class="col pt-2">
-                  <input class="btn btn-light pull-right" type="submit" value="FILTER" ng-click="submitFilter()"/>
+                  <input class="btn btn-success pull-right" type="submit" value="{{FILTER}}" ng-click="submitFilter()"/>
                 </div>
               </div>
 

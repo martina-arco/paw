@@ -14,7 +14,8 @@ requirejs.config({
     main: '../assets/js/main.js',
     json3: '../assets/js/json3',
     'chart': '../assets/js/Chart.min',
-    'angular-chart': '../assets/js/angular-chart'
+    'angular-chart': '../assets/js/angular-chart',
+    ngDialog: '../assets/js/ngDialog'
   },
   // shim: makes external libraries reachable
   shim: {
@@ -38,6 +39,11 @@ requirejs.config({
     bootstrap: {
       deps: [
         'jquery'
+      ]
+    },
+    ngDialog: {
+      deps: [
+        'angular'
       ]
     },
     collapse: {

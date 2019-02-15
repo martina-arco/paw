@@ -45,6 +45,11 @@
               },
               {
                 "glob": "*",
+                "input": "node_modules/ng-dialog/js",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
                 "input": "node_modules/angular-chart.js/dist",
                 "output": "assets/js/"
               },
@@ -71,6 +76,11 @@
               {
                 "glob": "*",
                 "input": "node_modules/bootstrap/dist/css",
+                "output": "assets/css/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/ng-dialog/css",
                 "output": "assets/css/"
               }
             ],

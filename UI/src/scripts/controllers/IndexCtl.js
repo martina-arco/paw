@@ -3,6 +3,22 @@ var translation_en = {
 
   lang: 'en',
 
+  //REGISTRATION
+  appName: 'Football Manager',
+  username: 'Username',
+  password: 'Password',
+  signIn: 'Sign in',
+  dontHaveAccount: "Don't have an account?  ",
+  SignUp: 'Sign up!',
+  SizeregisterFormusername: 'Username must be between {2} and {1} characters long',
+  SizeregisterFormpassword: 'Password must be between {2} and {1} characters long',
+  PatternregisterFormusername: 'Username can only contain letters and numbers',
+  NotNullregisterFormrepeatPassword: 'Passwords dont match',
+  repeatPassword: 'Repeat Password',
+  signUp: 'Sign Up!',
+  signUpButton: 'Sign Up',
+  alreadyHaveAccount: 'Already have an account? ',
+  errorLogIn: 'Username or password incorrect',
   Size: 'Username must be between {2} and {1} characters long',
   PatternUserFormusername: 'Username can only contain letters and numbers',
   userid: '{0} your current id is! - Master Yoda',
@@ -12,7 +28,15 @@ var translation_en = {
   boardTrust: 'Board trust',
   fanTrust: 'Fan trust',
 
+  //NAVBAR
+  tactics: "Tactics",
+  economy: "Economy",
+  passes: "Passes",
+  menuhome: 'Home',
+  logout: 'Log out',
+
   //PLAYERS
+  players: 'Players',
   name: 'Name',
   age: 'Age',
   playerfinishing: 'Finishing',
@@ -24,11 +48,13 @@ var translation_en = {
   playervalue: 'Value',
   retire: 'Retire',
   hire: 'Hire',
-
-  //FORMATION
-  formation: 'Formation',
-  attributes: 'Attributes',
-  stadium: 'Stadium',
+  skillLevel: 'Skill Level',
+  goalKeeping: 'Goalkeeping',
+  finishing: 'Finishing',
+  defending: 'Defending',
+  passing: 'Passing',
+  salary: 'Salary',
+  value: 'Value',
 
   //MATCH
   league: 'League',
@@ -41,6 +67,16 @@ var translation_en = {
   events: 'Events',
   remove: 'Remove',
   goals: 'Goals',
+  playerNameAndAge: '{0} (Age:{1})',
+  homeAndAwayScore: '{0} x {1}',
+  goalScored: 'score',
+  yellowCard: 'yellow card',
+  redCard: 'red card',
+  substitute: 'substitute',
+  eventHOMESCORE: '{0} {1} scored',
+  eventAWAYSCORE: '{0} {1} scored',
+  eventYELLOW_CARD: '{0} Yellow Card to {1}',
+  eventRED_CARD: '{0} Red Card to {1}',
 
   //FINANCE
   finance: 'Finance',
@@ -62,11 +98,25 @@ var translation_en = {
   highSeatsCost: 'High seats cost $',
   buy: 'Buy',
   sell: 'Sell',
-
-  save: 'Save',
-  playerNameAndAge: '{0} (Age:{1})',
   currency: '$ {0}',
-  homeAndAwayScore: '{0} x {1}',
+  upgradeStadium: 'Upgrade stadium',
+  upgradeFailed: 'Insufficient funds',
+  retry: 'Retry',
+  upgradeSuccess: 'Upgrade successful!',
+  confirm: 'Confirm',
+  operationStatus: 'Operation status',
+  total: 'Total',
+  receiptSOLDPLAYER: 'Player - Sold',
+  receiptBOUGHTPLAYER: 'Player - Bought',
+  receiptEXPANDEDSTADIUM: 'Stadium Expansion',
+  receiptMATCHINCOME: 'Ticket Sales',
+  receiptTOURNAMENTPRIZE: 'Prize',
+  receiptPLAYERSSALARIES: 'Salaries',
+
+  //FORMATION
+  formation: 'Formation',
+  attributes: 'Attributes',
+  stadium: 'Stadium',
   penaltyTaker: 'Penalties',
   captain: 'Captain',
   freekickTaker: 'Freekicks',
@@ -79,47 +129,31 @@ var translation_en = {
   medium: 'Medium',
   high: 'High',
   position: 'Position',
-  skillLevel: 'Skill Level',
-  goalKeeping: 'Goalkeeping',
-  finishing: 'Finishing',
-  defending: 'Defending',
-  passing: 'Passing',
-  salary: 'Salary',
-  value: 'Value',
+  pressure0: 'Low',
+  pressure1: 'Medium',
+  pressure2: 'High',
+  attitude0: 'Defensive',
+  attitude1: 'Balanced',
+  attitude2: 'Ofensive',
+  substitutes: 'Substitutes',
+  roles: 'Roles',
+  formationChange: 'Formation changed successfully!',
+  errorFormation: 'Changing formation failed.',
+  playersRepeated:'Players repeated, missing or in incorrect role.',
+
+  //LEAGUE
   upcomingMatches: 'Upcoming matches',
   team: 'Team',
   points: 'Points',
-  goalScored: 'score',
-  yellowCard: 'yellow card',
-  redCard: 'red card',
-  substitute: 'substitute',
-  menuhome: 'Home',
   versus: '{0} vs {1}',
   teams: 'Teams',
-  logout: 'Log out',
   positionTable: 'Position table',
   nextMatch: 'Next match',
   leagueInfo: 'League information',
   matchesPlayed: 'Matches played',
   matchesToPlay: 'Matches remaining',
 
-  appName: 'Legendary Manager',
-  username: 'Username',
-  password: 'Password',
-  signIn: 'Sign in',
-
-  dontHaveAccount: 'Dont have an account?',
-
-  SignUp: 'Sign up!',
-  upgradeStadium: 'Upgrade stadium',
-  upgradeFailed: 'Insufficient funds',
-  retry: 'Retry',
-  upgradeSuccess: 'Upgrade successful!',
-  confirm: 'Confirm',
-  transferFailed: 'Insufficient funds',
-  transferSuccess: 'Transfer successful!',
-  operationStatus: 'Operation status',
-  total: 'Total',
+  //TRANSFER
   potential: 'Potential',
   action: 'Action',
   any: 'Any',
@@ -127,6 +161,7 @@ var translation_en = {
   greaterThan: 'Greater than',
   equals: 'Equal to',
   filter: 'Filter',
+  filterInformation: 'Filter information',
   criteriaAGE: 'Age',
   criteriaVALUE: 'Value',
   criteriaSALARY: 'Salary',
@@ -136,41 +171,17 @@ var translation_en = {
   criteriaFINISH: 'Finishing',
   criteriaSKILL: 'Skill level',
   criteriaPOTENTIAL: 'Potential',
-  pressure0: 'Low',
-  pressure1: 'Medium',
-  pressure2: 'High',
-  attitude0: 'Defensive',
-  attitude1: 'Balanced',
-  attitude2: 'Ofensive',
-  substitutes: 'Substitutes',
-  formationChange: 'Formation changed successfully',
+  errorTransfer: 'Transfer failed.',
+  insufficientFunds: 'Insufficient funds.',
+  transferSuccess: 'Transfer made successfully!',
+
+  //COMMON UTILS
   ok: 'Ok',
-  errorFormation: 'Changing formation failed Players repeated, missing or in incorrect role',
-  players: 'Players',
-  SizeregisterFormusername: 'Username must be between {2} and {1} characters long',
-  SizeregisterFormpassword: 'Password must be between {2} and {1} characters long',
-  PatternregisterFormusername: 'Username can only contain letters and numbers',
-  NotNullregisterFormrepeatPassword: 'Passwords dont match',
-  eventHOMESCORE: '{0} {1} scored',
-  eventAWAYSCORE: '{0} {1} scored',
-  eventYELLOW_CARD: '{0} Yellow Card to {1}',
-  eventRED_CARD: '{0} Red Card to {1}',
-  receiptSOLDPLAYER: 'Player - Sold',
-  receiptBOUGHTPLAYER: 'Player - Bought',
-  receiptEXPANDEDSTADIUM: 'Stadium Expansion',
-  receiptMATCHINCOME: 'Ticket Sales',
-  receiptTOURNAMENTPRIZE: 'Prize',
-  receiptPLAYERSSALARIES: 'Salaries',
-  repeatPassword: 'Repeat Password',
-  signUp: 'Sign Up!',
-  signUpButton: 'Sign Up',
-
-  alreadyHaveAccount: 'Already have an account?',
-
   start: 'Start',
   chooseTeam: 'Choose your Team',
-  errorLogIn: 'Username or password incorrect',
-  error404: 'Page Not Found'
+  save: 'Save',
+  error404: 'Page Not Found',
+  error403: 'You shall not pass!'
 
 };
 
@@ -185,6 +196,13 @@ var translation_es = {
   userid: '{0} your current id is! - Master Yoda',
   usergreeting: 'Hola {0}!',
   remember_me: 'Recordarme',
+
+  //NAVBAR
+  menuhome: 'Inicio',
+  tactics: 'Táctica',
+  economy: 'Economía',
+  passes: 'Pases',
+
   boardTrust: 'Confianza de directivos',
   fanTrust: 'Confianza de fans',
   playerfinishing: 'Definición',
@@ -244,7 +262,7 @@ var translation_es = {
   currency: '$ {0}',
   homeAndAwayScore: '{0} x {1}',
   penaltyTaker: 'Penales',
-  captain: 'Capitan',
+  captain: 'Capitán',
   freekickTaker: 'Tiros Libres',
   attitude: 'Actitud',
   balanced: 'Balanceada',
@@ -262,14 +280,13 @@ var translation_es = {
   passing: 'Pase',
   salary: 'Salario',
   value: 'Valor',
-  upcomingMatches: 'Upcoming matches',
+  upcomingMatches: 'Próximos partidos',
   team: 'Equipo',
   points: 'Puntos',
   goalScored: 'gol',
   yellowCard: 'tarjeta amarilla',
   redCard: 'tarjeta roja',
   substitute: 'cambio',
-  menuhome: 'Inicio',
   versus: '{0} vs {1}',
   teams: 'Equipos',
   logout: 'Cerrar sesión',
@@ -287,25 +304,30 @@ var translation_es = {
   repeatPassword: 'Repetir Contraseña',
   signIn: 'Ingresar',
 
-  dontHaveAccount: 'No tienes una cuenta?',
+  dontHaveAccount: 'No tienes una cuenta? ',
 
   SignUp: 'Registrate!',
 
   substitutes: 'Suplentes',
-  formationChange: 'Formación cambiada exitosamente',
+  roles: 'Roles',
+  formationChange: 'Formación cambiada exitosamente!',
   ok: 'Ok',
-  errorFormation: 'El cambio de formación falló Hay jugadores repetidos, faltantes o en un rol indebido',
+  errorFormation: 'El cambio de formación falló.',
+  playersRepeated:'Hay jugadores repetidos, faltantes o en un rol indebido.',
   signUp: 'Registrate!',
   signUpButton: 'Registrarme',
 
-  alreadyHaveAccount: 'Ya tienes una cuenta?',
+  alreadyHaveAccount: 'Ya tienes una cuenta? ',
   upgradeStadium: 'Expandir estadio',
   upgradeFailed: 'Fondos insuficientes',
   retry: 'Vuelva a intentarlo',
   upgradeSuccess: 'Operación exitosa!',
   confirm: 'Confirmar',
-  transferFailed: 'Transferencia exitosa!',
-  transferSuccess: 'Fondos insuficientes',
+
+  errorTransfer: 'Transferencia falló.',
+  insufficientFunds: 'Fondos insuficientes.',
+  transferSuccess: 'Transferencia exitosa!',
+
   operationStatus: 'Estado de la operación',
   total: 'Total',
   potential: 'Potencial',
@@ -315,6 +337,7 @@ var translation_es = {
   greaterThan: 'Mayor a',
   equals: 'Igual a',
   filter: 'Filtrar',
+  filterInformation: 'Filtrar información',
   pressure0: 'Baja',
   pressure1: 'Media',
   pressure2: 'Alta',
@@ -333,7 +356,8 @@ var translation_es = {
   criteriaSKILL: 'Habilidad',
   criteriaPOTENTIAL: 'Potencial',
   errorLogIn: 'Usuario o contraseña incorrectas',
-  error404: 'Página no encontrada'
+  error404: 'Página no encontrada',
+  error403: 'No puedes pasar!'
 
 };
 
@@ -374,6 +398,12 @@ define(['footballManager'], function (footballManager) {
     $scope.USERID = translations["userid"];
     $scope.USERGREETING = translations["usergreeting"];
     $scope.REMEMBER_ME = translations["remember_me"];
+
+    $scope.MENUHOME = translations["menuhome"];
+    $scope.TACTICS = translations["tactics"];
+    $scope.ECONOMY = translations["economy"];
+    $scope.PASSES = translations["passes"];
+
     $scope.BOARDTRUST = translations["boardTrust"];
     $scope.FANTRUST = translations["fanTrust"];
     $scope.PLAYERFINISHING = translations["playerfinishing"];
@@ -444,7 +474,6 @@ define(['footballManager'], function (footballManager) {
     $scope.YELLOWCARD = translations["yellowCard"];
     $scope.REDCARD = translations["redCard"];
     $scope.SUBSTITUTE = translations["substitute"];
-    $scope.MENUHOME = translations["menuhome"];
     $scope.VERSUS = translations["versus"];
     $scope.TEAMS = translations["teams"];
     $scope.LOGOUT = translations["logout"];
@@ -464,7 +493,8 @@ define(['footballManager'], function (footballManager) {
     $scope.RETRY = translations["retry"];
     $scope.UPGRADESUCCESS = translations["upgradeSuccess"];
     $scope.CONFIRM = translations["confirm"];
-    $scope.TRANSFERFAILED = translations["transferFailed"];
+    $scope.ERRORTRANSFER = translations["errorTransfer"];
+    $scope.INSUFFICIENTFUNDS = translations["insufficientFunds"];
     $scope.TRANSFERSUCCESS = translations["transferSuccess"];
     $scope.OPERATIONSTATUS = translations["operationStatus"];
     $scope.TOTAL = translations["total"];
@@ -475,6 +505,7 @@ define(['footballManager'], function (footballManager) {
     $scope.GREATERTHAN = translations["greaterThan"];
     $scope.EQUALS = translations["equals"];
     $scope.FILTER = translations["filter"];
+    $scope.FILTERINFORMATION = translations["filterInformation"];
     $scope.CRITERIAAGE = translations["criteriaAGE"];
     $scope.CRITERIAVALUE = translations["criteriaVALUE"];
     $scope.CRITERIASALARY = translations["criteriaSALARY"];
@@ -491,9 +522,11 @@ define(['footballManager'], function (footballManager) {
     $scope.ATTITUDE1 = translations["attitude1"];
     $scope.ATTITUDE2 = translations["attitude2"];
     $scope.SUBSTITUTES = translations["substitutes"];
+    $scope.ROLES = translations["roles"];
     $scope.FORMATIONCHANGE = translations["formationChange"];
     $scope.OK = translations["ok"];
     $scope.ERRORFORMATION = translations["errorFormation"];
+    $scope.PLAYERSREPEATED = translations["playersRepeated"];
     $scope.PLAYERS = translations["players"];
     $scope.SIZEREGISTERFORMUSERNAME = translations["SizeregisterFormusername"];
     $scope.SIZEREGISTERFORMPASSWORD = translations["SizeregisterFormpassword"];
@@ -516,7 +549,8 @@ define(['footballManager'], function (footballManager) {
     $scope.START = translations["start"];
     $scope.CHOOSETEAM = translations["chooseTeam"];
     $scope.ERRORLOGIN = translations["errorLogIn"];
-    $scope.ERROR404 = translations["404"];
+    $scope.ERROR404 = translations["error404"];
+    $scope.ERROR403 = translations["error403"];
     $scope.LOWSEATSCOST = translations["lowSeatsCost"];
     $scope.MEDIUMSEATSCOST = translations["mediumSeatsCost"];
     $scope.HIGHSEATSCOST = translations["highSeatsCost"];

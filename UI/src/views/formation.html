@@ -1,26 +1,12 @@
 <link rel="stylesheet" href="../assets/css/formation.css"/>
 
-<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
-     aria-hidden="true" data-backdrop="static">
-
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticModalLabel">{{FORMATIONCHANGE}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
 <div class="animated fadeIn p-3">
   <div class="row">
     <div class="col-6">
       <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{FORMATION}}</strong>
+        </div>
         <div class="card-body">
             <div style="position: relative; left: 0; top: 0;">
             <img src="../assets/img/soccerField.jpg"  class="formationImage"/>
@@ -155,14 +141,19 @@
 
               <div class="alert alert-danger" role="alert" ng-show="error" id="error">
                 {{ERRORFORMATION}}
+                <p><small>{{PLAYERSREPEATED}}</small></p>
               </div>
 
               <ul class="list-group list-group-flush">
 
-                <li class="list-group-item">
-                  {{SUBSTITUTES}} <p></p>
+                <button type="button" class="btn btn-light list-group-item" data-toggle="collapse" data-target="#substitutes"
+                        aria-expanded="false" aria-controls="substitutes" ng-click="substitutesIsClosed = !substitutesIsClosed">
+                  {{SUBSTITUTES}} <i ng-class="{'fa fa-angle-down': substitutesIsClosed, 'fa fa-angle-up': !substitutesIsClosed}"></i>
+                </button>
 
-                <!--Suplentes-->
+                <div class="collapse" id="substitutes">
+
+                  <!--Suplentes-->
                   <select ng-options="player.id as player.name for player in substitutes track by player.id"
                           ng-model="formation.sub1">
                   </select>
@@ -191,77 +182,78 @@
                           ng-model="formation.sub7">
                   </select>
 
-                </li>
+                </div>
+
+                <button type="button" class="btn btn-light list-group-item" data-toggle="collapse" data-target="#roles"
+                        aria-expanded="false" aria-controls="roles" ng-click="rolesIsClosed = !rolesIsClosed">
+                  {{ROLES}} <i ng-class="{'fa fa-angle-down': rolesIsClosed, 'fa fa-angle-up': !rolesIsClosed}"></i>
+                </button>
+
+                <div class="collapse" id="roles">
+                  <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                      {{CAPTAIN}}
+                      <span class="pull-right">
+                        <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
+                                ng-model="formation.cap">
+                        </select>
+                      </span>
+                    </li>
+
+                    <li class="list-group-item">
+                      {{FREEKICKTAKER}}
+                      <span class="pull-right">
+                        <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
+                                ng-model="formation.fk">
+                        </select>
+                      </span>
+                    </li>
+
+                    <li class="list-group-item">
+                      {{PENALTYTAKER}}
+                      <span class="pull-right">
+                        <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
+                                ng-model="formation.pen">
+                        </select>
+                      </span>
+                    </li>
+
+                    <li class="list-group-item">
+                      {{PRESSURE}}
+                      <span class="pull-right">
+                        <select ng-options="pressure for pressure in pressures"
+                                ng-model="formation.pressure">
+                        </select>
+                      </span>
+                    </li>
+
+                    <li class="list-group-item">
+                      {{ATTITUDE}}
+                      <span class="pull-right">
+                        <select ng-options="attitude for attitude in attitudes"
+                                ng-model="formation.attitude">
+                        </select>
+                      </span>
+                    </li>
+
+                    <li class="list-group-item">
+                      {{FORMATION}}
+                      <span class="pull-right">
+                        <select ng-options="formation for formation in formations"
+                                ng-model="formation.formation">
+                        </select>
+                      </span>
+                    </li>
+
+                  </ul>
+                </div>
 
                 <li class="list-group-item">
-                  {{CAPTAIN}}
-                  <span class="pull-right">
-
-                    <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
-                            ng-model="formation.cap">
-                    </select>
-
-                  </span>
+                   <span class="pull-right">
+                     <input type="submit" value="{{SAVE}}" ng-click="saveFormation()" class="btn btn-success" id="submit"/>
+                   </span>
                 </li>
-
-                <li class="list-group-item">
-                  {{FREEKICKTAKER}}
-                  <span class="pull-right">
-
-                    <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
-                            ng-model="formation.fk">
-                    </select>
-
-                  </span>
-                </li>
-
-                <li class="list-group-item">
-                  {{PENALTYTAKER}}
-                  <span class="pull-right">
-
-                    <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
-                            ng-model="formation.pen">
-                    </select>
-
-                  </span>
-                </li>
-
-              <li class="list-group-item">
-                {{PRESSURE}}
-                <span class="pull-right">
-
-                  <select ng-options="pressure for pressure in pressures"
-                          ng-model="formation.pressure">
-                  </select>
-
-                </span>
-              </li>
-                <li class="list-group-item">
-                  {{ATTITUDE}}
-                  <span class="pull-right">
-
-                    <select ng-options="attitude for attitude in attitudes"
-                            ng-model="formation.attitude">
-                    </select>
-
-                  </span>
-                </li>
-                <li class="list-group-item">
-                  {{FORMATION}}
-                  <span class="pull-right">
-
-                    <select ng-options="formation for formation in formations"
-                            ng-model="formation.formation">
-                    </select>
-
-                  </span>
-              </li>
-
-              <li class="list-group-item">
-                 <span class="pull-right">
-                   <input type="submit" value="{{SAVE}}" ng-click="saveFormation()" class="btn btn-success" id="submit"/>
-                 </span>
-              </li>
               </ul>
           </form>
       </div>

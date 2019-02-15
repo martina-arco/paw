@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="../assets/css/finance.css"/>
+<link rel="stylesheet" href="../assets/css/home.css"/>
+
 
 <!--<span id="lowCost" hidden>${lowCost}</span>-->
 <!--<span id="upgradeURL" hidden><c:url value="/upgradeStadium"/> </span>-->
@@ -36,14 +38,26 @@
 
 <div class="animated fadeIn p-3">
   <div class="row">
+
     <div class="col-lg-4 col-md-6">
+
       <div class="card">
-        <div class="card-body">
+        <div class="card-header">
           <div class="stat-widget-one">
             <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
             <div class="stat-content dib">
-              <div class="stat-text">{{MONEY}}</div>
-              <div class="stat-digit">$ {{balance.money}}</div>
+              <div class="team-name">{{ECONOMY}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="row ml-1 mr-1">
+            <div class="col-6 trust-text">
+              {{MONEY}}
+            </div>
+            <div class="col-5 trust-text">
+              ${{balance.money}}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 define(['footballManager', 'services/FormationService', 'services/PlayerService'], function (footballManager) {
 
-    footballManager.controller("FormationCtl", function ($scope, FormationService, PlayerService) {
+    footballManager.controller("FormationCtl", function ($scope, ngDialog, FormationService, PlayerService) {
         // $scope.formation = {
         //         gk: {name:'hola', id:1, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
         //         lb: {name:'como', id:2, position:1, fitness: 0, skillLevel:2, goalKeeping:0, finishing:0, defending:2, passing:3},
@@ -30,6 +30,22 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
         //   {name:'bien', id:5, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3}
         // ];
 
+        $scope.openFormationChangeSuccessModal = function() {
+            ngDialog.open({
+                templateUrl: 'views/formationChangeSuccessModal.html',
+                className: 'ngdialog-theme-default',
+                scope: $scope
+            });
+        };
+
+        $scope.openFormationChangeErrorModal = function() {
+            ngDialog.open({
+                templateUrl: 'views/formationChangeErrorModal.html',
+                className: 'ngdialog-theme-default',
+                scope: $scope
+            });
+        };
+
         FormationService.getFormation().then(function (response) {
             $scope.formation = response.data;
         });
@@ -38,14 +54,19 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
             $scope.players = response.data;
         });
 
-        // $scope.formation = {formation:"541"};
+        $scope.error = false;
+        $scope.substitutesIsClosed = true;
+        $scope.rolesIsClosed = true;
 
         $scope.saveFormation = function () {
             // $scope.error = FormationService.saveFormation($scope.formation);
-            $scope.error = true;
+            // $scope.error = true;
+            if($scope.error)
+              $scope.openFormationChangeErrorModal();
+            else
+              $scope.openFormationChangeSuccessModal();
         };
 
-        $scope.error = false;
         $scope.goalKeepers = [];
         $scope.backPlayers = [];
         $scope.wingPlayers = [];
