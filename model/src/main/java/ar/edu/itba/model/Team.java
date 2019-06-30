@@ -103,6 +103,12 @@ public class Team {
         return leagueId;
     }
 
+    public long getStadiumId() {
+        if(stadium != null)
+            return stadium.getId();
+        return stadiumId;
+    }
+
     public long getFormationId() {
         if(formation != null)
             return formation.getId();

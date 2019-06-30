@@ -29,7 +29,7 @@ import java.util.Properties;
 
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan({"ar.edu.itba.webapp.controllers", "ar.edu.itba.services", "ar.edu.itba.persistence"})
+@ComponentScan({"ar.edu.itba.webapp.controllers.api", "ar.edu.itba.services", "ar.edu.itba.persistence"})
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Value("classpath:schema.sql")
@@ -64,8 +64,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         final SimpleDriverDataSource ds = new SimpleDriverDataSource();
         ds.setDriverClass(org.postgresql.Driver.class);
         ds.setUrl("jdbc:postgresql://localhost/paw-2018a-6");
-        ds.setUsername("paw-2018a-6");
-        ds.setPassword("cwE7rSjw9");
+        ds.setUsername("postgres");
+        ds.setPassword("root");
         return ds;
     }
 
