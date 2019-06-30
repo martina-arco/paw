@@ -41,20 +41,31 @@
     height: 570px;
 }
 
-.forwards {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 20%;
-}
-
 select {
     margin-right: 1%;
     margin-left: 1%;
     font-size: 13px;
+    width: 100%;
+}
+
+.forwards {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 20%;
 }
 
 .forwards select {
     width: 125px;
+}
+
+.lowForwards {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 5%;
+}
+
+.lowForwards select {
+  width: 125px;
 }
 
 .topMid {

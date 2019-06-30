@@ -115,6 +115,7 @@ var translation_en = {
 
   //FORMATION
   formation: 'Formation',
+  formationScheme: 'Formation scheme',
   attributes: 'Attributes',
   stadium: 'Stadium',
   penaltyTaker: 'Penalties',
@@ -171,7 +172,7 @@ var translation_en = {
   criteriaFINISH: 'Finishing',
   criteriaSKILL: 'Skill level',
   criteriaPOTENTIAL: 'Potential',
-  errorTransfer: 'Transfer failed.',
+  errorTransfer: 'Transfer failed',
   insufficientFunds: 'Insufficient funds.',
   transferSuccess: 'Transfer made successfully!',
 
@@ -448,6 +449,7 @@ define(['footballManager'], function (footballManager) {
     $scope.PLAYERNAMEANDAGE = translations["playerNameAndAge: '{0} (Age"];
     $scope.CURRENCY = translations["currency"];
     $scope.HOMEANDAWAYSCORE = translations["homeAndAwayScore"];
+    $scope.FORMATIONSCHEME = translations["formationScheme"];
     $scope.PENALTYTAKER = translations["penaltyTaker"];
     $scope.CAPTAIN = translations["captain"];
     $scope.FREEKICKTAKER = translations["freekickTaker"];
