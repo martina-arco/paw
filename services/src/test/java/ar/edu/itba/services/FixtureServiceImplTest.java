@@ -87,6 +87,6 @@ public class FixtureServiceImplTest {
             }
         }
 
-        assertEquals(count, teams.size()*2 - 2);
+        assertEquals(teams.size()*2 - 2, count);
     }
 }

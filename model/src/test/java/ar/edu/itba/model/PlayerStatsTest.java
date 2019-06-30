@@ -3,6 +3,7 @@ package ar.edu.itba.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -23,64 +24,64 @@ public class PlayerStatsTest {
     @Test
     public void addTackles() {
         stats.addTackle(testConst);
-        assertTrue(stats.getTackles() == testConst);
+        assertEquals((int) testConst, stats.getTackles());
 
         stats.addTackle(testConst);
-        assertTrue(stats.getTackles() == 2*testConst);
+        assertEquals(2 * testConst, stats.getTackles());
     }
 
     @Test
     public void addAssists() {
         stats.addAssist(testConst);
-        assertTrue(stats.getAssists() == testConst);
+        assertEquals((int) testConst, stats.getAssists());
 
         stats.addAssist(testConst);
-        assertTrue(stats.getAssists() == 2*testConst);
+        assertEquals(2 * testConst, stats.getAssists());
     }
 
     @Test
     public void addSaves() {
         stats.addSave(testConst);
-        assertTrue(stats.getSaves() == testConst);
+        assertEquals(stats.getSaves(), (int) testConst);
 
         stats.addSave(testConst);
-        assertTrue(stats.getSaves() == 2*testConst);
+        assertEquals(2 * testConst, stats.getSaves());
     }
 
     @Test
     public void addPasses() {
         stats.addPass(testConst);
-        assertTrue(stats.getPasses() == testConst);
+        assertEquals((int) testConst, stats.getPasses());
 
         stats.addPass(testConst);
-        assertTrue(stats.getPasses() == 2*testConst);
+        assertEquals(2 * testConst, stats.getPasses());
     }
 
     @Test
     public void addYellowCard() {
         stats.addYellowCard();
-        assertTrue(stats.getYellowCards() == 1);
+        assertEquals(1, stats.getYellowCards());
 
         stats.addYellowCard();
-        assertTrue(stats.getYellowCards() == 2);
+        assertEquals(2, stats.getYellowCards());
     }
 
     @Test
     public void addRedCard() {
         stats.addRedCard();
-        assertTrue(stats.getRedCards() == 1);
+        assertEquals(1, stats.getRedCards());
 
         stats.addRedCard();
-        assertTrue(stats.getRedCards() == 2);
+        assertEquals(2, stats.getRedCards());
     }
 
     @Test
     public void addScore() {
         stats.addScore();
-        assertTrue(stats.getScores() == 1);
+        assertEquals(1, stats.getScores());
 
         stats.addScore();
-        assertTrue(stats.getScores() == 2);
+        assertEquals(2, stats.getScores());
     }
 
 }

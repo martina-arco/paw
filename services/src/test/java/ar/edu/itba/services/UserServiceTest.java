@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -88,7 +89,7 @@ public class UserServiceTest {
     public void setTeam() {
         userService.setTeam(user, team);
 
-        assertTrue(user.getTeam().equals(team));
+        assertEquals(team, user.getTeam());
     }
 
 }

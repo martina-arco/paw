@@ -17,8 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -81,7 +80,7 @@ public class PlayerServiceTest {
     public void retire() {
         playerService.retire(player1);
 
-        assertEquals(team.getPlayers().size(), 2);
-        assertTrue(!team.getPlayers().contains(player1));
+        assertEquals(2, team.getPlayers().size());
+        assertFalse(team.getPlayers().contains(player1));
     }
 }

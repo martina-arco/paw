@@ -9,7 +9,7 @@ import static org.mockito.Mockito.mock;
 public class StadiumTest {
 
     private final Integer testConst = 30;
-    private final String testName = "Test";
+    private final static String testName = "Test";
     private Stadium stadium;
     private Team team = mock(Team.class);
 
@@ -21,18 +21,18 @@ public class StadiumTest {
     @Test
     public void addLowSeats() {
         stadium.addSeats(Stadium.SeatType.LOW,testConst);
-        assertTrue(stadium.getLowClass() == testConst);
+        assertEquals((int) testConst, stadium.getLowClass());
     }
 
     @Test
     public void addMediumSeats() {
         stadium.addSeats(Stadium.SeatType.MEDIUM,testConst);
-        assertTrue(stadium.getMediumClass() == testConst);
+        assertEquals((int) testConst, stadium.getMediumClass());
     }
 
     @Test
     public void addHighSeats() {
         stadium.addSeats(Stadium.SeatType.HIGH,testConst);
-        assertTrue(stadium.getHighClass() == testConst);
+        assertEquals((int) testConst, stadium.getHighClass());
     }
 }

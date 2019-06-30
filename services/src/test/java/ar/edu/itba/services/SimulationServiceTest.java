@@ -151,10 +151,10 @@ public class SimulationServiceTest {
     @Test
     public void disputeTest(){
         SimulationNode ret = simulationService.dispute(sNode1, matchStatus);
-        assertEquals(matchStatus.getEvents(), events);
+        assertEquals(events, matchStatus.getEvents());
         assertTrue(matchStatus.getEvents().size() == 0 || matchStatus.getEvents().size() == 1);
         if(matchStatus.getEvents().size() == 1){
-            assertEquals(matchStatus.getEvents().get(0).getType(), Event.Type.TACKLE);
+            assertEquals(Event.Type.TACKLE, matchStatus.getEvents().get(0).getType());
         }
         assertTrue(ret.equals(sNode1) || ret.equals(sNode2));
     }
@@ -174,12 +174,12 @@ public class SimulationServiceTest {
 
         SimulationNode ret = simulationService.shot(sNode1, matchStatus);
 
-        assertEquals(matchStatus.getEvents().size(), 1);
-        assertEquals(matchStatus.getEvents(), events);
+        assertEquals(1, matchStatus.getEvents().size());
+        assertEquals(events, matchStatus.getEvents());
         if(events.get(0).getType() == Event.Type.SAVE){
-            assertEquals(ret, sNode2);
+            assertEquals(sNode2, ret);
         } else {
-            assertEquals(ret, sNode1);
+            assertEquals(sNode1, ret);
         }
     }
 

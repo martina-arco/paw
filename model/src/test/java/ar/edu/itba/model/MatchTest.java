@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -22,8 +23,8 @@ public class MatchTest {
 
         match1.addHomeScore(3);
         match1.addAwayScore(2);
-        match1.setStats(new LinkedList<PlayerStats>());
-        match1.setEvents(new LinkedList<Event>());
+        match1.setStats(new LinkedList<>());
+        match1.setEvents(new LinkedList<>());
     }
 
     @Test
@@ -34,14 +35,14 @@ public class MatchTest {
         match1.addEvent(e);
         match1.addStats(stat);
 
-        assertTrue(match1.getEvents().get(0).equals(e));
-        assertTrue(match1.getStats().get(0).equals(stat));
+        assertEquals(e, match1.getEvents().get(0));
+        assertEquals(stat, match1.getStats().get(0));
     }
 
     @Test
     public void addScore() {
-        assertTrue(match1.getHomeScore() == 3);
-        assertTrue(match1.getAwayScore() == 2);
+        assertEquals(3, match1.getHomeScore());
+        assertEquals(2, match1.getAwayScore());
     }
 
     @Test
@@ -49,8 +50,8 @@ public class MatchTest {
         match1.finish();
 
         assertTrue(match1.isPlayed());
-        assertTrue(match1.getHomePoints() == 3);
-        assertTrue(match1.getAwayPoints() == 0);
+        assertEquals(3, match1.getHomePoints());
+        assertEquals(0, match1.getAwayPoints());
     }
 
 }

@@ -96,10 +96,10 @@ public class AiServiceImplTest {
     @Test
     public void getFormation() {
         Formation formation = aiService.getFormation(players);
-        assertEquals(formation.getCaptain().getId(),0);
-        assertEquals( formation.getFreeKickTaker().getId(), 8);
-        assertEquals(formation.getPenaltyTaker().getId(),10);
-        assertEquals(formation.getStarters().size(), 11);
-        assertEquals(formation.getSubstitutes().size(), 7);
+        assertEquals(0, formation.getCaptain().getId());
+        assertEquals(8, formation.getFreeKickTaker().getId());
+        assertEquals(10, formation.getPenaltyTaker().getId());
+        assertEquals(11, formation.getStarters().size());
+        assertEquals(7, formation.getSubstitutes().size());
     }
 }

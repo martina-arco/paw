@@ -3,6 +3,7 @@ package ar.edu.itba.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 public class BankLoanTest {
@@ -19,7 +20,7 @@ public class BankLoanTest {
 
     @Test
     public void MonthlyAmountTest(){
-        assertTrue(bLoan.getMonthlyAmount() == amount * interest / months);
+        assertEquals((int)(amount * interest / months), bLoan.getMonthlyAmount());
     }
 
     @Test
@@ -30,7 +31,7 @@ public class BankLoanTest {
             bLoan.decreaseMonth();
         }
 
-        assertTrue(bLoan.getRemainingMonths() == months - decreaseAmount);
+        assertEquals(months - decreaseAmount, bLoan.getRemainingMonths());
     }
 
 }

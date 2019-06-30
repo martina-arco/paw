@@ -136,9 +136,9 @@ public class LeagueServiceTest {
     public void getPoints() {
         Map<Team, Integer> points = leagueService.getTeamPoints(league, date);
 
-        assertEquals(points.get(t1),Optional.of(1).get());
-        assertEquals(points.get(t2), Optional.of(7).get());
-        assertEquals(points.size(), 2);
+        assertEquals(Optional.of(1).get(), points.get(t1));
+        assertEquals(Optional.of(7).get(), points.get(t2));
+        assertEquals(2, points.size());
     }
 
     @Test
@@ -148,7 +148,7 @@ public class LeagueServiceTest {
         assertTrue(league.getFixture().get(date).contains(m1));
         assertTrue(league.getFixture().get(date).contains(m2));
         assertTrue(league.getFixture().get(date).contains(m3));
-        assertEquals(league.getFixture().get(date).size(),3);
+        assertEquals(3, league.getFixture().get(date).size());
     }
 
 }
