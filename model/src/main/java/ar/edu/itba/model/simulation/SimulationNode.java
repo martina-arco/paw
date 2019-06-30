@@ -1,16 +1,12 @@
-package ar.edu.itba.model.utils.simulation;
+package ar.edu.itba.model.simulation;
 
-import ar.edu.itba.model.Event;
 import ar.edu.itba.model.Player;
-import ar.edu.itba.model.utils.MatchStatus;
 import ar.edu.itba.model.utils.Point;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-
-import static ar.edu.itba.model.utils.simulation.Grid.otherTeam;
 
 public class SimulationNode {
 

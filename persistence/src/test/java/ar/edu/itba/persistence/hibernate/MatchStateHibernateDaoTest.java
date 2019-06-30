@@ -5,8 +5,8 @@ import ar.edu.itba.model.Match;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import ar.edu.itba.model.utils.Point;
-import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
-import ar.edu.itba.model.utils.simulation.MyTeam;
+import ar.edu.itba.model.MatchDeepStatus;
+import ar.edu.itba.model.simulation.MyTeam;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,6 @@ import java.util.Date;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = JPAConfiguration.class)

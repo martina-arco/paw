@@ -1,4 +1,4 @@
-package ar.edu.itba.model.utils.simulation;
+package ar.edu.itba.model.simulation;
 
 import ar.edu.itba.model.Formation;
 import ar.edu.itba.model.Match;
@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
-import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
-import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
+import static ar.edu.itba.model.simulation.MyTeam.AWAY;
+import static ar.edu.itba.model.simulation.MyTeam.HOME;
 
 public class Grid {
     private static final int pitchSize = 4;

@@ -1,10 +1,9 @@
-package ar.edu.itba.model.utils;
+package ar.edu.itba.model;
 
 import ar.edu.itba.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class PlayerFilter {
@@ -33,10 +32,11 @@ public class PlayerFilter {
     private List<String> options;
 
     public PlayerFilter(String criteria, String parameter){
-        this(Criteria.valueOf(criteria.split("%3B")[0]),Condition.valueOf(criteria.split("%3B")[1]), Integer.valueOf(parameter));
+        this(Criteria.valueOf(criteria.split("%3B")[0]),
+                Condition.valueOf(criteria.split("%3B")[1]), Integer.valueOf(parameter));
     }
 
-    public PlayerFilter(Criteria criteria, Condition condition, int parameter){
+    private PlayerFilter(Criteria criteria, Condition condition, int parameter){
         this.type = "number";
         this.name = criteria.name();
         this.options = new ArrayList<>();

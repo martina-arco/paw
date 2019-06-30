@@ -1,7 +1,7 @@
-package ar.edu.itba.model.utils.simulation;
+package ar.edu.itba.model;
 
-import ar.edu.itba.model.Match;
 import ar.edu.itba.model.utils.Point;
+import ar.edu.itba.model.simulation.MyTeam;
 
 import javax.persistence.*;
 import java.util.ArrayList;

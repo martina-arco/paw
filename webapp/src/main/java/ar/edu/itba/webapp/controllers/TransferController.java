@@ -3,19 +3,14 @@ package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.TransferService;
 import ar.edu.itba.interfaces.service.UserService;
-import ar.edu.itba.model.DTOs.MatchDTO;
-import ar.edu.itba.model.DTOs.PlayerDTO;
-import ar.edu.itba.model.utils.PlayerFilter;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import ar.edu.itba.model.PlayerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 
 @org.springframework.stereotype.Controller
 public class TransferController extends Controller {

@@ -8,14 +8,13 @@ import ar.edu.itba.model.League;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
-import ar.edu.itba.model.utils.PlayerFilter;
+import ar.edu.itba.model.PlayerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

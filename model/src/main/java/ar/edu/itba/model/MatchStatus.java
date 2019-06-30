@@ -1,9 +1,6 @@
-package ar.edu.itba.model.utils;
-
-import ar.edu.itba.model.Event;
+package ar.edu.itba.model;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,24 +16,26 @@ public class MatchStatus {
     }
 
     public MatchStatus cloneAndFlush(){
-        List<Event> aux = new ArrayList<>();
-        aux.addAll(events);
+        List<Event> aux = new ArrayList<>(events);
         events = new ArrayList<>();
         return new MatchStatus(homeScore,awayScore,minute,aux);
     }
 
-    public MatchStatus filterEvents(){
-        List<Event> toFilter = new ArrayList<>();
-
-        for(Event event : events){
-            Event.Type type = event.getType();
-            if(!type.equals(Event.Type.HOMESCORE) || !(type.equals(Event.Type.AWAYSCORE) || type.equals(Event.Type.RED_CARD) || type.equals(Event.Type.YELLOW_CARD) || type.equals(Event.Type.SUBSTITUTE)))
-                toFilter.add(event);
-        }
-
-        events.removeAll(toFilter);
-        return this;
-    }
+//    TODO: sacar si no se usa
+//    public MatchStatus filterEvents(){
+//        List<Event> toFilter = new ArrayList<>();
+//
+//        for(Event event : events){
+//            Event.Type type = event.getType();
+//            if(!type.equals(Event.Type.HOMESCORE) || !(type.equals(Event.Type.AWAYSCORE) ||
+//                    type.equals(Event.Type.RED_CARD) || type.equals(Event.Type.YELLOW_CARD) ||
+//                    type.equals(Event.Type.SUBSTITUTE)))
+//                toFilter.add(event);
+//        }
+//
+//        events.removeAll(toFilter);
+//        return this;
+//    }
 
     public List<Event> getEventsByMinute(int minute){
         List<Event> aux = new ArrayList<>(events);

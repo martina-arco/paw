@@ -4,12 +4,12 @@ import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.MatchStateDao;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.model.*;
-import ar.edu.itba.model.utils.MatchStatus;
+import ar.edu.itba.model.MatchStatus;
 import ar.edu.itba.model.utils.Point;
-import ar.edu.itba.model.utils.simulation.Grid;
-import ar.edu.itba.model.utils.simulation.GridNode;
-import ar.edu.itba.model.utils.simulation.NodeAtt;
-import ar.edu.itba.model.utils.simulation.SimulationNode;
+import ar.edu.itba.model.simulation.Grid;
+import ar.edu.itba.model.simulation.GridNode;
+import ar.edu.itba.model.simulation.NodeAtt;
+import ar.edu.itba.model.simulation.SimulationNode;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,8 +21,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 
-import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
-import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
+import static ar.edu.itba.model.simulation.MyTeam.AWAY;
+import static ar.edu.itba.model.simulation.MyTeam.HOME;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;

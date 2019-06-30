@@ -8,16 +8,16 @@ import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.DTOs.MatchDTO;
 import ar.edu.itba.model.utils.*;
-import ar.edu.itba.model.utils.simulation.*;
+import ar.edu.itba.model.simulation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-import static ar.edu.itba.model.utils.simulation.Grid.otherTeam;
-import static ar.edu.itba.model.utils.simulation.MyTeam.AWAY;
-import static ar.edu.itba.model.utils.simulation.MyTeam.HOME;
+import static ar.edu.itba.model.simulation.Grid.otherTeam;
+import static ar.edu.itba.model.simulation.MyTeam.AWAY;
+import static ar.edu.itba.model.simulation.MyTeam.HOME;
 
 @Service
 @Transactional

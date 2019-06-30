@@ -1,4 +1,4 @@
-package ar.edu.itba.model.utils.simulation;
+package ar.edu.itba.model.simulation;
 
 public interface SimulationArc {
     public double getWeight();

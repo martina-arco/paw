@@ -2,7 +2,7 @@ package ar.edu.itba.persistence.hibernate;
 
 import ar.edu.itba.interfaces.dao.MatchStateDao;
 import ar.edu.itba.model.Match;
-import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
+import ar.edu.itba.model.MatchDeepStatus;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

@@ -1,7 +1,7 @@
 package ar.edu.itba.interfaces.dao;
 
 import ar.edu.itba.model.Match;
-import ar.edu.itba.model.utils.simulation.MatchDeepStatus;
+import ar.edu.itba.model.MatchDeepStatus;
 
 public interface MatchStateDao {
 

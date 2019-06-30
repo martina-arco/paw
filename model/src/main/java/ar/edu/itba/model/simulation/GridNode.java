@@ -1,4 +1,4 @@
-package ar.edu.itba.model.utils.simulation;
+package ar.edu.itba.model.simulation;
 
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.utils.Point;
