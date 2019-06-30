@@ -159,7 +159,7 @@ public class PlayerHibernateDaoTest {
         assertEquals(FITNESS, player.getFitness());
         assertEquals(SALARY, player.getSalary());
         assertEquals(CONTRACT_EXPIRATION, player.getContractExpiration());
-        assertEquals(false, player.isYouth());
+        assertFalse(player.isYouth());
         assertEquals(id, player.getId());
     }
 
@@ -182,7 +182,7 @@ public class PlayerHibernateDaoTest {
         assertEquals(FITNESS, player.getFitness());
         assertEquals(SALARY, player.getSalary());
         assertEquals(CONTRACT_EXPIRATION, player.getContractExpiration());
-        assertEquals(true, player.isYouth());
+        assertTrue(player.isYouth());
         assertEquals(id, player.getId());
     }
 

@@ -35,10 +35,6 @@ public class ReceiptHibernateDaoTest {
     @Autowired
     private UserHibernateDao userDao;
     @Autowired
-    private PlayerHibernateDao playerDao;
-    @Autowired
-    private MatchHibernateDao matchDao;
-    @Autowired
     private TeamHibernateDao teamDao;
     @Autowired
     private ReceiptHibernateDao receiptDao;

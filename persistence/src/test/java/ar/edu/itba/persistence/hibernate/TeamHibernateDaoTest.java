@@ -33,7 +33,6 @@ public class TeamHibernateDaoTest {
     private final int FANTRUST = 99;
     private final int BOARDTRUST = 1231;
     private final int MONEY = 928522342;
-    private final int NO_ID = 0;
     private final int SQL_NULL_INT = 0;
 
     @PersistenceContext
@@ -43,11 +42,7 @@ public class TeamHibernateDaoTest {
     @Autowired
     private UserHibernateDao userDao;
     @Autowired
-    private PlayerHibernateDao playerDao;
-    @Autowired
     private TeamHibernateDao teamDao;
-    @Autowired
-    private StadiumHibernateDao stadiumDao;
 
     private League league;
     private User user;
