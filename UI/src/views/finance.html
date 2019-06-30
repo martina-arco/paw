@@ -1,0 +1,203 @@
+<link rel="stylesheet" href="../assets/css/finance.css"/>
+<link rel="stylesheet" href="../assets/css/home.css"/>
+
+
+<!--<span id="lowCost" hidden>${lowCost}</span>-->
+<!--<span id="upgradeURL" hidden><c:url value="/upgradeStadium"/> </span>-->
+<!--<span id="financeURL" hidden><c:url value="/finance"/> </span>-->
+<!--<span id="mediumCost" hidden>${mediumCost}</span>-->
+<!--<span id="highCost" hidden>${highCost}</span>-->
+<!--<span id="failMessage" hidden><spring:message code="upgradeFailed"/></span>-->
+<!--<span id="retry" hidden><spring:message code="retry"/></span>-->
+<!--<span id="successMessage" hidden><spring:message code="upgradeSuccess"/></span>-->
+<!--<span id="confirm" hidden><spring:message code="confirm"/></span>-->
+
+<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+     aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticModalLabel">{{OPERATIONSTATUS}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="modalContent">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button id="returnButton" type="button" data-dismiss="modal" class="btn btn-primary">
+          {{CONFIRM}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="animated fadeIn p-3">
+  <div class="row">
+
+    <div class="col-lg-4 col-md-6">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="stat-widget-one">
+            <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+            <div class="stat-content dib">
+              <div class="team-name">{{ECONOMY}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="row ml-1 mr-1">
+            <div class="col-6 trust-text">
+              {{MONEY}}
+            </div>
+            <div class="col-5 trust-text">
+              ${{balance.money}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="clearfix">
+            <i class="ti-stats-up bg-flat-color-5 p-3 font-2xl mr-3 float-left text-light"></i>
+            <div class="h5 text-success mb-0 mt-1">$ {{balance.income}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs small">{{INCOME}}</div>
+          </div>
+          <div class="b-b-1 pt-3"></div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              {{PLAYERSSOLD}}
+              <span class="pull-right">$ {{summary.playersSold}}</span>
+            </li>
+            <li class="list-group-item">
+              {{TICKETSSOLD}}
+              <span class="pull-right">$ {{summary.ticketsSold}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="clearfix">
+            <i class="ti-stats-down bg-danger p-3 font-2xl mr-3 float-left text-light"></i>
+            <div class="h5 text-danger mb-0 mt-1">$ {{balance.expenses}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs small">{{EXPENSES}}</div>
+          </div>
+          <div class="b-b-1 pt-3"></div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              {{PLAYERSBOUGHT}}
+              <span class="pull-right">$ {{summary.playersBought}}</span>
+            </li>
+            <li class="list-group-item">
+              {{SALARIES}}
+              <span class="pull-right">$ {{summary.salaries}}</span>
+            </li>
+            <li class="list-group-item">
+              {{STADIUMEXPANSION}}
+              <span class="pull-right">$ {{summary.stadiumExpansion}}</span>
+            </li>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{LASTRECEIPTS}}</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li ng-repeat="receipt in receipts" class="list-group-item">
+              {{RECEIPT{{receipt.type}}}}
+              <span class="pull-right">$ {{receipt.amount}}</span>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{STADIUMEXPANSION}}</strong>
+        </div>
+        <div class="card-body pt-0">
+          <form id="stadiumForm" modelAttribute="stadiumForm">
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-5 without-padding">
+                    {{LOWSEATS}}
+                  </div>
+                  <div class="col-4 without-padding">
+                    <input id="lowInput" cssClass="input-field pull-right" type="number" min="{{stadium.lowClass}}" max="100000"
+                         placeholder="{{stadium.lowClass}}" ng-model="stadium.lowClass" ng-change="refreshLowClass()"/>
+                  </div>
+                  <div class="col-3 without-padding text-center">
+                    ${{lowClassSpent}}
+                  </div>
+                </div>
+                <div class="row">
+                  <p><small>{{LOWSEATSCOST}}{{stadium.lowClassPrice}}</small></p>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-5 without-padding">
+                    {{MEDIUMSEATS}}
+                  </div>
+                  <div class="col-4 without-padding">
+                    <input id="mediumInput" cssClass="input-field pull-right" type="number" min="{{stadium.mediumClass}}" max="100000"
+                       placeholder="{{stadium.mediumClass}}" ng-model="stadium.mediumClass" ng-change="refreshMediumClass()"/>
+                  </div>
+                  <div class="col-3 without-padding text-center">
+                    ${{mediumClassSpent}}
+                  </div>
+                </div>
+                <div class="row">
+                  <p><small>{{MEDIUMSEATSCOST}}{{stadium.mediumClassPrice}}</small></p>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-5 without-padding">
+                    {{HIGHSEATS}}
+                  </div>
+                  <div class="col-4 without-padding">
+                    <input id="highInput" cssClass="input-field pull-right" type="number" min="{{stadium.highClass}}" max="100000"
+                       placeholder="{{stadium.highClass}}" ng-model="stadium.highClass" ng-change="refreshHighClass()"/>
+                    </div>
+                  <div class="col-3 without-padding text-center">
+                    ${{highClassSpent}}
+                  </div>
+                </div>
+                <div class="row">
+                  <p><small>{{HIGHSEATSCOST}}{{stadium.highClassPrice}}</small></p>
+                </div>
+              </li>
+              <li class="list-group-item row">
+                <div class="col-9 without-padding">
+                  {{TOTAL}}
+                </div>
+                <div class="col-3 without-padding text-center">
+                  <span id="total">$ {{lowClassSpent + mediumClassSpent + highClassSpent}}</span>
+                </div>
+              </li>
+            </ul>
+            <input type="submit" class="btn btn-info pull-right mt-3" ng-click="submitStadiumUpgrade()">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

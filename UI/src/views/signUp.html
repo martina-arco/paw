@@ -1,0 +1,32 @@
+<div class="sufee-login d-flex align-content-center flex-wrap">
+  <div class="container">
+    <div class="login-content">
+      <div class="login-logo">
+        <!--<img class="align-content" src="images/logo.png" alt="">-->
+        <span class="align-content">{{APPNAME}}</span>
+      </div>
+      <div class="login-form">
+        <form action="{{postPath}}" method="post">
+          <div class="form-group">
+            <p>{{USERNAME}}</p>
+            <input type="text" ng-model="username" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <p>{{PASSWORD}}</p>
+            <input type="password" ng-model="password" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <p >{{REPEATPASSWORD}}</p>
+            <input type="password" ng-model="repeatPassword" class="form-control"/>
+          </div>
+          <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">{{SIGNUP}}</button>
+          <div class="register-link m-t-15 text-center">
+            <p>{{ALREADYHAVEACCOUNT}}<a ng-href="#!login">{{SIGNIN}}</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

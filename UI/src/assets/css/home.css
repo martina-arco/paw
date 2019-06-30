@@ -1,0 +1,48 @@
+/*.button {
+    width: 100%;
+    background-color: #7ebc83;
+    padding: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+}*/
+
+/*.button:hover {
+    background-color: #037c1e;
+    color: black;
+}*/
+
+.player {
+    border-radius: 5px;
+    padding: 3%;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    opacity: 1;
+}
+
+
+.full-width {
+    width: 100%;
+}
+
+.team-name {
+    color: #373737;
+    font-size: 24px;
+}
+
+.progress {
+    background-color: #D0D0D8;
+}
+
+.trust-text {
+    margin-top: 12px;
+}
+
+.center {
+  align-content: center;
+}
+
+thead th {
+    background-color: #4dbd74;
+}
+

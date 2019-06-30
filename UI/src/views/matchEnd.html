@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="../assets/css/match.css"/>
+
+
+<div class="animated fadeIn p-5">
+  <div class="row">
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <table class="table bg-white">
+
+            <thead class="green">
+              <tr>
+                <th scope="col">{{HOME}}</th>
+                <th scope="col" colspan="2">{{SCORE}}</th>
+                <th scope="col">{{AWAY}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr ng-repeat="match in matches">
+                <td>{{match.homeTeam.name}}</td>
+                <td>{{match.homeScore}}</td>
+                <td>{{match.awayScore}}</td>
+                <td>{{match.awayTeam.name}}</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+
+          <table class="table bg-white">
+
+            <thead>
+              <tr>
+                <th scope="col">{{match.homeTeam.name}}</th>
+                <th scope="col">{{match.homeScore}}x{{match.awayScore}}</th>
+                <th scope="col">{{match.awayTeam.name}}</th>
+                <th>{{match.stadium}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="event in match.events">
+                    <td>
+                        <div ng-if="{event.p1.teamId == match.homeTeam.id}}">
+                            {{event.type}} {{event.minute}}{{event.p1.name}}
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-if="{event.p1.teamId != match.homeTeam.id}}">
+                            {{event.type}} {{event.minute}}{{event.p1.name}}
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

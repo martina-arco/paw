@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="../assets/css/register.css"/>
+
+<div class="sufee-login d-flex align-content-center flex-wrap">
+  <div class="container">
+    <div class="login-content">
+
+      <div class="login-logo">
+        <span class="align-content">{{CHOOSETEAM}}</span>
+      </div>
+
+      <div class="login-form">
+        <form modelAttribute="chooseTeamForm">
+
+          <div class="form-group">
+            <ul ng-repeat="team in teams">
+              <label>
+                <input type="radio" ng-model="teamSelected" name="choose-team-input"
+                       value="{{team.id}}" required>
+                {{team.name}}
+              </label>
+            </ul>
+          </div>
+
+          <div class="right">
+            <button type="submit" class="btn btn-success" ng-click="submit()">{{START}} &nbsp;
+              <i class="fa fa-play"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+

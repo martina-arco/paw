@@ -1,0 +1,100 @@
+
+<link rel="stylesheet" href="../assets/css/home.css"/>
+<link rel="stylesheet" href="../assets/css/match.css">
+<link rel="stylesheet" href="../assets/css/league.css"/>
+
+<div class="animated fadeIn p-5">
+
+  <div class="row">
+    <div class="col-6">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="stat-widget-one">
+            <div class="stat-icon dib"><i class="ti-cup text-warning border-warning"></i></div>
+              <div class="stat-content dib">
+                <div class="team-name">{{league.name}}</div>
+              </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="weather-category twt-category m-0 p-0">
+            <ul class="m-0">
+              <li>
+                <h5>{{matchesPlayed}}</h5>
+                {{MATCHESPLAYED}}
+              </li>
+              <li>
+                <h5>{{matchesToPlay}}</h5>
+                {{MATCHESTOPLAY}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="col-6">
+
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">{{UPCOMINGMATCHES}}</strong>
+          </div>
+
+          <div class="card-body">
+            <table class="table bg-white small center header-fixed">
+              <thead>
+                <tr>
+                  <th scope="col" class="match-stadium">{{STADIUM}}</th>
+                  <th scope="col" class="match-home">{{HOME}}</th>
+                  <th scope="col" class="match-away">{{AWAY}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="match in upcomingMatches">
+                  <td class="match-stadium">{{match.stadium}}</td>
+                  <td class="match-home">{{match.homeTeam.name}}</td>
+                  <td class="match-away">{{match.awayTeam.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+
+        <div class="card">
+
+          <div class="card-header">
+            <strong class="card-title">{{POSITIONTABLE}}</strong>
+          </div>
+          <div class="card-body">
+            <table class="table bg-white small center header-fixed">
+              <thead>
+              <tr>
+                <th scope="col" class="match-position">{{POSITION}}</th>
+                <th scope="col" class="match-team">{{TEAM}}</th>
+                <th scope="col" class="match-points">{{POINTS}}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="team in teams">
+                  <th scope="row" class="match-position">{{$index}}</th>
+                  <td class="match-team">{{team.key}}</td>
+                  <td class="match-points">{{team.value}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -20,7 +20,69 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/scripts",
+              "src/views",
+              {
+                "glob": "*",
+                "input": "node_modules/bootstrap/dist/js",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/bootstrap/js/dist",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/jquery",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/popper.js/dist",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/ng-dialog/js",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/angular-chart.js/dist",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/json3/lib",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/chart.js/dist",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/angular",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/angular-route",
+                "output": "assets/js/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/bootstrap/dist/css",
+                "output": "assets/css/"
+              },
+              {
+                "glob": "*",
+                "input": "node_modules/ng-dialog/css",
+                "output": "assets/css/"
+              }
             ],
             "styles": [
               "src/styles.css"

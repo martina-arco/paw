@@ -1,14 +1,80 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>UI</title>
-  <base href="/">
+<html>
+  <head>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Football Manager</title>
+    <meta name="description" content="Football Manager">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="assets/favicon.ico"/>
+    <link rel="apple-touch-icon" href="assets/favicon.ico"/>
+
+    <link rel="stylesheet" href="assets/css/normalize.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/themify-icons.css"/>
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css"/>
+
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/ngDialog.min.css"/>
+    <link rel="stylesheet" href="assets/css/ngDialog-theme-default.min.css"/>
+    <link rel="stylesheet" href="assets/css/navbar.css"/>
+    <link rel="stylesheet" href="assets/css/background.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body ng-controller="IndexCtl">
+
+  <div ng-hide="currentPath == '/signUp' || currentPath == '/login'">
+
+  </div>
+
+    <aside id="left-panel" class="left-panel" ng-if="currentPath != '/signUp' && currentPath != '/login' && currentPath != '/match'">
+      <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+          </button>
+          <a class="navbar-brand" href="/">{{APPNAME}}</a>
+          <a class="navbar-brand hidden" href="/">{{APPNAME}}</a>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{ active: isActive('/home')}">
+              <a ng-href="#!home"> <i class="menu-icon ti-home"></i>{{MENUHOME}}</a>
+            </li>
+            <li ng-class="{ active: isActive('/league')}">
+              <a ng-href="#!league"> <i class="menu-icon ti-cup"></i>{{LEAGUE}}</a>
+            </li>
+            <li ng-class="{ active: isActive('/formation')}">
+              <a ng-href="#!formation"> <i class="menu-icon ti-clipboard"></i>{{TACTICS}}</a>
+            </li>
+            <li ng-class="{ active: isActive('/finance')}">
+              <a ng-href="#!finance"> <i class="menu-icon fa fa-money"></i>{{ECONOMY}}</a>
+            </li>
+            <li ng-class="{ active: isActive('/transfer')}">
+              <a ng-href="#!transfer"> <i class="menu-icon ti-exchange-vertical"></i>{{PASSES}}</a>
+            </li>
+            <li>
+              <a ng-href="#!logout"> <i class="menu-icon ti-power-off"></i>{{LOGOUT}}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <div ng-view=""></div>
+
+    <script src="scripts/require.js" data-main="scripts/build.js"></script>
+    <script src="scripts/commonUtils.js"></script>
+
+  </body>
+
 </html>

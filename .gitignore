@@ -48,3 +48,6 @@ UI/typings
 # System Files
 .DS_Store
 Thumbs.db
+
+*.DS_Store
+UI/node_modules/*

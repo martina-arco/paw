@@ -1,0 +1,164 @@
+<link rel="stylesheet" href="../assets/css/home.css"/>
+
+<div class="animated fadeIn p-5">
+  <div class="row">
+    <div class="col-6">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="stat-widget-one">
+            <div class="stat-icon dib"><i class="ti-shield text-primary border-primary"></i></div>
+            <div class="stat-content dib">
+              <div class="team-name">{{team.name}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="row ml-1 mr-1">
+            <div class="col-6 trust-text">
+              {{BOARDTRUST}}
+            </div>
+            <div class="col-5 p-0 progress mt-3">
+              <div class="progress-bar bg-info" role="progressbar" style="width: ${team.boardTrust}%" aria-valuemin="0"
+                   aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="row ml-1 mr-1">
+            <div class="col-6 trust-text">
+              {{FANTRUST}}
+            </div>
+            <div class="col-5 p-0 progress mt-3">
+              <div class="progress-bar bg-info" role="progressbar" style="width: {{team.fanTrust}}%"
+                   aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-6">
+
+      <div class="row">
+
+        <div class="col-12">
+
+          <div class="card">
+            <div class="card-header">
+              <strong class="card-title">{{NEXTMATCH}}<span class="pull-right">{{date}}</span></strong>
+            </div>
+
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+
+                  <div ng-switch on="team.name">
+                    <div ng-switch-when="team1">
+                      {{HOMEVERSUS}}
+                      <span class="pull-right">{{upcomingMatch.team2}}</span>
+                    </div>
+
+                    <div ng-switch-default>
+                      {{AWAYVERSUS}}
+                      <span class="pull-right">{{upcomingMatch.team1}}</span>
+                    </div>
+                  </div>
+
+                </li>
+                <li class="list-group-item">
+                  {{STADIUM}}
+                  <span class="pull-right">{{upcomingMatch.stadium}}</span>
+                </li>
+                <li class="list-group-item">
+                  <a ng-href="#!match" class="pull-right">{{PLAYMATCH}} &nbsp; <i class="fa fa-play"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+
+          <div class="card">
+            <div class="card-header">
+              <strong class="card-title">{{player.name}}</strong>
+            </div>
+
+            <div class="card-body">
+              <div class="col-6 p-0 pr-2">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    {{AGE}}
+                    <span class="pull-right">{{player.age}}</span>
+                  </li>
+                  <li class="list-group-item">
+                    {{PLAYERSALARY}}
+                    <span class="pull-right">$ {{player.salary}}</span>
+                  </li>
+                  <li class="list-group-item">
+                    {{PLAYERVALUE}}
+                    <span class="pull-right">$ {{player.value}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-6 p-0">
+                <canvas id="radarChart"
+                        class="chart chart-radar"
+                        chart-labels="labels"
+                        chart-data="data"
+                        chart-options="options">
+                </canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-6">
+
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{PLAYERS}}</strong>
+        </div>
+
+        <div class="card-body">
+          <table class="table table-hover bg-white small table-sm">
+            <thead>
+              <tr>
+                <th scope="col" class="center">{{NAME}}</th>
+                <th scope="col" class="center">{{SALARY}}</th>
+                <th scope="col" class="center">{{VALUE}}</th>
+                <th scope="col" class="center">{{FITNESS}}</th>
+                <th scope="col" class="center">{{AGE}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="player in players" ng-click="changePlayer(player.id)">
+                <td class="center">{{player.name}}</td>
+                <td class="center">{{player.salary}}</td>
+                <td class="center">{{player.value}}</td>
+                <td class="center">{{player.fitness}}</td>
+                <td class="center">{{player.age}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
