@@ -8,7 +8,9 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
 
         FinanceService.getEconomy().then(function (response) {
             $scope.summary = response.data.summary;
-            $scope.balance = response.data.balance;
+            $scope.income = response.data.income;
+            $scope.expense = response.data.expense;
+            $scope.money = response.data.money;
         });
 
         FinanceService.getReceipts().then(function (response) {

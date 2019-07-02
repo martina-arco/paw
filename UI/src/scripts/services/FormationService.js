@@ -26,7 +26,7 @@ define(['footballManager'], function(footballManager) {
     };
 
     this.saveFormation = function (formation) {
-      const body = JSON.stringify({formation: formation});
+      var body = JSON.stringify({formation: formation});
       return $http.post(this.url + 'formation', body);
     };
   })

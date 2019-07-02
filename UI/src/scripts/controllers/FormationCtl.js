@@ -2,6 +2,23 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
 
     footballManager.controller("FormationCtl", function ($scope, ngDialog, FormationService, PlayerService) {
 
+        // $scope.goalKeepers = [];
+        // $scope.backPlayers = [];
+        // $scope.wingPlayers = [];
+        // $scope.frontPlayers = [];
+        //
+        // FormationService.fillPositionArrays($scope.players, $scope.goalKeepers, $scope.backPlayers,
+        //   $scope.wingPlayers, $scope.frontPlayers);
+
+        $scope.saveFormation = function () {
+          // $scope.error = FormationService.saveFormation($scope.formation);
+          // $scope.error = true;
+          if($scope.error)
+            $scope.openFormationChangeErrorModal();
+          else
+            $scope.openFormationChangeSuccessModal();
+        };
+
         $scope.openFormationChangeSuccessModal = function() {
             ngDialog.open({
                 templateUrl: 'views/formationChangeSuccessModal.html',
@@ -30,15 +47,6 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
         $scope.substitutesIsClosed = true;
         $scope.rolesIsClosed = true;
 
-        $scope.saveFormation = function () {
-            // $scope.error = FormationService.saveFormation($scope.formation);
-            // $scope.error = true;
-            if($scope.error)
-              $scope.openFormationChangeErrorModal();
-            else
-              $scope.openFormationChangeSuccessModal();
-        };
-
         $scope.formation = {
           gk: {name:'gk', id:1, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
           lb: {name:'lb', id:2, position:1, fitness: 0, skillLevel:2, goalKeeping:0, finishing:0, defending:2, passing:3},
@@ -57,8 +65,8 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
           st: {name:'st', id:15, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
           rf: {name:'rf', id:16, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
           rw: {name:'rw', id:17, position:0, fitness: 0, skillLevel:2, goalKeeping:10, finishing:0, defending:2, passing:3},
-          options: ['343', '352', '433', '442', '451', '523', '532', '541'],
-          formation: '433'
+          options: [343, 352, 433, 442, 451, 523, 532, 541],
+          formation: 433
 
         };
 
@@ -73,14 +81,6 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
         $scope.frontPlayers = players;
         $scope.players = players;
         $scope.substitutes = $scope.players;
-
-        // $scope.goalKeepers = [];
-        // $scope.backPlayers = [];
-        // $scope.wingPlayers = [];
-        // $scope.frontPlayers = [];
-
-        // FormationService.fillPositionArrays($scope.players, $scope.goalKeepers, $scope.backPlayers,
-        //   $scope.wingPlayers, $scope.frontPlayers);
 
     });
 

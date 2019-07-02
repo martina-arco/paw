@@ -16,4 +16,44 @@ public class TeamShortDTO {
         this.formationId = team.getFormationId();
         this.name = team.getName();
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public long getLeagueId() {
+        return leagueId;
+    }
+
+    public long getStadiumId() {
+        return stadiumId;
+    }
+
+    public long getFormationId() {
+        return formationId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setLeagueId(long leagueId) {
+        this.leagueId = leagueId;
+    }
+
+    public void setStadiumId(long stadiumId) {
+        this.stadiumId = stadiumId;
+    }
+
+    public void setFormationId(long formationId) {
+        this.formationId = formationId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
