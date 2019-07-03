@@ -7,19 +7,19 @@ import java.util.Map;
 
 public class LeagueDTO {
 
-    private League league;
+    private Long id;
+    private String name;
+    private int prize;
     private Integer matchesToPlay, matchesPlayed;
     private List<Map.Entry<String,Integer>> teams;
 
     public LeagueDTO(League league, Integer matchesToPlay, Integer matchesPlayed, List<Map.Entry<String, Integer>> teams) {
-        this.league = league;
+        this.id = league.getId();
+        this.name = league.getName();
+        this.prize = league.getPrize();
         this.matchesToPlay = matchesToPlay;
         this.matchesPlayed = matchesPlayed;
         this.teams = teams;
-    }
-
-    public League getLeague() {
-        return league;
     }
 
     public Integer getMatchesToPlay() {
@@ -34,8 +34,28 @@ public class LeagueDTO {
         return teams;
     }
 
-    public void setLeague(League league) {
-        this.league = league;
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrize(int prize) {
+        this.prize = prize;
     }
 
     public void setMatchesToPlay(Integer matchesToPlay) {

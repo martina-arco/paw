@@ -7,10 +7,6 @@ define(['footballManager'], function(footballManager) {
             return $http.get(this.url + 'players');
         };
 
-        this.getPlayerInfo = function (playerId) {
-            return $http.get(this.url + 'player/' + playerId);
-        };
-
         this.getCriteriaTypes = function () {
             return $http.get(this.url + 'players/criteriaTypes');
         };

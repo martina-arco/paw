@@ -1,7 +1,6 @@
 package ar.edu.itba.model.DTOs;
 
 import ar.edu.itba.model.Receipt;
-import ar.edu.itba.model.Stadium;
 
 import java.util.Map;
 
@@ -9,14 +8,12 @@ public class EconomyDTO {
 
     private int income, expense, money;
     private Map<Receipt.Type, Integer> summary;
-    private Stadium stadium;
 
-    public EconomyDTO(int income, int expense, int money, Map<Receipt.Type, Integer> summary, Stadium stadium) {
+    public EconomyDTO(int income, int expense, int money, Map<Receipt.Type, Integer> summary) {
         this.income = income;
         this.expense = expense;
         this.money = money;
         this.summary = summary;
-        this.stadium = stadium;
     }
 
     public int getIncome() {
@@ -35,10 +32,6 @@ public class EconomyDTO {
         return summary;
     }
 
-    public Stadium getStadium() {
-        return stadium;
-    }
-
     public void setIncome(int income) {
         this.income = income;
     }
@@ -55,7 +48,4 @@ public class EconomyDTO {
         this.summary = summary;
     }
 
-    public void setStadium(Stadium stadium) {
-        this.stadium = stadium;
-    }
 }

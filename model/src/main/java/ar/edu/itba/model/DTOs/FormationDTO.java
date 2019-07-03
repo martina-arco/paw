@@ -113,6 +113,10 @@ public class FormationDTO {
         return rw;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public List<Integer> getOptions() {
         return options;
     }

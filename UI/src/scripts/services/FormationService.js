@@ -1,10 +1,10 @@
 define(['footballManager'], function(footballManager) {
 
   footballManager.service('FormationService', function($http) {
-    this.url = "./api/v1/";
+    this.url = "./api/v1/formation/";
 
     this.getFormation = function () {
-        return $http.get(this.url + 'formation');
+        return $http.get(this.url);
     };
 
     this.fillPositionArrays = function (players, goalKeepers, backPlayers, wingPlayers, frontPlayers) {
@@ -26,8 +26,8 @@ define(['footballManager'], function(footballManager) {
     };
 
     this.saveFormation = function (formation) {
-      var body = JSON.stringify({formation: formation});
-      return $http.post(this.url + 'formation', body);
+      var body = JSON.stringify(formation);
+      return $http.post(this.url, body);
     };
   })
 });

@@ -39,7 +39,7 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
 
         $scope.changePlayer = function (id) {
             $scope.players.forEach(function (player) {
-                if(player.id == id) {
+                if(player.id === id) {
                   $scope.player = player;
                 }
             });
