@@ -39,7 +39,6 @@ public class FinanceController {
     public Response getEconomy() {
         Team team = teamService.findByUserIdAndFetchPlayersAndFinance(1L); //id del user
         Map<Receipt.Type, Integer> summary = teamService.getFinanceSummary(team);
-        Stadium stadium = stadiumService.findByTeam(team);
 
         int income, playersSold, ticketsSold, expenses, playersBought, salaries, stadiumExpansion;
         playersSold = summary.get(Receipt.Type.SOLDPLAYER);
@@ -77,12 +76,13 @@ public class FinanceController {
     }
 
 //  TODO
-    @POST
-    @Path("/stadium")
-    @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response saveStadiumFinance(final StadiumDTO userDto) {
-        return Response.created(null).build();
-    }
+
+//    @POST
+//    @Path("/stadium")
+//    @Produces(value = { MediaType.APPLICATION_JSON, })
+//    public Response saveStadiumFinance(final StadiumDTO userDto) {
+//        return Response.created(null).build();
+//    }
 
 
 }

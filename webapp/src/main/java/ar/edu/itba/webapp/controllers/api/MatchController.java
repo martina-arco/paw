@@ -6,6 +6,7 @@ import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.*;
 import ar.edu.itba.model.DTOs.FormationDTO;
+import ar.edu.itba.model.DTOs.MatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +15,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
-@Path("match")
 @Component
 public class MatchController {
 
@@ -47,7 +48,7 @@ public class MatchController {
     }
 
     @GET
-    @Path("/")
+    @Path("/match")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatch() {
         User user = new User(); //logged user
@@ -55,23 +56,28 @@ public class MatchController {
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
         Match userMatch = matchService.getUserMatch(matches, user);
 
-        return Response.ok(userMatch).build();
+        return Response.ok(new MatchDTO(userMatch)).build();
     }
 
     @GET
-    @Path("/upcomingMatches")
+    @Path("matches/upcomingMatches")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getUpcomingMatches() {
         User user = new User(); //logged user
 
         Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
         List<Match> matches = matchService.getUpcomingMatches(team, user.getCurrentDay());
+        List<MatchDTO> matchDTOS = new ArrayList<>();
 
-        return Response.ok(matches).build();
+        for (Match match : matches) {
+            matchDTOS.add(new MatchDTO(match));
+        }
+
+        return Response.ok(matchDTOS).build();
     }
 
     @GET
-    @Path("/upcomingMatch")
+    @Path("match/upcomingMatch")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getUpcomingMatch() {
         User user = new User(); //logged user
@@ -79,7 +85,7 @@ public class MatchController {
         Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
         Match upcomingMatch = matchService.getUpcomingMatches(team, user.getCurrentDay()).get(0);
 
-        return Response.ok(upcomingMatch).build();
+        return Response.ok(new MatchDTO(upcomingMatch)).build();
     }
 
 }

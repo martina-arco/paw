@@ -19,7 +19,6 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("player")
 @Component
 public class PlayerController {
 
@@ -32,7 +31,7 @@ public class PlayerController {
     @GET
     @Path("/players")
     @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response getFormation() {
+    public Response getPlayers() {
         Team team = teamService.findByUserIdAndFetchPlayers(1L); //userid
         List<Player> players = playerService.getPlayers(team);
         List<PlayerDTO> playerDTOS = new ArrayList<>();
@@ -46,16 +45,16 @@ public class PlayerController {
 
 
 //    @POST
-//    @Path("/buy")
+//    @Path("player/buy")
 //    @Produces(value = { MediaType.APPLICATION_JSON, })
-//    public Response saveFormation(final PlayerDTO player) {
+//    public Response buyPlayer(final PlayerDTO player) {
 //        return Response.created(uri).build();
 //    }
 //
 //    @POST
-//    @Path("/sell")
+//    @Path("player/sell")
 //    @Produces(value = { MediaType.APPLICATION_JSON, })
-//    public Response saveFormation(final PlayerDTO player) {
+//    public Response sellPlayer(final PlayerDTO player) {
 //        return Response.created(uri).build();
 //    }
 }
