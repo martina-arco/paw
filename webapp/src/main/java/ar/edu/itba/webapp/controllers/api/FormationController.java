@@ -1,7 +1,7 @@
 package ar.edu.itba.webapp.controllers.api;
 
 import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.model.DTOs.FormationDTO;
+import ar.edu.itba.webapp.model.DTOs.FormationDTO;
 import ar.edu.itba.model.Formation;
 import ar.edu.itba.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;

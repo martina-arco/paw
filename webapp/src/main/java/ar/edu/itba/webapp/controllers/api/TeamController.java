@@ -3,17 +3,14 @@ package ar.edu.itba.webapp.controllers.api;
 import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.model.DTOs.PlayerDTO;
-import ar.edu.itba.model.DTOs.TeamDTO;
+import ar.edu.itba.webapp.model.DTOs.TeamDTO;
 import ar.edu.itba.model.League;
-import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;

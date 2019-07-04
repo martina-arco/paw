@@ -2,7 +2,8 @@ package ar.edu.itba.webapp.controllers.api;
 
 
 import ar.edu.itba.interfaces.service.UserService;
-import ar.edu.itba.model.DTOs.UserDTO;
+import ar.edu.itba.webapp.model.DTOs.UserDTO;
+import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ws.rs.core.Response.*;
@@ -28,7 +29,7 @@ public class UserController {
     @Path("/")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response listUsers() {
-        final List<User> allUsers = new LinkedList<>();//us.getAll();
+        final List<User> allUsers = Arrays.asList(new User("test", "test", "test@test.test", new Team(), new Date()));//us.getAll();
         return Response.ok(allUsers.parallelStream().map(UserDTO::new).collect(Collectors.toList())).build();
     }
     @POST

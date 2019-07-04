@@ -2,8 +2,7 @@ package ar.edu.itba.webapp.controllers.api;
 
 import ar.edu.itba.interfaces.service.StadiumService;
 import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.model.DTOs.EconomyDTO;
-import ar.edu.itba.model.DTOs.StadiumDTO;
+import ar.edu.itba.webapp.model.DTOs.EconomyDTO;
 import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;

@@ -1,8 +1,8 @@
 package ar.edu.itba.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "match")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Match {
 
     @Id

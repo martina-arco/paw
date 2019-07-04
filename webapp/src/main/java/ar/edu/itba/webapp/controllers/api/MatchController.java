@@ -5,8 +5,7 @@ import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.*;
-import ar.edu.itba.model.DTOs.FormationDTO;
-import ar.edu.itba.model.DTOs.MatchDTO;
+import ar.edu.itba.webapp.model.DTOs.MatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
