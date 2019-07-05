@@ -19,6 +19,6 @@ public class Controller {
     public User loggedUser() {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final User user = us.findByUsername(auth == null ? "" : auth.getName());
-        return user;
+        return us.findById(1); //TODO user;
     }
 }

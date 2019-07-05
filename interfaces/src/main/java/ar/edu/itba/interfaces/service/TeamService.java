@@ -13,7 +13,11 @@ public interface TeamService {
 
     Team findByIdAndFetchPlayers(long id);
 
+    Team findByIdAndFetchPlayersAndFormation(long id);
+
     Team findByIdAndFetchPlayersAndFinance(long id);
+
+    Team findByIdAndFetchFormation(long id);
 
     List<Team> findByLeague(League league);
 

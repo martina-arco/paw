@@ -5,6 +5,7 @@ import ar.edu.itba.interfaces.service.LeagueService;
 import ar.edu.itba.interfaces.service.PlayerService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.Formation;
+import ar.edu.itba.webapp.controllers.Controller;
 import ar.edu.itba.webapp.model.DTOs.FormationDTO;
 import ar.edu.itba.webapp.model.DTOs.TeamDTO;
 import ar.edu.itba.model.League;
@@ -20,11 +21,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Path("teams")
 @Component
-public class TeamController {
+public class TeamController extends Controller {
 
     @Autowired
     private TeamService teamService;
@@ -38,18 +40,25 @@ public class TeamController {
     @Autowired
     private FormationService formationService;
 
+
     @GET
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getTeams() {
-        League league = leagueService.findByUser(new User()).get(0); //TODO current user. Esto tira indexoutofbounds
-        List<Team> teams = teamService.findByLeague(league);
-        List<TeamDTO> teamDTOS = new ArrayList<>();
+        List<League> leagues = leagueService.findByUser(loggedUser());
+        if (leagues.isEmpty()) {
+            return Response.noContent().build();
+        } else {
+            League league = leagues.get(0); //TODO siempre la 0 ?
+            List<Team> teams = teamService.findByLeagueAndFetchPlayers(league);
+            List<TeamDTO> teamDTOS = new LinkedList<>();
 
-        for (Team team : teams) {
-            teamDTOS.add(new TeamDTO(team));
+            for (Team team : teams) {
+                teamDTOS.add(new TeamDTO(team));
+            }
+
+            return Response.ok(teamDTOS).build();
+
         }
-
-        return Response.ok(teamDTOS).build();
     }
 
     @GET
@@ -68,16 +77,21 @@ public class TeamController {
     @Path("/{id}/formation")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getFormation(@PathParam("id") final int id) {
-        Team team = teamService.findById(id);
-        Formation formation = formationService.findById(team.getFormationId());
-        return Response.ok(new FormationDTO(formation)).build();
+        Team team = teamService.findByIdAndFetchFormation(id);
+        if (team != null) {
+            Formation formation = team.getFormation();
+            if (formation != null) {
+                return Response.ok(new FormationDTO(formation)).build();
+            }
+        }
+        return Response.status(404).build();
     }
 
     @GET
     @Path("/current")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getTeam() {
-        Team team = teamService.findByUserIdAndFetchPlayers(1L); //TODO userid
+        Team team = teamService.findByUserIdAndFetchPlayers(loggedUser().getId());
         if (team != null) {
             return Response.ok(new TeamDTO(team)).build();
         } else {
