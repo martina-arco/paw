@@ -6,31 +6,27 @@ import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class MatchDTO {
+public class MatchShortDTO {
     private final long id;
     private final TeamShortDTO home, away;
     private final StadiumDTO stadium;
     private final int homeScore, awayScore;
-    private final List<EventDTO> events;
+    private final String events;
 
-    public MatchDTO(Match match){
-        this(match.getId(), match.getHome(), match.getAway(), match.getHome().getStadium(), match.getHomeScore(), match.getAwayScore(), match.getEvents());
+    public MatchShortDTO(Match match){
+        this(match.getId(), match.getHome(), match.getAway(), match.getHome().getStadium(), match.getHomeScore(), match.getAwayScore());
     }
 
-    public MatchDTO(long matchId, Team home, Team away, Stadium stadium, int homeScore, int awayScore, List<Event> events) {
+    public MatchShortDTO(long matchId, Team home, Team away, Stadium stadium, int homeScore, int awayScore) {
         this.id = matchId;
         this.home = new TeamShortDTO(home);
         this.away = new TeamShortDTO(away);
         this.stadium = new StadiumDTO(stadium);
         this.homeScore = homeScore;
         this.awayScore = awayScore;
-        this.events = new LinkedList<>();
-        for(Event event : events){
-            this.events.add(new EventDTO(event));
-        }
+        this.events = "/matches/"+this.id+"/events";
     }
 
     public long getId() {
@@ -57,7 +53,7 @@ public class MatchDTO {
         return awayScore;
     }
 
-    public List<EventDTO> getEvents() {
+    public String getEvents() {
         return events;
     }
 }

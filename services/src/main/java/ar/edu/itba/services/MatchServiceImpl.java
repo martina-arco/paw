@@ -154,7 +154,9 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public Match findById(long id) {
-        return matchDao.findById(id);
+        Match match = matchDao.findById(id);
+        fetchEvents(match);
+        return match;
     }
 
     @Override
