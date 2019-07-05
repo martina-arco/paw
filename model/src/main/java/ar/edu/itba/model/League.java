@@ -88,4 +88,10 @@ public class League {
     public User getUser() {
         return user;
     }
+
+    public long getUserId() {
+        if(user != null)
+            return user.getId();
+        return -1;
+    }
 }

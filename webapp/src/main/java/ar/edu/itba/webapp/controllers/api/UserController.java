@@ -26,20 +26,20 @@ public class UserController {
     private UriInfo uriInfo;
 
     @GET
-    @Path("/")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response listUsers() {
         final List<User> allUsers = Arrays.asList(new User("test", "test", "test@test.test", new Team(), new Date()));//us.getAll();
         return Response.ok(allUsers.parallelStream().map(UserDTO::new).collect(Collectors.toList())).build();
     }
+
     @POST
-    @Path("/")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response createUser(final UserDTO userDto) {
         final User user = us.create(userDto.getUsername(), userDto.getPassword(), userDto.getMail(), new Date());
         final URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(user.getId())).build();
         return Response.created(uri).build();
     }
+
     @GET
     @Path("/{id}")
     @Produces(value = { MediaType.APPLICATION_JSON, })
@@ -51,6 +51,7 @@ public class UserController {
             return Response.status(Status.NOT_FOUND).build();
         }
     }
+
     @DELETE
     @Path("/{id}")
     @Produces(value = { MediaType.APPLICATION_JSON, })

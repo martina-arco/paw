@@ -39,6 +39,21 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public Team findByIdAndFetchPlayers(long id) {
+        Team team = findById(id);
+        setPlayers(team);
+        return team;
+    }
+
+    @Override
+    public Team findByIdAndFetchPlayersAndFinance(long id) {
+        Team team = findById(id);
+        setPlayers(team);
+        setFinance(team);
+        return team;
+    }
+
+    @Override
     public List<Team> findByLeague(League league) {
         return teamDao.findAllByLeagueId(league.getId());
     }
@@ -108,14 +123,6 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public Team findByUserIdAndFetchPlayersAndFinance(long id) {
         Team team = findByUserId(id);
-        setPlayers(team);
-        setFinance(team);
-        return team;
-    }
-
-    @Override
-    public Team findByIdAndFetchPlayersAndFinance(long id) {
-        Team team = findById(id);
         setPlayers(team);
         setFinance(team);
         return team;
