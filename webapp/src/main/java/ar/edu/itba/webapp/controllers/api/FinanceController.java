@@ -2,8 +2,8 @@ package ar.edu.itba.webapp.controllers.api;
 
 import ar.edu.itba.interfaces.service.StadiumService;
 import ar.edu.itba.interfaces.service.TeamService;
-import ar.edu.itba.model.DTOs.EconomyDTO;
-import ar.edu.itba.model.DTOs.StadiumDTO;
+import ar.edu.itba.webapp.controllers.Controller;
+import ar.edu.itba.webapp.model.DTOs.EconomyDTO;
 import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Path("finance")
 @Component
-public class FinanceController {
+public class FinanceController extends Controller {
 
     @Autowired
     private TeamService teamService;
@@ -34,10 +34,9 @@ public class FinanceController {
 
 
     @GET
-    @Path("/economy")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getEconomy() {
-        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(1L); //id del user
+        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId()); //id del user
         Map<Receipt.Type, Integer> summary = teamService.getFinanceSummary(team);
 
         int income, playersSold, ticketsSold, expenses, playersBought, salaries, stadiumExpansion;
@@ -56,7 +55,7 @@ public class FinanceController {
     @Path("/receipts")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getReceipts() {
-        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(1L); //id del user
+        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId());
         List<Receipt> receipts = team.getFinance();
 
         List<Receipt> sortedReceipts = new LinkedList<>(receipts);
@@ -69,7 +68,7 @@ public class FinanceController {
     @Path("/stadium")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getStadiumFinance() {
-        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(1L); //id del user
+        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId());
         Stadium stadium = stadiumService.findByTeam(team);
 
         return Response.ok(stadium).build();

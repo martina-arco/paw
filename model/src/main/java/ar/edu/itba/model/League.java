@@ -1,8 +1,8 @@
 package ar.edu.itba.model;
 
 import ar.edu.itba.model.utils.*;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.*;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "league")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class League {
 
     @Id
@@ -87,5 +87,11 @@ public class League {
 
     public User getUser() {
         return user;
+    }
+
+    public long getUserId() {
+        if(user != null)
+            return user.getId();
+        return -1;
     }
 }

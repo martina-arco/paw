@@ -26,7 +26,12 @@ public class FormationServiceImpl implements FormationService {
 
     @Override
     public Formation findById(long id) {
-        return formationDao.findById(id);
+        Formation formation = formationDao.findById(id);
+        if(formation != null) {
+            formation.getStarters().size();
+            formation.getSubstitutes().size();
+        }
+        return formation;
     }
 
     @Override

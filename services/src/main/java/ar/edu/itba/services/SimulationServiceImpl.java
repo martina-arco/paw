@@ -6,7 +6,6 @@ import ar.edu.itba.interfaces.dao.MatchStateDao;
 import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.model.*;
-import ar.edu.itba.model.DTOs.MatchDTO;
 import ar.edu.itba.model.utils.*;
 import ar.edu.itba.model.simulation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +46,12 @@ public class SimulationServiceImpl implements SimulationService{
     }
 
     @Override
-    public List<MatchDTO> getMatches(Long leagueId, User user) {
+    public List<Match> getMatches(Long leagueId, User user) {
         List<Match> matches = matchDao.findByLeagueIdAndDate(leagueId, user.getCurrentDay());
-        List<MatchDTO> ret = new ArrayList<>();
+        List<Match> ret = new ArrayList<>();
         for(Match match : matches){
             matchService.fetchEvents(match);
-            ret.add(new MatchDTO(match));
+            ret.add(match);
         }
 
         return ret;

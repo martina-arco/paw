@@ -39,6 +39,36 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public Team findByIdAndFetchPlayers(long id) {
+        Team team = findById(id);
+        setPlayers(team);
+        return team;
+    }
+
+    @Override
+    public Team findByIdAndFetchPlayersAndFinance(long id) {
+        Team team = findById(id);
+        setPlayers(team);
+        setFinance(team);
+        return team;
+    }
+
+    @Override
+    public Team findByIdAndFetchPlayersAndFormation(long id) {
+        Team team = findById(id);
+        setPlayers(team);
+        setFormation(team);
+        return team;
+    }
+
+    @Override
+    public Team findByIdAndFetchFormation(long id) {
+        Team team = findById(id);
+        setFormation(team);
+        return team;
+    }
+
+    @Override
     public List<Team> findByLeague(League league) {
         return teamDao.findAllByLeagueId(league.getId());
     }
@@ -114,14 +144,6 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Team findByIdAndFetchPlayersAndFinance(long id) {
-        Team team = findById(id);
-        setPlayers(team);
-        setFinance(team);
-        return team;
-    }
-
-    @Override
     public void setPlayers(Team team) {
         if(team != null){
             team.getPlayers().size();
@@ -141,6 +163,8 @@ public class TeamServiceImpl implements TeamService {
         if(formation != null) {
             formation.getStarters().size();
             formation.getSubstitutes().size();
+        } else {
+            team.setFormation(aiService.getFormation(team.getPlayers()));
         }
     }
 

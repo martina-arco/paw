@@ -5,8 +5,8 @@ import ar.edu.itba.interfaces.service.MatchService;
 import ar.edu.itba.interfaces.service.SimulationService;
 import ar.edu.itba.interfaces.service.TeamService;
 import ar.edu.itba.model.*;
-import ar.edu.itba.model.DTOs.FormationDTO;
-import ar.edu.itba.model.DTOs.MatchDTO;
+import ar.edu.itba.webapp.controllers.Controller;
+import ar.edu.itba.webapp.model.DTOs.MatchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,9 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+@Path("matches")
 @Component
-public class MatchController {
+public class MatchController extends Controller {
 
     @Autowired
     private LeagueService leagueService;
@@ -35,7 +36,6 @@ public class MatchController {
 
 //  TODO: hacerlo para toda la simulacion
     @GET
-    @Path("/matches")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatches() {
         User user = new User(); //logged user
@@ -48,10 +48,10 @@ public class MatchController {
     }
 
     @GET
-    @Path("/match")
+    @Path("/current")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatch() {
-        User user = new User(); //logged user
+        User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
         Match userMatch = matchService.getUserMatch(matches, user);
@@ -60,10 +60,10 @@ public class MatchController {
     }
 
     @GET
-    @Path("matches/upcomingMatches")
+    @Path("/upcoming")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getUpcomingMatches() {
-        User user = new User(); //logged user
+        User user = loggedUser();
 
         Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
         List<Match> matches = matchService.getUpcomingMatches(team, user.getCurrentDay());
@@ -77,10 +77,10 @@ public class MatchController {
     }
 
     @GET
-    @Path("match/upcomingMatch")
+    @Path("/next")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getUpcomingMatch() {
-        User user = new User(); //logged user
+        User user = loggedUser();
 
         Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
         Match upcomingMatch = matchService.getUpcomingMatches(team, user.getCurrentDay()).get(0);

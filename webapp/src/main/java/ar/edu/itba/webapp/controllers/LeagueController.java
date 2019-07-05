@@ -32,7 +32,7 @@ public class LeagueController extends Controller {
 
         User user = loggedUser();
         Team team = teamService.findByUserId(user.getId());
-        League league = leagueService.findByUser(loggedUser()).get(0);
+        League league = leagueService.findByUser(user).get(0);
 
         List<Match> upcomingMatches = matchService.getUpcomingMatches(team, user.getCurrentDay());
         List<Map.Entry<String,Integer>> teams = leagueService.getTeamPointsName(league, user.getCurrentDay());

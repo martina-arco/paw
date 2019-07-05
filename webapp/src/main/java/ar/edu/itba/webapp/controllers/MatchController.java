@@ -1,7 +1,7 @@
 package ar.edu.itba.webapp.controllers;
 
 import ar.edu.itba.interfaces.service.*;
-import ar.edu.itba.model.DTOs.MatchDTO;
+import ar.edu.itba.webapp.model.DTOs.MatchDTO;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Match;
 import ar.edu.itba.model.User;
@@ -53,7 +53,7 @@ public class MatchController extends Controller{
     @RequestMapping(value = "/matchData", produces = "application/json")
     @ResponseBody
     public Object json() {
-        List<MatchDTO> ret = simulationService.getMatches(leagueService.findByUser(loggedUser()).get(0).getId(),loggedUser());
+        List<Match> ret = simulationService.getMatches(leagueService.findByUser(loggedUser()).get(0).getId(),loggedUser());
         return ret;
     }
 

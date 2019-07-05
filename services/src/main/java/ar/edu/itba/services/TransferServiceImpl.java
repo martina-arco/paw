@@ -3,7 +3,6 @@ package ar.edu.itba.services;
 import ar.edu.itba.interfaces.dao.PlayerDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.*;
-import ar.edu.itba.model.DTOs.PlayerDTO;
 import ar.edu.itba.model.League;
 import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
@@ -66,7 +65,7 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public List<PlayerDTO> playersByCriteria(User user, Predicate<Player> criteria) {
+    public List<Player> playersByCriteria(User user, Predicate<Player> criteria) {
         List<League> leagues = leagueService.findByUser(user);
         List<Player> players = new ArrayList<>();
         Team userTeam = teamService.findByUserId(user.getId());
@@ -78,9 +77,9 @@ public class TransferServiceImpl implements TransferService {
             }
         }
 
-        List<PlayerDTO> ret = new ArrayList<>();
+        List<Player> ret = new ArrayList<>();
         for(Player player : players){
-            ret.add(new PlayerDTO(player));
+            ret.add(player);
         }
 
         return ret;

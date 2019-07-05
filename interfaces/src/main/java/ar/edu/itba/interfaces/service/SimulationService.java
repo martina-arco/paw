@@ -1,7 +1,6 @@
 package ar.edu.itba.interfaces.service;
 
 import ar.edu.itba.model.*;
-import ar.edu.itba.model.DTOs.MatchDTO;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface SimulationService {
 
     void resimulate(Long userId, int minute, Match match, Team team, List<Player> in, List<Player> out);
 
-    List<MatchDTO> getMatches(Long leagueId, User user);
+    List<Match> getMatches(Long leagueId, User user);
 
     boolean started(Match match);
 }
