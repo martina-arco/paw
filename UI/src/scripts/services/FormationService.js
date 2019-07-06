@@ -1,7 +1,7 @@
 define(['footballManager'], function(footballManager) {
 
   footballManager.service('FormationService', function($http) {
-    this.url = "./api/v1/formation/";
+    this.url = 'http://localhost:8080/webapp_war_exploded/formation/';
 
     this.getFormation = function () {
         return $http.get(this.url);

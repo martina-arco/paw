@@ -1,7 +1,7 @@
 define(['footballManager'], function(footballManager) {
 
   footballManager.service('FinanceService', function($http) {
-    this.url = "./api/v1/finance/";
+    this.url = "http://localhost:8080/webapp_war_exploded/finance/";
 
     // summary: {
     //   playersSold: int,
