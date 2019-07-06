@@ -1,11 +1,11 @@
 define(['footballManager', 'services/MatchService'], function (footballManager) {
 
     footballManager.controller("MatchEndCtl", function ($scope, MatchService) {
-        MatchService.getMatches().then(function (response) {
+        MatchService.getUpcomingMatches().then(function (response) {
             $scope.matches = response.data;
         });
 
-        MatchService.getMatch().then(function (response) {
+        MatchService.getCurrentMatch().then(function (response) {
             $scope.match = response.data;
         });
     });

@@ -8,6 +8,8 @@ import ar.edu.itba.model.Player;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import ar.edu.itba.model.PlayerFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class TransferServiceImpl implements TransferService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransferServiceImpl.class);
 
     @Autowired
     private EconomyService economyService;
@@ -87,12 +91,18 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public Predicate<Player> criteria(String filters) {
-        Predicate ret = o -> true;
-        String array[] = filters.split("&");
-        for (int i = 0; i < array.length; i+=2) {
-            if(!array[i].split("=")[1].equals("Any")){
-                PlayerFilter playerFilter = new PlayerFilter(array[i].split("=")[1], array[i+1].split("=")[1]);
-                ret = ret.and(playerFilter.toPredicate());
+        Predicate<Player> ret = o -> true;
+        if (!filters.isEmpty()) {
+            try {
+                String array[] = filters.split("&");
+                for (int i = 0; i < array.length; i += 2) {
+                    if (!array[i].split("=")[1].equals("Any")) {
+                        PlayerFilter playerFilter = new PlayerFilter(array[i].split("=")[1], array[i + 1].split("=")[1]);
+                        ret = ret.and(playerFilter.toPredicate());
+                    }
+                }
+            } catch (Exception e) {
+                LOGGER.debug("Filtro invalido: "+filters, e);
             }
         }
         return ret;
