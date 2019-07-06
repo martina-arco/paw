@@ -12,6 +12,8 @@ public class LeagueShortDTO {
     private int prize;
     private long userId;
 
+    public LeagueShortDTO(){}
+
     public LeagueShortDTO(League league) {
         this.id = league.getId();
         this.name = league.getName();

@@ -12,6 +12,8 @@ public class StadiumDTO {
     private int lowClassPrice, mediumClassPrice, highClassPrice;
     private int lowCost, mediumCost, highCost;
 
+    public StadiumDTO(){}
+
     public StadiumDTO(Stadium stadium) {
         this(stadium.getId(), stadium.getName(), stadium.getLowClass(), stadium.getMediumClass(), stadium.getHighClass(),
                 stadium.getLowClassPrice(), stadium.getMediumClassPrice(), stadium.getHighClassPrice(),

@@ -3,8 +3,8 @@ package ar.edu.itba.webapp.model.DTOs;
 import ar.edu.itba.model.Event;
 
 public class EventDTO {
-    private final String player1, player2, type;
-    private final int minute;
+    private String player1, player2, type;
+    private int minute;
 
     private static String typeToString(Event.Type type){
         switch (type){
@@ -30,6 +30,8 @@ public class EventDTO {
                 return "";
         }
     }
+
+    public EventDTO(){}
 
     public EventDTO(Event event){
         this(event.getP1().getName(), event.getP2()==null?"":event.getP2().getName(), typeToString(event.getType()), event.getMinute());

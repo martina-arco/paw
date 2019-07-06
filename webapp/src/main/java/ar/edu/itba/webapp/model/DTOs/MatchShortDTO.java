@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatchShortDTO {
-    private final long id;
-    private final TeamShortDTO home, away;
-    private final StadiumDTO stadium;
-    private final int homeScore, awayScore;
-    private final String events;
+    private long id;
+    private TeamShortDTO home, away;
+    private StadiumDTO stadium;
+    private int homeScore, awayScore;
+    private String events;
+
+    public MatchShortDTO(){}
 
     public MatchShortDTO(Match match){
         this(match.getId(), match.getHome(), match.getAway(), match.getHome().getStadium(), match.getHomeScore(), match.getAwayScore());

@@ -16,6 +16,8 @@ public class LeagueDTO {
     private List<Map.Entry<String,Integer>> teams;
     private List<MatchShortDTO> upcomingMatches;
 
+    public LeagueDTO(){}
+
     public LeagueDTO(League league, Integer matchesToPlay, Integer matchesPlayed, List<Map.Entry<String, Integer>> teams,
                      List<Match> upcomingMatches) {
         this.id = league.getId();

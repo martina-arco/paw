@@ -12,6 +12,9 @@ public class FormationDTO {
     private List<Integer> options; //nose si deberia ir en este dto o hacer llamado aparte
     private Integer formation;
 
+
+    public FormationDTO(){}
+
     //  TODO: de donde saco la formation
     public FormationDTO(Formation formation) {
         this(formation.getId(), formation.getGk(), formation.getLb(), formation.getLcb(), formation.getCb(), formation.getRcb(), formation.getRb(),

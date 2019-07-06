@@ -9,6 +9,8 @@ public class EconomyDTO {
     private int income, expense, money;
     private Map<Receipt.Type, Integer> summary;
 
+    public EconomyDTO(){}
+
     public EconomyDTO(int income, int expense, int money, Map<Receipt.Type, Integer> summary) {
         this.income = income;
         this.expense = expense;
