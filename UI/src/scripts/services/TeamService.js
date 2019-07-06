@@ -12,7 +12,7 @@ define(['footballManager'], function(footballManager) {
       };
 
       this.chooseTeam = function (teamId) {
-        var body = JSON.stringify({teamId: teamId});
+        var body = JSON.stringify(teamId);
         return $http.post(this.url + 'current', body);
       }
 
