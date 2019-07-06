@@ -31,12 +31,14 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
           $scope.PLAYERGOALKEEPING
         ];
 
-        $scope.data = [
-          $scope.player.finishing,
-          $scope.player.defending,
-          $scope.player.passing,
-          $scope.player.goalKeeping
-        ];
+        if($scope.player != null) {
+            $scope.data = [
+              $scope.player.finishing,
+              $scope.player.defending,
+              $scope.player.passing,
+              $scope.player.goalKeeping
+            ];
+        }
 
         $scope.changePlayer = function (id) {
             $scope.players.forEach(function (player) {
