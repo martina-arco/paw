@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    defaultRoutePath: '/home',
+    defaultRoutePath: '/login',
     routes: {
       '/home': {
         templateUrl: 'views/home.html',
@@ -28,7 +28,7 @@ define([], function() {
       },
       '/signUp':{
         templateUrl: 'views/signUp.html',
-        controller: 'IndexCtl'
+        controller: 'SignUpCtl'
       },
       '/match': {
         templateUrl: 'views/match.html',

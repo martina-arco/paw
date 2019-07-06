@@ -3,7 +3,7 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
   footballManager.controller('SignUpCtl', function($scope/*, $rootScope*/, $location, AccountService) { 
     /* 
     if(AccountService.getToken()) { 
-      $location.url("game") 
+      $location.url("home")
     } 
     */ 
  
@@ -11,7 +11,7 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
     $scope.password = null; 
     $scope.repeatPassword = null; 
  
-    $scope.register = function () { 
+    $scope.signup = function () {
       $scope.usernameError = ""; 
       $scope.passwordError = ""; 
       $scope.repeatPasswordError = ""; 
@@ -39,45 +39,17 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
       } 
  
       if (!error) { 
-        AccountService.createUser($scope.username, $scope.password); 
-        $location.url("home"); 
-        /*.then( 
-          function (response) { 
-            $rootScope.user = undefined; 
+        AccountService.createUser($scope.username, $scope.password).then(
+          function (response) {
             AccountService.login($scope.username, $scope.password, false).then( 
-              function (response){ 
-                $rootScope.user = response.data; 
-                $location.url("home"); 
+              function (response){
+                $location.url("home");
               } 
             ) 
-          }, 
-          function (response) { 
-            $scope.usernameError = $scope.register_alreadyExists"Username error"; 
-          } 
-        )*/ 
+          }
+        )
       } 
-    } 
- 
-    /* 
-    $('#username').on('keydown', function(e) { 
-      if (e.which === 13) { 
-        $scope.register(); 
-      } 
-    }); 
- 
- 
-    $('#password').on('keydown', function(e) { 
-      if (e.which === 13) { 
-        $scope.register(); 
-      } 
-    }); 
- 
-    $('#password2').on('keydown', function(e) { 
-      if (e.which === 13) { 
-        $scope.register(); 
-      } 
-    }); 
-    */ 
+    }
   }); 
  
 }); 

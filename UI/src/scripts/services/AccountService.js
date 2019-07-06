@@ -1,7 +1,7 @@
 define(['footballManager'], function(footballManager) { 
  
   footballManager.service('AccountService', function($http, $q) { 
-    this.url = "./api/accounts/"; 
+    this.url = "./api/accounts/";
  
     this.key = 'token-footballManager'; 
  
@@ -11,9 +11,9 @@ define(['footballManager'], function(footballManager) {
       sessionStorage.getItem(this.key); 
       */ 
       if(remeberMe) { 
-        localStorage.setItem(this.key, token) 
+        localStorage.setItem(this.key, token);
       } else { 
-        sessionStorage.setItem(this.key,token) 
+        sessionStorage.setItem(this.key,token);
       } 
     }; 
  
@@ -43,8 +43,8 @@ define(['footballManager'], function(footballManager) {
     }; 
  
     this.createUser = function (username, password) { 
-      const body = JSON.stringify({username: username, password: password}); 
-      return $http.post(this.url + "create", body); 
+      var body = JSON.stringify({username: username, password: password});
+      return $http.post(this.url + "createUser", body);
     }; 
  
     this.getUser = function () { 
@@ -62,7 +62,7 @@ define(['footballManager'], function(footballManager) {
  
       var that = this; 
       that.saveToken(username+password, remeberMe); 
-      /* 
+      /*
       return $http({ 
           method: 'POST', 
           url: this.url + "login", 

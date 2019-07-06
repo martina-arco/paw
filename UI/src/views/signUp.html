@@ -10,18 +10,23 @@
           <div class="form-group">
             <p>{{USERNAME}}</p>
             <input type="text" ng-model="username" class="form-control" />
+            <p>{{usernameError}}</p>
           </div>
 
           <div class="form-group">
             <p>{{PASSWORD}}</p>
             <input type="password" ng-model="password" class="form-control" />
+            <p>{{passwordError}}</p>
           </div>
 
           <div class="form-group">
             <p >{{REPEATPASSWORD}}</p>
             <input type="password" ng-model="repeatPassword" class="form-control"/>
+            <p>{{repeatPasswordError}}</p>
           </div>
-          <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">{{SIGNUP}}</button>
+          <div ng-click="signup()" id="signupBtn">
+            <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">{{SIGNUP}}</button>
+          </div>
           <div class="register-link m-t-15 text-center">
             <p>{{ALREADYHAVEACCOUNT}}<a ng-href="#!login">{{SIGNIN}}</a></p>
           </div>
