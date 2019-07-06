@@ -74,7 +74,7 @@ public class UserController extends Controller {
         //return Response.noContent().build();
     }
 
-    @GET
+    @POST
     @Path("/advanceDate")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response advanceDate() {

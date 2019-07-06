@@ -1,9 +1,6 @@
 package ar.edu.itba.webapp.controllers.api;
 
-import ar.edu.itba.interfaces.service.FormationService;
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.PlayerService;
-import ar.edu.itba.interfaces.service.TeamService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.Formation;
 import ar.edu.itba.webapp.controllers.Controller;
 import ar.edu.itba.webapp.model.DTOs.FormationDTO;
@@ -14,10 +11,7 @@ import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -30,15 +24,14 @@ public class TeamController extends Controller {
 
     @Autowired
     private TeamService teamService;
-
     @Autowired
     private PlayerService playerService;
-
     @Autowired
     private LeagueService leagueService;
-
     @Autowired
     private FormationService formationService;
+    @Autowired
+    private UserService userService;
 
 
     @GET
@@ -84,7 +77,7 @@ public class TeamController extends Controller {
                 return Response.ok(new FormationDTO(formation)).build();
             }
         }
-        return Response.status(404).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @GET
@@ -98,6 +91,23 @@ public class TeamController extends Controller {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
+
+    @POST
+    @Path("/current")
+    @Produces(value = { MediaType.APPLICATION_JSON, })
+    public Response createUser(final long teamId) {
+        User user = loggedUser();
+        Team currentTeam = teamService.findByUserId(user.getId());
+        Team team = teamService.findByIdAndFetchPlayers(teamId);
+
+        if (currentTeam == null && team != null && team.getLeague().getUserId() == user.getId()) {
+            userService.setTeam(user, team);
+            return Response.ok(new TeamDTO(team)).build();
+        }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
 
 
 //    @POST
