@@ -34,6 +34,15 @@ public class UserDTO {
         this.currentDay = currentDay;
     }
 
+    public UserDTO(String username, String password, String mail) {
+        this.username = username;
+        this.password = password;
+        this.mail = mail;
+    }
+
+    public UserDTO() {
+    }
+
     public long getId() {
         return id;
     }
