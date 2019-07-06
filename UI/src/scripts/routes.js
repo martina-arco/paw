@@ -28,7 +28,7 @@ define([], function() {
       },
       '/signUp':{
         templateUrl: 'views/signUp.html',
-        controller: 'IndexCtl'
+        controller: 'SignUpCtl'
       },
       '/match': {
         templateUrl: 'views/match.html',

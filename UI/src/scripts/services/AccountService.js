@@ -36,10 +36,10 @@ define(['footballManager'], function(footballManager) {
       })
     };
 
-    this.createUser = function (username, password) {
-      const body = JSON.stringify({username: username, password: password});
-      return $http.post(this.url + "create", body);
-    };
+    // this.createUser = function (username, password) {
+    //   const body = JSON.stringify({username: username, password: password});
+    //   return $http.post(this.url + "create", body);
+    // };
 
     this.getUser = function () {
       return this.authenticated('GET', this.url + "user")
