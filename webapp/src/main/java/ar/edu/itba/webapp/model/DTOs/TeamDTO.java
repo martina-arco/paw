@@ -18,6 +18,8 @@ public class TeamDTO {
     private int fanCount, fanTrust, boardTrust, money;
     private String finance;
 
+    public TeamDTO(){}
+
     public TeamDTO(Team team) {
         this.id = team.getId();
         this.name = team.getName();

@@ -11,6 +11,8 @@ public class TeamShortDTO {
     private String name;
 
 
+    public TeamShortDTO(){}
+
     public TeamShortDTO(Team team) {
         this.id = team.getId();
         this.leagueId = team.getLeagueId();

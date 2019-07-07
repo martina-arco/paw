@@ -8,6 +8,8 @@ public class ReceiptDTO {
     private int amount;
     private String type;
 
+    public ReceiptDTO(){}
+
     public ReceiptDTO(Receipt receipt) {
         this(receipt.getId(), receipt.getAmount(), receipt.getType().toString());
     }

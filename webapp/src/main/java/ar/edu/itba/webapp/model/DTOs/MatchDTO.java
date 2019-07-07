@@ -10,11 +10,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MatchDTO {
-    private final long id;
-    private final TeamShortDTO home, away;
-    private final StadiumDTO stadium;
-    private final int homeScore, awayScore;
-    private final List<EventDTO> events;
+    private long id;
+    private TeamShortDTO home, away;
+    private StadiumDTO stadium;
+    private int homeScore, awayScore;
+    private List<EventDTO> events;
+
+    public MatchDTO(){}
 
     public MatchDTO(Match match){
         this(match.getId(), match.getHome(), match.getAway(), match.getHome().getStadium(), match.getHomeScore(), match.getAwayScore(), match.getEvents());

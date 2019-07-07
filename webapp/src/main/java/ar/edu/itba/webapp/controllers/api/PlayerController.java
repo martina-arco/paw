@@ -29,7 +29,6 @@ public class PlayerController extends Controller {
     private PlayerService playerService;
 
     @GET
-    @Path("/current")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getPlayers() {
         Team team = teamService.findByUserIdAndFetchPlayers(loggedUser().getId());

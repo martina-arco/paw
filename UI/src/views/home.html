@@ -16,21 +16,27 @@
 
         <div class="card-body">
           <div class="row ml-1 mr-1">
-            <div class="col-6 trust-text">
+            <div class="col-4 trust-text">
               {{BOARDTRUST}}
             </div>
             <div class="col-5 p-0 progress mt-3">
-              <div class="progress-bar bg-info" role="progressbar" style="width: ${team.boardTrust}%" aria-valuemin="0"
+              <div class="progress-bar bg-info" role="progressbar" style="width: {{team.boardTrust}}%" aria-valuemin="0"
                    aria-valuemax="100"></div>
+            </div>
+            <div class="col-2 trust-text text-right">
+              <p>{{team.boardTrust}}%</p>
             </div>
           </div>
           <div class="row ml-1 mr-1">
-            <div class="col-6 trust-text">
+            <div class="col-4 trust-text">
               {{FANTRUST}}
             </div>
             <div class="col-5 p-0 progress mt-3">
               <div class="progress-bar bg-info" role="progressbar" style="width: {{team.fanTrust}}%"
                    aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="col-2 trust-text text-right">
+              <p>{{team.fanTrust}}%</p>
             </div>
           </div>
         </div>
@@ -59,19 +65,19 @@
                   <div ng-switch on="team.name">
                     <div ng-switch-when="team1">
                       {{HOMEVERSUS}}
-                      <span class="pull-right">{{upcomingMatch.away}}</span>
+                      <span class="pull-right">{{upcomingMatch.away.name}}</span>
                     </div>
 
                     <div ng-switch-default>
                       {{AWAYVERSUS}}
-                      <span class="pull-right">{{upcomingMatch.home}}</span>
+                      <span class="pull-right">{{upcomingMatch.home.name}}</span>
                     </div>
                   </div>
 
                 </li>
                 <li class="list-group-item">
                   {{STADIUM}}
-                  <span class="pull-right">{{upcomingMatch.stadium}}</span>
+                  <span class="pull-right">{{upcomingMatch.stadium.name}}</span>
                 </li>
                 <li class="list-group-item">
                   <a ng-href="#!match" class="pull-right">{{PLAYMATCH}} &nbsp; <i class="fa fa-play"></i></a>

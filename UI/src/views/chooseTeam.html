@@ -12,10 +12,10 @@
         <form modelAttribute="chooseTeamForm">
 
           <div class="form-group">
-            <ul ng-repeat="team in teams">
+            <ul ng-repeat="team in teams" >
               <label>
-                <input type="radio" ng-model="teamSelected" name="choose-team-input"
-                       value="{{team.id}}" required>
+                <input type="radio" name="choose-team-input"
+                       value="{{team.id}}" ng-model="model.selected" required>
                 {{team.name}}
               </label>
             </ul>

@@ -17,7 +17,7 @@ define(['footballManager'], function(footballManager) {
     //   stadium: int
     // }
     this.getEconomy = function () {
-        return $http.get(this.url + 'economy');
+        return $http.get(this.url);
     };
 
     // [

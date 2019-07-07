@@ -7,6 +7,8 @@ public class PlayerDTO {
     private int goalkeeping, defense, passing, finishing, skillLevel, value, salary, fitness, age, potential, position;
     private long id, teamId;
 
+    public PlayerDTO(){}
+
     public PlayerDTO(Player player){
         this(player.getId(), player.getName(), player.getTeamId(), player.getGoalKeeping(),
                 player.getDefending(), player.getPassing(), player.getFinishing(), player.getSkillLevel(),
