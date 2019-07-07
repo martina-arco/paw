@@ -7,6 +7,7 @@ import ar.edu.itba.webapp.model.DTOs.EconomyDTO;
 import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;
+import ar.edu.itba.webapp.model.DTOs.StadiumDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -71,7 +72,7 @@ public class FinanceController extends Controller {
         Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId());
         Stadium stadium = stadiumService.findByTeam(team);
 
-        return Response.ok(stadium).build();
+        return Response.ok(new StadiumDTO(stadium)).build();
     }
 
 //  TODO
