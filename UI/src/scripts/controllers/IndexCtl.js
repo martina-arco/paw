@@ -373,7 +373,7 @@ function getBrowserLanguage() {
   }
 }
 
-define(['footballManager'], function (footballManager) {
+define(['footballManager', 'services/AccountService'], function (footballManager) {
 
   footballManager.config(['$translateProvider', function ($translateProvider) {
     // add translation table
@@ -382,13 +382,18 @@ define(['footballManager'], function (footballManager) {
     $translateProvider.determinePreferredLanguage(getBrowserLanguage());
   }]);
 
-  footballManager.controller("IndexCtl", function ($scope, $translate, $location) {
+  footballManager.controller("IndexCtl", function ($scope, $translate, $location, AccountService) {
 
     $scope.currentPath = $location.path();
 
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
+
+    $scope.logout = function(){
+      AccountService.logout();
+      $location.url("login");
+    }
 
     var translations = translation_en;
     if (getBrowserLanguage() == "es") {

@@ -1,6 +1,6 @@
 define(['footballManager', 'services/SettingsService'], function(footballManager) {
  
-  footballManager.service('AccountService', function($http, $q, SettingsService) {
+  footballManager.service('AccountService', function($http, $q, $location, SettingsService) {
     this.url = SettingsService.getUrl();
     this.urlLogin = this.url + 'login';
     this.urlRegister = this.url + 'register';
@@ -29,7 +29,8 @@ define(['footballManager', 'services/SettingsService'], function(footballManager
       sessionStorage.removeItem(this.key); 
     }; 
  
-    this.authenticated = function(method, url, body) { 
+    this.authenticated = function(method, url, body) {
+      var that = this;
       return $http({ 
           method: method,
           url: url,
@@ -38,7 +39,7 @@ define(['footballManager', 'services/SettingsService'], function(footballManager
         })
         .catch(function (reason) {
           if (reason.status == 401) {
-            this.eraseToken();
+            that.eraseToken();
             $location.url("login");
           }
           throw reason;
