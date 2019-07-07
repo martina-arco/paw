@@ -8,12 +8,12 @@ define(['footballManager', 'services/SettingsService', 'services/AccountService'
         };
 
         this.getCriteriaTypes = function () {
-            return AccountService.get(this.url + 'players/criteriaTypes');
+            return AccountService.get(this.url + 'transfers');
         };
 
         this.filterSearch = function (filters) {
             var body = JSON.stringify(filters);
-            return AccountService.post(this.url + 'players/filters', body);
+            return AccountService.put(this.url + 'transfers', body);
         };
 
         this.buyPlayer = function (playerId) {
