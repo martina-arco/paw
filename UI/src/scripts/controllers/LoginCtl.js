@@ -1,35 +1,32 @@
 define(['footballManager', 'services/AccountService'], function (footballManager) { 
  
-  footballManager.controller("LoginCtl", function ($scope, AccountService, $location) { 
- 
-    if(AccountService.getToken()) { 
-      $location.url("home"); 
-    } 
- 
-    $scope.username = null; 
-    $scope.password = null; 
+  footballManager.controller("LoginCtl", function ($scope, AccountService, $location) {
+    if(AccountService.getToken()) {
+      $location.url("home");
+    }
+
+    $scope.user = {username:'', password:'', repeatPassword:'', mail:''};
     $scope.rememberMe = null; 
  
-    $scope.login = function () { 
+    $scope.login = function () {
+
+      var error = false;
  
-      $scope.usernameError = ""; 
-      $scope.passwordError = ""; 
-      let error = false; 
- 
-      if (!$scope.username) { 
-        $scope.usernameError = /*$scope.home_enterUsername*/ "Enter Username"; 
+      if (!$scope.user.username) {
+        $scope.user.usernameError = "Enter Username";
         error = true; 
       } 
  
-      if (!$scope.password) { 
-        $scope.passwordError = /*$scope.home_enterPassword*/ "Enter password"; 
+      if (!$scope.user.password) {
+        $scope.user.passwordError = "Enter password";
         error = true; 
       } 
  
       if (!error) { 
-        AccountService.login($scope.username, $scope.password, $scope.rememberMe); 
-        $location.url("home"); 
-      } 
+        AccountService.login($scope.user, $scope.rememberMe).then(function (response) {
+          $location.url("home");
+        });
+      }
     } 
   }); 
  
