@@ -27,6 +27,8 @@ public class UserDTO {
         this.currentDay = user.getCurrentDay();
     }
 
+    public UserDTO(){}
+
     public UserDTO(long id, String username, String password, String mail, Team team, Date currentDay) {
         this.id = id;
         this.username = username;

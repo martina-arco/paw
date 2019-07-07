@@ -1,9 +1,33 @@
-define(['footballManager', 'services/AccountService'], function (footballManager) {
+define(['footballManager', 'services/AccountService'], function (footballManager) { 
+ 
+  footballManager.controller("LoginCtl", function ($scope, AccountService, $location) {
+    // if(AccountService.getToken()) {
+    //   $location.url("home");
+    // }
 
-  footballManager.controller("LoginCtl", function ($scope, AccountService) {
-      $scope.login = function () {
-        AccountService.login($scope.username, $scope.password, $scope.rememberMe);
+    $scope.user = {username:'', password:'', repeatPassword:'', mail:''};
+    $scope.rememberMe = null; 
+ 
+    $scope.login = function () {
+
+      var error = false;
+ 
+      if (!$scope.user.username) {
+        $scope.user.usernameError = "Enter Username";
+        error = true; 
+      } 
+ 
+      if (!$scope.user.password) {
+        $scope.user.passwordError = "Enter password";
+        error = true; 
+      } 
+ 
+      if (!error) { 
+        AccountService.login($scope.user, $scope.rememberMe).then(function (response) {
+          $location.url("home");
+        });
       }
-  });
-
+    } 
+  }); 
+ 
 });

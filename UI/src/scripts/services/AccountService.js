@@ -1,82 +1,76 @@
-define(['footballManager'], function(footballManager) {
-
-  footballManager.service('AccountService', function($http, $q) {
-    this.url = "./api/accounts/";
-
-    this.key = 'token-footballManager';
-
+define(['footballManager'], function(footballManager) { 
+ 
+  footballManager.service('AccountService', function($http, $q) { 
+    this.url = 'http://localhost:8080/users/';
+    this.key = 'token-footballManager'; 
+ 
     this.saveToken = function(token, remeberMe){
-      localStorage.getItem(this.key);
-      sessionStorage.getItem(this.key);
-      if(remeberMe) {
-        localStorage.setItem(this.key, token)
-      } else {
-        sessionStorage.setItem(this.key,token)
-      }
-    };
-
+      if(remeberMe) { 
+        localStorage.setItem(this.key, token);
+      } else { 
+        sessionStorage.setItem(this.key,token);
+      } 
+    }; 
+ 
     this.getToken = function () {
       if(localStorage.getItem(this.key))
         return localStorage.getItem(this.key);
-      else
+      else if(sessionStorage.getItem(this.key))
         return sessionStorage.getItem(this.key);
+      else
+        return null;
+    }; 
+ 
+    this.eraseToken = function () { 
+      localStorage.removeItem(this.key); 
+      sessionStorage.removeItem(this.key); 
+    }; 
+ 
+    this.authenticated = function(method, url, body) { 
+      return $http({ 
+        method: method, 
+        url: url, 
+        headers: {'Authorization': this.getToken()}, 
+        data: body 
+      }) 
     };
-
-    this.eraseToken = function () {
-      localStorage.removeItem(this.key);
-      sessionStorage.removeItem(this.key);
-    };
-
-    this.authenticated = function(method, url, body) {
-      return $http({
-        method: method,
-        url: url,
-        headers: {'Authorization': this.getToken()},
-        data: body
-      })
-    };
-
-    // this.createUser = function (username, password) {
-    //   const body = JSON.stringify({username: username, password: password});
-    //   return $http.post(this.url + "create", body);
-    // };
-
-    this.getUser = function () {
-      return this.authenticated('GET', this.url + "user")
-    };
-
-    this.formFormat = function(obj){
-      var str = [];
-      for(var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-      return str.join("&");
-    };
-
-    this.login = function (username, password, remeberMe) {
+ 
+    this.createUser = function (user) {
+      var body = JSON.stringify(user);
+      return $http.post(this.url , body);;
+    }; 
+ 
+    this.getUser = function () { 
+      return this.authenticated('GET', this.url + "user") 
+    }; 
+ 
+    this.formFormat = function(obj){ 
+      var str = []; 
+      for(var p in obj) 
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p])); 
+      return str.join("&"); 
+    }; 
+ 
+    this.login = function (user, remeberMe) {
       var that = this;
-      return $http({
-          method: 'POST',
-          url: this.url + "login",
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data: this.formFormat({
-            username: username,
-            password: password
-          })
-      })
-        .then(function(response) {
+      return $http.post(this.url, JSON.stringify(user))
+      // return $http({
+      //     method: 'POST',
+      //     url: this.url,
+      //     headers: {
+      //       'Content-Type': 'application/x-www-form-urlencoded'
+      //     },
+      //     data: JSON.stringify(user)
+      // })
+        .then(function(response) { 
             that.eraseToken();
             that.saveToken(response.headers("authorization"), remeberMe);
             return $q.resolve(response);
         });
-    };
-
-    this.logout = function () {
-      this.eraseToken();
+    }; 
+ 
+    this.logout = function () { 
+      this.eraseToken(); 
     }
-
-  });
+  }); 
 });
-
-
