@@ -53,14 +53,14 @@ define(['footballManager'], function(footballManager) {
  
     this.login = function (user, remeberMe) {
       var that = this;
-      return $http.post(this.url, JSON.stringify(user))
+      // return $http.post(this.url, JSON.stringify(user))
       return $http({
           method: 'POST',
           url: this.url,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data: JSON.stringify(user)
+          // headers: {
+          //   'Content-Type': 'application/x-www-form-urlencoded'
+          // },
+          data: this.formFormat({username: user.username, password: user.password})
       })
         .then(function(response) { 
             that.eraseToken();
