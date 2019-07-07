@@ -13,6 +13,7 @@ import ar.edu.itba.webapp.model.DTOs.UserDTO;
 import ar.edu.itba.model.Team;
 import ar.edu.itba.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.ws.rs.core.Response.*;
 
-@Path("users")
+@Path("/")
 @Component
 public class UserController extends Controller {
     @Autowired
@@ -38,47 +39,41 @@ public class UserController extends Controller {
     @Autowired
     private SimulationService simulationService;
 
-    @GET
-    @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response listUsers() {
-        final List<User> allUsers = Arrays.asList(new User("test", "test", "test@test.test", new Team(), new Date()));//userService.getAll();
-        return Response.ok(allUsers.parallelStream().map(UserDTO::new).collect(Collectors.toList())).build();
-    }
-
-    @POST
-    @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response createUser(final UserDTO userDto) {
-        final User user = userService.create(userDto.getUsername(), userDto.getPassword(), userDto.getMail(), new Date());
-        final URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(user.getId())).build();
-        return Response.created(uri).build();
-    }
 
     @GET
-    @Path("/{id}")
+    @Path("user")
     @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response getById(@PathParam("id") final int id) {
-        final User user = userService.findById(id);
+    public Response getCurrent() {
+        final User user = loggedUser();
         if (user != null) {
             return Response.ok(new UserDTO(user)).build();
         } else {
-            return Response.status(Status.NOT_FOUND).build();
+            return Response.status(Status.UNAUTHORIZED).build();
         }
     }
 
-    @DELETE
-    @Path("/{id}")
+    @POST
+    @Path("register")
     @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response deleteById(@PathParam("id") final int id) {
-        return Response.status(Status.METHOD_NOT_ALLOWED).build();
-        //userService.deleteById(id);
-        //return Response.noContent().build();
+    public Response createUser(final UserDTO userDto) {
+        if (userDto != null) {
+            final User user = userService.create(userDto.getUsername(), userDto.getPassword(), userDto.getMail(), new Date());
+            if (user != null) {
+                final URI uri = uriInfo.getAbsolutePathBuilder().path("user").build();
+                return Response.created(uri).build();
+            }
+        }
+        return Response.status(Status.BAD_REQUEST).build();
     }
 
     @POST
-    @Path("/advanceDate")
+    @Path("user/advanceDate")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response advanceDate() {
         User user = loggedUser();
+        if (user == null)
+            return Response.status(Status.UNAUTHORIZED).build();
+
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
         Match userMatch = matchService.getUserMatch(matches, user);

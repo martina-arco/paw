@@ -1,9 +1,6 @@
 package ar.edu.itba.webapp.config;
 
-import ar.edu.itba.webapp.auth.JwtAuthenticationFilter;
-import ar.edu.itba.webapp.auth.JwtAuthorizationFilter;
-import ar.edu.itba.webapp.auth.RestAuthenticationEntryPoint;
-import ar.edu.itba.webapp.auth.MySavedRequestAwareAuthenticationSuccessHandler;
+import ar.edu.itba.webapp.auth.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -58,9 +56,11 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().authorizeRequests()
+                .antMatchers("/register").anonymous()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             .and()
+            .addFilterBefore(new CORSFilter(), UsernamePasswordAuthenticationFilter.class)
             .addFilter(new JwtAuthenticationFilter(authenticationManager()))
             .addFilter(new JwtAuthorizationFilter(authenticationManager()))
             .exceptionHandling()

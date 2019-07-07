@@ -23,11 +23,9 @@ public class UserDTO {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.mail = user.getMail();
-        this.team = new TeamShortDTO(user.getTeam());
+        this.team = user.getTeam() != null ? new TeamShortDTO(user.getTeam()) : null;
         this.currentDay = user.getCurrentDay();
     }
-
-    public UserDTO(){}
 
     public UserDTO(long id, String username, String password, String mail, Team team, Date currentDay) {
         this.id = id;
