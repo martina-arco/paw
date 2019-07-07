@@ -93,6 +93,44 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
 
     footballManager.controller("FormationCtl", function ($scope, ngDialog, FormationService, PlayerService) {
 
+        $scope.updateOccupiedPlayers = function () {
+            $scope.occupiedPlayers = [];
+            if($scope.formation.cam != null)
+                $scope.occupiedPlayers.push($scope.formation.cam);
+            if($scope.formation.cb != null)
+              $scope.occupiedPlayers.push($scope.formation.cb);
+            if($scope.formation.cdm != null)
+              $scope.occupiedPlayers.push($scope.formation.cdm);
+            if($scope.formation.gk != null)
+              $scope.occupiedPlayers.push($scope.formation.gk);
+            if($scope.formation.lb != null)
+              $scope.occupiedPlayers.push($scope.formation.lb);
+            if($scope.formation.lcb != null)
+              $scope.occupiedPlayers.push($scope.formation.lcb);
+            if($scope.formation.lcm != null)
+              $scope.occupiedPlayers.push($scope.formation.lcm);
+            if($scope.formation.lf != null)
+              $scope.occupiedPlayers.push($scope.formation.lf);
+            if($scope.formation.lm != null)
+              $scope.occupiedPlayers.push($scope.formation.lm);
+            if($scope.formation.lw != null)
+              $scope.occupiedPlayers.push($scope.formation.lw);
+            if($scope.formation.rb != null)
+              $scope.occupiedPlayers.push($scope.formation.rb);
+            if($scope.formation.rcb != null)
+              $scope.occupiedPlayers.push($scope.formation.rcb);
+            if($scope.formation.rcm != null)
+              $scope.occupiedPlayers.push($scope.formation.rcm);
+            if($scope.formation.rf != null)
+              $scope.occupiedPlayers.push($scope.formation.rf);
+            if($scope.formation.rm != null)
+              $scope.occupiedPlayers.push($scope.formation.rm);
+            if($scope.formation.rw != null)
+              $scope.occupiedPlayers.push($scope.formation.rw);
+            if($scope.formation.st != null)
+              $scope.occupiedPlayers.push($scope.formation.st);
+        };
+
         $scope.saveFormation = function () {
           if(!validateFormation($scope.formation, $scope.formation.formation)) {
               $scope.openFormationChangeErrorModal();
@@ -131,24 +169,7 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
                     $scope.formation.formation = option;
             });
 
-            $scope.occupiedPlayers = [];
-            $scope.occupiedPlayers.push($scope.formation.cam);
-            $scope.occupiedPlayers.push($scope.formation.cb);
-            $scope.occupiedPlayers.push($scope.formation.cdm);
-            $scope.occupiedPlayers.push($scope.formation.gk);
-            $scope.occupiedPlayers.push($scope.formation.lb);
-            $scope.occupiedPlayers.push($scope.formation.lcb);
-            $scope.occupiedPlayers.push($scope.formation.lcm);
-            $scope.occupiedPlayers.push($scope.formation.lf);
-            $scope.occupiedPlayers.push($scope.formation.lm);
-            $scope.occupiedPlayers.push($scope.formation.lw);
-            $scope.occupiedPlayers.push($scope.formation.rb);
-            $scope.occupiedPlayers.push($scope.formation.rcb);
-            $scope.occupiedPlayers.push($scope.formation.rcm);
-            $scope.occupiedPlayers.push($scope.formation.rf);
-            $scope.occupiedPlayers.push($scope.formation.rm);
-            $scope.occupiedPlayers.push($scope.formation.rw);
-            $scope.occupiedPlayers.push($scope.formation.st);
+            $scope.updateOccupiedPlayers();
         });
 
         PlayerService.getPlayers().then(function (response) {
