@@ -69,20 +69,25 @@ public class FinanceController extends Controller {
     @Path("/stadium")
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getStadiumFinance() {
-        Team team = teamService.findByUserIdAndFetchPlayersAndFinance(loggedUser().getId());
+        Team team = teamService.findByUserId(loggedUser().getId());
         Stadium stadium = stadiumService.findByTeam(team);
 
         return Response.ok(new StadiumDTO(stadium)).build();
     }
 
-//  TODO
 
-//    @POST
-//    @Path("/stadium")
-//    @Produces(value = { MediaType.APPLICATION_JSON, })
-//    public Response saveStadiumFinance(final StadiumDTO userDto) {
-//        return Response.created(null).build();
-//    }
+    @POST
+    @Path("/stadium")
+    @Produces(value = { MediaType.APPLICATION_JSON, })
+    public Response expandStadium(final StadiumDTO newStadium) {
+        if (newStadium != null) {
+            Team team = teamService.findByUserId(loggedUser().getId());
+            if (stadiumService.upgradeStadium(team, newStadium.getLowClass(), newStadium.getMediumClass(), newStadium.getHighClass())) {
+                return Response.ok(newStadium).build();
+            }
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
 
 
 }
