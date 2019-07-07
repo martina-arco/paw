@@ -22,8 +22,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
         appContext.register(WebConfig.class, WebAuthConfig.class);
 
-        //FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-        //filterRegistration.addMappingForUrlPatterns(null, true, "/*");
+        FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
+        filterRegistration.addMappingForUrlPatterns(null, true, "/*");
 
         servletContext.setInitParameter("contextConfigLocation", "<NONE>");
         servletContext.addListener(new ContextLoaderListener(appContext));
