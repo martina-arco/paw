@@ -5,10 +5,7 @@ define(['footballManager', 'services/LeagueService'], function (footballManager)
         LeagueService.getLeagueInformation().then(function (response) {
           var teams = response.data.teams;
 
-          $scope.matchesToPlay = response.data.matchesToPlay;
-          $scope.matchesPlayed = response.data.matchesPlayed;
-          $scope.league = response.data.league;
-          $scope.upcomingMatches = response.data.upcomingMatches;
+          $scope.league = response.data;
           $scope.teams = [];
 
           for(var prop in teams) {

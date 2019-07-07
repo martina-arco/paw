@@ -22,11 +22,11 @@
           <div class="weather-category twt-category m-0 p-0">
             <ul class="m-0">
               <li>
-                <h5>{{matchesPlayed}}</h5>
+                <h5>{{league.matchesPlayed}}</h5>
                 {{MATCHESPLAYED}}
               </li>
               <li>
-                <h5>{{matchesToPlay}}</h5>
+                <h5>{{league.matchesToPlay}}</h5>
                 {{MATCHESTOPLAY}}
               </li>
             </ul>
@@ -55,7 +55,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="match in upcomingMatches">
+              <tr ng-repeat="match in league.upcomingMatches">
                 <td class="match-stadium">{{match.stadium.name}}</td>
                 <td class="match-home">{{match.home.name}}</td>
                 <td class="match-away">{{match.away.name}}</td>
