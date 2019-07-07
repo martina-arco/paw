@@ -5,7 +5,7 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     //   $location.url("home");
     // }
 
-    $scope.user = {username:'', password:'', repeatPassword:'', mail:''};
+    $scope.user = {username:'', password:''};
     $scope.rememberMe = null; 
  
     $scope.login = function () {
