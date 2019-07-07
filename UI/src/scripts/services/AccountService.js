@@ -1,12 +1,13 @@
-define(['footballManager'], function(footballManager) { 
+define(['footballManager', 'services/SettingsService'], function(footballManager) {
  
-  footballManager.service('AccountService', function($http, $q) { 
-    this.urlLogin = 'http://localhost:8080/login';
-    this.urlRegister = 'http://localhost:8080/register';
+  footballManager.service('AccountService', function($http, $q, SettingsService) {
+    this.url = SettingsService.getUrl();
+    this.urlLogin = this.url + 'login';
+    this.urlRegister = this.url + 'register';
+    this.urlUser = this.url + 'user';
     this.key = 'token-footballManager'; 
  
     this.saveToken = function(token, remeberMe){
-      $http.defaults.headers.common['Authorization'] = token;
       if(remeberMe) { 
         localStorage.setItem(this.key, token);
       } else { 
@@ -23,19 +24,38 @@ define(['footballManager'], function(footballManager) {
         return null;
     }; 
  
-    this.eraseToken = function () { 
+    this.eraseToken = function () {
       localStorage.removeItem(this.key); 
       sessionStorage.removeItem(this.key); 
     }; 
  
     this.authenticated = function(method, url, body) { 
       return $http({ 
-        method: method, 
-        url: url, 
-        headers: {'Authorization': this.getToken()},
-        data: body 
-      }) 
+          method: method,
+          url: url,
+          headers: {'Authorization': this.getToken()},
+          data: body
+        })
+        .catch(function (reason) {
+          if (reason.status == 401) {
+            this.eraseToken();
+            $location.url("login");
+          }
+          throw reason;
+        })
     };
+
+    this.get = function (url) {
+      return this.authenticated('GET', url);
+    };
+
+    this.post = function (url, body) {
+      return this.authenticated('POST', url, body);
+    }
+
+    this.put = function (url, body) {
+      return this.authenticated('PUT', url, body);
+    }
  
     this.createUser = function (user) {
       var body = JSON.stringify(user);
@@ -72,6 +92,10 @@ define(['footballManager'], function(footballManager) {
  
     this.logout = function () { 
       this.eraseToken(); 
-    }
+    };
+
+    this.isLoggedIn = function() {
+      return this.get(this.urlUser);
+    };
   }); 
 });

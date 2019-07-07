@@ -1,11 +1,11 @@
-define(['footballManager'], function(footballManager) {
+define(['footballManager', 'services/SettingsService'], function(footballManager) {
 
-  footballManager.service('UserService', function($http) {
-    this.url = 'http://localhost:8080/webapp_war_exploded/users/';
+  footballManager.service('UserService', function($http, SettingsService) {
+    this.url = SettingsService.getUrl();
 
     this.createUser = function (user) {
         var body = JSON.stringify(user);
-        return $http.post(this.url, body);
+        return $http.post(this.url + 'register', body);
     };
   })
 });

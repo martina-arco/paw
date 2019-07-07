@@ -1,10 +1,10 @@
-define(['footballManager', 'services/SettingsService'], function(footballManager) {
+define(['footballManager', 'services/SettingsService', 'services/AccountService'], function(footballManager) {
 
-  footballManager.service('FormationService', function($http, SettingsService) {
+  footballManager.service('FormationService', function($http, SettingsService, AccountService) {
     this.url = SettingsService.getUrl() + 'formation/';
 
     this.getFormation = function () {
-        return $http.get(this.url);
+        return AccountService.get(this.url);
     };
 
     this.fillPositionArrays = function (players, goalKeepers, backPlayers, wingPlayers, frontPlayers) {
@@ -27,7 +27,7 @@ define(['footballManager', 'services/SettingsService'], function(footballManager
 
     this.saveFormation = function (formation) {
       var body = JSON.stringify(formation);
-      return $http.post(this.url, body);
+      return AccountService.post(this.url, body);
     };
   })
 });

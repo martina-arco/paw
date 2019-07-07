@@ -71,9 +71,12 @@ public class MatchController extends Controller {
         User user = loggedUser();
 
         Team team = teamService.findByUserIdAndFetchPlayers(user.getId());
-        Match upcomingMatch = matchService.getUpcomingMatches(team, user.getCurrentDay()).get(0);
+        if (team != null) {
+            Match upcomingMatch = matchService.getUpcomingMatches(team, user.getCurrentDay()).get(0);
 
-        return Response.ok(new MatchShortDTO(upcomingMatch)).build();
+            return Response.ok(new MatchShortDTO(upcomingMatch)).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @GET

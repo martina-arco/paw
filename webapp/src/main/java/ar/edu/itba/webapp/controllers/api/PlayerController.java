@@ -32,14 +32,17 @@ public class PlayerController extends Controller {
     @Produces(value = { MediaType.APPLICATION_JSON, })
     public Response getPlayers() {
         Team team = teamService.findByUserIdAndFetchPlayers(loggedUser().getId());
-        List<Player> players = playerService.getPlayers(team);
-        List<PlayerDTO> playerDTOS = new LinkedList<>();
+        if (team != null) {
+            List<Player> players = playerService.getPlayers(team);
+            List<PlayerDTO> playerDTOS = new LinkedList<>();
 
-        for (Player player : players) {
-            playerDTOS.add(new PlayerDTO(player));
+            for (Player player : players) {
+                playerDTOS.add(new PlayerDTO(player));
+            }
+
+            return Response.ok(playerDTOS).build();
         }
-
-        return Response.ok(playerDTOS).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
 

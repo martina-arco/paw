@@ -1,10 +1,10 @@
-define(['footballManager', 'services/SettingsService'], function(footballManager) {
+define(['footballManager', 'services/SettingsService', 'services/AccountService'], function(footballManager) {
 
-    footballManager.service('LeagueService', function($http, SettingsService) {
+    footballManager.service('LeagueService', function($http, SettingsService, AccountService) {
         this.url = SettingsService.getUrl() + "league/";
 
         this.getLeagueInformation = function () {
-            return $http.get(this.url);
+            return AccountService.get(this.url);
         };
     })
 });

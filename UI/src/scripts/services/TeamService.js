@@ -1,19 +1,19 @@
-define(['footballManager', 'services/SettingsService'], function(footballManager) {
+define(['footballManager', 'services/SettingsService', 'services/AccountService'], function(footballManager) {
 
-  footballManager.service('TeamService', function($http, SettingsService) {
+  footballManager.service('TeamService', function($http, SettingsService, AccountService) {
       this.url = SettingsService.getUrl() + 'teams/';
 
       this.getTeams = function () {
-        return $http.get(this.url);
+        return AccountService.get(this.url);
       };
 
       this.getTeam = function () {
-        return $http.get(this.url + 'current');
+        return AccountService.get(this.url + 'current');
       };
 
       this.chooseTeam = function (teamId) {
         var body = JSON.stringify(teamId);
-        return $http.post(this.url + 'current', body);
+        return AccountService.post(this.url + 'current', body);
       }
 
   });

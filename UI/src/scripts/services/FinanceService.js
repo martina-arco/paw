@@ -1,6 +1,6 @@
-define(['footballManager', 'services/SettingsService'], function(footballManager) {
+define(['footballManager', 'services/SettingsService', 'services/AccountService'], function(footballManager) {
 
-  footballManager.service('FinanceService', function($http, SettingsService) {
+  footballManager.service('FinanceService', function($http, SettingsService, AccountService) {
     this.url = SettingsService.getUrl() + "finance/";
 
     // summary: {
@@ -17,7 +17,7 @@ define(['footballManager', 'services/SettingsService'], function(footballManager
     //   stadium: int
     // }
     this.getEconomy = function () {
-        return $http.get(this.url);
+        return AccountService.get(this.url);
     };
 
     // [
@@ -31,16 +31,16 @@ define(['footballManager', 'services/SettingsService'], function(footballManager
     //   }
     // ]
     this.getReceipts = function () {
-        return $http.get(this.url + 'receipts');
+        return AccountService.get(this.url + 'receipts');
     };
 
     this.getStadiumFinance = function () {
-        return $http.get(this.url + 'stadium');
+        return AccountService.get(this.url + 'stadium');
     };
 
     this.postStadiumFinance = function (finance) {
         var body = JSON.stringify(finance);
-        return $http.post(this.url + 'stadium', body);
+        return AccountService.post(this.url + 'stadium', body);
     };
   })
 });

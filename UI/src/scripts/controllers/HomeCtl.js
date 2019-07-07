@@ -3,10 +3,10 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
     footballManager.controller("HomeCtl", function ($scope, $window, $location, PlayerService, MatchService, TeamService) {
         TeamService.getTeam().then(function (response) {
             $scope.team = response.data;
-
-            if($scope.team == null) {
-                $location.url('chooseTeam');
-            }
+        }, function (reason) {
+          if (reason.status == 404) {
+            $location.url('chooseTeam');
+          }
         });
 
         MatchService.getUpcomingMatch().then(function (response) {
