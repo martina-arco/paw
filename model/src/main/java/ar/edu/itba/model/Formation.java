@@ -324,6 +324,15 @@ public class Formation {
         return list;
     }
 
+    public List<String> getPossiblePressuresString(){
+        List<String> list = new LinkedList<>();
+        list.add(Pressures.Low.toString());
+        list.add(Pressures.Medium.toString());
+        list.add(Pressures.High.toString());
+
+        return list;
+    }
+
     public enum Attitudes {
         Defensive, Balanced, Offensive
     }
@@ -333,6 +342,15 @@ public class Formation {
         list.add(Attitudes.Defensive.ordinal());
         list.add(Attitudes.Balanced.ordinal());
         list.add(Attitudes.Offensive.ordinal());
+
+        return list;
+    }
+
+    public List<String> getPossibleAttitudesString(){
+        List<String> list = new LinkedList<>();
+        list.add(Attitudes.Defensive.toString());
+        list.add(Attitudes.Balanced.toString());
+        list.add(Attitudes.Offensive.toString());
 
         return list;
     }

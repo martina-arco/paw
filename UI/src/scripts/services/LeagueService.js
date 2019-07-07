@@ -1,7 +1,7 @@
-define(['footballManager'], function(footballManager) {
+define(['footballManager', 'services/SettingsService'], function(footballManager) {
 
-    footballManager.service('LeagueService', function($http) {
-        this.url = "http://localhost:8080/webapp_war_exploded/league/";
+    footballManager.service('LeagueService', function($http, SettingsService) {
+        this.url = SettingsService.getUrl() + "league/";
 
         this.getLeagueInformation = function () {
             return $http.get(this.url);

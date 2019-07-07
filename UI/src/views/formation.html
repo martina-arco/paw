@@ -37,9 +37,9 @@
               <td>{{player.name}}</td>
               <td>{{player.fitness}}</td>
               <td>{{player.skillLevel}}</td>
-              <td>{{player.goalKeeping}}</td>
+              <td>{{player.goalkeeping}}</td>
               <td>{{player.finishing}}</td>
-              <td>{{player.defending}}</td>
+              <td>{{player.defense}}</td>
               <td>{{player.passing}}</td>
             </tr>
             </tbody>
@@ -217,6 +217,24 @@
                       </span>
                     </li>
 
+                    <li class="list-group-item">
+                      {{PRESSURE}}
+                      <span class="pull-right">
+                        <select ng-options="pressure for pressure in formation.possiblePressures"
+                                ng-model="formation.pressure">
+                        </select>
+                      </span>
+                    </li>
+
+                    <li class="list-group-item">
+                      {{ATTITUDE}}
+                      <span class="pull-right">
+                        <select ng-options="attitude for attitude in formation.possibleAttitudes"
+                                ng-model="formation.attitude">
+                        </select>
+                      </span>
+                    </li>
+
                   </ul>
 
                 </div>
@@ -233,47 +251,47 @@
 
                     <li class="list-group-item">
                       <div class="col-6">
-                        <select class="full-width" ng-options="player.id as player.name for player in substitutes track by player.id"
-                                ng-model="formation.sub1">
+                        <select class="full-width" ng-options="player.id as player.name for player in players track by player.id"
+                                ng-model="formation.substitutes[0]">
                         </select>
                       </div>
                       <div class="col-6">
-                          <select ng-options="player.id as player.name for player in substitutes track by player.id"
-                                  ng-model="formation.sub2">
+                          <select ng-options="player.id as player.name for player in players track by player.id"
+                                  ng-model="formation.substitutes[1]">
                           </select>
                       </div>
                     </li>
 
                     <li class="list-group-item">
                       <div class="col-6">
-                        <select ng-options="player.id as player.name for player in substitutes track by player.id"
-                              ng-model="formation.sub3">
+                        <select ng-options="player.id as player.name for player in players track by player.id"
+                              ng-model="formation.substitutes[2]">
                         </select>
                       </div>
                       <div class="col-6">
-                        <select ng-options="player.id as player.name for player in substitutes track by player.id"
-                                ng-model="formation.sub4">
-                        </select>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item">
-                      <div class="col-6">
-                        <select ng-options="player.id as player.name for player in substitutes track by player.id"
-                                ng-model="formation.sub5">
-                        </select>
-                      </div>
-                      <div class="col-6">
-                        <select ng-options="player.id as player.name for player in substitutes track by player.id"
-                                ng-model="formation.sub6">
+                        <select ng-options="player.id as player.name for player in players track by player.id"
+                                ng-model="formation.substitutes[3]">
                         </select>
                       </div>
                     </li>
 
                     <li class="list-group-item">
                       <div class="col-6">
-                        <select ng-options="player.id as player.name for player in substitutes track by player.id"
-                                ng-model="formation.sub7">
+                        <select ng-options="player.id as player.name for player in players track by player.id"
+                                ng-model="formation.substitutes[4]">
+                        </select>
+                      </div>
+                      <div class="col-6">
+                        <select ng-options="player.id as player.name for player in players track by player.id"
+                                ng-model="formation.substitutes[5]">
+                        </select>
+                      </div>
+                    </li>
+
+                    <li class="list-group-item">
+                      <div class="col-6">
+                        <select ng-options="player.id as player.name for player in players track by player.id"
+                                ng-model="formation.substitutes[6]">
                         </select>
                       </div>
                     </li>
@@ -292,7 +310,7 @@
                       {{CAPTAIN}}
                       <span class="pull-right">
                         <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
-                                ng-model="formation.cap">
+                                ng-model="formation.captain">
                         </select>
                       </span>
                     </li>
@@ -301,7 +319,7 @@
                       {{FREEKICKTAKER}}
                       <span class="pull-right">
                         <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
-                                ng-model="formation.fk">
+                                ng-model="formation.freeKickTaker">
                         </select>
                       </span>
                     </li>
@@ -310,34 +328,7 @@
                       {{PENALTYTAKER}}
                       <span class="pull-right">
                         <select ng-options="player.id as player.name for player in occupiedPlayers track by player.id"
-                                ng-model="formation.pen">
-                        </select>
-                      </span>
-                    </li>
-
-                    <li class="list-group-item">
-                      {{PRESSURE}}
-                      <span class="pull-right">
-                        <select ng-options="pressure for pressure in pressures"
-                                ng-model="formation.pressure">
-                        </select>
-                      </span>
-                    </li>
-
-                    <li class="list-group-item">
-                      {{ATTITUDE}}
-                      <span class="pull-right">
-                        <select ng-options="attitude for attitude in attitudes"
-                                ng-model="formation.attitude">
-                        </select>
-                      </span>
-                    </li>
-
-                    <li class="list-group-item">
-                      {{FORMATION}}
-                      <span class="pull-right">
-                        <select ng-options="formation for formation in formations"
-                                ng-model="formation.formation">
+                                ng-model="formation.penaltyTaker">
                         </select>
                       </span>
                     </li>

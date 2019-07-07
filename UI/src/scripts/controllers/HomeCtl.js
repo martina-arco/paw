@@ -34,9 +34,9 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
         if($scope.player != null) {
             $scope.data = [
               $scope.player.finishing,
-              $scope.player.defending,
+              $scope.player.defense,
               $scope.player.passing,
-              $scope.player.goalKeeping
+              $scope.player.goalkeeping
             ];
         }
 
@@ -49,9 +49,9 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
 
             $scope.data = [
               $scope.player.finishing,
-              $scope.player.defending,
+              $scope.player.defense,
               $scope.player.passing,
-              $scope.player.goalKeeping
+              $scope.player.goalkeeping
             ];
         };
     });

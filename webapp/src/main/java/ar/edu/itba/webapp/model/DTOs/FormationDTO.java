@@ -4,14 +4,18 @@ import ar.edu.itba.model.Formation;
 import ar.edu.itba.model.Player;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FormationDTO {
 
     private long id;
     private PlayerDTO gk, lb, lcb, cb, rcb, rb, lm, lcm, cdm, cam, rcm, rm, lw, lf, st, rf, rw;
-    private List<Integer> options; //nose si deberia ir en este dto o hacer llamado aparte
+    private PlayerDTO captain, freeKickTaker, penaltyTaker;
+    private List<PlayerDTO> substitutes;
+    private String pressure, attitude;
+    private List<Integer> options;
     private Integer formation;
-
+    private List<String> possiblePressures, possibleAttitudes;
 
     public FormationDTO(){}
 
@@ -19,13 +23,17 @@ public class FormationDTO {
     public FormationDTO(Formation formation) {
         this(formation.getId(), formation.getGk(), formation.getLb(), formation.getLcb(), formation.getCb(), formation.getRcb(), formation.getRb(),
             formation.getLm(), formation.getLcm(), formation.getCdm(), formation.getCam(), formation.getRcm(), formation.getRm(),
-            formation.getLw(), formation.getLf(), formation.getSt(), formation.getRf(), formation.getRw(), formation.getPossibleFormations(),
-            formation.getPossibleFormations().get(0));
+            formation.getLw(), formation.getLf(), formation.getSt(), formation.getRf(), formation.getRw(),
+                formation.getCaptain(), formation.getFreeKickTaker(),formation.getPenaltyTaker(), formation.getSubstitutes(),
+                formation.getPossibleFormations(), formation.getPressure(), formation.getAttitude(),
+            formation.getPossibleFormations().get(0), formation.getPossiblePressuresString(), formation.getPossibleAttitudesString());
     }
 
     public FormationDTO(Long id, Player gk, Player lb, Player lcb, Player cb, Player rcb, Player rb, Player lm, Player lcm,
                         Player cdm, Player cam, Player rcm, Player rm, Player lw, Player lf, Player st, Player rf,
-                        Player rw, List<Integer> options, Integer formation) {
+                        Player rw, Player captain, Player freeKickTaker, Player penaltyTaker, List<Player> substitutes, 
+                        List<Integer> options, int pressure, int attitude, Integer formation,
+                        List<String> possiblePressures, List<String> possibleAttitudes) {
         this.id = id;
         this.gk = gk != null? new PlayerDTO(gk) : null;
         this.lb = lb != null? new PlayerDTO(lb) : null;
@@ -44,8 +52,80 @@ public class FormationDTO {
         this.st = st != null? new PlayerDTO(st) : null;
         this.rf = rf != null? new PlayerDTO(rf) : null;
         this.rw = rw != null? new PlayerDTO(rw) : null;
+        this.captain = captain != null? new PlayerDTO(captain) : null;
+        this.freeKickTaker = freeKickTaker != null? new PlayerDTO(freeKickTaker) : null;
+        this.penaltyTaker = penaltyTaker != null? new PlayerDTO(penaltyTaker) : null;
+        this.substitutes = substitutes.parallelStream().map(PlayerDTO::new).collect(Collectors.toList());
         this.options = options;
         this.formation = formation;
+        this.pressure = String.valueOf(pressure);
+        this.attitude = String.valueOf(attitude);
+        this.possiblePressures = possiblePressures;
+        this.possibleAttitudes = possibleAttitudes;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
+
+    public String getAttitude() {
+        return attitude;
+    }
+
+    public void setPressure(String pressure) {
+        this.pressure = pressure;
+    }
+
+    public void setAttitude(String attitude) {
+        this.attitude = attitude;
+    }
+
+    public List<String> getPossiblePressures() {
+        return possiblePressures;
+    }
+
+    public void setPossiblePressures(List<String> possiblePressures) {
+        this.possiblePressures = possiblePressures;
+    }
+
+    public List<String> getPossibleAttitudes() {
+        return possibleAttitudes;
+    }
+
+    public void setPossibleAttitudes(List<String> possibleAttitudes) {
+        this.possibleAttitudes = possibleAttitudes;
+    }
+
+    public PlayerDTO getCaptain() {
+        return captain;
+    }
+
+    public void setCaptain(PlayerDTO captain) {
+        this.captain = captain;
+    }
+
+    public PlayerDTO getFreeKickTaker() {
+        return freeKickTaker;
+    }
+
+    public void setFreeKickTaker(PlayerDTO freeKickTaker) {
+        this.freeKickTaker = freeKickTaker;
+    }
+
+    public PlayerDTO getPenaltyTaker() {
+        return penaltyTaker;
+    }
+
+    public void setPenaltyTaker(PlayerDTO penaltyTaker) {
+        this.penaltyTaker = penaltyTaker;
+    }
+
+    public List<PlayerDTO> getSubstitutes() {
+        return substitutes;
+    }
+
+    public void setSubstitutes(List<PlayerDTO> substitutes) {
+        this.substitutes = substitutes;
     }
 
     public long getId() {
