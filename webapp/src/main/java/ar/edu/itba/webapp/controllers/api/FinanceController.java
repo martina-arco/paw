@@ -7,6 +7,7 @@ import ar.edu.itba.webapp.model.DTOs.EconomyDTO;
 import ar.edu.itba.model.Receipt;
 import ar.edu.itba.model.Stadium;
 import ar.edu.itba.model.Team;
+import ar.edu.itba.webapp.model.DTOs.ReceiptDTO;
 import ar.edu.itba.webapp.model.DTOs.StadiumDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Path("finance")
 @Component
@@ -62,7 +64,8 @@ public class FinanceController extends Controller {
         List<Receipt> sortedReceipts = new LinkedList<>(receipts);
         sortedReceipts.sort((Receipt r1, Receipt r2)-> (int)(r2.getId() - r1.getId()));
 
-        return Response.ok(sortedReceipts.subList(0, Math.min(9, receipts.size()))).build();
+        return Response.ok(sortedReceipts.subList(0, Math.min(9, receipts.size())).stream().map(ReceiptDTO::new)
+                .collect(Collectors.toList())).build();
     }
 
     @GET
