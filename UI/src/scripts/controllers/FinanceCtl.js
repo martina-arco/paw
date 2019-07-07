@@ -1,6 +1,6 @@
 define(['footballManager', 'services/FinanceService'], function (footballManager) {
 
-    footballManager.controller('FinanceCtl', function ($scope, FinanceService) {
+    footballManager.controller('FinanceCtl', function ($scope, $window, ngDialog, FinanceService) {
 
         var setUpReceiptType = function () {
             $scope.receipts.forEach(function (receipt) {
@@ -32,45 +32,71 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
             })
         };
 
-        FinanceService.getEconomy().then(function (response) {
+        $scope.openStadiumExpansionSuccessModal = function() {
+          ngDialog.open({
+            templateUrl: 'views/stadiumExpansionSuccessModal.html',
+            className: 'ngdialog-theme-default',
+            scope: $scope
+          });
+        };
+
+        var setUpEconomy = function () {
+          FinanceService.getEconomy().then(function (response) {
             $scope.summary = response.data.summary;
             $scope.income = response.data.income;
             $scope.expense = response.data.expense;
             $scope.money = response.data.money;
-        });
+          });
+        };
 
-        FinanceService.getReceipts().then(function (response) {
+        var setUpReceipts = function () {
+          FinanceService.getReceipts().then(function (response) {
             $scope.receipts = response.data;
             setUpReceiptType($scope.receipts);
-        });
+          });
+        };
 
-        FinanceService.getStadiumFinance().then(function (response) {
+        var setUpStadium = function () {
+          FinanceService.getStadiumFinance().then(function (response) {
             $scope.stadium  = response.data;
+
+            $scope.lowClassSpent = 0;
+            $scope.mediumClassSpent = 0;
+            $scope.highClassSpent = 0;
 
             $scope.initialLowClass = $scope.stadium.lowClass;
             $scope.initialMediumClass = $scope.stadium.mediumClass;
             $scope.initialHighClass = $scope.stadium.highClass;
-        });
-
-        $scope.submitStadiumUpgrade = function () {
-            FinanceService.postStadiumFinance($scope.stadium);
+          });
         };
 
-        $scope.lowClassSpent = 0;
-        $scope.mediumClassSpent = 0;
-        $scope.highClassSpent = 0;
+        $scope.submitStadiumUpgrade = function () {
+            FinanceService.postStadiumFinance($scope.stadium).then(function (response) {
+              setUpEconomy();
+              setUpReceipts();
+              setUpStadium();
+              $scope.openStadiumExpansionSuccessModal();
+            });
+        };
 
         $scope.refreshLowClass = function () {
-            $scope.lowClassSpent = ($scope.stadium.lowClass - $scope.initialLowClass) * $scope.stadium.lowClassPrice;
+            if($scope.stadium.lowClass != null)
+                $scope.lowClassSpent = ($scope.stadium.lowClass - $scope.initialLowClass) * $scope.stadium.lowCost;
         };
 
         $scope.refreshMediumClass = function () {
-            $scope.mediumClassSpent = ($scope.stadium.mediumClass - $scope.initialMediumClass) * $scope.stadium.mediumClassPrice;
+            if($scope.stadium.mediumClass != null)
+                $scope.mediumClassSpent = ($scope.stadium.mediumClass - $scope.initialMediumClass) * $scope.stadium.mediumCost;
         };
 
         $scope.refreshHighClass = function () {
-            $scope.highClassSpent = ($scope.stadium.highClass - $scope.initialHighClass) * $scope.stadium.highClassPrice;
+            if($scope.stadium.highClass != null)
+                $scope.highClassSpent = ($scope.stadium.highClass - $scope.initialHighClass) * $scope.stadium.highCost;
         };
+
+        setUpEconomy();
+        setUpReceipts();
+        setUpStadium();
     });
 
 });

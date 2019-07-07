@@ -113,6 +113,7 @@ var translation_en = {
   receiptTOURNAMENTPRIZE: 'Prize',
   receiptPLAYERSSALARIES: 'Salaries',
   noTransactions: 'You have no transactions.',
+  stadiumExpansionSuccessful: 'Stadium was expanded successfully',
 
   //FORMATION
   formation: 'Formation',
@@ -251,6 +252,8 @@ var translation_es = {
   receiptTOURNAMENTPRIZE: 'Premio',
   receiptPLAYERSSALARIES: 'Sueldos',
   noTransactions: 'No tienes transacciones.',
+  stadiumExpansionSuccessful: 'El estadio fue expandido exitosamente',
+
   currentSeats: 'Asientos actuales',
   lowSeats: 'Asientos bajos',
   mediumSeats: 'Asientos medios',
@@ -446,6 +449,7 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.PLAYERSBOUGHT = translations["playersBought"];
     $scope.STADIUMEXPANSION = translations["stadiumExpansion"];
     $scope.NOTRANSACTIONS = translations["noTransactions"];
+    $scope.STADIUMEXPANSIONSUCCESSFUL = translations["stadiumExpansionSuccessful"];
     $scope.EXPENSES = translations["expenses"];
     $scope.SALARIES = translations["salaries"];
     $scope.LASTRECEIPTS = translations["lastReceipts"];
