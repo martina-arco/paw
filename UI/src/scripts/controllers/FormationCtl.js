@@ -1,14 +1,110 @@
+function validateFormation(formation, scheme) {
+    var success = true;
+
+    if(formation.lcm == null || formation.rcm == null || formation.lcb == null || formation.rcb == null || formation.gk == null)
+        success = false;
+
+    switch(scheme) {
+        case 343:
+            if(formation.lw == null || formation.st == null || formation.rw == null || formation.lm == null ||
+               formation.rm == null || formation.cb == null)
+                success = false;
+
+            if(formation.lf != null || formation.rf != null || formation.cam != null || formation.cdm != null ||
+               formation.lb != null || formation.rb != null)
+                success = false;
+            break;
+
+        case 352 :
+            if(formation.lf == null || formation.rf == null || formation.cam == null || formation.lm == null ||
+              formation.rm == null || formation.cb == null)
+              success = false;
+
+            if(formation.lw != null || formation.st != null || formation.rw != null || formation.cdm != null ||
+              formation.lb != null || formation.rb != null)
+              success = false;
+            break;
+
+        case 433 :
+            if(formation.lw == null || formation.st == null || formation.rw == null || formation.cdm == null ||
+               formation.lb == null || formation.rb == null)
+                success = false;
+
+            if(formation.lf != null || formation.rf != null || formation.cam != null || formation.lm != null ||
+               formation.rm != null || formation.cb != null)
+                success = false;
+            break;
+
+        case 442 :
+            if(formation.lf == null || formation.rf == null || formation.lm == null || formation.rm == null ||
+              formation.lb == null || formation.rb == null)
+                success = false;
+
+            if(formation.lw != null || formation.st != null || formation.rw != null || formation.cam != null ||
+              formation.cdm != null || formation.cb != null)
+                success = false;
+            break;
+
+        case 451 :
+            if(formation.st == null || formation.cam == null || formation.lm == null || formation.rm == null ||
+              formation.lb == null || formation.rb == null)
+                success = false;
+
+            if(formation.lw != null || formation.lf != null || formation.rf != null || formation.rw != null ||
+              formation.cdm != null || formation.cb != null)
+                success = false;
+            break;
+
+        case 523 :
+            if(formation.lw == null || formation.st == null || formation.rw == null || formation.cb == null ||
+              formation.lb == null || formation.rb == null)
+                success = false;
+
+            if(formation.lf != null || formation.rf != null || formation.cam != null || formation.lm != null ||
+              formation.rm != null || formation.cdm != null)
+                success = false;
+            break;
+
+        case 532 :
+            if(formation.lf == null || formation.rf == null || formation.cam == null || formation.cb == null ||
+              formation.lb == null || formation.rb == null)
+                success = false;
+
+            if(formation.lw != null || formation.st != null || formation.rw != null || formation.lm != null ||
+              formation.rm != null || formation.cdm != null)
+                success = false;
+            break;
+
+        case 541 :
+            if(formation.st == null || formation.lm == null || formation.rm == null || formation.cb == null ||
+              formation.lb == null || formation.rb == null)
+                success = false;
+
+            if(formation.lw != null || formation.lf != null || formation.rf != null || formation.rw != null ||
+              formation.cam != null || formation.cdm != null)
+                success = false;
+            break;
+    }
+
+    return success;
+}
+
 define(['footballManager', 'services/FormationService', 'services/PlayerService'], function (footballManager) {
 
     footballManager.controller("FormationCtl", function ($scope, ngDialog, FormationService, PlayerService) {
 
         $scope.saveFormation = function () {
-          // $scope.error = FormationService.saveFormation($scope.formation);
-          // $scope.error = true;
-          if($scope.error)
-            $scope.openFormationChangeErrorModal();
-          else
-            $scope.openFormationChangeSuccessModal();
+          if(!validateFormation($scope.formation, $scope.formation.formation)) {
+              $scope.openFormationChangeErrorModal();
+              return;
+          }
+
+          FormationService.saveFormation($scope.formation)
+            .then(function (response) {
+              $scope.openFormationChangeSuccessModal();
+            }, function(response) {
+              $scope.openFormationChangeErrorModal();
+          });
         };
 
         $scope.openFormationChangeSuccessModal = function() {
@@ -29,6 +125,11 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
 
         FormationService.getFormation().then(function (response) {
             $scope.formation = response.data;
+
+            $scope.formation.options.forEach(function (option) {
+                if(validateFormation($scope.formation, option))
+                    $scope.formation.formation = option;
+            });
 
             $scope.occupiedPlayers = [];
             $scope.occupiedPlayers.push($scope.formation.cam);
@@ -60,6 +161,83 @@ define(['footballManager', 'services/FormationService', 'services/PlayerService'
             FormationService.fillPositionArrays($scope.players, $scope.goalKeepers, $scope.backPlayers,
               $scope.wingPlayers, $scope.frontPlayers);
         });
+
+        $scope.updateFormationScheme = function() {
+
+            switch ($scope.formation.formation) {
+                case 343:
+                    $scope.formation.lf = null;
+                    $scope.formation.rf = null;
+                    $scope.formation.cam = null;
+                    $scope.formation.cdm = null;
+                    $scope.formation.lb = null;
+                    $scope.formation.rb = null;
+                    break;
+
+                case 352:
+                    $scope.formation.lw = null;
+                    $scope.formation.st = null;
+                    $scope.formation.rw = null;
+                    $scope.formation.cdm = null;
+                    $scope.formation.lb = null;
+                    $scope.formation.rb = null;
+                    break;
+
+                case 433:
+                    $scope.formation.lf = null;
+                    $scope.formation.rf = null;
+                    $scope.formation.cam = null;
+                    $scope.formation.lm = null;
+                    $scope.formation.rm = null;
+                    $scope.formation.cb = null;
+                    break;
+
+                case 442:
+                    $scope.formation.lw = null;
+                    $scope.formation.st = null;
+                    $scope.formation.rw = null;
+                    $scope.formation.cam = null;
+                    $scope.formation.cdm = null;
+                    $scope.formation.cb = null;
+                    break;
+
+                case 451:
+                  $scope.formation.lw = null;
+                  $scope.formation.lf = null;
+                  $scope.formation.rf = null;
+                  $scope.formation.rw = null;
+                  $scope.formation.cdm = null;
+                  $scope.formation.cb = null;
+                  break;
+
+                case 523:
+                  $scope.formation.lf = null;
+                  $scope.formation.rf = null;
+                  $scope.formation.cam = null;
+                  $scope.formation.lm = null;
+                  $scope.formation.rm = null;
+                  $scope.formation.cdm = null;
+                  break;
+
+                case 532:
+                  $scope.formation.lw = null;
+                  $scope.formation.st = null;
+                  $scope.formation.rw = null;
+                  $scope.formation.lm = null;
+                  $scope.formation.rm = null;
+                  $scope.formation.cdm = null;
+                  break;
+
+                case 541:
+                  $scope.formation.lw = null;
+                  $scope.formation.lf = null;
+                  $scope.formation.rf = null;
+                  $scope.formation.rw = null;
+                  $scope.formation.cam = null;
+                  $scope.formation.cdm = null;
+                  break;
+            }
+        };
 
         $scope.error = false;
         $scope.substitutesIsClosed = true;

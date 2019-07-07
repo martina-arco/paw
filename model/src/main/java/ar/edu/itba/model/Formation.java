@@ -326,9 +326,9 @@ public class Formation {
 
     public List<String> getPossiblePressuresString(){
         List<String> list = new LinkedList<>();
-        list.add(Pressures.Low.toString());
-        list.add(Pressures.Medium.toString());
-        list.add(Pressures.High.toString());
+        list.add(Pressures.Low.name());
+        list.add(Pressures.Medium.name());
+        list.add(Pressures.High.name());
 
         return list;
     }
@@ -348,9 +348,9 @@ public class Formation {
 
     public List<String> getPossibleAttitudesString(){
         List<String> list = new LinkedList<>();
-        list.add(Attitudes.Defensive.toString());
-        list.add(Attitudes.Balanced.toString());
-        list.add(Attitudes.Offensive.toString());
+        list.add(Attitudes.Defensive.name());
+        list.add(Attitudes.Balanced.name());
+        list.add(Attitudes.Offensive.name());
 
         return list;
     }

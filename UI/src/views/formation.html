@@ -65,21 +65,21 @@
                 <!--Delanteros-->
                 <div class="row forwards d-flex justify-content-center">
 
-                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                  <select ng-options="player as player.name for player in frontPlayers track by player.id"
                           ng-hide="formation.formation == '352' || formation.formation == '442'
                               || formation.formation == '451' || formation.formation == '532'
                               || formation.formation == '541'"
                           ng-model="formation.lw">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                  <select ng-options="player as player.name for player in frontPlayers track by player.id"
                           ng-hide="formation.formation == '343' || formation.formation == '433' ||
                               formation.formation == '451' || formation.formation == '523'||
                               formation.formation == '541'"
                           ng-model="formation.lf">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                  <select ng-options="player as player.name for player in frontPlayers track by player.id"
                           ng-hide="formation.formation == '352' || formation.formation == '442'
                               || formation.formation == '532'"
                           ng-model="formation.st">
@@ -88,14 +88,14 @@
 
                 <div class="row lowForwards d-flex justify-content-center">
 
-                  <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                  <select ng-options="player as player.name for player in frontPlayers track by player.id"
                             ng-hide="formation.formation == '343' || formation.formation == '433'
                                 || formation.formation == '451' || formation.formation == '523'
                                 || formation.formation == '541'"
                             ng-model="formation.rf">
                     </select>
 
-                    <select ng-options="player.id as player.name for player in frontPlayers track by player.id"
+                    <select ng-options="player as player.name for player in frontPlayers track by player.id"
                             ng-hide="formation.formation == '352' || formation.formation == '442'
                                 || formation.formation == '451' || formation.formation == '532'
                                 || formation.formation == '541'"
@@ -106,9 +106,9 @@
                 <!--Volantes -->
                 <div class="row topMid d-flex justify-content-center">
 
-                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                  <select ng-options="player as player.name for player in wingPlayers track by player.id"
                           ng-hide="formation.formation == '343' || formation.formation == '433' ||
-                              formation.formation == '442' || formation.formation == '523'"
+                              formation.formation == '442' || formation.formation == '523' || formation.formation == '541'"
                           ng-model="formation.cam">
                   </select>
 
@@ -116,21 +116,21 @@
 
                 <div class="row mid d-flex justify-content-center">
 
-                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                  <select ng-options="player as player.name for player in wingPlayers track by player.id"
                           ng-hide="formation.formation == '433' || formation.formation == '532'
                               || formation.formation == '523'"
                           ng-model="formation.lm">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                  <select ng-options="player as player.name for player in wingPlayers track by player.id"
                           ng-model="formation.lcm">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                  <select ng-options="player as player.name for player in wingPlayers track by player.id"
                           ng-model="formation.rcm">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                  <select ng-options="player as player.name for player in wingPlayers track by player.id"
                           ng-hide="formation.formation == '433' || formation.formation == '532'
                               || formation.formation == '523'"
                           ng-model="formation.rm">
@@ -139,7 +139,7 @@
                 </div>
                 <div class="row lowMid d-flex justify-content-center">
 
-                  <select ng-options="player.id as player.name for player in wingPlayers track by player.id"
+                  <select ng-options="player as player.name for player in wingPlayers track by player.id"
                           ng-hide="formation.formation == '343' || formation.formation == '352'
                               || formation.formation == '442' || formation.formation == '451'
                               || formation.formation == '532' || formation.formation == '523'
@@ -152,12 +152,12 @@
                 <!--Defensores-->
                 <div class="row backs d-flex justify-content-between">
 
-                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                  <select ng-options="player as player.name for player in backPlayers track by player.id"
                           ng-hide="formation.formation == '343' || formation.formation == '352'"
                           ng-model="formation.lb">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                  <select ng-options="player as player.name for player in backPlayers track by player.id"
                           ng-hide="formation.formation == '343' || formation.formation == '352'"
                           ng-model="formation.rb">
                   </select>
@@ -165,17 +165,17 @@
                 </div>
                 <div class="row backsCenter d-flex justify-content-center">
 
-                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                  <select ng-options="player as player.name for player in backPlayers track by player.id"
                           ng-model="formation.lcb">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                  <select ng-options="player as player.name for player in backPlayers track by player.id"
                           ng-hide="formation.formation == '433' || formation.formation == '442'
                               || formation.formation == '451'"
                           ng-model="formation.cb">
                   </select>
 
-                  <select ng-options="player.id as player.name for player in backPlayers track by player.id"
+                  <select ng-options="player as player.name for player in backPlayers track by player.id"
                           ng-model="formation.rcb">
                   </select>
                 </div>
@@ -183,18 +183,11 @@
                 <!--Arquero-->
                 <div class="row goalKeeper d-flex justify-content-center">
                   <div class="col-4">
-                    <select ng-options="player.id as player.name for player in goalKeepers track by player.id"
+                    <select ng-options="player as player.name for player in goalKeepers track by player.id"
                             ng-model="formation.gk">
                     </select>
                   </div>
                 </div>
-              </div>
-
-              <br>
-
-              <div class="alert alert-danger" role="alert" ng-show="error" id="error">
-                {{ERRORFORMATION}}
-                <p><small>{{PLAYERSREPEATED}}</small></p>
               </div>
 
               <ul class="list-group list-group-flush">
@@ -212,7 +205,7 @@
                       {{FORMATIONSCHEME}}
                       <span class="pull-right">
                         <select ng-options="formation for formation in formation.options"
-                                ng-model="formation.formation">
+                                ng-model="formation.formation" ng-change="updateFormationScheme()">
                         </select>
                       </span>
                     </li>
