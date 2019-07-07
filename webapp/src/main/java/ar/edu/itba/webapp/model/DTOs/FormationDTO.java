@@ -19,7 +19,6 @@ public class FormationDTO {
 
     public FormationDTO(){}
 
-    //  TODO: de donde saco la formation
     public FormationDTO(Formation formation) {
         this(formation.getId(), formation.getGk(), formation.getLb(), formation.getLcb(), formation.getCb(), formation.getRcb(), formation.getRb(),
             formation.getLm(), formation.getLcm(), formation.getCdm(), formation.getCam(), formation.getRcm(), formation.getRm(),
@@ -58,8 +57,8 @@ public class FormationDTO {
         this.substitutes = substitutes.parallelStream().map(PlayerDTO::new).collect(Collectors.toList());
         this.options = options;
         this.formation = formation;
-        this.pressure = String.valueOf(pressure);
-        this.attitude = String.valueOf(attitude);
+        this.pressure = Formation.Pressures.values()[pressure].name();
+        this.attitude = Formation.Attitudes.values()[attitude].name();
         this.possiblePressures = possiblePressures;
         this.possibleAttitudes = possibleAttitudes;
     }
