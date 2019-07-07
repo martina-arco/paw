@@ -1,17 +1,6 @@
 <link rel="stylesheet" href="../assets/css/finance.css"/>
 <link rel="stylesheet" href="../assets/css/home.css"/>
 
-
-<!--<span id="lowCost" hidden>${lowCost}</span>-->
-<!--<span id="upgradeURL" hidden><c:url value="/upgradeStadium"/> </span>-->
-<!--<span id="financeURL" hidden><c:url value="/finance"/> </span>-->
-<!--<span id="mediumCost" hidden>${mediumCost}</span>-->
-<!--<span id="highCost" hidden>${highCost}</span>-->
-<!--<span id="failMessage" hidden><spring:message code="upgradeFailed"/></span>-->
-<!--<span id="retry" hidden><spring:message code="retry"/></span>-->
-<!--<span id="successMessage" hidden><spring:message code="upgradeSuccess"/></span>-->
-<!--<span id="confirm" hidden><spring:message code="confirm"/></span>-->
-
 <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
      aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-sm" role="document">
@@ -77,11 +66,11 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               {{PLAYERSSOLD}}
-              <span class="pull-right">$ {{summary.playersSold}}</span>
+              <span class="pull-right">$ {{summary.SOLDPLAYER}}</span>
             </li>
             <li class="list-group-item">
               {{TICKETSSOLD}}
-              <span class="pull-right">$ {{summary.ticketsSold}}</span>
+              <span class="pull-right">$ {{summary.MATCHINCOME}}</span>
             </li>
           </ul>
         </div>
@@ -91,39 +80,28 @@
         <div class="card-body">
           <div class="clearfix">
             <i class="ti-stats-down bg-danger p-3 font-2xl mr-3 float-left text-light"></i>
-            <div class="h5 text-danger mb-0 mt-1">$ {{expenses}}</div>
+            <div class="h5 text-danger mb-0 mt-1">$ {{expense}}</div>
             <div class="text-muted text-uppercase font-weight-bold font-xs small">{{EXPENSES}}</div>
           </div>
           <div class="b-b-1 pt-3"></div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               {{PLAYERSBOUGHT}}
-              <span class="pull-right">$ {{summary.playersBought}}</span>
+              <span class="pull-right">$ {{summary.BOUGHTPLAYER}}</span>
             </li>
             <li class="list-group-item">
               {{SALARIES}}
-              <span class="pull-right">$ {{summary.salaries}}</span>
+              <span class="pull-right">$ {{summary.PLAYERSSALARIES}}</span>
             </li>
             <li class="list-group-item">
               {{STADIUMEXPANSION}}
-              <span class="pull-right">$ {{summary.stadiumExpansion}}</span>
+              <span class="pull-right">$ {{summary.EXPANDEDSTADIUM}}</span>
             </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-header">
-          <strong class="card-title">{{LASTRECEIPTS}}</strong>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li ng-repeat="receipt in receipts" class="list-group-item">
-              {{RECEIPT{{receipt.type}}}}
-              <span class="pull-right">$ {{receipt.amount}}</span>
-            </li>
-        </ul>
-      </div>
-    </div>
+
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
@@ -139,7 +117,7 @@
                     {{LOWSEATS}}
                   </div>
                   <div class="col-4 without-padding">
-                    <input id="lowInput" cssClass="input-field pull-right" type="number" min="{{stadium.lowClass}}" max="100000"
+                    <input id="lowInput" cssClass="input-field pull-right" type="number" min="{{initialLowClass}}" max="100000"
                          placeholder="{{stadium.lowClass}}" ng-model="stadium.lowClass" ng-change="refreshLowClass()"/>
                   </div>
                   <div class="col-3 without-padding text-center">
@@ -156,7 +134,7 @@
                     {{MEDIUMSEATS}}
                   </div>
                   <div class="col-4 without-padding">
-                    <input id="mediumInput" cssClass="input-field pull-right" type="number" min="{{stadium.mediumClass}}" max="100000"
+                    <input id="mediumInput" cssClass="input-field pull-right" type="number" min="{{initialMediumClass}}" max="100000"
                        placeholder="{{stadium.mediumClass}}" ng-model="stadium.mediumClass" ng-change="refreshMediumClass()"/>
                   </div>
                   <div class="col-3 without-padding text-center">
@@ -173,7 +151,7 @@
                     {{HIGHSEATS}}
                   </div>
                   <div class="col-4 without-padding">
-                    <input id="highInput" cssClass="input-field pull-right" type="number" min="{{stadium.highClass}}" max="100000"
+                    <input id="highInput" cssClass="input-field pull-right" type="number" min="{{initialHighClass}}" max="100000"
                        placeholder="{{stadium.highClass}}" ng-model="stadium.highClass" ng-change="refreshHighClass()"/>
                     </div>
                   <div class="col-3 without-padding text-center">
@@ -199,5 +177,25 @@
         </div>
       </div>
     </div>
+
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">{{LASTRECEIPTS}}</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+
+          <li ng-if="receipts.length == 0"class="list-group-item">
+            <p >{{NOTRANSACTIONS}}</p>
+          </li>
+
+          <li ng-repeat="receipt in receipts" class="list-group-item">
+            {{RECEIPT{{receipt.type}}}}
+            <span class="pull-right">$ {{receipt.amount}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </div>

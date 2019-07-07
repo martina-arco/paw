@@ -112,6 +112,7 @@ var translation_en = {
   receiptMATCHINCOME: 'Ticket Sales',
   receiptTOURNAMENTPRIZE: 'Prize',
   receiptPLAYERSSALARIES: 'Salaries',
+  noTransactions: 'You have no transactions.',
 
   //FORMATION
   formation: 'Formation',
@@ -249,6 +250,7 @@ var translation_es = {
   receiptMATCHINCOME: 'Venta de Entradas',
   receiptTOURNAMENTPRIZE: 'Premio',
   receiptPLAYERSSALARIES: 'Sueldos',
+  noTransactions: 'No tienes transacciones.',
   currentSeats: 'Asientos actuales',
   lowSeats: 'Asientos bajos',
   mediumSeats: 'Asientos medios',
@@ -438,6 +440,7 @@ define(['footballManager'], function (footballManager) {
     $scope.PLAYERSSOLD = translations["playersSold"];
     $scope.PLAYERSBOUGHT = translations["playersBought"];
     $scope.STADIUMEXPANSION = translations["stadiumExpansion"];
+    $scope.NOTRANSACTIONS = translations["noTransactions"];
     $scope.EXPENSES = translations["expenses"];
     $scope.SALARIES = translations["salaries"];
     $scope.LASTRECEIPTS = translations["lastReceipts"];
