@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../assets/css/register.css"/>
+<link rel="stylesheet" href="../assets/css/error.css"/>
 
 <div class="sufee-login d-flex align-content-center flex-wrap">
   <div class="container">
@@ -11,17 +12,22 @@
           <div class="form-group">
             <label for="username">{{USERNAME}}</label>
             <input id="username" ng-model="user.username" type="text" class="form-control" placeholder="{{username}}"/>
+            <p class="error">{{usernameError}}</p>
           </div>
           <div class="form-group">
             <label for="password">{{PASSWORD}}</label>
             <input id="password" ng-model="user.password" type="password" class="form-control" placeholder="{{password}}"/>
-          </div>
+            <p class="error">{{passwordError}}</p>
+            <p class="error">{{errorLogIn}}</p>
+<!--          </div>-->
+<!--          <div class="error">-->
+<!--            -->
+<!--          </div>-->
           <div class="checkbox">
             <label>
               <input ng-model="rememberMe" type="checkbox"/>{{REMEMBER_ME}}
             </label>
           </div>
-
           <div class="alert alert-danger" role="alert" id="error">
             {{errorLogIn}}
           </div>

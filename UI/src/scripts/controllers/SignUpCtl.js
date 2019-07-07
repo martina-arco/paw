@@ -10,8 +10,10 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
 
     $scope.signup = function () {
       $scope.usernameError = "";
+      $scope.mailError = "";
       $scope.passwordError = "";
       $scope.repeatPasswordError = "";
+      $scope.errorLogIn = "";
       var error = false; 
  
       if (!$scope.user.username) {
@@ -20,7 +22,12 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
       } else if ($scope.user.username.length < 4 || $scope.user.username.length > 30) {
         $scope.usernameError = "Username length invalid";
         error = true; 
-      } 
+      }
+
+      if(!$scope.user.mail) {
+        $scope.mailError = "Enter mail";
+        error = true;
+      }
  
       if (!$scope.user.password) {
         $scope.passwordError = "Enter password";
@@ -37,16 +44,18 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
  
       if (!error) {
         //Uncomment to test login
-        // AccountService.createUser($scope.user).then(function(response){
-        //   AccountService.login($scope.user, false).then(function (response) {
-        //     $location.url("home");
-        //   })
-        // });
+        AccountService.createUser($scope.user).then(function(response){
+          AccountService.login($scope.user, false).then(function (response) {
+            $location.url("chooseTeam");
+          })
+        }, function (response) {
+          $scope.errorLogIn = "User already exists";
+        });
 
         //Just signup
-        AccountService.createUser($scope.user).then(function(response){
-          $location.url("home");
-        });
+        // AccountService.createUser($scope.user).then(function(response){
+        //   $location.url("home");
+        // });
       } 
     }
   });

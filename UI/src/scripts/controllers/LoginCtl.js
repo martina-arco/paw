@@ -9,22 +9,26 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.rememberMe = null; 
  
     $scope.login = function () {
-
+      $scope.usernameError = "";
+      $scope.passwordError = "";
+      $scope.errorLogIn = "";
       var error = false;
  
       if (!$scope.user.username) {
-        $scope.user.usernameError = "Enter Username";
+        $scope.usernameError = "Enter Username";
         error = true; 
       } 
  
       if (!$scope.user.password) {
-        $scope.user.passwordError = "Enter password";
+        $scope.passwordError = "Enter password";
         error = true; 
       } 
  
       if (!error) { 
         AccountService.login($scope.user, $scope.rememberMe).then(function (response) {
           $location.url("home");
+        }, function (reason) {
+          $scope.errorLogIn = "Invalid username or password";
         });
       }
     } 

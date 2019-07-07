@@ -10,6 +10,7 @@
       <div class="login-form">
         <form>
           <div class="form-group">
+            <p class="error">{{errorLogIn}}</p>
             <p>{{USERNAME}}</p>
             <input type="text" ng-model="user.username" class="form-control" />
             <p class="error">{{usernameError}}</p>
@@ -17,6 +18,7 @@
           <div class="form-group">
             <p>Mail</p>
             <input type="text" ng-model="user.mail" class="form-control" />
+            <p class="error">{{mailError}}</p>
           </div>
           <div class="form-group">
             <p>{{PASSWORD}}</p>

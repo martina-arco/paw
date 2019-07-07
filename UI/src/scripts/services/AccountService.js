@@ -1,7 +1,8 @@
 define(['footballManager'], function(footballManager) { 
  
   footballManager.service('AccountService', function($http, $q) { 
-    this.url = 'http://localhost:8080/login';
+    this.urlLogin = 'http://localhost:8080/login';
+    this.urlRegister = 'http://localhost:8080/register';
     this.key = 'token-footballManager'; 
  
     this.saveToken = function(token, remeberMe){
@@ -30,14 +31,14 @@ define(['footballManager'], function(footballManager) {
       return $http({ 
         method: method, 
         url: url, 
-        headers: {'Authorization': this.getToken()}, 
+        headers: {'Authorization': this.getToken()},
         data: body 
       }) 
     };
  
     this.createUser = function (user) {
       var body = JSON.stringify(user);
-      return $http.post(this.url , body);;
+      return $http.post(this.urlRegister , body);
     }; 
  
     this.getUser = function () { 
@@ -55,7 +56,7 @@ define(['footballManager'], function(footballManager) {
       var that = this;
       return $http({
           method: 'POST',
-          url: this.url,
+          url: this.urlLogin,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
