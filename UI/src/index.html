@@ -30,11 +30,11 @@
 
   <body ng-controller="IndexCtl">
 
-  <div ng-hide="currentPath == '/signUp' || currentPath == '/login'">
+  <!--<div ng-class="{ hidden: isActive('/login') || isActive('/register') || isActive('/chooseTeam') }" >
 
-  </div>
+  </div>-->
 
-    <aside id="left-panel" class="left-panel" ng-if="currentPath != '/signUp' && currentPath != '/login' && currentPath != '/match'">
+    <aside id="left-panel" class="left-panel" ng-class="{ 'd-none': isActive('/login') || isActive('/register') || isActive('/chooseTeam') }">
       <nav class="navbar navbar-expand-sm navbar-default">
 
         <div class="navbar-header">
@@ -62,7 +62,7 @@
             <li ng-class="{ active: isActive('/transfer')}">
               <a ng-href="#!transfer"> <i class="menu-icon ti-exchange-vertical"></i>{{PASSES}}</a>
             </li>
-            <li ng-class="{ active: isActive('/login')}">
+            <li>
               <a ng-click="logout()"> <i class="menu-icon ti-power-off"></i>{{LOGOUT}}</a>
             </li>
           </ul>
