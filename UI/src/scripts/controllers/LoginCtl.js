@@ -1,9 +1,9 @@
 define(['footballManager', 'services/AccountService'], function (footballManager) { 
  
   footballManager.controller("LoginCtl", function ($scope, AccountService, $location) {
-    if(AccountService.getToken()) {
-      $location.url("home");
-    }
+    // if(AccountService.getToken()) {
+    //   $location.url("home");
+    // }
 
     $scope.user = {username:'', password:'', repeatPassword:'', mail:''};
     $scope.rememberMe = null; 
