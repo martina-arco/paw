@@ -2,9 +2,35 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
 
     footballManager.controller('FinanceCtl', function ($scope, FinanceService) {
 
-        var initialLowClass = 0;
-        var initialMediumClass = 0;
-        var initialHighClass = 0;
+        var setUpReceiptType = function () {
+            $scope.receipts.forEach(function (receipt) {
+                switch (receipt.type) {
+                  case 'SOLDPLAYER':
+                    receipt.name = $scope.RECEIPTSOLDPLAYER;
+                    break;
+
+                  case 'BOUGHTPLAYER':
+                    receipt.name = $scope.RECEIPTBOUGHTPLAYER;
+                    break;
+
+                  case 'EXPANDEDSTADIUM':
+                    receipt.name = $scope.RECEIPTEXPANDEDSTADIUM;
+                    break;
+
+                  case 'MATCHINCOME':
+                    receipt.name = $scope.RECEIPTMATCHINCOME;
+                    break;
+
+                  case 'TOURNAMENTPRIZE':
+                    receipt.name = $scope.RECEIPTTOURNAMENTPRIZE;
+                    break;
+
+                  case 'PLAYERSSALARIES':
+                    receipt.name = $scope.RECEIPTPLAYERSSALARIES;
+                    break;
+                }
+            })
+        };
 
         FinanceService.getEconomy().then(function (response) {
             $scope.summary = response.data.summary;
@@ -15,6 +41,7 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
 
         FinanceService.getReceipts().then(function (response) {
             $scope.receipts = response.data;
+            setUpReceiptType($scope.receipts);
         });
 
         FinanceService.getStadiumFinance().then(function (response) {

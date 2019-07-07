@@ -185,12 +185,12 @@
         </div>
         <ul class="list-group list-group-flush">
 
-          <li ng-if="receipts.length == 0"class="list-group-item">
+          <li ng-if="receipts.length == 0" class="list-group-item">
             <p >{{NOTRANSACTIONS}}</p>
           </li>
 
           <li ng-repeat="receipt in receipts" class="list-group-item">
-            {{RECEIPT{{receipt.type}}}}
+            {{receipt.name}}
             <span class="pull-right">$ {{receipt.amount}}</span>
           </li>
         </ul>
