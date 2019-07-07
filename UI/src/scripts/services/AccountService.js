@@ -6,6 +6,7 @@ define(['footballManager'], function(footballManager) {
     this.key = 'token-footballManager'; 
  
     this.saveToken = function(token, remeberMe){
+      $http.defaults.headers.common['Authorization'] = token;
       if(remeberMe) { 
         localStorage.setItem(this.key, token);
       } else { 
