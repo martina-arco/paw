@@ -94,9 +94,9 @@ public class TransferServiceImpl implements TransferService {
         if (!filters.isEmpty()) {
             try {
                 String[] array = filters.split("&");
-                for (int i = 0; i < array.length; i += 2) {
-                    if (!array[i].split("%3B")[1].equals("ANY")) {
-                        String[] aux = array[i].split("%3D");
+                for (String s : array) {
+                    if (!s.split("%3B")[1].equals("ANY")) {
+                        String[] aux = s.split("%3D");
                         String[] aux1 = aux[0].split("=");
                         String[] aux2 = aux1[1].split("%3B");
                         PlayerFilter playerFilter = new PlayerFilter(aux1[0], aux2[1], aux[1]);

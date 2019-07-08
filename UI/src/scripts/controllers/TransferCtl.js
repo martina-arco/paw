@@ -27,13 +27,19 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
 
   footballManager.controller("TransferCtl", function ($scope, ngDialog, PlayerService) {
 
-      var updatePlayersAndCount = function() {
+      var updatePlayers = function() {
           PlayerService.filterSearch($scope.criterias).then(function (response) {
             $scope.players = response.data;
             $scope.playersAvailable = $scope.players.length;
-            $scope.playerCount = $scope.players.length;
+            $scope.playerCount--;
           });
       };
+
+      PlayerService.filterSearch($scope.criterias).then(function (response) {
+        $scope.players = response.data;
+        $scope.playersAvailable = $scope.players.length;
+        $scope.playerCount = $scope.players.length;
+      });
 
       $scope.criteriaTypes = {
         0: ["Age", "Value", "Salary"],
@@ -75,7 +81,7 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
           PlayerService.buyPlayer(playerId)
             .then(
               function (response) {
-                updatePlayersAndCount();
+                updatePlayers();
                 $scope.openTransferSuccessModal();
               },
               function (response) {
@@ -90,8 +96,6 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
             $scope.playersAvailable = $scope.players.length;
           });
       };
-
-      updatePlayersAndCount();
   });
 
 });
