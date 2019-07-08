@@ -116,7 +116,7 @@ public class Team {
     }
 
     public boolean removePlayer(Player player) {
-        if(!formation.removePlayer(player, players))
+        if(formation != null && !formation.removePlayer(player, players))
             return false;
         return players.remove(player);
     }
