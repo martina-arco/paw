@@ -1,9 +1,6 @@
 package ar.edu.itba.webapp.controllers.api;
 
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.MatchService;
-import ar.edu.itba.interfaces.service.SimulationService;
-import ar.edu.itba.interfaces.service.TeamService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.*;
 import ar.edu.itba.webapp.controllers.Controller;
 import ar.edu.itba.webapp.model.DTOs.MatchDTO;
@@ -34,6 +31,9 @@ public class MatchController extends Controller {
     private TeamService teamService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private SimulationService simulationService;
 
     @GET
@@ -53,24 +53,24 @@ public class MatchController extends Controller {
     }
 
     @GET
-    @Path("/current")
+    @Path("/lastUserPlayed")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatch() {
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
-        List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
         Match userMatch = matchService.getUserMatch(matches, user);
 
         return Response.ok(new MatchDTO(userMatch)).build();
     }
 
     @GET
-    @Path("/currents")
+    @Path("/lastPlayed")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatches() {
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
-        List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
 
         return Response.ok(matches.parallelStream().map(MatchDTO::new).collect(Collectors.toList())).build();
     }

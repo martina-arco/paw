@@ -18,4 +18,6 @@ public interface UserService {
     void advanceDate(User user);
 
     String getCurrentDay(User user);
+
+    Date getPreviousDate(User user);
 }

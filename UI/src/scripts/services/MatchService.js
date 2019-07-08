@@ -3,12 +3,12 @@ define(['footballManager', 'services/SettingsService', 'services/AccountService'
    footballManager.service('MatchService', function($http, SettingsService, AccountService) {
        this.url = SettingsService.getUrl() + 'matches/';
 
-       this.getMatch = function () {
-         return AccountService.get(this.url + 'current');
+       this.getUserPlayedMatch = function () {
+         return AccountService.get(this.url + 'lastUserPlayed');
        };
 
-       this.getCurrentMatches = function () {
-           return AccountService.get(this.url + 'currents');
+       this.getPlayedMatches = function () {
+           return AccountService.get(this.url + 'lastPlayed');
        };
 
        this.getUpcomingMatch = function () {

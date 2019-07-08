@@ -20,9 +20,9 @@ define(['footballManager', 'services/MatchService', 'services/UserService'], fun
         var iterate = function() {
 
             if($scope.time === 90){
-              UserService.advanceDate().then(function (response) {});
-              $location.url('/matchEnd');
-                return;
+              UserService.advanceDate().then(function (response) {
+                  $location.url('/matchEnd');
+              });
             }
 
             for (var i = 0; i < $scope.matchesWithEvents.length; i++)  {
