@@ -1,5 +1,6 @@
 package ar.edu.itba.services;
 
+import ar.edu.itba.interfaces.dao.FormationDao;
 import ar.edu.itba.interfaces.dao.PlayerDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
 import ar.edu.itba.interfaces.service.*;
@@ -43,6 +44,9 @@ public class TransferServiceImpl implements TransferService {
     @Autowired
     private PlayerDao playerDao;
 
+    @Autowired
+    private FormationDao formationDao;
+
     @Override
     public boolean performTransfer(User user, long playerId) {
         Player player = playerService.findById(playerId);
@@ -58,10 +62,11 @@ public class TransferServiceImpl implements TransferService {
             return false;
 
         player.setTeam(to);
-        from.getPlayers().remove(player);
-        to.getPlayers().add(player);
+        from.removePlayer(player);
+        to.addPlayer(player);
         playerDao.save(player);
         economyService.submitTransfer(from, to, player.getValue());
+        formationDao.save(from.getFormation());
         teamDao.save(from);
         teamDao.save(to);
         return true;
