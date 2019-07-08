@@ -1,7 +1,7 @@
 define(['footballManager', 'services/PlayerService'], function (footballManager) {
 
   footballManager.controller("TransferCtl", function ($scope, ngDialog, PlayerService) {
-      PlayerService.getPlayers().then(function (response) {
+      PlayerService.filterSearch($scope.criterias).then(function (response) {
         $scope.players = response.data;
       });
 
