@@ -75,7 +75,7 @@ public class PlayerStatsHibernateDaoTest {
     @Test
     public void testSave() {
         final long id = playerStatsDao.create(player, match).getId();
-        PlayerStats playerStats = playerStatsDao.findByMatchId(id).get(0);
+        PlayerStats playerStats = playerStatsDao.findByMatchId(match.getId()).get(0);
         assertNotNull(playerStats);
     }
 }

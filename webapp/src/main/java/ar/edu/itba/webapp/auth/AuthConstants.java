@@ -4,7 +4,7 @@ package ar.edu.itba.webapp.auth;
  * Source: https://dev.to/keysh/spring-security-with-jwt-3j76
  */
 public final class AuthConstants {
-    public static final String AUTH_LOGIN_URL = "/login";
+    public static final String AUTH_LOGIN_URL = "/api/login";
 
     public static final String JWT_SECRET = "aPdSgVkYp3s5v8y/B?E(H+MbQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r5u8x/A%D*";
 
