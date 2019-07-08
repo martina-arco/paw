@@ -18,7 +18,7 @@ define(['footballManager', 'services/SettingsService', 'services/AccountService'
 
         this.buyPlayer = function (playerId) {
             var body = JSON.stringify(playerId);
-            return AccountService.post(this.url + 'players/buy', body);
+            return AccountService.post(this.url + 'transfers', body);
         };
     })
 });

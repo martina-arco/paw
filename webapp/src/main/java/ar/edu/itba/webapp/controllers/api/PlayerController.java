@@ -49,17 +49,4 @@ public class PlayerController extends Controller {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
-
-    @POST
-    @Path("/buy")
-    @Produces(value = { MediaType.APPLICATION_JSON, })
-    public Response buyPlayer(final long playerId) {
-        boolean success = transferService.performTransfer(loggedUser(), playerId);
-        if(success)
-            return Response.ok().build();
-        else
-            return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
 }
