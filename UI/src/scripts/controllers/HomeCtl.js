@@ -1,6 +1,17 @@
 define(['footballManager', 'services/PlayerService', 'services/MatchService', 'services/TeamService'], function (footballManager) {
 
     footballManager.controller("HomeCtl", function ($scope, $window, $location, PlayerService, MatchService, TeamService) {
+        var updateGraphData = function() {
+            if($scope.player != null) {
+                $scope.data = [
+                  $scope.player.finishing,
+                  $scope.player.defense,
+                  $scope.player.passing,
+                  $scope.player.goalkeeping
+                ];
+            }
+        };
+
         TeamService.getTeam().then(function (response) {
             $scope.team = response.data;
         }, function (reason) {
@@ -15,6 +26,8 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
 
         PlayerService.getPlayers().then(function (response) {
             $scope.players = response.data;
+            $scope.player = $scope.players[0];
+            updateGraphData();
         });
 
         if($scope.players != null)
@@ -27,15 +40,6 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
           $scope.PLAYERGOALKEEPING
         ];
 
-        if($scope.player != null) {
-            $scope.data = [
-              $scope.player.finishing,
-              $scope.player.defense,
-              $scope.player.passing,
-              $scope.player.goalkeeping
-            ];
-        }
-
         $scope.changePlayer = function (id) {
             $scope.players.forEach(function (player) {
                 if(player.id === id) {
@@ -43,12 +47,7 @@ define(['footballManager', 'services/PlayerService', 'services/MatchService', 's
                 }
             });
 
-            $scope.data = [
-              $scope.player.finishing,
-              $scope.player.defense,
-              $scope.player.passing,
-              $scope.player.goalkeeping
-            ];
+            updateGraphData();
         };
     });
 

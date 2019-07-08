@@ -59,6 +59,11 @@ public class MatchController extends Controller {
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
+
+        if(matches.isEmpty()) {
+            matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        }
+
         Match userMatch = matchService.getUserMatch(matches, user);
 
         return Response.ok(new MatchDTO(userMatch)).build();
@@ -71,6 +76,10 @@ public class MatchController extends Controller {
         User user = loggedUser();
         League league = leagueService.findByUser(user).get(0);
         List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
+
+        if(matches.isEmpty()) {
+            matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        }
 
         return Response.ok(matches.parallelStream().map(MatchDTO::new).collect(Collectors.toList())).build();
     }

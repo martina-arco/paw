@@ -62,17 +62,15 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
 
-                  <div ng-switch on="team.name">
-                    <div ng-switch-when="team1">
+                    <div ng-show="upcomingMatch.home.id == team.id">
                       {{HOMEVERSUS}}
                       <span class="pull-right">{{upcomingMatch.away.name}}</span>
                     </div>
 
-                    <div ng-switch-default>
+                    <div ng-show="upcomingMatch.away.id == team.id">
                       {{AWAYVERSUS}}
                       <span class="pull-right">{{upcomingMatch.home.name}}</span>
                     </div>
-                  </div>
 
                 </li>
                 <li class="list-group-item">
