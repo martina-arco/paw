@@ -1,12 +1,31 @@
+var formatFilter = function(criteriaTypesNames, criteriaTypeSelected, criteriaNumberSelected) {
+    var criteriaNumbers = [];
+    var criteriaTypes = [];
+    var criteriaNames = [];
+    var json = {};
+
+    for (var i = 0; i < criteriaTypeSelected.length; i++) {
+          for(var j = 0; j < criteriaTypeSelected[i].length; j++) {
+            criteriaTypes.push(criteriaTypeSelected[i][j].toUpperCase());
+            criteriaNames.push(criteriaTypesNames[i][j].toUpperCase());
+            if (criteriaNumberSelected[i][j] != null)
+              criteriaNumbers.push(criteriaNumberSelected[i][j]);
+            else
+              criteriaNumbers.push(0);
+          }
+      }
+
+    for (i = 0; i < criteriaTypes.length; i++) {
+      json[criteriaNames[i]] = criteriaNames[i] + ';' + criteriaTypes[i] + ';' + criteriaNames[i] + '=' +
+        criteriaNumbers[i];
+    }
+
+    return json;
+};
+
 define(['footballManager', 'services/PlayerService'], function (footballManager) {
 
   footballManager.controller("TransferCtl", function ($scope, ngDialog, PlayerService) {
-      var updatePlayers = function() {
-          PlayerService.filterSearch($scope.criterias).then(function (response) {
-            $scope.players = response.data;
-            $scope.playersAvailable = $scope.players.length;
-          });
-      };
 
       var updatePlayersAndCount = function() {
           PlayerService.filterSearch($scope.criterias).then(function (response) {
@@ -65,7 +84,11 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
       };
 
       $scope.submitFilter = function () {
-          updatePlayers();
+          $scope.criterias = formatFilter($scope.criteriaTypes, $scope.criteriaTypeSelected, $scope.criteriaNumberSelected);
+          PlayerService.filterSearch($scope.criterias).then(function (response) {
+            $scope.players = response.data;
+            $scope.playersAvailable = $scope.players.length;
+          });
       };
 
       updatePlayersAndCount();

@@ -31,9 +31,8 @@ public class PlayerFilter {
     private String type, name;
     private List<String> options;
 
-    public PlayerFilter(String criteria, String parameter){
-        this(Criteria.valueOf(criteria.split("%3B")[0]),
-                Condition.valueOf(criteria.split("%3B")[1]), Integer.valueOf(parameter));
+    public PlayerFilter(String criteria, String condition, String parameter){
+        this(Criteria.valueOf(criteria), Condition.valueOf(condition), Integer.valueOf(parameter));
     }
 
     private PlayerFilter(Criteria criteria, Condition condition, int parameter){

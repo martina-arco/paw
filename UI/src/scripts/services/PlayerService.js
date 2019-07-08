@@ -12,7 +12,7 @@ define(['footballManager', 'services/SettingsService', 'services/AccountService'
         };
 
         this.filterSearch = function (filters) {
-            var body = JSON.stringify(filters);
+            var body = AccountService.formFormat(filters);
             return AccountService.put(this.url + 'transfers', body);
         };
 

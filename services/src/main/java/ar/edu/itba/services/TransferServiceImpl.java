@@ -93,10 +93,13 @@ public class TransferServiceImpl implements TransferService {
         Predicate<Player> ret = o -> true;
         if (!filters.isEmpty()) {
             try {
-                String array[] = filters.split("&");
+                String[] array = filters.split("&");
                 for (int i = 0; i < array.length; i += 2) {
-                    if (!array[i].split("=")[1].equals("Any")) {
-                        PlayerFilter playerFilter = new PlayerFilter(array[i].split("=")[1], array[i + 1].split("=")[1]);
+                    if (!array[i].split("%3B")[1].equals("ANY")) {
+                        String[] aux = array[i].split("%3D");
+                        String[] aux1 = aux[0].split("=");
+                        String[] aux2 = aux1[1].split("%3B");
+                        PlayerFilter playerFilter = new PlayerFilter(aux1[0], aux2[1], aux[1]);
                         ret = ret.and(playerFilter.toPredicate());
                     }
                 }

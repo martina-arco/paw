@@ -52,11 +52,11 @@ define(['footballManager', 'services/SettingsService'], function(footballManager
 
     this.post = function (url, body) {
       return this.authenticated('POST', url, body);
-    }
+    };
 
     this.put = function (url, body) {
       return this.authenticated('PUT', url, body);
-    }
+    };
  
     this.createUser = function (user) {
       var body = JSON.stringify(user);
