@@ -1,11 +1,10 @@
-define(['footballManager', 'services/SettingsService'], function(footballManager) {
+define(['footballManager', 'services/SettingsService', 'services/AccountService'], function(footballManager) {
 
-  footballManager.service('UserService', function($http, SettingsService) {
-    this.url = SettingsService.getUrl();
+  footballManager.service('UserService', function($http, SettingsService, AccountService) {
+    this.url = SettingsService.getUrl() + 'user/';
 
-    this.createUser = function (user) {
-        var body = JSON.stringify(user);
-        return $http.post(this.url + 'register', body);
+    this.advanceDate = function () {
+        return AccountService.post(this.url + 'advanceDate', null);
     };
   })
 });

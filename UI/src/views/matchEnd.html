@@ -20,10 +20,10 @@
             <tbody>
 
               <tr ng-repeat="match in matches">
-                <td>{{match.homeTeam.name}}</td>
+                <td>{{match.home.name}}</td>
                 <td>{{match.homeScore}}</td>
                 <td>{{match.awayScore}}</td>
-                <td>{{match.awayTeam.name}}</td>
+                <td>{{match.away.name}}</td>
               </tr>
 
             </tbody>
@@ -41,25 +41,29 @@
 
             <thead>
               <tr>
-                <th scope="col">{{match.homeTeam.name}}</th>
+                <th scope="col">{{match.home.name}}</th>
                 <th scope="col">{{match.homeScore}}x{{match.awayScore}}</th>
-                <th scope="col">{{match.awayTeam.name}}</th>
-                <th>{{match.stadium}}</th>
+                <th scope="col">{{match.away.name}}</th>
               </tr>
             </thead>
+          </table>
 
+          <div class="container center">
+            <h6>{{match.stadium.name}}</h6>
+          </div>
+          <p>{{GOALS}}</p>
+
+          <table>
             <tbody>
-                <tr ng-repeat="event in match.events">
+                <tr ng-repeat="event in homeEvents">
                     <td>
-                        <div ng-if="{event.p1.teamId == match.homeTeam.id}}">
-                            {{event.type}} {{event.minute}}{{event.p1.name}}
-                        </div>
+                        {{event}}
                     </td>
-                    <td>
-                        <div ng-if="{event.p1.teamId != match.homeTeam.id}}">
-                            {{event.type}} {{event.minute}}{{event.p1.name}}
-                        </div>
-                    </td>
+                </tr>
+                <tr ng-repeat="event in awayEvents">
+                  <td>
+                    {{event}}
+                  </td>
                 </tr>
 
             </tbody>
