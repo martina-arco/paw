@@ -3,7 +3,7 @@ define(['footballManager', 'services/MatchService', 'services/UserService'], fun
     footballManager.controller("MatchEndCtl", function ($scope, MatchService, UserService) {
         UserService.advanceDate().then(function (response) {});
 
-        MatchService.getUpcomingMatches().then(function (response) {
+        MatchService.getCurrentMatches().then(function (response) {
             $scope.matches = response.data;
         });
 

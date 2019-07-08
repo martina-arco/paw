@@ -65,6 +65,17 @@ public class MatchController extends Controller {
     }
 
     @GET
+    @Path("/currents")
+    @Produces(value = { MediaType.APPLICATION_JSON })
+    public Response getMatches() {
+        User user = loggedUser();
+        League league = leagueService.findByUser(user).get(0);
+        List<Match> matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+
+        return Response.ok(matches.parallelStream().map(MatchDTO::new).collect(Collectors.toList())).build();
+    }
+
+    @GET
     @Path("/next")
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getUpcomingMatch() {

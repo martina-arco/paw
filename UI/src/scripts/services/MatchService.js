@@ -7,8 +7,8 @@ define(['footballManager', 'services/SettingsService', 'services/AccountService'
          return AccountService.get(this.url + 'current');
        };
 
-       this.getUpcomingMatches = function () {
-           return AccountService.get(this.url);
+       this.getCurrentMatches = function () {
+           return AccountService.get(this.url + 'currents');
        };
 
        this.getUpcomingMatch = function () {
