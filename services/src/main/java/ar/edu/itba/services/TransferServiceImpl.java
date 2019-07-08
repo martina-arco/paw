@@ -62,11 +62,13 @@ public class TransferServiceImpl implements TransferService {
             return false;
 
         player.setTeam(to);
-        from.removePlayer(player);
+        if(!from.removePlayer(player))
+            return false;
         to.addPlayer(player);
         playerDao.save(player);
         economyService.submitTransfer(from, to, player.getValue());
-        formationDao.save(from.getFormation());
+        if(from.getFormation() != null)
+            formationDao.save(from.getFormation());
         teamDao.save(from);
         teamDao.save(to);
         return true;

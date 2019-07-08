@@ -148,6 +148,12 @@ public class Formation {
             startersIds.remove(p1.getId());
             startersIds.put(p2.getId(), position);
         }
+        else{
+            loadStartersIds();
+            if(substitutesIds == null){
+                loadSubstitusIds();
+            }
+        }
     }
 
     public Player getGk(){
@@ -502,9 +508,10 @@ public class Formation {
             }
             else{
                 for(Player s : substitutes){
-                    if(s.getPosition() == position)
+                    if(s.getPosition() == position) {
                         actual = s;
-                    break;
+                        break;
+                    }
                 }
                 if(actual != null && first != null){
                     Point pos = starters.get(player);
@@ -516,9 +523,15 @@ public class Formation {
                         startersIds.remove(player.getId());
                         startersIds.put(actual.getId(), pos);
                     }
+                    else{
+                        loadStartersIds();
+                    }
                     if(substitutesIds != null){
                         substitutesIds.remove(actual.getId());
                         substitutesIds.add(first.getId());
+                    }
+                    else{
+                        loadSubstitusIds();
                     }
                 }
                 else if(first != null){
@@ -526,14 +539,17 @@ public class Formation {
                         captainId = first.getId();
                         captain = first;
                     }
+                    captainId = captain.getId();
                     if(penaltyTaker.equals(player)){
                         penaltyTaker = first;
                         penaltyTakerId = first.getId();
                     }
+                    penaltyTakerId = penaltyTaker.getId();
                     if(freeKickTaker.equals(player)){
                         freeKickTaker = first;
                         freeKickTakerId= first.getId();
                     }
+                    freeKickTakerId = freeKickTaker.getId();
                     replacePlayer(player, first);
                 }
             }
@@ -542,14 +558,17 @@ public class Formation {
                     captain = actual;
                     captainId = actual.getId();
                 }
+                captainId = captain.getId();
                 if(penaltyTaker.equals(player)){
                     penaltyTaker = actual;
                     penaltyTakerId = actual.getId();
                 }
+                penaltyTakerId = penaltyTaker.getId();
                 if(freeKickTaker.equals(player)){
                     freeKickTaker = actual;
                     freeKickTakerId = actual.getId();
                 }
+                freeKickTakerId = freeKickTaker.getId();
             }
         }
         else if(substitutes.contains(player)){
@@ -561,10 +580,30 @@ public class Formation {
                         substitutesIds.remove(player.getId());
                         substitutesIds.add(p.getId());
                     }
+                    else{
+                        if(startersIds == null){
+                            loadStartersIds();
+                        }
+                        loadSubstitusIds();
+                    }
                     break;
                 }
             }
         }
         return true;
+    }
+
+    private void loadStartersIds(){
+        startersIds = new HashMap<>();
+        for(Map.Entry<Player, Point> p : starters.entrySet()){
+            startersIds.put(p.getKey().getId(), p.getValue());
+        }
+    }
+
+    private void loadSubstitusIds(){
+        substitutesIds = new ArrayList<>();
+        for(Player p : substitutes){
+            substitutesIds.add(p.getId());
+        }
     }
 }
