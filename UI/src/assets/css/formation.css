@@ -1,8 +1,11 @@
 .formation {
-    /*content:url("../assets/img/formation.jpg");*/
     height: 70%;
     width: 100%;
     margin-top: 10px;
+}
+
+.twt-category ul li {
+  color: #373737;
 }
 
 #attitude {

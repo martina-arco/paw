@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../assets/css/home.css"/>
 <link rel="stylesheet" href="../assets/css/formation.css"/>
 
 <div class="animated fadeIn p-3">
@@ -7,13 +8,37 @@
       <div class="card">
         <div class="card-header">
           <div class="stat-widget-one">
-            <div class="stat-icon dib"><i class="ti-clipboard text-danger border-danger"></i></div>
+            <div class="stat-icon dib"><i class="ti-clipboard text-info border-info"></i></div>
             <div class="stat-content dib">
               <div class="team-name">{{TACTICS}}</div>
             </div>
           </div>
         </div>
+
+        <div class="card-body">
+          <div class="weather-category twt-category m-0 p-0">
+            <ul class="m-0">
+              <li>
+                <h5>{{formation.formation}}</h5>
+                {{FORMATION}}
+              </li>
+              <li>
+                <h5>{{formation.pressure}}</h5>
+                {{PRESSURE}}
+              </li>
+              <li>
+                <h5>{{formation.attitude}}</h5>
+                {{ATTITUDE}}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
 
       <div class="card">
         <div class="card-header">

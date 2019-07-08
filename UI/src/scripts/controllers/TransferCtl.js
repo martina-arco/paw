@@ -11,7 +11,7 @@ var formatFilter = function(criteriaTypesNames, criteriaTypeSelected, criteriaNu
             if (criteriaNumberSelected[i][j] != null)
               criteriaNumbers.push(criteriaNumberSelected[i][j]);
             else
-              criteriaNumbers.push(0);
+              criteriaNumbers.push('None');
           }
       }
 

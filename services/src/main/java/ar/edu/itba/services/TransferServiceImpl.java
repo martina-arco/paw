@@ -99,8 +99,10 @@ public class TransferServiceImpl implements TransferService {
                         String[] aux = s.split("%3D");
                         String[] aux1 = aux[0].split("=");
                         String[] aux2 = aux1[1].split("%3B");
-                        PlayerFilter playerFilter = new PlayerFilter(aux1[0], aux2[1], aux[1]);
-                        ret = ret.and(playerFilter.toPredicate());
+                        if(!aux[1].equals("None")) {
+                            PlayerFilter playerFilter = new PlayerFilter(aux1[0], aux2[1], aux[1]);
+                            ret = ret.and(playerFilter.toPredicate());
+                        }
                     }
                 }
             } catch (Exception e) {
