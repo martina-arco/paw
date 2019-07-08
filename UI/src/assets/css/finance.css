@@ -6,3 +6,7 @@
 .without-padding {
     padding: 0px;
 }
+
+.twt-category ul li {
+  color: #373737;
+}
