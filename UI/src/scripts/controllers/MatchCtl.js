@@ -36,9 +36,8 @@ define(['footballManager', 'services/MatchService', 'services/UserService'], fun
                 });
             }
 
-            // jQuery('.progress-bar').css('width', (minute * 1.1) + '%');
-
             $scope.time++;
+            $scope.progress = $scope.time*1.1;
             $timeout(iterate, 150);
         };
 

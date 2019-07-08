@@ -49,6 +49,7 @@ var translation_en = {
   retire: 'Retire',
   hire: 'Hire',
   skillLevel: 'Skill Level',
+  skill: 'Skill',
   goalKeeping: 'Goalkeeping',
   finishing: 'Finishing',
   defending: 'Defending',
@@ -169,7 +170,7 @@ var translation_en = {
   criteriaVALUE: 'Value',
   criteriaSALARY: 'Salary',
   criteriaGOALKEEPING: 'Goalkeeping',
-  criteriaDEFENSE: 'Defending',
+  criteriaDEFENSE: 'Defense',
   criteriaPASS: 'Passing',
   criteriaFINISH: 'Finishing',
   criteriaSKILL: 'Skill level',
@@ -280,6 +281,7 @@ var translation_es = {
   high: 'Alta',
   position: 'Posición',
   skillLevel: 'Overall',
+  skill: 'Habilidad',
   goalKeeping: 'Arquero',
   finishing: 'Definición',
   defending: 'Defensa',
@@ -379,7 +381,6 @@ function getBrowserLanguage() {
 define(['footballManager', 'services/AccountService'], function (footballManager) {
 
   footballManager.config(['$translateProvider', function ($translateProvider) {
-    // add translation table
     $translateProvider.translations('en', translation_en);
     $translateProvider.translations('es', translation_es);
     $translateProvider.determinePreferredLanguage(getBrowserLanguage());
@@ -495,6 +496,7 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.HIGH = translations["high"];
     $scope.POSITION = translations["position"];
     $scope.SKILLLEVEL = translations["skillLevel"];
+    $scope.SKILL = translations["skill"];
     $scope.GOALKEEPING = translations["goalKeeping"];
     $scope.FINISHING = translations["finishing"];
     $scope.DEFENDING = translations["defending"];
