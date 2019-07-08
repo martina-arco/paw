@@ -1,6 +1,6 @@
-define(['footballManager', 'services/MatchService'], function (footballManager) {
+define(['footballManager', 'services/MatchService', 'services/UserService'], function (footballManager) {
 
-    footballManager.controller("MatchCtl", function ($scope, $location, $timeout, MatchService) {
+    footballManager.controller("MatchCtl", function ($scope, $location, $timeout, MatchService, UserService) {
 
         $scope.matches = [];
         $scope.time = 0;
@@ -19,8 +19,9 @@ define(['footballManager', 'services/MatchService'], function (footballManager) 
 
         var iterate = function() {
 
-            if($scope.time > 90){
-                $location.url('/matchEnd');
+            if($scope.time === 90){
+              UserService.advanceDate().then(function (response) {});
+              $location.url('/matchEnd');
                 return;
             }
 
