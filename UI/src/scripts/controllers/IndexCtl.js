@@ -393,13 +393,33 @@ define(['footballManager', 'services/AccountService'], function (footballManager
       return viewLocation === $location.path();
     };
 
+    $scope.goToHome = function(){
+      $location.url("home");
+    };
+
+    $scope.goToLeague = function(){
+      $location.url("league");
+    };
+
+    $scope.goToFormation = function(){
+      $location.url("formation");
+    };
+
+    $scope.goToFinance = function(){
+      $location.url("finance");
+    };
+
+    $scope.goToTransfer = function(){
+      $location.url("transfer");
+    };
+
     $scope.logout = function(){
       AccountService.logout();
       $location.url("login");
-    }
+    };
 
     var translations = translation_en;
-    if (getBrowserLanguage() == "es") {
+    if (getBrowserLanguage() === "es") {
       translations = translation_es;
     }
 

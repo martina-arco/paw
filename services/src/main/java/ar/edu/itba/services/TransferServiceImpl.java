@@ -44,8 +44,7 @@ public class TransferServiceImpl implements TransferService {
     private PlayerDao playerDao;
 
     @Override
-    public boolean performTransfer(User user, String transfer) {
-        long playerId = Long.valueOf(transfer.split("=")[0]);
+    public boolean performTransfer(User user, long playerId) {
         Player player = playerService.findById(playerId);
         return transferPlayer(player.getTeam(), user.getTeam(), player);
     }

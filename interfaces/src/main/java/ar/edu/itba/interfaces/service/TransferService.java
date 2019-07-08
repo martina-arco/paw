@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public interface TransferService {
-    boolean performTransfer(User user, String transfer);
+    boolean performTransfer(User user, long playerId);
 
     boolean transferPlayer(Team from, Team to, Player player);
 

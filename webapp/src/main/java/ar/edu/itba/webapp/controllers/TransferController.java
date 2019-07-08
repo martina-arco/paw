@@ -39,7 +39,8 @@ public class TransferController extends Controller {
     @RequestMapping(value = "/transferPlayer")
     @ResponseBody
     public Object transferredPlayer(@RequestBody String transfer){
-        return transferService.performTransfer(loggedUser(), transfer);
+//        return transferService.performTransfer(loggedUser(), transfer);
+        return null;
     }
 
 }

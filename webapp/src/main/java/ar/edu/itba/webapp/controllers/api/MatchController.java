@@ -36,6 +36,16 @@ public class MatchController extends Controller {
     @Autowired
     private SimulationService simulationService;
 
+    private List<Match> getMatchesPlayed(User user) {
+        League league = leagueService.findByUser(user).get(0);
+        List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
+
+        if(matches.isEmpty()) {
+            matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
+        }
+        return matches;
+    }
+
     @GET
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getUpcomingMatches() {
@@ -57,14 +67,7 @@ public class MatchController extends Controller {
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatch() {
         User user = loggedUser();
-        League league = leagueService.findByUser(user).get(0);
-        List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
-
-        if(matches.isEmpty()) {
-            matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
-        }
-
-        Match userMatch = matchService.getUserMatch(matches, user);
+        Match userMatch = matchService.getUserMatch(getMatchesPlayed(user), user);
 
         return Response.ok(new MatchDTO(userMatch)).build();
     }
@@ -74,14 +77,8 @@ public class MatchController extends Controller {
     @Produces(value = { MediaType.APPLICATION_JSON })
     public Response getMatches() {
         User user = loggedUser();
-        League league = leagueService.findByUser(user).get(0);
-        List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
-
-        if(matches.isEmpty()) {
-            matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
-        }
-
-        return Response.ok(matches.parallelStream().map(MatchDTO::new).collect(Collectors.toList())).build();
+        return Response.ok(getMatchesPlayed(user).parallelStream().map(MatchDTO::new)
+                .collect(Collectors.toList())).build();
     }
 
     @GET

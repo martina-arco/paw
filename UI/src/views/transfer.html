@@ -28,7 +28,7 @@
               </li>
               <li>
                 <h5>{{playersAvailable}}</h5>
-                Players available
+                Players filtered
               </li>
             </ul>
           </div>
@@ -95,7 +95,6 @@
             <thead>
             <tr>
               <th>{{NAME}}</th>
-              <th>{{TEAM}}</th>
               <th>{{AGE}}</th>
               <th>{{FITNESS}}</th>
               <th>{{SKILLLEVEL}}</th>
@@ -112,20 +111,18 @@
             <tbody>
               <tr ng-repeat="player in players">
                 <td>{{player.name}}</td>
-                <td>{{player.team}}</td>
                 <th>{{player.age}}</th>
                 <th>{{player.fitness}}</th>
                 <td>{{player.skillLevel}}</td>
-                <td>{{player.goalKeeping}}</td>
+                <td>{{player.goalkeeping}}</td>
                 <td>{{player.finishing}}</td>
-                <td>{{player.defending}}</td>
+                <td>{{player.defense}}</td>
                 <td>{{player.passing}}</td>
                 <th>{{player.value}}</th>
                 <th>{{player.salary}}</th>
                 <th>{{player.potential}}</th>
                 <th>
                   <button type="button" class="btn btn-light" ng-click="buyPlayer(player.id)">{{BUY}}</button>
-                  <button type="button" class="btn btn-light" ng-click="sellPlayer(player.id)">{{SELL}}</button>
                 </th>
               </tr>
             </tbody>
