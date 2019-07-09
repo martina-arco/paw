@@ -32,6 +32,8 @@ public interface MatchService {
 
     List<Match> findByLeagueIdAndBeforeDate(long id, Date date);
 
+    List<Match> findPlayedByLeagueId(League league);
+
     void setTeamsAndFormations(List<Match> matches);
 
     void setTeams(List<Match> matches);

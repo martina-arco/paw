@@ -38,12 +38,10 @@ public class MatchController extends Controller {
 
     private List<Match> getMatchesPlayed(User user) {
         League league = leagueService.findByUser(user).get(0);
-        List<Match> matches = leagueService.findMatchesForDate(league, userService.getPreviousDate(user));
+        List<Match> matches = matchService.findPlayedByLeagueId(league);
+        int amountOfMatches = teamService.findByLeague(league).size() / 2;
 
-        if(matches.isEmpty()) {
-            matches = leagueService.findMatchesForDate(league, user.getCurrentDay());
-        }
-        return matches;
+        return new ArrayList<>(matches.subList(0, amountOfMatches));
     }
 
     @GET

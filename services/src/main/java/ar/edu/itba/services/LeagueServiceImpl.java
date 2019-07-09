@@ -3,10 +3,7 @@ package ar.edu.itba.services;
 import ar.edu.itba.interfaces.dao.LeagueDao;
 import ar.edu.itba.interfaces.dao.MatchDao;
 import ar.edu.itba.interfaces.dao.TeamDao;
-import ar.edu.itba.interfaces.service.EconomyService;
-import ar.edu.itba.interfaces.service.FixtureService;
-import ar.edu.itba.interfaces.service.LeagueService;
-import ar.edu.itba.interfaces.service.MatchService;
+import ar.edu.itba.interfaces.service.*;
 import ar.edu.itba.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +33,9 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Autowired
     private EconomyService economyService;
+
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -172,8 +172,8 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public int matchesToPlay(User user, League league) {
-        return matchService.findByTeamIdFromDate(league.getId(), user.getCurrentDay()).size();
+    public int matchesToPlay(User user, Team team) {
+        return matchService.findByTeamIdFromDate(team.getId(), user.getCurrentDay()).size();
     }
 
     @Override

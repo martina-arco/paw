@@ -19,5 +19,4 @@ public interface UserService {
 
     String getCurrentDay(User user);
 
-    Date getPreviousDate(User user);
 }

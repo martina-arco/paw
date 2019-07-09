@@ -173,4 +173,11 @@ public class MatchServiceImpl implements MatchService {
     public List<Match> findByLeagueIdAndBeforeDate(long id, Date date) {
         return matchDao.findByLeagueIdAndBeforeDate(id, date);
     }
+
+    @Override
+    public List<Match> findPlayedByLeagueId(League league) {
+        List<Match> matches = matchDao.findPlayedByLeagueId(league.getId());
+        setTeamsAndFormations(matches);
+        return matches;
+    }
 }

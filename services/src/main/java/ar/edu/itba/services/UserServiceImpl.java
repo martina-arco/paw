@@ -116,11 +116,4 @@ public class UserServiceImpl implements UserService {
         cal.add(Calendar.DATE, 7 * amount);
         return cal.getTime();
     }
-
-    public Date getPreviousDate(User user) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(user.getCurrentDay());
-        cal.add(Calendar.DATE, -7);
-        return cal.getTime();
-    }
 }

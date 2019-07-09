@@ -19,5 +19,5 @@ public interface LeagueService {
     List<Map.Entry<String, Integer>> getTeamPointsName(League league, Date currentDate);
     void generateFixture(User user, League league);
     int matchesPlayed(User user, League league);
-    int matchesToPlay(User user, League league);
+    int matchesToPlay(User user, Team team);
 }

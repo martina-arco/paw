@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,6 +71,12 @@ public class MatchJdbcDao implements MatchDao{
     @Override
     public List<Match> findByLeagueIdAndDate(long id, Date date) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND day = ?", ROW_MAPPER, id, date);
+        return list;
+    }
+
+    @Override
+    public List<Match> findPlayedByLeagueId(long id) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ? AND played = true ORDER BY day", ROW_MAPPER, id);
         return list;
     }
 

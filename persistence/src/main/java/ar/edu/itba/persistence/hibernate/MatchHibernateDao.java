@@ -68,6 +68,14 @@ public class MatchHibernateDao implements MatchDao{
     }
 
     @Override
+    public List<Match> findPlayedByLeagueId(long id) {
+        final TypedQuery<Match> query = em.createQuery("SELECT m FROM Match m WHERE m.league.id = :leagueId " +
+                "AND m.played = true ORDER BY m.day DESC", Match.class);
+        query.setParameter("leagueId", id);
+        return query.getResultList();
+    }
+
+    @Override
     public List<Match> findByLeagueIdAndBeforeDate(long id, Date date) {
         final TypedQuery<Match> query = em.createQuery("SELECT m FROM Match m WHERE m.league.id = :leagueId " +
                 "AND m.day < :day", Match.class);
