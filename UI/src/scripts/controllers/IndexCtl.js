@@ -25,6 +25,10 @@ var translation_en = {
   usergreeting: 'Hello {0}!',
   remember_me: 'Remember me',
 
+  //ChosseTeam
+  failChooseTeam: 'Failed to choose team',
+  errorChooseTeam: 'There was an error while choosing your team',
+
   boardTrust: 'Board trust',
   fanTrust: 'Fan trust',
 
@@ -208,6 +212,9 @@ var translation_es = {
   userid: '{0} your current id is! - Master Yoda',
   usergreeting: 'Hola {0}!',
   remember_me: 'Recordarme',
+
+  failChooseTeam: 'No se pudo elegir el equipo',
+  errorChooseTeam: 'Hubo un error al elegir su equipo',
 
   //NAVBAR
   menuhome: 'Inicio',
@@ -619,6 +626,8 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.INVALIDLOGIN = translations["invalidLogin"];
     $scope.ENTEREMAIL = translations["enterEmail"];
     $scope.INVALIDSIGNUP = translations["invalidSignup"];
+    $scope.FAILCHOOSETEAM = translations["failChooseTeam"];
+    $scope.ERRORCHOOSETEAM = translations["errorChooseTeam"];
   });
 
 });
