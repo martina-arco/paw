@@ -56,6 +56,8 @@ var translation_en = {
   passing: 'Passing',
   salary: 'Salary',
   value: 'Value',
+  playerCount: 'Player count',
+  playersFiltered: 'Players filtered',
 
   //MATCH
   league: 'League',
@@ -216,8 +218,11 @@ var translation_es = {
   fitness: 'Estado físico',
   playersalary: 'Sueldo',
   playervalue: 'Valor',
+  playerCount: 'Cantidad de jugadores',
+  playersFiltered: 'Jugadores filtrados',
   retire: 'Retirar',
   formation: 'Formación',
+  formationScheme: 'Esquema de formación',
   leagueInfo: 'Información de la liga',
   name: 'Nombre',
   age: 'Edad',
@@ -246,8 +251,8 @@ var translation_es = {
   expenses: 'Expensas',
   salaries: 'Sueldos',
   lastReceipts: 'Últimas Transacciones',
-  receiptSOLDPLAYER: 'Jugador - Venta',
-  receiptBOUGHTPLAYER: 'Jugador - Compra',
+  receiptSOLDPLAYER: 'Venta de Jugador',
+  receiptBOUGHTPLAYER: 'Compra de Jugador',
   receiptEXPANDEDSTADIUM: 'Expansión del Estadio',
   receiptMATCHINCOME: 'Venta de Entradas',
   receiptTOURNAMENTPRIZE: 'Premio',
@@ -280,7 +285,7 @@ var translation_es = {
   medium: 'Media',
   high: 'Alta',
   position: 'Posición',
-  skillLevel: 'Overall',
+  skillLevel: 'Habilidad',
   skill: 'Habilidad',
   goalKeeping: 'Arquero',
   finishing: 'Definición',
@@ -445,6 +450,8 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.FITNESS = translations["fitness"];
     $scope.PLAYERSALARY = translations["playersalary"];
     $scope.PLAYERVALUE = translations["playervalue"];
+    $scope.PLAYERCOUNT = translations["playerCount"];
+    $scope.PLAYERSFILTERED = translations["playersFiltered"];
     $scope.RETIRE = translations["retire"];
     $scope.FORMATION = translations["formation"];
     $scope.NAME = translations["name"];

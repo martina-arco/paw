@@ -7,7 +7,7 @@ var formatFilter = function(criteriaTypesNames, criteriaTypeSelected, criteriaNu
     for (var i = 0; i < criteriaTypeSelected.length; i++) {
           for(var j = 0; j < criteriaTypeSelected[i].length; j++) {
             criteriaTypes.push(criteriaTypeSelected[i][j].toUpperCase());
-            criteriaNames.push(criteriaTypesNames[i][j].toUpperCase());
+            criteriaNames.push(criteriaTypesNames[i][j].type.toUpperCase());
             if (criteriaNumberSelected[i][j] != null)
               criteriaNumbers.push(criteriaNumberSelected[i][j]);
             else
@@ -42,9 +42,9 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
       });
 
       $scope.criteriaTypes = {
-        0: ["Age", "Value", "Salary"],
-        1: ["Defense", "GoalKeeping", "Pass"],
-        2: ["Finish", "Skill", "Potential"]
+        0: [{type: "AGE", name:$scope.CRITERIAAGE}, {type: "VALUE", name:$scope.CRITERIAVALUE}, {type: "SALARY", name:$scope.CRITERIASALARY}],
+        1: [{type: "DEFENSE", name:$scope.CRITERIADEFENSE}, {type: "GOALKEEPING", name:$scope.CRITERIAGOALKEEPING}, {type: "PASS", name:$scope.CRITERIAPASS}],
+        2: [{type: "FINISH", name:$scope.CRITERIAFINISH}, {type: "SKILL", name:$scope.CRITERIASKILL}, {type: "POTENTIAL", name:$scope.CRITERIAPOTENTIAL}]
       };
 
       $scope.isClosed = true;
@@ -71,7 +71,7 @@ define(['footballManager', 'services/PlayerService'], function (footballManager)
 
       $scope.openTransferErrorModal = function() {
           ngDialog.open({
-              templateUrl: 'views/transferErrorModal.html',
+              templateUrl: 'views/noFundsErrorModal.html',
               className: 'ngdialog-theme-default',
               scope: $scope
           });

@@ -21,14 +21,19 @@ define([
           '$filterProvider',
           '$provide',
           '$translateProvider',
+          '$locationProvider',
           function($routeProvider, $controllerProvider, $compileProvider, $filterProvider,
-                   $provide, $translateProvider) {
+                   $provide, $translateProvider, $locationProvider) {
 
             footballManager.controller = $controllerProvider.register;
             footballManager.directive = $compileProvider.directive;
             footballManager.filter = $filterProvider.register;
             footballManager.factory = $provide.factory;
             footballManager.service = $provide.service;
+            $locationProvider.html5Mode({
+                enabled:true,
+                requireBase:false
+            });
 
             if (config.routes !== undefined) {
               angular.forEach(config.routes, function(route, path) {

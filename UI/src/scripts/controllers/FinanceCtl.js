@@ -40,6 +40,14 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
           });
         };
 
+        $scope.openStadiumExpansionErrorModal = function() {
+          ngDialog.open({
+            templateUrl: 'views/noFundsErrorModal.html',
+            className: 'ngdialog-theme-default',
+            scope: $scope
+          });
+        };
+
         var setUpEconomy = function () {
           FinanceService.getEconomy().then(function (response) {
             $scope.summary = response.data.summary;
@@ -76,7 +84,10 @@ define(['footballManager', 'services/FinanceService'], function (footballManager
               setUpReceipts();
               setUpStadium();
               $scope.openStadiumExpansionSuccessModal();
-            });
+            }), function () {
+              $scope.openStadiumExpansionErrorModal();
+            }
+            ;
         };
 
         $scope.refreshLowClass = function () {
