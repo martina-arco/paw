@@ -46,6 +46,8 @@ define([], function() {
         templateUrl: 'views/404.html',
         controller: 'IndexCtl'
       }
+      /* ===== yeoman hook ===== */
+      /* Do not remove these commented lines! Needed for auto-generation */
     }
   }
 });

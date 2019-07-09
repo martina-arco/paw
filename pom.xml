@@ -284,15 +284,24 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
-          <execution>
-            <id>npm run build</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>run build</arguments>
-            </configuration>
-          </execution>
+            <execution>
+              <id>bower install</id>
+              <goals>
+                <goal>bower</goal>
+              </goals>
+              <configuration>
+                <arguments>install</arguments>
+              </configuration>
+            </execution>
+            <execution>
+              <id>grunt build</id>
+              <goals>
+                <goal>grunt</goal>
+              </goals>
+              <configuration>
+                <arguments>build --force</arguments>
+              </configuration>
+            </execution>
         </executions>
       </plugin>
       <plugin>

@@ -2,7 +2,7 @@ define(['footballManager', 'services/AccountService'], function (footballManager
  
   footballManager.controller("LoginCtl", function ($scope, AccountService, $location) {
     AccountService.isLoggedIn().then(function () {
-      $location.url("home");
+      $location.url("");
     }, function () {});
 
     $scope.user = {username:'', password:''};

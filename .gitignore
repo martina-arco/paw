@@ -3,6 +3,8 @@ target
 *.iml
 .sass-cache
 node
+bower_components
+.tmp
 
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
