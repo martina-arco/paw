@@ -162,6 +162,7 @@ var translation_en = {
   leagueInfo: 'League information',
   matchesPlayed: 'Matches played',
   matchesToPlay: 'Matches remaining',
+  season: 'Season',
 
   //TRANSFER
   potential: 'Potential',
@@ -323,6 +324,7 @@ var translation_es = {
   players: 'Jugadores',
   matchesPlayed: 'Partidos jugados',
   matchesToPlay: 'Partidos por jugar',
+  season: 'Temporada',
 
   appName: 'Entrenador Legendario',
   username: 'Usuario',
@@ -545,6 +547,7 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.LEAGUEINFO = translations["leagueInfo"];
     $scope.MATCHESPLAYED = translations["matchesPlayed"];
     $scope.MATCHESTOPLAY = translations["matchesToPlay"];
+    $scope.SEASON = translations["season"];
     $scope.APPNAME = translations["appName"];
     $scope.USERNAME = translations["username"];
     $scope.PASSWORD = translations["password"];

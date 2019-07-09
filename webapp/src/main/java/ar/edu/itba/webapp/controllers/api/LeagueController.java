@@ -17,9 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Path("league")
 @Component
@@ -44,7 +42,18 @@ public class LeagueController extends Controller {
         List<Map.Entry<String,Integer>> teams = leagueService.getTeamPointsName(league, user.getCurrentDay());
         Integer matchesToPlay = leagueService.matchesToPlay(user, team);
         Integer matchesPlayed = leagueService.matchesPlayed(user, league);
+        List<Match> matches = matchService.findByTeamId(team.getId());
+        Set<Integer> years = new HashSet<>();
 
-        return Response.ok(new LeagueDTO(league, matchesToPlay, matchesPlayed, teams, upcomingMatches)).build();
+        for (Match match : matches) {
+            Date date = match.getDay();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            years.add(calendar.get(Calendar.YEAR));
+        }
+
+        int seasonAmount = years.size();
+
+        return Response.ok(new LeagueDTO(league, matchesToPlay, matchesPlayed, teams, upcomingMatches, seasonAmount)).build();
     }
 }

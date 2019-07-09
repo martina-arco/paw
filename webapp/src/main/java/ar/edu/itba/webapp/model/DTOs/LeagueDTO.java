@@ -15,17 +15,19 @@ public class LeagueDTO {
     private Integer matchesToPlay, matchesPlayed;
     private List<Map.Entry<String,Integer>> teams;
     private List<MatchShortDTO> upcomingMatches;
+    private int seasonAmount;
 
     public LeagueDTO(){}
 
     public LeagueDTO(League league, Integer matchesToPlay, Integer matchesPlayed, List<Map.Entry<String, Integer>> teams,
-                     List<Match> upcomingMatches) {
+                     List<Match> upcomingMatches, int seasonAmount) {
         this.id = league.getId();
         this.name = league.getName();
         this.prize = league.getPrize();
         this.matchesToPlay = matchesToPlay;
         this.matchesPlayed = matchesPlayed;
         this.teams = teams;
+        this.seasonAmount = seasonAmount;
         this.upcomingMatches = upcomingMatches.parallelStream().map(MatchShortDTO::new).collect(Collectors.toList());
     }
 
@@ -83,5 +85,13 @@ public class LeagueDTO {
 
     public void setUpcomingMatches(List<MatchShortDTO> upcomingMatches) {
         this.upcomingMatches = upcomingMatches;
+    }
+
+    public int getSeasonAmount() {
+        return seasonAmount;
+    }
+
+    public void setSeasonAmount(int seasonAmount) {
+        this.seasonAmount = seasonAmount;
     }
 }
