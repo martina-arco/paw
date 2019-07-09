@@ -23,7 +23,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         appContext.register(WebConfig.class, WebAuthConfig.class);
 
         FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-        filterRegistration.addMappingForUrlPatterns(null, true, "/api/*");
+        filterRegistration.addMappingForUrlPatterns(null, true, "/api/v1/*");
 
         servletContext.setInitParameter("contextConfigLocation", "<NONE>");
         servletContext.addListener(new ContextLoaderListener(appContext));
@@ -34,7 +34,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         servletRegistration.setInitParameter("jersey.config.server.provider.packages", "ar.edu.itba.webapp.controllers");
         servletRegistration.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
         servletRegistration.setLoadOnStartup(1);
-        servletRegistration.addMapping("/api/*");
+        servletRegistration.addMapping("/api/v1/*");
     }
 
 }

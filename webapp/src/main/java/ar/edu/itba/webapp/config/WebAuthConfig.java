@@ -57,7 +57,7 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().authorizeRequests()
-                .antMatchers("/api/register").anonymous()
+                .antMatchers("/api/v1/register").anonymous()
                 .anyRequest().authenticated()
             .and()
             .addFilterBefore(new CORSFilter(), ChannelProcessingFilter.class)
