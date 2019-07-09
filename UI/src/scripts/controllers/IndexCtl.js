@@ -13,7 +13,7 @@ var translation_en = {
   SizeregisterFormusername: 'Username must be between {2} and {1} characters long',
   SizeregisterFormpassword: 'Password must be between {2} and {1} characters long',
   PatternregisterFormusername: 'Username can only contain letters and numbers',
-  NotNullregisterFormrepeatPassword: 'Passwords dont match',
+  NotNullregisterFormrepeatPassword: 'Passwords do not match',
   repeatPassword: 'Repeat Password',
   signUp: 'Sign Up!',
   signUpButton: 'Sign Up',
@@ -187,8 +187,14 @@ var translation_en = {
   chooseTeam: 'Choose your Team',
   save: 'Save',
   error404: 'Page Not Found',
-  error403: 'You shall not pass!'
-
+  error403: 'You shall not pass!',
+  enterUsername: 'Enter Username',
+  usernameLength: 'Username length invalid',
+  enterPassword: 'Enter password',
+  passwordLength: 'Password length invalid',
+  invalidLogin: 'Invalid username or password',
+  enterEmail: 'Enter mail',
+  invalidSignup: 'User already exists'
 };
 
 var translation_es = {
@@ -370,7 +376,14 @@ var translation_es = {
   criteriaPOTENTIAL: 'Potencial',
   errorLogIn: 'Usuario o contraseña incorrectas',
   error404: 'Página no encontrada',
-  error403: 'No puedes pasar!'
+  error403: 'No puedes pasar!',
+  enterUsername: 'Ingrese un nombre de usuario',
+  usernameLength: 'Longitud de usuario invalida',
+  enterPassword: 'Ingrese una contraseña',
+  passwordLength: 'Longitud de contraseña invalida',
+  invalidLogin: 'Usuario o contraseña invalidos',
+  enterEmail: 'Ingrese un email',
+  invalidSignup: 'El usuario ya existe'
 
 };
 
@@ -599,7 +612,13 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     $scope.HIGHSEATSCOST = translations["highSeatsCost"];
     $scope.BUY = translations["buy"];
     $scope.SELL = translations["sell"];
-
+    $scope.ENTERUSERNAME = translations["enterUsername"];
+    $scope.USERNAMELENGTH = translations["usernameLength"];
+    $scope.ENTERPASSWORD = translations["enterPassword"];
+    $scope.PASSWORDLENGTH = translations["passwordLength"];
+    $scope.INVALIDLOGIN = translations["invalidLogin"];
+    $scope.ENTEREMAIL = translations["enterEmail"];
+    $scope.INVALIDSIGNUP = translations["invalidSignup"];
   });
 
 });

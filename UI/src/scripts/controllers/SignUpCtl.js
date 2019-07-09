@@ -17,28 +17,28 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
       var error = false; 
  
       if (!$scope.user.username) {
-        $scope.usernameError = "Enter Username";
+        $scope.usernameError = $scope.ENTERUSERNAME;
         error = true; 
       } else if ($scope.user.username.length < 4 || $scope.user.username.length > 30) {
-        $scope.usernameError = "Username length invalid";
+        $scope.usernameError = $scope.USERNAMELENGTH;
         error = true; 
       }
 
       if(!$scope.user.mail) {
-        $scope.mailError = "Enter mail";
+        $scope.mailError = $scope.ENTEREMAIL;
         error = true;
       }
  
       if (!$scope.user.password) {
-        $scope.passwordError = "Enter password";
+        $scope.passwordError = $scope.ENTERPASSWORD;
         error = true; 
       } else if ($scope.user.password.length < 4 || $scope.user.password.length > 30) {
-        $scope.passwordError = "Password length invalid";
+        $scope.passwordError = $scope.PASSWORDLENGTH;
         error = true; 
       } 
  
       if ($scope.user.password !== $scope.repeatPassword) {
-        $scope.repeatPasswordError = "Passwords do not match";
+        $scope.repeatPasswordError = $scope.NOTNULLREGISTERFORMREPEATPASSWORD;
         error = true; 
       } 
  
@@ -49,7 +49,7 @@ define(['footballManager', 'services/AccountService'], function(footballManager)
             $location.url("chooseTeam");
           })
         }, function (response) {
-          $scope.errorLogIn = "User already exists";
+          $scope.errorLogIn = $scope.INVALIDSIGNUP;
         });
 
         //Just signup
