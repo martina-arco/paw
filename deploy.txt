@@ -1,0 +1,10 @@
+mvn clean package
+sftp TUUSER@pampero.itba.edu.ar
+TUPASS
+put webapp/target/webapp.war app.war
+exit
+ssh TUUSER@pampero.itba.edu.ar
+TUPASS
+sftp paw-2018a-6@10.16.1.110
+cwE7rSjw9
+put app.war /web
