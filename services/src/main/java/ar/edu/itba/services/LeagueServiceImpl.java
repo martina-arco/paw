@@ -89,26 +89,25 @@ public class LeagueServiceImpl implements LeagueService {
 
             for (Match match : matches) {
 
-                Team home = match.getHome();
-                Team away = match.getAway();
+                    Team home = match.getHome();
+                    Team away = match.getAway();
 
-                Integer homePoints = map.get(home);
-                Integer awayPoints = map.get(away);
+                    Integer homePoints = map.get(home);
+                    Integer awayPoints = map.get(away);
 
-                if(homePoints == null)
-                    homePoints = 0;
+                    if(homePoints == null)
+                        homePoints = 0;
 
-                if(awayPoints == null)
-                    awayPoints = 0;
+                    if(awayPoints == null)
+                        awayPoints = 0;
 
-                homePoints += match.getHomePoints();
-                awayPoints += match.getAwayPoints();
+                    homePoints += match.getHomePoints();
+                    awayPoints += match.getAwayPoints();
 
-                map.put(home, homePoints);
-                map.put(away, awayPoints);
+                    map.put(home, homePoints);
+                    map.put(away, awayPoints);
+                }
             }
-
-        }
 
         return map;
     }
@@ -129,28 +128,31 @@ public class LeagueServiceImpl implements LeagueService {
         }
 
         if(!matches.isEmpty()) {
+            if(currentDate != null) {
+                int year = currentDate.getYear();
 
-            for (Match match : matches) {
+                for (Match match : matches) {
+                    if (match.getDay().getYear() == year) {
+                        Team home = match.getHome();
+                        Team away = match.getAway();
 
-                Team home = match.getHome();
-                Team away = match.getAway();
+                        Integer homePoints = map.get(home.getName());
+                        Integer awayPoints = map.get(away.getName());
 
-                Integer homePoints = map.get(home.getName());
-                Integer awayPoints = map.get(away.getName());
+                        if (homePoints == null)
+                            homePoints = 0;
 
-                if(homePoints == null)
-                    homePoints = 0;
+                        if (awayPoints == null)
+                            awayPoints = 0;
 
-                if(awayPoints == null)
-                    awayPoints = 0;
+                        homePoints += match.getHomePoints();
+                        awayPoints += match.getAwayPoints();
 
-                homePoints += match.getHomePoints();
-                awayPoints += match.getAwayPoints();
-
-                map.put(home.getName(), homePoints);
-                map.put(away.getName(), awayPoints);
+                        map.put(home.getName(), homePoints);
+                        map.put(away.getName(), awayPoints);
+                    }
+                }
             }
-
         }
 
         List<Map.Entry<String,Integer>> ret = new ArrayList<>(map.entrySet());
