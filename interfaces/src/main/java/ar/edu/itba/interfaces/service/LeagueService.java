@@ -18,6 +18,6 @@ public interface LeagueService {
     void fillFixture(User user, League league);
     List<Map.Entry<String, Integer>> getTeamPointsName(League league, Date currentDate);
     void generateFixture(User user, League league);
-    int matchesPlayed(User user, League league);
+    int matchesPlayed(User user, Team team);
     int matchesToPlay(User user, Team team);
 }

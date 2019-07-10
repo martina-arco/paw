@@ -63,6 +63,12 @@ public class MatchJdbcDao implements MatchDao{
     }
 
     @Override
+    public List<Match> findByTeamIdBeforeDate(long id, Date date) {
+        final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE (home = ? OR away = ?) AND day < ?", ROW_MAPPER, id, id, date);
+        return list;
+    }
+
+    @Override
     public List<Match> findByLeagueId(long id) {
         final List<Match> list = jdbcTemplate.query("SELECT * FROM match WHERE league = ?", ROW_MAPPER, id);
         return list;

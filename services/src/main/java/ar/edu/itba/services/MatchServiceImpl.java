@@ -170,6 +170,11 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<Match> findByTeamIdBeforeDate(long id, Date date) {
+        return matchDao.findByTeamIdBeforeDate(id, date);
+    }
+
+    @Override
     public List<Match> findByLeagueIdAndBeforeDate(long id, Date date) {
         return matchDao.findByLeagueIdAndBeforeDate(id, date);
     }

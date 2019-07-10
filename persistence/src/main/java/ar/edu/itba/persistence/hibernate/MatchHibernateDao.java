@@ -52,6 +52,16 @@ public class MatchHibernateDao implements MatchDao{
     }
 
     @Override
+    public List<Match> findByTeamIdBeforeDate(long id, Date date) {
+        final TypedQuery<Match> query = em.createQuery("SELECT m FROM Match m WHERE m.day < :day AND " +
+                "(m.home.id = :homeId OR m.away.id = :awayId)", Match.class);
+        query.setParameter("day", date);
+        query.setParameter("homeId", id);
+        query.setParameter("awayId", id);
+        return query.getResultList();
+    }
+
+    @Override
     public List<Match> findByLeagueId(long id) {
         final TypedQuery<Match> query = em.createQuery("SELECT m FROM Match m WHERE m.league.id = :leagueId", Match.class);
         query.setParameter("leagueId", id);

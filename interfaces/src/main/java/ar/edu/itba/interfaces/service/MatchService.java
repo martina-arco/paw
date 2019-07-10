@@ -30,6 +30,8 @@ public interface MatchService {
 
     List<Match> findByTeamIdFromDate(long id, Date date);
 
+    List<Match> findByTeamIdBeforeDate(long id, Date date);
+
     List<Match> findByLeagueIdAndBeforeDate(long id, Date date);
 
     List<Match> findPlayedByLeagueId(League league);

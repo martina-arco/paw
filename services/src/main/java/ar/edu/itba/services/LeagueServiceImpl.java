@@ -167,8 +167,8 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public int matchesPlayed(User user, League league) {
-        return matchService.findByLeagueIdAndBeforeDate(league.getId(), user.getCurrentDay()).size();
+    public int matchesPlayed(User user, Team team) {
+        return matchService.findByTeamIdBeforeDate(team.getId(), user.getCurrentDay()).size();
     }
 
     @Override
