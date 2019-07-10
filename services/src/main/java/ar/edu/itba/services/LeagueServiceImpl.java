@@ -201,4 +201,20 @@ public class LeagueServiceImpl implements LeagueService {
         economyService.submitReceipt(winner, Receipt.Type.TOURNAMENTPRIZE, league.getPrize());
     }
 
+    @Override
+    public int getSeason(Team team) {
+        List<Match> matches = matchService.findByTeamId(team.getId());
+
+        Set<Integer> years = new HashSet<>();
+
+        for (Match match : matches) {
+            Date date = match.getDay();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            years.add(calendar.get(Calendar.YEAR));
+        }
+
+        return years.size();
+    }
+
 }

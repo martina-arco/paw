@@ -42,17 +42,7 @@ public class LeagueController extends Controller {
         List<Map.Entry<String,Integer>> teams = leagueService.getTeamPointsName(league, user.getCurrentDay());
         Integer matchesToPlay = leagueService.matchesToPlay(user, team);
         Integer matchesPlayed = leagueService.matchesPlayed(user, team);
-        List<Match> matches = matchService.findByTeamId(team.getId());
-        Set<Integer> years = new HashSet<>();
-
-        for (Match match : matches) {
-            Date date = match.getDay();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            years.add(calendar.get(Calendar.YEAR));
-        }
-
-        int seasonAmount = years.size();
+        int seasonAmount = leagueService.getSeason(team);
 
         return Response.ok(new LeagueDTO(league, matchesToPlay, matchesPlayed, teams, upcomingMatches, seasonAmount)).build();
     }

@@ -26,6 +26,9 @@ public class MatchServiceImpl implements MatchService {
     private TeamService teamService;
 
     @Autowired
+    private LeagueService leagueService;
+
+    @Autowired
     private AiService aiService;
 
     @Autowired
@@ -184,5 +187,14 @@ public class MatchServiceImpl implements MatchService {
         List<Match> matches = matchDao.findPlayedByLeagueId(league.getId());
         setTeamsAndFormations(matches);
         return matches;
+    }
+
+    @Override
+    public List<Match> getMatchesPlayed(User user) {
+        League league = leagueService.findByUser(user).get(0);
+        List<Match> matches = findPlayedByLeagueId(league);
+        int amountOfMatches = teamService.findByLeague(league).size() / 2;
+
+        return new ArrayList<>(matches.subList(0, amountOfMatches));
     }
 }

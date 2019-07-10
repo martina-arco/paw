@@ -18,12 +18,12 @@ define(['footballManager', 'services/MatchService', 'services/UserService'], fun
                 switch(event.type) {
                   case 'HOMESCORE':
                       $scope.events.push({type:'home',
-                        description: event.player1 + event.player2 + ' ' +  $scope.EVENTHOMESCORE
+                        description: event.player1 + event.player2 + ' ' +  $scope.GOALSCORED
                         + ' - ' + event.minute + "'"});
                       break;
                   case 'AWAYSCORE':
                       $scope.events.push({type:'away',
-                      description: event.player1 + event.player2 + ' ' +  $scope.EVENTHOMESCORE
+                      description: event.player1 + event.player2 + ' ' +  $scope.GOALSCORED
                         + ' - ' + event.minute + "'"});
                       break;
                   // case 'YELLOW_CARD':

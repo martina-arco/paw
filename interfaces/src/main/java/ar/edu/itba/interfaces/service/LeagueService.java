@@ -20,4 +20,5 @@ public interface LeagueService {
     void generateFixture(User user, League league);
     int matchesPlayed(User user, Team team);
     int matchesToPlay(User user, Team team);
+    int getSeason(Team team);
 }

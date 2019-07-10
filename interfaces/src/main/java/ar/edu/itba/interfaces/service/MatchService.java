@@ -41,4 +41,6 @@ public interface MatchService {
     void setTeams(List<Match> matches);
 
     void payTickets(Match match);
+
+    List<Match> getMatchesPlayed(User user);
 }
