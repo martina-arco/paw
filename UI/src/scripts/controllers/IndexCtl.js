@@ -422,7 +422,7 @@ define(['footballManager', 'services/AccountService'], function (footballManager
     };
 
     $scope.goToHome = function(){
-      $location.url("home");
+      $location.url("/");
     };
 
     $scope.goToLeague = function(){
